@@ -180,7 +180,7 @@ const network_module: Module<NetworkState, RootState> = {
             let mainnet = new AvaNetwork(
                 'ROIChain Testnet',
                 'https://testnet-api.roichain.net:443',
-                1,
+                5,
                 'https://testnet-index-api.roichain.net',
                 'https://testnet-explorer.roichain.net',
                 true
