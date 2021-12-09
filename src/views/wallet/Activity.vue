@@ -29,7 +29,7 @@
                             depressed
                             :disabled="!showList"
                         >
-                            Export AVAX Transfers
+                            Export ROI Transfers
                         </v-btn>
                     </div>
                 </div>

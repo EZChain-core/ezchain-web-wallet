@@ -178,22 +178,22 @@ const network_module: Module<NetworkState, RootState> = {
 
         async init({ state, commit, dispatch }) {
             let mainnet = new AvaNetwork(
-                'Mainnet',
-                'https://api.avax.network:443',
+                'ROIChain Testnet',
+                'https://testnet-api.roichain.net:443',
                 1,
-                'https://explorerapi.avax.network',
-                'https://explorer.avax.network',
+                'https://testnet-index-api.roichain.net',
+                'https://testnet-explorer.roichain.net',
                 true
             )
 
-            let fuji = new AvaNetwork(
-                'Fuji',
-                'https://api.avax-test.network:443',
-                5,
-                'https://explorerapi.avax-test.network',
-                'https://explorer.avax-test.network',
-                true
-            )
+            //let fuji = new AvaNetwork(
+            //    'Fuji',
+            //    'https://api.avax-test.network:443',
+            //    5,
+            //    'https://explorerapi.avax-test.network',
+            //    'https://explorer.avax-test.network',
+            //    true
+            //)
 
             // Load custom networks if any
             try {
@@ -203,7 +203,7 @@ const network_module: Module<NetworkState, RootState> = {
             }
 
             commit('addNetwork', mainnet)
-            commit('addNetwork', fuji)
+            //commit('addNetwork', fuji)
 
             try {
                 let isSet = await dispatch('loadSelectedNetwork')

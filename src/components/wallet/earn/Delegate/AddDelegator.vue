@@ -108,8 +108,8 @@
                     </div>
                     <div>
                         <label>{{ $t('earn.delegate.summary.reward') }}</label>
-                        <p v-if="currency_type === 'AVAX'">
-                            {{ estimatedReward.toLocaleString(2) }} AVAX
+                        <p v-if="currency_type === 'ROI'">
+                            {{ estimatedReward.toLocaleString(2) }} ROI
                         </p>
                         <p v-if="currency_type === 'USD'">
                             ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -117,8 +117,8 @@
                     </div>
                     <div>
                         <label>{{ $t('earn.delegate.summary.fee') }}</label>
-                        <p v-if="currency_type === 'AVAX'">
-                            {{ totalFeeBig.toLocaleString(2) }} AVAX
+                        <p v-if="currency_type === 'ROI'">
+                            {{ totalFeeBig.toLocaleString(2) }} ROI
                         </p>
                         <p v-if="currency_type === 'USD'">
                             ${{ totalFeeUsdBig.toLocaleString(2) }} USD
@@ -267,7 +267,7 @@ export default class AddDelegator extends Vue {
     formEnd: Date = new Date()
     formRewardAddr = ''
 
-    currency_type = 'AVAX'
+    currency_type = 'ROI'
 
     mounted() {
         this.rewardSelect('local')

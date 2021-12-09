@@ -26,12 +26,12 @@
             </div>
             <div class="balance_row">
                 <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
-                    {{ balanceTextLeft }} AVAX
+                    {{ balanceTextLeft }} ROI
                 </p>
                 <p class="balance" data-cy="wallet_balance" v-else>
                     {{ balanceTextLeft }}
                     <span>.{{ balanceTextRight }}</span>
-                    AVAX
+                    ROI
                 </p>
                 <div style="display: flex; flex-direction: row">
                     <p class="balance_usd">
@@ -39,7 +39,7 @@
                         USD
                     </p>
                     <p class="balance_usd" style="background-color: transparent">
-                        <b>1 AVAX</b>
+                        <b>1 ROI</b>
                         =
                         <b>${{ avaxPriceText }}</b>
                         USD
@@ -51,37 +51,37 @@
                 <div class="alt_non_breakdown" v-if="!isBreakdown">
                     <div>
                         <label>{{ $t('top.balance.available') }}</label>
-                        <p>{{ unlockedText }} AVAX</p>
+                        <p>{{ unlockedText }} ROI</p>
                     </div>
                     <div>
                         <label>{{ $t('top.locked') }}</label>
-                        <p>{{ balanceTextLocked }} AVAX</p>
+                        <p>{{ balanceTextLocked }} ROI</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.stake') }}</label>
-                        <p>{{ stakingText }} AVAX</p>
+                        <p>{{ stakingText }} ROI</p>
                     </div>
                 </div>
                 <div class="alt_breakdown" v-else>
                     <div>
                         <label>{{ $t('top.balance.available') }} (X)</label>
-                        <p>{{ avmUnlocked | cleanAvaxBN }} AVAX</p>
+                        <p>{{ avmUnlocked | cleanAvaxBN }} ROI</p>
                         <label>{{ $t('top.balance.available') }} (P)</label>
-                        <p>{{ platformUnlocked | cleanAvaxBN }} AVAX</p>
+                        <p>{{ platformUnlocked | cleanAvaxBN }} ROI</p>
                         <label>{{ $t('top.balance.available') }} (C)</label>
-                        <p>{{ evmUnlocked | cleanAvaxBN }} AVAX</p>
+                        <p>{{ evmUnlocked | cleanAvaxBN }} ROI</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.locked') }} (X)</label>
-                        <p>{{ avmLocked | cleanAvaxBN }} AVAX</p>
+                        <p>{{ avmLocked | cleanAvaxBN }} ROI</p>
                         <label>{{ $t('top.balance.locked') }} (P)</label>
-                        <p>{{ platformLocked | cleanAvaxBN }} AVAX</p>
+                        <p>{{ platformLocked | cleanAvaxBN }} ROI</p>
                         <label>{{ $t('top.balance.locked_stake') }} (P)</label>
-                        <p>{{ platformLockedStakeable | cleanAvaxBN }} AVAX</p>
+                        <p>{{ platformLockedStakeable | cleanAvaxBN }} ROI</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.stake') }}</label>
-                        <p>{{ stakingText }} AVAX</p>
+                        <p>{{ stakingText }} ROI</p>
                     </div>
                 </div>
             </div>

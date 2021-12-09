@@ -11,7 +11,7 @@
                                     <div class="img_container">
                                         <img
                                             v-if="$root.theme === 'day'"
-                                            src="@/assets/diamond-primary.svg"
+                                            src="@/assets/diamond-primary.png"
                                             alt
                                         />
                                         <img v-else src="@/assets/diamond-primary-night.svg" alt />
