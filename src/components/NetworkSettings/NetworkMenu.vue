@@ -200,12 +200,12 @@ export default class NetworkMenu extends Vue {
 
     &[testnet]:after {
         position: absolute;
-        content: 'TEST';
+        content: '';
         background-color: var(--secondary-color);
         color: #fff;
         font-size: 9px;
         font-weight: bold;
-        padding: 2px 6px;
+        padding: 0px 6px;
         border-radius: 12px;
         right: -20px;
         top: -8px;
