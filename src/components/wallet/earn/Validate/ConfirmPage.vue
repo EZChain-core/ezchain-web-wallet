@@ -6,7 +6,7 @@
         </div>
         <div>
             <label>{{ $t('earn.validate.confirmation.amount') }}</label>
-            <p>{{ amtText }} ROI</p>
+            <p>{{ amtText }} EZC</p>
         </div>
         <div>
             <label>{{ $t('earn.validate.confirmation.start') }}</label>

@@ -55,7 +55,7 @@
                     <div class="fees">
                         <p>
                             {{ $t('transfer.fee_tx') }}
-                            <span>{{ txFee.toLocaleString(9) }} ROI</span>
+                            <span>{{ txFee.toLocaleString(9) }} EZC</span>
                         </p>
                         <p>
                             {{ $t('transfer.total_avax') }}

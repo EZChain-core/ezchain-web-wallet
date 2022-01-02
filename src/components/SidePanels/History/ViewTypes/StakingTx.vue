@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div class="data_row reward_row">
-                <p>ROI Price at reward date</p>
+                <p>EZC Price at reward date</p>
                 <p v-if="rewardDateAvaxPrice">{{ rewardDateAvaxPrice.toFixed(2) }} USD</p>
                 <p v-else>Unknown</p>
             </div>
@@ -28,7 +28,7 @@
             <div class="data_row">
                 <p v-if="!isDelegatorReward">{{ $t('transactions.reward_amount') }}</p>
                 <p v-else>{{ $t('transactions.fee_amount') }}</p>
-                <p class="amt">{{ rewardAmtText.toLocaleString() }} ROI</p>
+                <p class="amt">{{ rewardAmtText.toLocaleString() }} EZC</p>
             </div>
         </template>
         <template v-else-if="!isRewarded && !!rewardTime">
@@ -72,14 +72,14 @@
                 </div>
                 <div class="data_row reward_row">
                     <p>{{ $t('transactions.reward_pending') }}</p>
-                    <p class="amt">{{ rewardText }} ROI</p>
+                    <p class="amt">{{ rewardText }} EZC</p>
                 </div>
             </template>
         </div>
 
         <div class="data_row" v-if="!isDelegatorReward">
             <p>{{ actionText }}</p>
-            <p class="amt">{{ amtText }} ROI</p>
+            <p class="amt">{{ amtText }} EZC</p>
         </div>
     </div>
 </template>

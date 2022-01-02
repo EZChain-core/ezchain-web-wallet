@@ -12,7 +12,7 @@
                 @change="amount_in"
             ></BigNumInput>
         </div>
-        <p class="ticker">ROI</p>
+        <p class="ticker">EZC</p>
         <div v-if="balance" class="balance">
             <div>
                 <p>

@@ -73,7 +73,7 @@
                     <div class="fee">
                         <p>
                             {{ $t('studio.mint.form_col.fee') }}
-                            <span>{{ txFee.toLocaleString() }} ROI</span>
+                            <span>{{ txFee.toLocaleString() }} EZC</span>
                         </p>
                     </div>
                     <v-btn

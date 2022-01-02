@@ -29,7 +29,7 @@
                             depressed
                             :disabled="!showList"
                         >
-                            Export ROI Transfers
+                            Export EZC Transfers
                         </v-btn>
                     </div>
                 </div>

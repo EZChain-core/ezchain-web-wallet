@@ -13,7 +13,7 @@
             <div>
                 <label>{{ $t('earn.shared.utxo_select.available') }}</label>
                 <p>
-                    <span>{{ selectedBalanceText }} ROI</span>
+                    <span>{{ selectedBalanceText }} EZC</span>
                 </p>
             </div>
 

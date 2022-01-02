@@ -119,7 +119,7 @@
                                     <fa icon="question-circle"></fa>
                                 </Tooltip>
                             </label>
-                            <p v-if="currency_type === 'ROI'">{{ maxDelegationText }} ROI</p>
+                            <p v-if="currency_type === 'EZC'">{{ maxDelegationText }} EZC</p>
                             <p v-if="currency_type === 'USD'">${{ maxDelegationUsdText }} USD</p>
                         </div>
                         <div>
@@ -128,8 +128,8 @@
                         </div>
                         <div>
                             <label>{{ $t('earn.validate.summary.rewards') }}</label>
-                            <p v-if="currency_type === 'ROI'">
-                                {{ estimatedReward.toLocaleString(2) }} ROI
+                            <p v-if="currency_type === 'EZC'">
+                                {{ estimatedReward.toLocaleString(2) }} EZC
                             </p>
                             <p v-if="currency_type === 'USD'">
                                 ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -289,7 +289,7 @@ export default class AddValidator extends Vue {
 
     isSuccess = false
 
-    currency_type = 'ROI'
+    currency_type = 'EZC'
 
     mounted() {
         this.rewardSelect('local')
