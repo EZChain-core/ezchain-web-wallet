@@ -121,7 +121,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Dropdown from '@/components/misc/Dropdown.vue'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 import AvaAsset from '@/js/AvaAsset'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import { avm, cChain, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
 import { bnToBig } from '@/helpers/helper'
@@ -141,7 +141,7 @@ import {
     GasHelper,
     Utils,
     Big,
-} from '@avalabs/avalanche-wallet-sdk'
+} from 'ezchain-wallet-sdk'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms

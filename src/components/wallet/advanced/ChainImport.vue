@@ -43,14 +43,14 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 import Spinner from '@/components/misc/Spinner.vue'
 import { WalletType } from '@/js/wallets/types'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import {
     ExportChainsC,
     ExportChainsP,
     ExportChainsX,
     GasHelper,
     Utils,
-} from '@avalabs/avalanche-wallet-sdk'
+} from 'ezchain-wallet-sdk'
 
 @Component({
     components: { Spinner },
