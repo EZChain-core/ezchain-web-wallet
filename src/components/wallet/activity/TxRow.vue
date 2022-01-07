@@ -36,7 +36,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ITransactionData, ITransactionDataProcessed } from '@/store/modules/history/types'
 import { AssetsDict, NftFamilyDict } from '@/store/modules/assets/types'
 import { bnToBig } from '@/helpers/helper'
-import { BN, Buffer } from 'avalanche'
+import { BN, Buffer } from 'ezchainjs2'
 
 import StakingTx from '@/components/SidePanels/History/ViewTypes/StakingTx.vue'
 import BaseTx from '@/components/SidePanels/History/ViewTypes/BaseTx.vue'

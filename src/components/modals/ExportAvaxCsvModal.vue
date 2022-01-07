@@ -36,7 +36,7 @@ import {
     parseMemo,
 } from '@/store/modules/history/history_utils'
 import { ava, avm } from '@/AVA'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 
 @Component({
     components: {

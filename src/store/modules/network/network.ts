@@ -5,12 +5,12 @@ import { NetworkState } from '@/store/modules/network/types'
 import { ava, avm, bintools, cChain, infoApi, pChain } from '@/AVA'
 import { AvaNetwork } from '@/js/AvaNetwork'
 import { explorer_api } from '@/explorer_api'
-import { BN } from 'avalanche'
-import { getPreferredHRP } from 'avalanche/dist/utils'
+import { BN } from 'ezchainjs2'
+import { getPreferredHRP } from 'ezchainjs2/dist/utils'
 import router from '@/router'
 import { web3 } from '@/evm'
 import { setSocketNetwork } from '../../../providers'
-import { Network } from '@avalabs/avalanche-wallet-sdk'
+import { Network } from 'ezchain-wallet-sdk'
 const network_module: Module<NetworkState, RootState> = {
     namespaced: true,
     state: {
@@ -179,7 +179,8 @@ const network_module: Module<NetworkState, RootState> = {
         async init({ state, commit, dispatch }) {
             let mainnet = new AvaNetwork(
                 'EZChain Testnet',
-                'https://testnet-api.roichain.net:443',
+                //'https://testnet-api.roichain.net:443',
+                'http://192.168.1.36:9650',
                 5,
                 'https://testnet-index-api.roichain.net',
                 'https://testnet-explorer.roichain.net',

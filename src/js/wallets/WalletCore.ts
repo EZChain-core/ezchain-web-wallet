@@ -1,9 +1,9 @@
 /*
 The base wallet class used for common functionality
 */
-import { BN } from 'avalanche'
-import { UTXOSet as AVMUTXOSet } from 'avalanche/dist/apis/avm'
-import { UTXOSet as PlatformUTXOSet } from 'avalanche/dist/apis/platformvm'
+import { BN } from 'ezchainjs2'
+import { UTXOSet as AVMUTXOSet } from 'ezchainjs2/dist/apis/avm'
+import { UTXOSet as PlatformUTXOSet } from 'ezchainjs2/dist/apis/platformvm'
 import {
     ExportChainsC,
     ExportChainsP,
@@ -13,15 +13,15 @@ import {
     UtxoHelper,
     TxHelper,
     GasHelper,
-} from '@avalabs/avalanche-wallet-sdk'
+} from 'ezchain-wallet-sdk'
 import { ava, avm, bintools, cChain, pChain } from '@/AVA'
-import { UTXOSet as EVMUTXOSet } from 'avalanche/dist/apis/evm/utxos'
-import { Tx as EVMTx, UnsignedTx as EVMUnsignedTx } from 'avalanche/dist/apis/evm/tx'
+import { UTXOSet as EVMUTXOSet } from 'ezchainjs2/dist/apis/evm/utxos'
+import { Tx as EVMTx, UnsignedTx as EVMUnsignedTx } from 'ezchainjs2/dist/apis/evm/tx'
 import {
     Tx as PlatformTx,
     UnsignedTx as PlatformUnsignedTx,
-} from 'avalanche/dist/apis/platformvm/tx'
-import { Tx as AVMTx, UnsignedTx as AVMUnsignedTx } from 'avalanche/dist/apis/avm/tx'
+} from 'ezchainjs2/dist/apis/platformvm/tx'
+import { Tx as AVMTx, UnsignedTx as AVMUnsignedTx } from 'ezchainjs2/dist/apis/avm/tx'
 import { AvmImportChainType, WalletType } from '@/js/wallets/types'
 import { WalletHelper } from '@/helpers/wallet_helper'
 var uniqid = require('uniqid')
