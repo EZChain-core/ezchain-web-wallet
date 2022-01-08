@@ -117,14 +117,13 @@
 </template>
 <script lang="ts">
 import 'reflect-metadata'
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import Dropdown from '@/components/misc/Dropdown.vue'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 import AvaAsset from '@/js/AvaAsset'
 import { BN } from 'ezchainjs2'
 import { avm, cChain, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
-import { bnToBig } from '@/helpers/helper'
 import Spinner from '@/components/misc/Spinner.vue'
 import ChainCard from '@/components/wallet/earn/ChainTransfer/ChainCard.vue'
 import TxStateCard from '@/components/wallet/earn/ChainTransfer/TxState.vue'
@@ -186,8 +185,12 @@ export default class ChainTransfer extends Vue {
     importStatus: string | null = null
     importReason: string | null = null
 
-    activated() {
-        this.$refs.form.clear()
+    @Watch('sourceChain')
+    @Watch('targetChain')
+    onChainChange() {
+        if (this.sourceChain === 'C' || this.targetChain === 'C') {
+            this.updateBaseFee()
+        }
     }
 
     created() {
