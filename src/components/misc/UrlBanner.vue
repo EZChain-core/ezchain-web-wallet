@@ -3,7 +3,7 @@
         <template v-slot:default>
             <fa icon="exclamation-triangle"></fa>
             Make sure the URL is
-            <b>wallet.roichain.net</b>
+            <b>wallet.ezchain.com</b>
             <button @click="dismiss" class="dismiss_but" data-cy="dismiss_banner">
                 <fa icon="times"></fa>
             </button>

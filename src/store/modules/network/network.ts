@@ -179,10 +179,10 @@ const network_module: Module<NetworkState, RootState> = {
         async init({ state, commit, dispatch }) {
             let mainnet = new AvaNetwork(
                 'EZChain Testnet',
-                'https://testnet-api.roichain.net:443',
+                'https://testnet-api.ezchain.com:443',
                 5,
-                'https://testnet-index-api.roichain.net',
-                'https://testnet-explorer.roichain.net',
+                'https://testnet-index-api.ezchain.com',
+                'https://testnet-explorer.ezchain.com',
                 true
             )
 
