@@ -12,6 +12,14 @@
     "patch": 0
   },
   "tokens": [
+    {
+      "chainId": 43114,
+      "address": "0x0540E4EE0C5CdBA347C2f0E011ACF8651bB70Eb9",
+      "decimals": 0,
+      "name": "CryptoSeals",
+      "symbol": "SEAL",
+      "logoURI": ""
+    }
   ],
   "timestamp": "2021-04-15T00:21:05+00:00"
 }
