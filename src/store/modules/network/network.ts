@@ -203,7 +203,7 @@ const network_module: Module<NetworkState, RootState> = {
             }
 
             commit('addNetwork', mainnet)
-            //commit('addNetwork', fuji)
+            commit('addNetwork', fuji)
 
             try {
                 let isSet = await dispatch('loadSelectedNetwork')
