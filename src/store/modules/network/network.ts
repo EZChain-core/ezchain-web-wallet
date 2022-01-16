@@ -178,6 +178,15 @@ const network_module: Module<NetworkState, RootState> = {
 
         async init({ state, commit, dispatch }) {
             let mainnet = new AvaNetwork(
+                'EZChain MainNet',
+                'https://api.ezchain.com:443',
+                1,
+                'https://index-api.ezchain.com',
+                'https://explorer.ezchain.com',
+                true
+            )
+
+            let fuji = new AvaNetwork(
                 'EZChain Testnet',
                 'https://testnet-api.ezchain.com:443',
                 5,
@@ -185,15 +194,6 @@ const network_module: Module<NetworkState, RootState> = {
                 'https://testnet-explorer.ezchain.com',
                 true
             )
-
-            //let fuji = new AvaNetwork(
-            //    'Fuji',
-            //    'https://api.avax-test.network:443',
-            //    5,
-            //    'https://explorerapi.avax-test.network',
-            //    'https://explorer.avax-test.network',
-            //    true
-            //)
 
             // Load custom networks if any
             try {

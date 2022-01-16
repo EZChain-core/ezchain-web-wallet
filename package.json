@@ -18,8 +18,8 @@
         "test": "jest --verbose ./tests"
     },
     "dependencies": {
-        "ezchain-wallet-sdk": "1.0.1-testnet",
-        "ezchain-vue_components": "1.0.1-testnet",
+        "ezchain-wallet-sdk": "1.0.0-mainnet",
+        "ezchain-vue_components": "1.0.0-mainnet",
         "@ethereumjs/common": "2.0.0",
         "@ethereumjs/tx": "3.0.0",
         "@fortawesome/fontawesome-svg-core": "1.2.26",
@@ -44,7 +44,7 @@
         "@types/vue-datetime": "1.0.0",
         "@zxing/library": "0.15.2",
         "abi-decoder": "2.4.0",
-	"ezchainjs2": "1.0.1-testnet",
+	"ezchainjs2": "1.0.0-mainnet",
         "axios": "0.21.2",
         "big.js": "5.2.2",
         "bip32": "2.0.5",
