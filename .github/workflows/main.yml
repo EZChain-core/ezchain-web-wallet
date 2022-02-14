@@ -39,7 +39,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/ezc-wallet-v2/
+        run: rsync -avz ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/ezc-wallet-v2/
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
