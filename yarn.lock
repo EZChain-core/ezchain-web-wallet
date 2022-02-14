@@ -7940,10 +7940,10 @@ ezchain-wallet-sdk@1.0.0-mainnet:
     web3-eth-contract "1.6.0"
     xss "^1.0.10"
 
-ezchainjs2@1.0.0-mainnet:
-  version "1.0.0-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchainjs2/-/ezchainjs2-1.0.0-mainnet.tgz#0b5caddb4b276d6ae2eab674cc3ca64f5121d63a"
-  integrity sha512-olmRBnLqcGZ5KflRxeurgvLnA+WPsfgtR406Gy4gzVm+ZoTcPR27bS93MrNTMeGljga7yBkvstXcTT+iKG175w==
+ezchainjs2@1.0.3-mainnet:
+  version "1.0.3-mainnet"
+  resolved "https://registry.yarnpkg.com/ezchainjs2/-/ezchainjs2-1.0.3-mainnet.tgz#ea8be8f370efb47afb0f92fbdeec6841efae1f34"
+  integrity sha512-9awp3ohcUkRPlwafSQV2EGiw2wBe9ZEknFcQur1rKImNSJeOP9inAY7HPOUE3JLH1Zlw42AN9gjRFmz+axIxKg==
   dependencies:
     assert "2.0.0"
     axios "0.24.0"

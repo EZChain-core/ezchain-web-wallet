@@ -5,7 +5,6 @@
             <sidebar class="panel sidenav"></sidebar>
         </transition>
         <div class="wallet_main">
-            <top-info class="wallet_top"></top-info>
             <transition name="page_fade" mode="out-in">
                 <keep-alive
                     :exclude="['cross_chain', 'activity', 'advanced', 'earn', 'manage', 'studio']"
@@ -13,10 +12,8 @@
                     <router-view id="wallet_router" :key="$route.path"></router-view>
                 </keep-alive>
             </transition>
+            <top-info class="wallet_top"></top-info>
         </div>
-        <transition name="fade" mode="out-in">
-            <main-panel class="panel"></main-panel>
-        </transition>
     </div>
 </template>
 
@@ -116,7 +113,7 @@ export default class Wallet extends Vue {
 .wallet_view {
     padding-bottom: 0;
     display: grid;
-    grid-template-columns: 200px 1fr 300px;
+    grid-template-columns: 300px 1fr;
     column-gap: 15px;
     height: 100%;
     background-color: var(--bg-wallet);
@@ -134,7 +131,7 @@ export default class Wallet extends Vue {
 .wallet_main {
     height: 100%;
     display: grid;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: 1fr max-content;
     grid-gap: 15px;
     padding-top: 8px;
 }

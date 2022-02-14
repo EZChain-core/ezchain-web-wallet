@@ -16,7 +16,7 @@ import { Vue, Component } from 'vue-property-decorator'
 @Component({
     metaInfo: () => {
         const description =
-            'Access your stored crypto assets in a simple fashion, yet highly secure, and non-custodial fashion. Your EZChain wallet is a few clicks away!'
+            'Access your stored crypto assets in a simple fashion, yet highly secure, and non-custodial fashion. Your Avalanche wallet is a few clicks away!'
         return {
             meta: [
                 {
@@ -32,7 +32,7 @@ import { Vue, Component } from 'vue-property-decorator'
                 {
                     vmid: 'og:title',
                     name: 'og:title',
-                    content: 'Access Stored Crypto Assets | EZChain Wallet',
+                    content: 'Access Stored Crypto Assets | Avalanche Wallet',
                 },
             ],
             title: 'Access Stored Crypto Assets',
@@ -47,7 +47,7 @@ export default class Access extends Vue {}
 .access_view {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .access_card {

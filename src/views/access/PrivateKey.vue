@@ -1,30 +1,62 @@
 <template>
-    <div class="access_card">
-        <div class="content">
-            <h1>Private Key</h1>
-            <form @submit.prevent="access">
-                <v-text-field
-                    class="pass"
-                    label="Private Key"
-                    dense
-                    solo
-                    flat
-                    type="password"
-                    v-model="privatekey"
-                    hide-details
-                ></v-text-field>
-                <p class="err">{{ error }}</p>
-                <v-btn
-                    class="ava_button button_primary"
-                    @click="access"
-                    :loading="isLoading"
-                    :disabled="!canSubmit"
-                    depressed
-                >
-                    Access Wallet
-                </v-btn>
-            </form>
-            <router-link to="/access" class="link">Cancel</router-link>
+    <div>
+        <LogoCenter></LogoCenter>
+        <div class="access_card">
+            <div class="content">
+                <h1>Private Key</h1>
+                <form @submit.prevent="access">
+                    <v-text-field
+                        class="pass"
+                        label="Private Key"
+                        dense
+                        solo
+                        flat
+                        type="password"
+                        v-model="privatekey"
+                        hide-details
+                    ></v-text-field>
+                    <p class="err">{{ error }}</p>
+                    <div style="display: flex; justify-content: space-between">
+                        <v-btn
+                            style="
+                                background: #ef6825 !important;
+                                border-radius: 8px;
+                                width: 49%;
+                                height: 60px;
+                            "
+                            class="ava_button button_primary"
+                            @click="access"
+                            :loading="isLoading"
+                            depressed
+                        >
+                            Access Wallet
+                        </v-btn>
+                        <button
+                            style="
+                                background: #ffffff;
+                                border: 1px solid #262626;
+                                box-sizing: border-box;
+                                border-radius: 8px;
+                                height: 60px;
+                                width: 49%;
+                            "
+                        >
+                            <router-link
+                                style="
+                                    display: inline-block;
+                                    width: 100%;
+                                    height: 100%;
+                                    line-height: 60px;
+                                "
+                                to="/access"
+                                tag="span"
+                            >
+                                Cancel
+                            </router-link>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </template>
@@ -34,9 +66,13 @@ import { ImportKeyfileInput } from '@/store/types'
 import { SingletonWallet } from '@/js/wallets/SingletonWallet'
 import { privateToAddress } from 'ethereumjs-util'
 import { bintools } from '@/AVA'
-import { Buffer } from 'ezchainjs2'
-
-@Component
+import { Buffer } from 'avalanche'
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
+@Component({
+    components: {
+        LogoCenter,
+    },
+})
 export default class PrivateKey extends Vue {
     privatekey: string = ''
     isLoading: boolean = false
@@ -75,7 +111,8 @@ export default class PrivateKey extends Vue {
 <style scoped lang="scss">
 @use '../../main';
 .pass {
-    background-color: var(--bg) !important;
+    background-color: #f5f5f5 !important;
+    border-radius: 8px;
 }
 .ava_button {
     width: 100%;
@@ -83,7 +120,7 @@ export default class PrivateKey extends Vue {
 }
 .access_card {
     /*max-width: 80vw;*/
-    background-color: var(--bg-light);
+    background-color: white;
     padding: main.$container-padding;
     width: 100%;
     /*max-width: 240px;*/
@@ -93,6 +130,7 @@ export default class PrivateKey extends Vue {
     justify-content: center;
     align-items: center;
     border-radius: 6px;
+    margin-top: 150px;
 }
 .content {
     width: 340px;

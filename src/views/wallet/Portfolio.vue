@@ -1,48 +1,54 @@
 <template>
     <div class="home_view">
-        <div class="header">
-            <h1>{{ $t('portfolio.assets') }}</h1>
-            <div>
-                <button
-                    @click="tab = 'fungibles'"
-                    :active="tab === `fungibles`"
-                    data-cy="wallet_fungible"
-                >
-                    {{ $t('portfolio.assets1') }}
-                </button>
-                <button
-                    @click="tab = 'collectibles'"
-                    :active="tab === `collectibles`"
-                    data-cy="wallet_nft"
-                >
-                    {{ $t('portfolio.assets2') }}
-                </button>
+        <div>
+            <div class="header">
+                <h1>{{ $t('portfolio.assets') }}</h1>
+                <div>
+                    <button
+                        @click="tab = 'fungibles'"
+                        :active="tab === `fungibles`"
+                        data-cy="wallet_fungible"
+                    >
+                        {{ $t('portfolio.assets1') }}
+                    </button>
+                    <button
+                        @click="tab = 'collectibles'"
+                        :active="tab === `collectibles`"
+                        data-cy="wallet_nft"
+                    >
+                        {{ $t('portfolio.assets2') }}
+                    </button>
+                </div>
+                <div style="flex-grow: 1"></div>
+                <div class="search hover_border">
+                    <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
+                    <img v-else src="@/assets/search_night.svg" />
+                    <input :placeholder="$t('portfolio.search')" v-model="search" />
+                </div>
             </div>
-            <div style="flex-grow: 1"></div>
-            <div class="search hover_border">
-                <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
-                <img v-else src="@/assets/search_night.svg" />
-                <input :placeholder="$t('portfolio.search')" v-model="search" />
+            <div class="pages">
+                <transition-group name="fade" mode="out-in">
+                    <fungibles
+                        v-show="tab === `fungibles`"
+                        key="fungibles"
+                        :search="search"
+                    ></fungibles>
+                    <collectibles
+                        v-show="tab === `collectibles`"
+                        key="collectibles"
+                        :search="search"
+                    ></collectibles>
+                </transition-group>
             </div>
         </div>
-        <div class="pages">
-            <transition-group name="fade" mode="out-in">
-                <fungibles
-                    v-show="tab === `fungibles`"
-                    key="fungibles"
-                    :search="search"
-                ></fungibles>
-                <collectibles
-                    v-show="tab === `collectibles`"
-                    key="collectibles"
-                    :search="search"
-                ></collectibles>
-            </transition-group>
-        </div>
+        <transition name="fade" mode="out-in">
+            <transaction-history-panel class="panel_content"></transaction-history-panel>
+        </transition>
     </div>
 </template>
 <script>
 import Fungibles from '@/components/wallet/portfolio/Fungibles'
+import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel'
 import Collectibles from '@/components/wallet/portfolio/Collectibles'
 export default {
     name: 'WalletHome',
@@ -55,6 +61,7 @@ export default {
     components: {
         Fungibles,
         Collectibles,
+        TransactionHistoryPanel,
     },
     watch: {
         tab() {
@@ -68,7 +75,8 @@ export default {
 
 .home_view {
     display: grid;
-    grid-template-rows: max-content 1fr;
+    grid-template-columns: 1fr 360px;
+    grid-gap: 16px;
 }
 .header {
     display: flex;
@@ -81,7 +89,6 @@ export default {
         font-weight: normal;
         margin-right: 30px;
     }
-
     button {
         padding: 8px 24px;
         font-size: 14px;
@@ -92,8 +99,9 @@ export default {
         color: var(--primary-color-light);
 
         &[active] {
-            color: var(--secondary-color);
-            border-bottom: 2px solid var(--secondary-color);
+            color: #262626;
+            background: #e5e5e5;
+            border-radius: 8px;
         }
     }
 }

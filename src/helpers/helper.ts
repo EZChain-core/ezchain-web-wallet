@@ -7,7 +7,13 @@ import {
     UTXO,
 } from 'ezchainjs2/dist/apis/avm'
 
-import { Defaults, getPreferredHRP, ONEAVAX, PayloadBase, PayloadTypes } from 'ezchainjs2/dist/utils'
+import {
+    Defaults,
+    getPreferredHRP,
+    ONEAVAX,
+    PayloadBase,
+    PayloadTypes,
+} from 'ezchainjs2/dist/utils'
 import Big from 'big.js'
 
 import { Buffer, BN } from 'ezchainjs2'

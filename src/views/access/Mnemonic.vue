@@ -1,30 +1,66 @@
 <template>
-    <div class="mnemonic_auth">
-        <div class="left">
-            <header>
-                <h1>{{ $t('access.mnemonic.title') }}</h1>
-            </header>
-            <label>{{ $t('access.mnemonic.subtitle') }}</label>
-            <textarea @input="onPhraseIn" translate="no"></textarea>
-            <div class="button_container">
-                <p class="err" v-if="err">{{ err }}</p>
-                <v-btn
-                    class="ava_button but_primary button_primary access"
-                    @click="access"
-                    depressed
-                    :loading="isLoading"
-                    :disabled="!canSubmit"
-                >
-                    {{ $t('access.mnemonic.submit') }}
-                </v-btn>
-                <router-link to="/access" class="link">
-                    {{ $t('access.mnemonic.cancel') }}
-                </router-link>
+    <div>
+        <LogoCenter style="margin-bottom: 150px"></LogoCenter>
+        <div class="mnemonic_auth">
+            <div class="left">
+                <header>
+                    <h1>{{ $t('access.mnemonic.title') }}</h1>
+                </header>
+                <label>{{ $t('access.mnemonic.subtitle') }}</label>
+                <textarea @input="onPhraseIn" translate="no"></textarea>
+                <div class="button_container">
+                    <p class="err" v-if="err">{{ err }}</p>
+                    <div style="display: flex; width: 318px; align-items: center">
+                        <v-btn
+                            style="
+                                background: #ef6825 !important;
+                                border-radius: 8px;
+                                width: 49%;
+                                height: 60px;
+                                margin: 0;
+                            "
+                            class="ava_button but_primary button_primary access"
+                            @click="access"
+                            depressed
+                            :loading="isLoading"
+                        >
+                            {{ $t('access.mnemonic.submit') }}
+                        </v-btn>
+                        <div
+                            style="
+                                margin-left: 16px;
+                                background: #ffffff;
+                                border: 1px solid #262626;
+                                box-sizing: border-box;
+                                border-radius: 8px;
+                                width: 49%;
+                                height: 60px;
+                            "
+                        >
+                            <router-link
+                                to="/access"
+                                tag="span"
+                                style="
+                                    display: inline-block;
+                                    width: 100%;
+                                    height: 100%;
+                                    line-height: 60px;
+                                "
+                            >
+                                {{ $t('access.mnemonic.cancel') }}
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="right">
-            <label>Preview</label>
-            <mnemonic-display :phrase="phrase" class="phrase_disp" :rowSize="3"></mnemonic-display>
+            <div class="right">
+                <label>Preview</label>
+                <mnemonic-display
+                    :phrase="phrase"
+                    class="phrase_disp"
+                    :rowSize="3"
+                ></mnemonic-display>
+            </div>
         </div>
     </div>
 </template>
@@ -34,10 +70,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 import MnemonicDisplay from '@/components/misc/MnemonicDisplay.vue'
 import * as bip39 from 'bip39'
-
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 @Component({
     components: {
         MnemonicDisplay,
+        LogoCenter,
     },
 })
 export default class Mnemonic extends Vue {
