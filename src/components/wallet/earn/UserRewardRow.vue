@@ -19,11 +19,11 @@
             </div>
             <div>
                 <label>{{ $t('earn.rewards.row.stake') }}</label>
-                <p class="reward">{{ stakeBig.toLocaleString() }} EZC</p>
+                <p class="reward">{{ stakeBig.toLocaleString() }} AVAX</p>
             </div>
             <div style="text-align: right">
                 <label>{{ $t('earn.rewards.row.reward') }}</label>
-                <p class="reward">{{ rewardBig.toLocaleString() }} EZC</p>
+                <p class="reward">{{ rewardBig.toLocaleString() }} AVAX</p>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { DelegatorRaw, ValidatorRaw } from '../../misc/ValidatorList/types'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import Big from 'big.js'
 
 @Component

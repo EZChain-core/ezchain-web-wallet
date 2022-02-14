@@ -5,12 +5,12 @@ import {
     KeyPair as AVMKeyPair,
     NFTTransferOutput,
     UTXO,
-} from 'ezchainjs2/dist/apis/avm'
+} from 'avalanche/dist/apis/avm'
 
-import { Defaults, getPreferredHRP, ONEAVAX, PayloadBase, PayloadTypes } from 'ezchainjs2/dist/utils'
+import { Defaults, getPreferredHRP, ONEAVAX, PayloadBase, PayloadTypes } from 'avalanche/dist/utils'
 import Big from 'big.js'
 
-import { Buffer, BN } from 'ezchainjs2'
+import { Buffer, BN } from 'avalanche'
 import createHash from 'create-hash'
 
 function bnToBig(val: BN, denomination = 0): Big {

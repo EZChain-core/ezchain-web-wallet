@@ -1,7 +1,7 @@
-import { UTXOSet as AVMUTXOSet } from 'ezchainjs2/dist/apis/avm/utxos'
-import { UTXOSet as PlatformUTXOSet } from 'ezchainjs2/dist/apis/platformvm/utxos'
+import { UTXOSet as AVMUTXOSet } from 'avalanche/dist/apis/avm/utxos'
+import { UTXOSet as PlatformUTXOSet } from 'avalanche/dist/apis/platformvm/utxos'
 import { avm, cChain, pChain } from '@/AVA'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 
 export async function getStakeForAddresses(addrs: string[]): Promise<BN> {
     if (addrs.length <= 256) {

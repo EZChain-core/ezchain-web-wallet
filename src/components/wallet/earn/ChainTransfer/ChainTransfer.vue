@@ -16,16 +16,16 @@
 
                         <p>
                             Export Fee
-                            <span>{{ exportFee.toLocaleString() }} EZC</span>
+                            <span>{{ exportFee.toLocaleString() }} AVAX</span>
                         </p>
                         <p>
                             Import Fee
-                            <span>{{ importFee.toLocaleString() }} EZC</span>
+                            <span>{{ importFee.toLocaleString() }} AVAX</span>
                         </p>
                         <p>
                             <b>
                                 Total
-                                <span>{{ fee.toLocaleString() }} EZC</span>
+                                <span>{{ fee.toLocaleString() }} AVAX</span>
                             </b>
                         </p>
                     </div>
@@ -121,7 +121,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import Dropdown from '@/components/misc/Dropdown.vue'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 import AvaAsset from '@/js/AvaAsset'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import { avm, cChain, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
 import Spinner from '@/components/misc/Spinner.vue'
@@ -140,7 +140,7 @@ import {
     GasHelper,
     Utils,
     Big,
-} from 'ezchain-wallet-sdk'
+} from '@avalabs/avalanche-wallet-sdk'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms

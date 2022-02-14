@@ -10,7 +10,7 @@
         <h2 style="padding-left: 5pt; text-indent: 0pt; text-align: justify">AGREEMENT TO TERMS</h2>
         <p style="padding-top: 12pt; padding-left: 5pt; text-indent: 0pt; text-align: justify">
             These Terms of Use constitute a legally binding agreement made between you, whether
-            personally or on behalf of an entity (“you”) and EZChain (BVI) Inc. (&quot;
+            personally or on behalf of an entity (“you”) and Avalanche (BVI) Inc. (&quot;
             <b>Company</b>
             &quot;, “
             <b>we</b>
@@ -19,7 +19,7 @@
             ”, or “
             <b>our</b>
             ”), concerning your access to and use of the
-            <span class="s1">https://wallet.ezchain.com/</span>
+            <span class="s1">https://wallet.avax.network/</span>
             website and related features and services, including but not limited to the AVAX wallet
             functionality, as well as any other media form, media channel, mobile website or mobile
             application related, linked, or otherwise connected thereto, (collectively, the “Site”).
@@ -607,10 +607,10 @@
         <p style="text-indent: 0pt; text-align: left"><br /></p>
         <p style="padding-left: 5pt; text-indent: 0pt; text-align: justify">
             We care about data privacy and security. Please review our Privacy Policy:
-            <a href="http://www.ezchain.com/privacy-policy" class="s7" target="_blank">
-                https://www.ezchain.com/privacy-policy
+            <a href="http://www.avalabs.org/privacy-policy" class="s7" target="_blank">
+                https://www.avalabs.org/privacy-policy
             </a>
-            <a href="http://www.ezchain.com/privacy-policy" class="a" target="_blank">.</a>
+            <a href="http://www.avalabs.org/privacy-policy" class="a" target="_blank">.</a>
             By using the Site, you agree to be bound by our Privacy Policy, which is incorporated
             into these Terms of Use. Please be advised the Site is hosted in the United States. If
             you access the Site from any other region of the world with laws or other requirements
@@ -733,7 +733,7 @@
         <p style="padding-top: 12pt; padding-left: 5pt; text-indent: 0pt; text-align: justify">
             You may opt out of the binding arbitration described in this section by sending us
             written notice of your desire to do so by email at
-            <a href="mailto:support@ezchain.com" class="a" target="_blank">support@ezchain.com</a>
+            <a href="mailto:support@avax.network" class="a" target="_blank">support@avax.network</a>
             (such notice, an “Arbitration Opt-out Notice”) within thirty (30) days following the
             date you first agree to these Terms of Use, or within thirty (30) days of the date we
             modify this Dispute Resolution section as indicated in the “Last updated” date above or
@@ -993,7 +993,7 @@
             regarding use of the Site, please contact us at:
         </p>
         <p style="text-indent: 0pt; text-align: left"><br /></p>
-        <p style="padding-left: 5pt; text-indent: 0pt; text-align: left">EZChain (BVI) Inc.</p>
+        <p style="padding-left: 5pt; text-indent: 0pt; text-align: left">Avalanche (BVI) Inc.</p>
         <p style="padding-left: 5pt; text-indent: 0pt; text-align: left">
             Floor 4, Banco Popular Building
             <br />
@@ -1001,7 +1001,7 @@
             <br />
             British Virgin Islands
             <br />
-            <a href="mailto:support@ezchain.com" target="_blank">support@ezchain.com</a>
+            <a href="mailto:support@avax.network" target="_blank">support@avax.network</a>
         </p>
     </div>
 </template>

@@ -13,7 +13,7 @@
             <div>
                 <label>{{ $t('earn.shared.utxo_select.available') }}</label>
                 <p>
-                    <span>{{ selectedBalanceText }} EZC</span>
+                    <span>{{ selectedBalanceText }} AVAX</span>
                 </p>
             </div>
 
@@ -29,11 +29,11 @@
 <script lang="ts">
 import { Vue, Component, Model, Watch } from 'vue-property-decorator'
 import UtxoSelectModal from '@/components/modals/UtxoSelect/UtxoSelect.vue'
-import { AmountOutput, UTXO, UTXOSet } from 'ezchainjs2/dist/apis/platformvm'
+import { AmountOutput, UTXO, UTXOSet } from 'avalanche/dist/apis/platformvm'
 import { WalletType } from '@/js/wallets/types'
 
 import { CurrencyType } from '@/components/misc/CurrencySelect/types'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import { bnToBig } from '@/helpers/helper'
 @Component({
     components: {

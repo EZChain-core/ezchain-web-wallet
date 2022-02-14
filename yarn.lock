@@ -2,6 +2,43 @@
 # yarn lockfile v1
 
 
+"@avalabs/avalanche-wallet-sdk@0.11.1-beta.3":
+  version "0.11.1-beta.3"
+  resolved "https://registry.yarnpkg.com/@avalabs/avalanche-wallet-sdk/-/avalanche-wallet-sdk-0.11.1-beta.3.tgz#f7fa143c9e71f1023b5f3eb8da3423855644ec20"
+  integrity sha512-0PUsTQyWLw+aNFH87L6IduCK0jm4qEWgbCcAbYjQjwKYV/JR1ATlT+sdwVSFwFD7vNseARfQ8M6iBq1cG/6/vA==
+  dependencies:
+    "@ethereumjs/common" "2.6.0"
+    "@ethereumjs/tx" "3.4.0"
+    "@ledgerhq/hw-app-eth" "6.12.2"
+    "@obsidiansystems/hw-app-avalanche" "0.2.2"
+    "@openzeppelin/contracts" "4.4.1"
+    big.js "^6.1.1"
+    bip32 "^2.0.6"
+    bip32-path "^0.4.2"
+    bip39 "^3.0.4"
+    bn.js "5.1.1"
+    create-hash "1.2.0"
+    ethereumjs-util "^7.0.7"
+    ethers "^5.1.4"
+    sockette "^2.0.6"
+    typescript-transform-paths "^2.2.3"
+    url "^0.11.0"
+    web3 "1.6.0"
+    web3-eth-contract "1.6.0"
+    xss "^1.0.10"
+
+"@avalabs/vue_components@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@avalabs/vue_components/-/vue_components-0.10.0.tgz#6dcab2079db824711410898b3afafdbc6d1d5bd4"
+  integrity sha512-hQ+Th/5Ra4RWrRIWhIl2dYu+F38u8h1DHCqkfLNIGHRhIBHuQwKadIHh0iE6W1/GEau8dKl1O6QImNw5ZdI32A==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.27"
+    "@fortawesome/free-solid-svg-icons" "^5.12.1"
+    "@fortawesome/vue-fontawesome" "^0.1.9"
+    "@zxing/library" "^0.15.2"
+    core-js "^3.6.4"
+    vue "^2.6.11"
+
 "@babel/code-frame@^7.0.0":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"
@@ -2530,16 +2567,6 @@
     rxjs "6"
     semver "^7.3.5"
 
-"@ledgerhq/devices@^6.20.0":
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-6.20.0.tgz#4280aaa5dc16f821ecab9ee8ae882299411ba5b7"
-  integrity sha512-WehM7HGdb+nSUzyUlz1t2qJ8Tg4I+rQkOJJsx0/Dpjkx6/+1hHcX6My/apPuwh39qahqwYhjszq0H1YzGDS0Yg==
-  dependencies:
-    "@ledgerhq/errors" "^6.10.0"
-    "@ledgerhq/logs" "^6.10.0"
-    rxjs "6"
-    semver "^7.3.5"
-
 "@ledgerhq/errors@^5.22.0", "@ledgerhq/errors@^5.40.0":
   version "5.40.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-5.40.0.tgz#1c8a4fa5977e645e354e497519b403e156c4f043"
@@ -2622,15 +2649,6 @@
   integrity sha512-VZbGfyQ8iFl2W6TUkVmQ3rz8kyOXMbOdFiht3VNlglMe3KBGJWOjW9s/5LhOR348NJs797B1gl4V0Zqmn11kUg==
   dependencies:
     "@ledgerhq/devices" "^6.11.2"
-    "@ledgerhq/errors" "^6.10.0"
-    events "^3.3.0"
-
-"@ledgerhq/hw-transport@^6.19.0":
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.20.0.tgz#16e84c99fca2d10f637c0e36c87088322479a488"
-  integrity sha512-5KS0Y6CbWRDOv3FgNIfk53ViQOIZqMxAw0RuOexreW5GMwuYfK7ddGi4142qcu7YrxkGo7cNe42wBbx1hdXl0Q==
-  dependencies:
-    "@ledgerhq/devices" "^6.20.0"
     "@ledgerhq/errors" "^6.10.0"
     events "^3.3.0"
 
@@ -4323,6 +4341,28 @@ available-typed-arrays@^1.0.2:
   integrity sha512-XWX3OX8Onv97LMk/ftVyBibpGwY5a8SmuxZPzeOxqmuEqUCOM9ZE+uIaD1VNJ5QnvU2UQusvmKbuM1FR8QWGfQ==
   dependencies:
     array-filter "^1.0.0"
+
+avalanche@3.10.1:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/avalanche/-/avalanche-3.10.1.tgz#68a628abd4fb12fde52447731a662b1be3c1864e"
+  integrity sha512-A+cd8Bm7F2XvUZ1yM1JESw7sN4TcOtrby0cF+baLv6KCMUT7mGm0wv/UAmlo5ElHY2dwDXHPa9OyOUAKl/wliA==
+  dependencies:
+    assert "2.0.0"
+    axios "0.24.0"
+    bech32 "2.0.0"
+    bip39 "3.0.4"
+    bn.js "5.2.0"
+    buffer "6.0.3"
+    create-hash "1.2.0"
+    crypto-browserify "3.12.0"
+    elliptic "6.5.4"
+    ethers "5.5.1"
+    hdkey "2.0.1"
+    isomorphic-dompurify "^0.16.0"
+    isomorphic-ws "4.0.1"
+    store2 "2.12.0"
+    stream-browserify "3.0.0"
+    ws "8.2.3"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -7901,66 +7941,6 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
-
-ezchain-vue_components@1.0.0-mainnet:
-  version "1.0.0-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchain-vue_components/-/ezchain-vue_components-1.0.0-mainnet.tgz#6f802b80043d9b4d1c11a2da5b3ea630904544a4"
-  integrity sha512-yFB7mkyEoEL3gsvB07iulpz8ApovHFW3fcIpBWrGAiQAsOiYRmdGlcOT1uWBT8oitFIepfR61sW+DJM0IzHCoA==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.27"
-    "@fortawesome/free-solid-svg-icons" "^5.12.1"
-    "@fortawesome/vue-fontawesome" "^0.1.9"
-    "@zxing/library" "^0.15.2"
-    core-js "^3.6.4"
-    vue "^2.6.11"
-
-ezchain-wallet-sdk@1.0.0-mainnet:
-  version "1.0.0-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchain-wallet-sdk/-/ezchain-wallet-sdk-1.0.0-mainnet.tgz#949e288382837d1f24110fcf39f8014ce532ae80"
-  integrity sha512-pKX0qDr+/NUP0bI5xgi6BXXDb/VjVf4FDo7x3q4BVcme5mXAJIn7O333yRGakvQ5OB1hSP6I82xja7Uju65UWQ==
-  dependencies:
-    "@ethereumjs/common" "2.6.0"
-    "@ethereumjs/tx" "3.4.0"
-    "@ledgerhq/hw-app-eth" "6.12.2"
-    "@ledgerhq/hw-transport" "^6.19.0"
-    "@obsidiansystems/hw-app-avalanche" "0.2.2"
-    "@openzeppelin/contracts" "4.4.1"
-    big.js "^6.1.1"
-    bip32 "^2.0.6"
-    bip32-path "^0.4.2"
-    bip39 "^3.0.4"
-    bn.js "5.1.1"
-    create-hash "1.2.0"
-    ethereumjs-util "^7.0.7"
-    ethers "^5.1.4"
-    sockette "^2.0.6"
-    typescript-transform-paths "^2.2.3"
-    url "^0.11.0"
-    web3 "1.6.0"
-    web3-eth-contract "1.6.0"
-    xss "^1.0.10"
-
-ezchainjs2@1.0.0-mainnet:
-  version "1.0.0-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchainjs2/-/ezchainjs2-1.0.0-mainnet.tgz#0b5caddb4b276d6ae2eab674cc3ca64f5121d63a"
-  integrity sha512-olmRBnLqcGZ5KflRxeurgvLnA+WPsfgtR406Gy4gzVm+ZoTcPR27bS93MrNTMeGljga7yBkvstXcTT+iKG175w==
-  dependencies:
-    assert "2.0.0"
-    axios "0.24.0"
-    bech32 "2.0.0"
-    bip39 "3.0.4"
-    bn.js "5.2.0"
-    buffer "6.0.3"
-    create-hash "1.2.0"
-    crypto-browserify "3.12.0"
-    elliptic "6.5.4"
-    ethers "5.5.1"
-    hdkey "2.0.1"
-    isomorphic-dompurify "^0.16.0"
-    isomorphic-ws "4.0.1"
-    store2 "2.12.0"
-    stream-browserify "3.0.0"
-    ws "8.2.3"
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"

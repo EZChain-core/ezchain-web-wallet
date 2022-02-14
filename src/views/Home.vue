@@ -2,59 +2,37 @@
     <div class="home">
         <b-container>
             <b-row>
-                <b-col>
+                <b-col class="flex_column">
                     <div class="home_wrapper">
+                        <LogoCenter></LogoCenter>
                         <h1>{{ $t('home.desc') }}</h1>
                         <div class="login_wrapper">
                             <div class="login_option">
-                                <header>
-                                    <div class="img_container">
-                                        <img
-                                            v-if="$root.theme === 'day'"
-                                            src="@/assets/diamond-primary.png"
-                                            alt
-                                        />
-                                        <img v-else src="@/assets/diamond-primary-night.svg" alt />
-                                    </div>
-                                    <h2>{{ $t('home.access.title') }}</h2>
-                                    <p>{{ $t('home.access.desc') }}</p>
-                                </header>
-                                <div>
-                                    <router-link
-                                        data-cy="access"
-                                        to="/access"
-                                        class="ava_button button_primary submit_but"
-                                    >
-                                        {{ $t('home.access.submit') }}
-                                    </router-link>
-                                </div>
+                                <router-link data-cy="access" to="/access">
+                                    <header>
+                                        <div class="img_container">
+                                            <img src="@/assets/create1.png" alt />
+                                            <!--                                        <img v-else src="@/assets/diamond-primary-night.svg" alt />-->
+                                        </div>
+                                        <div>
+                                            <h2>{{ $t('home.access.title') }}</h2>
+                                            <p>{{ $t('home.access.desc') }}</p>
+                                        </div>
+                                    </header>
+                                </router-link>
                             </div>
-                            <div class="login_option">
-                                <header>
-                                    <div class="img_container">
-                                        <img
-                                            v-if="$root.theme === 'day'"
-                                            src="@/assets/diamond-secondary.png"
-                                            alt
-                                        />
-                                        <img
-                                            v-else
-                                            src="@/assets/diamond-secondary-night.svg"
-                                            alt
-                                        />
-                                    </div>
-                                    <h2>{{ $t('home.create.title') }}</h2>
-                                    <p>{{ $t('home.create.desc') }}</p>
-                                </header>
-                                <div>
-                                    <router-link
-                                        data-cy="create"
-                                        to="/create"
-                                        class="ava_button button_secondary submit_but"
-                                    >
-                                        {{ $t('home.create.submit') }}
-                                    </router-link>
-                                </div>
+                            <div class="login_option" style="margin-top: 16px">
+                                <router-link data-cy="create" to="/create">
+                                    <header>
+                                        <div class="img_container">
+                                            <img src="@/assets/create2.png" alt />
+                                        </div>
+                                        <div>
+                                            <h2>{{ $t('home.create.title') }}</h2>
+                                            <p>{{ $t('home.create.desc') }}</p>
+                                        </div>
+                                    </header>
+                                </router-link>
                             </div>
                         </div>
                         <ToS class="tos" style="align-self: center; margin: 30px !important"></ToS>
@@ -69,17 +47,22 @@
 import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ToS from '@/components/misc/ToS.vue'
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 
 @Component({
     name: 'home',
-    components: { ToS },
+    components: { ToS, LogoCenter },
 })
 export default class Home extends Vue {}
 </script>
 
 <style scoped lang="scss">
 @use "../main";
-
+.flex_column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .home {
     padding-top: 100px;
     /*background-color: #fff;*/
@@ -99,53 +82,72 @@ export default class Home extends Vue {}
         flex-direction: column;
         align-content: center;
         justify-content: center;
+        max-width: 480px;
 
         h1 {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 28px;
+            color: #262626;
             text-align: center;
-            font-size: 22px;
-            font-weight: 400;
+            margin-top: 224px;
         }
 
         .login_wrapper {
-            margin-top: 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: main.$container-padding;
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 16px;
 
             .login_option {
+                box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.2);
+                border-radius: 8px;
                 display: flex;
-                flex-direction: column;
-                border-radius: 2px;
-                align-items: flex-start;
-                justify-content: space-between;
-                background-color: var(--bg-light);
-                padding: 60px 90px main.$container-padding main.$container-padding;
+                height: 138px;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--bg-wallet-light);
+                padding: 25px 69px 40px 40px;
 
                 header {
-                    margin-bottom: 60px;
-
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .img_container {
+                        margin-right: 16px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
                     img {
-                        width: 89px;
-                        height: 89px;
+                        width: 72px;
+                        height: 72px;
                         max-height: none;
                     }
 
                     h2 {
-                        padding-top: main.$s-size;
+                        text-align: left;
                         font-family: 'DM Sans', sans-serif;
-                        font-size: main.$s-size;
+                        font-size: 12px;
                         text-transform: uppercase;
                         color: var(--primary-color-light);
                     }
 
                     p {
-                        margin-top: 10px !important;
-                        font-size: main.$l-size;
+                        text-align: left;
+                        font-size: 20px;
+                        line-height: 28px;
                     }
                 }
 
                 a {
                     margin: 0;
+                    text-decoration: none;
+                    color: #262626;
                 }
             }
         }

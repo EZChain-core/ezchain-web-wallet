@@ -26,12 +26,12 @@
             </div>
             <div class="balance_row">
                 <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
-                    {{ balanceTextLeft }} EZC
+                    {{ balanceTextLeft }} AVAX
                 </p>
                 <p class="balance" data-cy="wallet_balance" v-else>
                     {{ balanceTextLeft }}
                     <span>.{{ balanceTextRight }}</span>
-                    EZC
+                    AVAX
                 </p>
                 <div style="display: flex; flex-direction: row">
                     <p class="balance_usd">
@@ -39,7 +39,7 @@
                         USD
                     </p>
                     <p class="balance_usd" style="background-color: transparent">
-                        <b>1 EZC</b>
+                        <b>1 AVAX</b>
                         =
                         <b>${{ avaxPriceText }}</b>
                         USD
@@ -51,37 +51,37 @@
                 <div class="alt_non_breakdown" v-if="!isBreakdown">
                     <div>
                         <label>{{ $t('top.balance.available') }}</label>
-                        <p>{{ unlockedText }} EZC</p>
+                        <p>{{ unlockedText }} AVAX</p>
                     </div>
                     <div>
                         <label>{{ $t('top.locked') }}</label>
-                        <p>{{ balanceTextLocked }} EZC</p>
+                        <p>{{ balanceTextLocked }} AVAX</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.stake') }}</label>
-                        <p>{{ stakingText }} EZC</p>
+                        <p>{{ stakingText }} AVAX</p>
                     </div>
                 </div>
                 <div class="alt_breakdown" v-else>
                     <div>
                         <label>{{ $t('top.balance.available') }} (X)</label>
-                        <p>{{ avmUnlocked | cleanAvaxBN }} EZC</p>
+                        <p>{{ avmUnlocked | cleanAvaxBN }} AVAX</p>
                         <label>{{ $t('top.balance.available') }} (P)</label>
-                        <p>{{ platformUnlocked | cleanAvaxBN }} EZC</p>
+                        <p>{{ platformUnlocked | cleanAvaxBN }} AVAX</p>
                         <label>{{ $t('top.balance.available') }} (C)</label>
-                        <p>{{ evmUnlocked | cleanAvaxBN }} EZC</p>
+                        <p>{{ evmUnlocked | cleanAvaxBN }} AVAX</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.locked') }} (X)</label>
-                        <p>{{ avmLocked | cleanAvaxBN }} EZC</p>
+                        <p>{{ avmLocked | cleanAvaxBN }} AVAX</p>
                         <label>{{ $t('top.balance.locked') }} (P)</label>
-                        <p>{{ platformLocked | cleanAvaxBN }} EZC</p>
+                        <p>{{ platformLocked | cleanAvaxBN }} AVAX</p>
                         <label>{{ $t('top.balance.locked_stake') }} (P)</label>
-                        <p>{{ platformLockedStakeable | cleanAvaxBN }} EZC</p>
+                        <p>{{ platformLockedStakeable | cleanAvaxBN }} AVAX</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.stake') }}</label>
-                        <p>{{ stakingText }} EZC</p>
+                        <p>{{ stakingText }} AVAX</p>
                     </div>
                 </div>
             </div>
@@ -99,8 +99,8 @@ import NftCol from './NftCol.vue'
 import Tooltip from '@/components/misc/Tooltip.vue'
 
 import Big from 'big.js'
-import { BN } from 'ezchainjs2/dist'
-import { ONEAVAX } from 'ezchainjs2/dist/utils'
+import { BN } from 'avalanche/dist'
+import { ONEAVAX } from 'avalanche/dist/utils'
 import { bnToBig } from '@/helpers/helper'
 import { priceDict } from '@/store/types'
 import { WalletType } from '@/js/wallets/types'

@@ -4,7 +4,7 @@ import {
     ValidatorPendingRaw,
     ValidatorRaw,
 } from '@/components/misc/ValidatorList/types'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 
 export interface PlatformState {
     validators: ValidatorRaw[]

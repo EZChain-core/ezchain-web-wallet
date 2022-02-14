@@ -3,21 +3,12 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <LogoCenter v-if="!keyPhrase" style="margin-bottom: 298px"></LogoCenter>
+                    <LogoCenter v-else style="margin-bottom: 106px"></LogoCenter>
                     <transition name="fade" mode="out-in">
                         <!-- PHASE 1 -->
                         <div v-if="!keyPhrase" class="stage_1">
-                            <div class="img_container">
-                                <img
-                                    v-if="$root.theme === 'day'"
-                                    src="@/assets/diamond-secondary.png"
-                                    alt
-                                />
-                                <img v-else src="@/assets/diamond-secondary-night.svg" alt />
-                            </div>
                             <h1>{{ $t('create.generate') }}</h1>
-                            <router-link to="/access" class="link">
-                                {{ $t('create.but_have') }}
-                            </router-link>
                             <div class="options">
                                 <button
                                     class="ava_button but_generate button_secondary"
@@ -27,9 +18,11 @@
                                 </button>
                                 <!--                                <TorusGoogle class="torus_but"></TorusGoogle>-->
                             </div>
-                            <ToS></ToS>
-
-                            <router-link to="/" class="link">{{ $t('create.cancel') }}</router-link>
+                            <div class="options2">
+                                <router-link to="/" class="button_cancel" tag="button">
+                                    {{ $t('create.cancel') }}
+                                </router-link>
+                            </div>
                         </div>
                         <!-- PHASE 2 -->
                         <div v-else class="stage_2">
@@ -50,34 +43,33 @@
                                         >
                                             {{ keyPhrase.getValue() }}
                                         </p>
-                                        <div class="mneumonic_button_container" v-if="!isVerified">
-                                            <button
-                                                @click="createKey"
-                                                class="ava_button but_randomize button_primary"
-                                            >
-                                                <fa icon="sync"></fa>
-                                                <span>{{ $t('create.regenerate') }}</span>
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- RIGHT -->
                                 <div class="phrase_disp_col">
                                     <template v-if="!isVerified">
-                                        <img
-                                            v-if="$root.theme === 'day'"
-                                            src="@/assets/keyphrase.png"
-                                            alt
-                                        />
-                                        <img v-else src="@/assets/keyphrase_night.svg" alt />
+                                        <div style="display: flex">
+                                            <div style="margin-right: 20px">
+                                                <img
+                                                    v-if="$root.theme === 'day'"
+                                                    src="@/assets/create3.png"
+                                                    alt
+                                                />
+                                                <img
+                                                    v-else
+                                                    src="@/assets/keyphrase_night.svg"
+                                                    alt
+                                                />
+                                            </div>
+                                            <h1 style="color: #262626">
+                                                {{ $t('create.mnemonic_title') }}
+                                            </h1>
+                                        </div>
                                     </template>
                                     <template v-else>
                                         <img src="@/assets/success.svg" alt />
                                     </template>
                                     <header v-if="!isVerified">
-                                        <h1>
-                                            {{ $t('create.mnemonic_title') }}
-                                        </h1>
                                         <p>{{ $t('create.mnemonic_desc') }}</p>
                                     </header>
                                     <header v-else>
@@ -87,7 +79,6 @@
                                         <p>{{ $t('create.success_desc') }}</p>
                                     </header>
                                     <p class="warn" v-if="!isVerified">
-                                        <span class="label">{{ $t('create.attention') }}</span>
                                         <span class="description">{{ $t('create.warning') }}</span>
                                     </p>
                                     <!-- STEP 2a - VERIFY -->
@@ -101,13 +92,39 @@
                                             ref="verify"
                                             @complete="complete"
                                         ></VerifyMnemonic>
-                                        <button
-                                            class="but_primary ava_button button_secondary"
-                                            @click="verifyMnemonic"
-                                            :disabled="!canVerify"
-                                        >
-                                            {{ $t('create.success_submit') }}
-                                        </button>
+                                        <div class="button_cont2a">
+                                            <button
+                                                style="
+                                                    margin-right: 16px;
+                                                    background: #ef6825 !important;
+                                                    border-radius: 8px;
+                                                "
+                                                class="but_primary ava_button button_secondary"
+                                                @click="verifyMnemonic"
+                                                :disabled="!canVerify"
+                                            >
+                                                {{ $t('create.success_submit') }}
+                                            </button>
+                                            <div
+                                                class="mneumonic_button_container"
+                                                v-if="!isVerified"
+                                            >
+                                                <button
+                                                    style="
+                                                        background: white !important;
+                                                        border: 1px solid #262626;
+                                                        box-sizing: border-box;
+                                                        border-radius: 8px;
+                                                    "
+                                                    @click="createKey"
+                                                    class="ava_button but_randomize button_primary"
+                                                >
+                                                    <span style="color: #000000">
+                                                        {{ $t('create.regenerate') }}
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- STEP 2b - ACCESS -->
                                     <div class="access_cont" v-if="isVerified">
@@ -154,7 +171,7 @@ import VerifyMnemonic from '@/components/modals/VerifyMnemonic.vue'
 import MnemonicCopied from '@/components/CreateWalletWorkflow/MnemonicCopied.vue'
 import ToS from '@/components/misc/ToS.vue'
 import MnemonicPhrase from '@/js/wallets/MnemonicPhrase'
-
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 @Component({
     components: {
         ToS,
@@ -166,6 +183,7 @@ import MnemonicPhrase from '@/js/wallets/MnemonicPhrase'
         // TorusGoogle,
         VerifyMnemonic,
         MnemonicCopied,
+        LogoCenter,
     },
 })
 export default class CreateWallet extends Vue {
@@ -222,7 +240,6 @@ export default class CreateWallet extends Vue {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
 .create_wallet {
     display: flex;
     justify-content: center;
@@ -238,9 +255,9 @@ export default class CreateWallet extends Vue {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg-light);
-    padding: main.$container-padding;
+    background-color: #ffffff;
     text-align: center;
+    width: 480px;
     /*min-width: 1000px;*/
 
     img {
@@ -252,9 +269,13 @@ export default class CreateWallet extends Vue {
 
     h1 {
         margin-top: main.$vertical-padding;
-        text-align: left;
-        font-size: main.$m-size;
-        font-weight: 400;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 28px;
+        text-align: center;
+        color: #262626;
+        max-width: 354px;
     }
 }
 
@@ -262,9 +283,8 @@ export default class CreateWallet extends Vue {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 15px;
-    padding-top: 15px;
-    border-top: 1px solid var(--primary-color-light);
+    width: 100%;
+    justify-content: center;
 
     > * {
         margin: 4px;
@@ -276,7 +296,22 @@ export default class CreateWallet extends Vue {
         margin: 6px !important;
     }
 }
+.options2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    > * {
+        margin: 4px;
+        font-size: 0.8rem;
+    }
 
+    p {
+        color: #999;
+        margin: 6px !important;
+    }
+}
 .torus_but {
     background-color: #db3236;
     color: #fff;
@@ -284,10 +319,25 @@ export default class CreateWallet extends Vue {
 
 .but_generate {
     display: block;
-    height: max-content;
-    background-color: main.$secondary-color;
+    background: #ef6825 !important;
+    border-radius: 8px;
+    width: 100%;
+    height: 64px;
 }
-
+.button_cancel {
+    margin-top: 16px;
+    display: block;
+    background: white;
+    width: 100%;
+    height: 64px;
+    border: 1px solid #262626;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #262626;
+}
 .key_disp {
     margin: 30px auto;
     font-size: 12px;
@@ -314,7 +364,10 @@ a {
     grid-template-columns: 1fr 1fr;
     column-gap: 60px;
 }
-
+.button_cont2a {
+    display: flex;
+    align-items: center;
+}
 .mneumonic_disp_col {
     .mnemonic_disp {
         max-width: 560px;
@@ -325,15 +378,16 @@ a {
 
     .phrase_raw {
         color: var(--primary-color);
-        background-color: var(--bg-light);
+        background: #f5f5f5;
+        border-radius: 8px;
         padding: 14px 24px;
         text-align: justify;
-        border-radius: 4px;
         margin: 30px 0px !important;
     }
 
     .mnemonic_display {
-        background-color: var(--bg-light);
+        background: #f5f5f5;
+        border-radius: 8px;
         padding: 14px;
     }
 
@@ -378,18 +432,24 @@ a {
         }
 
         p {
-            color: main.$primary-color-light;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 32px;
+            color: #000000;
         }
     }
 
     .warn {
-        margin-top: main.$vertical-padding !important;
-
+        margin-top: 72px !important;
+        background: #f0f7ff;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 16px;
         span {
             display: block;
             font-size: main.$s-size;
             font-weight: 700;
-            text-transform: uppercase;
 
             &.label {
                 color: main.$secondary-color;
@@ -397,7 +457,11 @@ a {
             }
 
             &.description {
-                color: main.$primary-color-light !important;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 24px;
+                color: #2f80ed;
             }
         }
     }

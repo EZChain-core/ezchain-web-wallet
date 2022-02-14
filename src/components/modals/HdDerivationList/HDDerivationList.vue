@@ -39,15 +39,15 @@ import 'reflect-metadata'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
-import { KeyPair as AVMKeyPair, UTXOSet as AVMUTXOSet } from 'ezchainjs2/dist/apis/avm'
-import { UTXOSet as PlatformUTXOSet } from 'ezchainjs2/dist/apis/platformvm'
+import { KeyPair as AVMKeyPair, UTXOSet as AVMUTXOSet } from 'avalanche/dist/apis/avm'
+import { UTXOSet as PlatformUTXOSet } from 'avalanche/dist/apis/platformvm'
 import { ava, bintools } from '@/AVA'
 import Big from 'big.js'
 import AvaAsset from '@/js/AvaAsset'
 import { DerivationListBalanceDict } from '@/components/modals/HdDerivationList/types'
 import { LedgerWallet } from '../../../js/wallets/LedgerWallet'
 import { bnToBig } from '@/helpers/helper'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import HdChainTable from '@/components/modals/HdDerivationList/HdChainTable.vue'
 
 @Component({

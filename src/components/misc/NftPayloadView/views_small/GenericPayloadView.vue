@@ -21,7 +21,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { JSONPayload } from 'ezchainjs2/dist/utils'
+import { JSONPayload } from 'avalanche/dist/utils'
 import { IGenericNft } from '@/components/wallet/studio/mint/types'
 
 @Component

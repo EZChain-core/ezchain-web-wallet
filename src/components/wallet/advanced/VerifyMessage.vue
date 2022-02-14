@@ -32,12 +32,12 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { KeyPair } from 'ezchainjs2/dist/apis/avm'
+import { KeyPair } from 'avalanche/dist/apis/avm'
 import { ava, bintools } from '@/AVA'
 import createHash from 'create-hash'
-import { getPreferredHRP } from 'ezchainjs2/dist/utils'
+import { getPreferredHRP } from 'avalanche/dist/utils'
 import { avm } from '@/AVA'
-import { Buffer } from 'ezchainjs2'
+import { Buffer } from 'avalanche'
 import { digestMessage } from '@/helpers/helper'
 
 @Component

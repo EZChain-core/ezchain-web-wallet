@@ -29,7 +29,7 @@
                             depressed
                             :disabled="!showList"
                         >
-                            Export EZC Transfers
+                            Export AVAX Transfers
                         </v-btn>
                     </div>
                 </div>

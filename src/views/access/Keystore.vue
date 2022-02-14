@@ -1,38 +1,58 @@
 <template>
-    <div class="access_card">
-        <div class="content">
-            <h1>{{ $t('keystore.title') }}</h1>
-            <file-input class="file_in" @change="onfile"></file-input>
-            <form @submit.prevent="access">
-                <v-text-field
-                    class="pass"
-                    :label="$t('password')"
-                    dense
-                    solo
-                    flat
-                    type="password"
-                    v-model="pass"
-                    v-if="file"
-                    hide-details
-                ></v-text-field>
-                <p class="err">{{ error }}</p>
-                <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
-                <v-btn
-                    class="ava_button button_primary"
-                    @click="access"
-                    :loading="isLoading"
-                    v-if="file"
-                    :disabled="!canSubmit"
-                    depressed
+    <div>
+        <LogoCenter style="margin-bottom: 150px"></LogoCenter>
+        <div class="access_card">
+            <div class="content">
+                <h1>{{ $t('keystore.title') }}</h1>
+                <file-input class="file_in" @change="onfile"></file-input>
+                <form @submit.prevent="access">
+                    <v-text-field
+                        class="pass"
+                        :label="$t('password')"
+                        dense
+                        solo
+                        flat
+                        type="password"
+                        v-model="pass"
+                        v-if="file"
+                        hide-details
+                    ></v-text-field>
+                    <p class="err">{{ error }}</p>
+                    <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
+                    <v-btn
+                        class="ava_button button_primary"
+                        @click="access"
+                        :loading="isLoading"
+                        v-if="file"
+                        depressed
+                    >
+                        {{ $t('access.mnemonic.submit') }}
+                    </v-btn>
+                </form>
+                <div
+                    style="
+                        background: #ffffff;
+                        border: 1px solid #262626;
+                        box-sizing: border-box;
+                        border-radius: 8px;
+                        height: 60px;
+                        line-height: 60px;
+                    "
                 >
-                    {{ $t('access.mnemonic.submit') }}
-                </v-btn>
-            </form>
-            <router-link to="/access" class="link">{{ $t('access.cancel') }}</router-link>
+                    <router-link
+                        style="display: inline-block; width: 100%; height: 100%"
+                        to="/access"
+                        tag="span"
+                    >
+                        {{ $t('access.cancel') }}
+                    </router-link>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script lang="ts">
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 import { Vue, Component } from 'vue-property-decorator'
 
 import FileInput from '../../components/misc/FileInput.vue'
@@ -44,6 +64,7 @@ import { AllKeyFileTypes } from '@/js/IKeystore'
     components: {
         // RememberKey,
         FileInput,
+        LogoCenter,
     },
 })
 export default class Keystore extends Vue {
@@ -140,7 +161,6 @@ export default class Keystore extends Vue {
 }
 .access_card {
     /*max-width: 80vw;*/
-    background-color: var(--bg-light);
     padding: main.$container-padding;
     width: 100%;
     /*max-width: 240px;*/
@@ -165,9 +185,13 @@ h1 {
 
 .file_in {
     margin: 30px auto 10px;
+    color: white;
     font-size: 13px;
     border: none !important;
-    background-color: var(--bg) !important;
+    height: 60px;
+    background: #ef6825 !important;
+    border-radius: 8px;
+    line-height: 45px;
     /*min-width: 200px*/
 }
 

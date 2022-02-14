@@ -55,7 +55,7 @@
                     <div class="fees">
                         <p>
                             {{ $t('transfer.fee_tx') }}
-                            <span>{{ txFee.toLocaleString(9) }} EZC</span>
+                            <span>{{ txFee.toLocaleString(9) }} AVAX</span>
                         </p>
                         <p>
                             {{ $t('transfer.total_avax') }}
@@ -140,12 +140,12 @@ import Big from 'big.js'
 import NftList from '@/components/wallet/transfer/NftList.vue'
 
 //@ts-ignore
-import { QrInput } from 'ezchain-vue_components'
+import { QrInput } from '@avalabs/vue_components'
 import { ava, avm, isValidAddress } from '../../AVA'
 import FaucetLink from '@/components/misc/FaucetLink.vue'
 import { ITransaction } from '@/components/wallet/transfer/types'
-import { UTXO } from 'ezchainjs2/dist/apis/avm'
-import { Buffer, BN } from 'ezchainjs2'
+import { UTXO } from 'avalanche/dist/apis/avm'
+import { Buffer, BN } from 'avalanche'
 import TxSummary from '@/components/wallet/transfer/TxSummary.vue'
 import { priceDict, IssueBatchTxInput } from '@/store/types'
 import { WalletType } from '@/js/wallets/types'

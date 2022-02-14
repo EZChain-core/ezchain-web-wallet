@@ -13,7 +13,7 @@
 </template>
 <script>
 import Big from 'big.js'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 
 export default {
     data() {

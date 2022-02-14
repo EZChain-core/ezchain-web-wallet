@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div class="data_row reward_row">
-                <p>EZC Price at reward date</p>
+                <p>AVAX Price at reward date</p>
                 <p v-if="rewardDateAvaxPrice">{{ rewardDateAvaxPrice.toFixed(2) }} USD</p>
                 <p v-else>Unknown</p>
             </div>
@@ -28,7 +28,7 @@
             <div class="data_row">
                 <p v-if="!isDelegatorReward">{{ $t('transactions.reward_amount') }}</p>
                 <p v-else>{{ $t('transactions.fee_amount') }}</p>
-                <p class="amt">{{ rewardAmtText.toLocaleString() }} EZC</p>
+                <p class="amt">{{ rewardAmtText.toLocaleString() }} AVAX</p>
             </div>
         </template>
         <template v-else-if="!isRewarded && !!rewardTime">
@@ -72,23 +72,23 @@
                 </div>
                 <div class="data_row reward_row">
                     <p>{{ $t('transactions.reward_pending') }}</p>
-                    <p class="amt">{{ rewardText }} EZC</p>
+                    <p class="amt">{{ rewardText }} AVAX</p>
                 </div>
             </template>
         </div>
 
         <div class="data_row" v-if="!isDelegatorReward">
             <p>{{ actionText }}</p>
-            <p class="amt">{{ amtText }} EZC</p>
+            <p class="amt">{{ amtText }} AVAX</p>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ITransactionData } from '@/store/modules/history/types'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import { bnToBig } from '@/helpers/helper'
-import { UnixNow } from 'ezchainjs2/dist/utils'
+import { UnixNow } from 'avalanche/dist/utils'
 import { ValidatorRaw } from '@/components/misc/ValidatorList/types'
 import { WalletType } from '@/js/wallets/types'
 import { getPriceAtUnixTime } from '@/helpers/price_helper'

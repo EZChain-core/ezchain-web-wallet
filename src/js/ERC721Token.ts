@@ -2,7 +2,7 @@ import { web3 } from '@/evm'
 import ERC721Abi from '@openzeppelin/contracts/build/contracts/ERC721.json'
 import { ERC721TokenInput } from '@/store/modules/assets/modules/types'
 import axios from 'axios'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 
 interface TokenDataCache {
     [index: number]: string

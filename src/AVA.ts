@@ -1,9 +1,9 @@
-import { KeyChain as AVMKeyChain, AVMAPI } from 'ezchainjs2/dist/apis/avm'
-import { InfoAPI } from 'ezchainjs2/dist/apis/info'
-import Avalanche from 'ezchainjs2'
+import { KeyChain as AVMKeyChain, AVMAPI } from 'avalanche/dist/apis/avm'
+import { InfoAPI } from 'avalanche/dist/apis/info'
+import Avalanche from 'avalanche'
 //@ts-ignore
-import BinTools from 'ezchainjs2/dist/utils/bintools'
-import { EVMAPI } from 'ezchainjs2/dist/apis/evm'
+import BinTools from 'avalanche/dist/utils/bintools'
+import { EVMAPI } from 'avalanche/dist/apis/evm'
 
 // Connect to TestNet by default
 // Doesn't really matter how we initialize, it will get changed by the network module later

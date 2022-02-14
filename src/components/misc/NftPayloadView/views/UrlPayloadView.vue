@@ -21,7 +21,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { URLPayload } from 'ezchainjs2/dist/utils'
+import { URLPayload } from 'avalanche/dist/utils'
 
 @Component
 export default class UrlPayloadView extends Vue {

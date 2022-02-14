@@ -1,4 +1,4 @@
-import { UTXO } from 'ezchainjs2/dist/apis/avm'
+import { UTXO } from 'avalanche/dist/apis/avm'
 
 export interface UrlFormType {
     url: string

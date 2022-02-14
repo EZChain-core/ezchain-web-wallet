@@ -119,7 +119,7 @@
                                     <fa icon="question-circle"></fa>
                                 </Tooltip>
                             </label>
-                            <p v-if="currency_type === 'EZC'">{{ maxDelegationText }} EZC</p>
+                            <p v-if="currency_type === 'AVAX'">{{ maxDelegationText }} AVAX</p>
                             <p v-if="currency_type === 'USD'">${{ maxDelegationUsdText }} USD</p>
                         </div>
                         <div>
@@ -128,8 +128,8 @@
                         </div>
                         <div>
                             <label>{{ $t('earn.validate.summary.rewards') }}</label>
-                            <p v-if="currency_type === 'EZC'">
-                                {{ estimatedReward.toLocaleString(2) }} EZC
+                            <p v-if="currency_type === 'AVAX'">
+                                {{ estimatedReward.toLocaleString(2) }} AVAX
                             </p>
                             <p v-if="currency_type === 'USD'">
                                 ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -222,23 +222,23 @@ import 'reflect-metadata'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 //@ts-ignore
 import AvaxInput from '@/components/misc/AvaxInput.vue'
-import { BN } from 'ezchainjs2'
+import { BN } from 'avalanche'
 import Big from 'big.js'
 //@ts-ignore
-import { QrInput } from 'ezchain-vue_components'
+import { QrInput } from '@avalabs/vue_components'
 import { bintools, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
 import ConfirmPage from '@/components/wallet/earn/Validate/ConfirmPage.vue'
 import moment from 'moment'
 import { bnToBig, calculateStakingReward } from '@/helpers/helper'
-import { ONEAVAX } from 'ezchainjs2/dist/utils'
+import { ONEAVAX } from 'avalanche/dist/utils'
 import Tooltip from '@/components/misc/Tooltip.vue'
 import CurrencySelect from '@/components/misc/CurrencySelect/CurrencySelect.vue'
 import Spinner from '@/components/misc/Spinner.vue'
 import DateForm from '@/components/wallet/earn/DateForm.vue'
 import UtxoSelectForm from '@/components/wallet/earn/UtxoSelectForm.vue'
 import Expandable from '@/components/misc/Expandable.vue'
-import { AmountOutput, UTXO } from 'ezchainjs2/dist/apis/platformvm'
+import { AmountOutput, UTXO } from 'avalanche/dist/apis/platformvm'
 import { WalletType } from '@/js/wallets/types'
 
 const MIN_MS = 60000
@@ -289,7 +289,7 @@ export default class AddValidator extends Vue {
 
     isSuccess = false
 
-    currency_type = 'EZC'
+    currency_type = 'AVAX'
 
     mounted() {
         this.rewardSelect('local')

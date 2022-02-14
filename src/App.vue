@@ -2,8 +2,6 @@
     <v-app>
         <v-main>
             <template>
-                <UrlBanner></UrlBanner>
-                <navbar v-show="isNavbar"></navbar>
                 <div class="main_cols" :wallet_view="!isNavbar">
                     <UpgradeToAccountModal></UpgradeToAccountModal>
                     <transition name="fade" mode="out-in">
@@ -76,22 +74,22 @@ export default {
                 vmid: 'description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'Avalanche wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
             },
             {
                 vmid: 'og:description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'Avalanche wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
             },
             {
                 vmid: 'og:title',
                 name: 'og:title',
-                content: 'Fastest Performing and Secure DeFi Wallet | EZChain Wallet',
+                content: 'Fastest Performing and Secure DeFi Wallet | Avalanche Wallet',
             },
         ],
         title: 'Fastest Performing and Secure DeFi Wallet',
-        titleTemplate: '%s | EZChain Wallet',
+        titleTemplate: '%s | Avalanche Wallet',
     },
 }
 </script>

@@ -2,7 +2,7 @@
     <div class="wallet_sidebar">
         <div class="stick">
             <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/wallet_logo.png" />
+                <img v-if="$root.theme === 'day'" src="@/assets/sidebar/logo_nav.png" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
             <div class="links">
@@ -53,6 +53,9 @@
             <div class="bottom">
                 <AccountMenu class="wallet_link"></AccountMenu>
                 <LanguageSelect></LanguageSelect>
+                <transition name="fade" mode="out-in">
+                    <main-panel class="panel"></main-panel>
+                </transition>
             </div>
         </div>
     </div>
@@ -60,10 +63,12 @@
 <script>
 import LanguageSelect from '@/components/misc/LanguageSelect/LanguageSelect'
 import AccountMenu from '@/components/wallet/sidebar/AccountMenu'
+import MainPanel from '@/components/SidePanels/MainPanel.vue'
 export default {
     components: {
         AccountMenu,
         LanguageSelect,
+        MainPanel,
     },
 }
 </script>
@@ -85,11 +90,13 @@ export default {
     .brand {
         height: 150px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        padding-left: 24px;
 
         img {
-            width: 80%;
+            width: 124px;
+            height: 41px;
             object-fit: contain;
         }
     }

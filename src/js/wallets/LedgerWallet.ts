@@ -8,7 +8,7 @@ import EthereumjsCommon from '@ethereumjs/common'
 import { Transaction } from '@ethereumjs/tx'
 
 import moment from 'moment'
-import { Buffer, BN } from 'ezchainjs2'
+import { Buffer, BN } from 'avalanche'
 import HDKey from 'hdkey'
 import { ava, avm, bintools, cChain, pChain } from '@/AVA'
 const bippath = require('bip32-path')
@@ -16,7 +16,7 @@ import createHash from 'create-hash'
 import store from '@/store'
 import { importPublic, publicToAddress, bnToRlp, rlp } from 'ethereumjs-util'
 
-import { UTXO as AVMUTXO, UTXO, UTXOSet as AVMUTXOSet } from 'ezchainjs2/dist/apis/avm/utxos'
+import { UTXO as AVMUTXO, UTXO, UTXOSet as AVMUTXOSet } from 'avalanche/dist/apis/avm/utxos'
 import { AvaWalletCore } from '@/js/wallets/types'
 import { ITransaction } from '@/components/wallet/transfer/types'
 import {
@@ -27,7 +27,7 @@ import {
     Tx as AVMTx,
     UnsignedTx as AVMUnsignedTx,
     ImportTx as AVMImportTx,
-} from 'ezchainjs2/dist/apis/avm'
+} from 'avalanche/dist/apis/avm'
 
 import {
     ImportTx as PlatformImportTx,
@@ -39,7 +39,7 @@ import {
     SelectCredentialClass as PlatformSelectCredentialClass,
     AddDelegatorTx,
     AddValidatorTx,
-} from 'ezchainjs2/dist/apis/platformvm'
+} from 'avalanche/dist/apis/platformvm'
 
 import {
     UnsignedTx as EVMUnsignedTx,
@@ -49,10 +49,10 @@ import {
     EVMConstants,
     EVMInput,
     SelectCredentialClass as EVMSelectCredentialClass,
-} from 'ezchainjs2/dist/apis/evm'
+} from 'avalanche/dist/apis/evm'
 
-import { Credential, SigIdx, Signature, UTXOResponse, Address } from 'ezchainjs2/dist/common'
-import { getPreferredHRP, PayloadBase } from 'ezchainjs2/dist/utils'
+import { Credential, SigIdx, Signature, UTXOResponse, Address } from 'avalanche/dist/common'
+import { getPreferredHRP, PayloadBase } from 'avalanche/dist/utils'
 import { HdWalletCore } from '@/js/wallets/HdWalletCore'
 import { ILedgerAppConfig } from '@/store/types'
 import { WalletNameType } from '@/js/wallets/types'
@@ -64,7 +64,7 @@ import { ParseableAvmTxEnum, ParseablePlatformEnum, ParseableEvmTxEnum } from '.
 import { ILedgerBlockMessage } from '../../store/modules/ledger/types'
 import Erc20Token from '@/js/Erc20Token'
 import { WalletHelper } from '@/helpers/wallet_helper'
-import { Utils, NetworkHelper, Network } from 'ezchain-wallet-sdk'
+import { Utils, NetworkHelper, Network } from '@avalabs/avalanche-wallet-sdk'
 
 export const MIN_EVM_SUPPORT_V = '0.5.3'
 
