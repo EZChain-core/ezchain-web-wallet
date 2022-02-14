@@ -66,7 +66,7 @@ import { ImportKeyfileInput } from '@/store/types'
 import { SingletonWallet } from '@/js/wallets/SingletonWallet'
 import { privateToAddress } from 'ethereumjs-util'
 import { bintools } from '@/AVA'
-import { Buffer } from 'avalanche'
+import { Buffer } from 'ezchainjs2'
 import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 @Component({
     components: {
