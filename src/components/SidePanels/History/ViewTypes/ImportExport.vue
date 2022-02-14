@@ -2,11 +2,11 @@
     <div class="import_row" :export="isExport">
         <template v-if="isExport">
             <p>Export ({{ chainAlias }})</p>
-            <p class="amt">{{ isExport ? '-' : '' }}{{ amtText }} ROI</p>
+            <p class="amt">{{ isExport ? '-' : '' }}{{ amtText }} EZC</p>
         </template>
         <template v-else>
             <p>Import ({{ chainAlias }})</p>
-            <p class="amt">{{ amtText }} ROI</p>
+            <p class="amt">{{ amtText }} EZC</p>
         </template>
     </div>
 </template>
@@ -14,7 +14,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ITransactionData } from '@/store/modules/history/types'
 import { avm, pChain } from '@/AVA'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import { bnToBig } from '@/helpers/helper'
 
 @Component

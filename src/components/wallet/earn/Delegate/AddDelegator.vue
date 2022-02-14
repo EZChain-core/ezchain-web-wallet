@@ -108,8 +108,8 @@
                     </div>
                     <div>
                         <label>{{ $t('earn.delegate.summary.reward') }}</label>
-                        <p v-if="currency_type === 'ROI'">
-                            {{ estimatedReward.toLocaleString(2) }} ROI
+                        <p v-if="currency_type === 'EZC'">
+                            {{ estimatedReward.toLocaleString(2) }} EZC
                         </p>
                         <p v-if="currency_type === 'USD'">
                             ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -117,8 +117,8 @@
                     </div>
                     <div>
                         <label>{{ $t('earn.delegate.summary.fee') }}</label>
-                        <p v-if="currency_type === 'ROI'">
-                            {{ totalFeeBig.toLocaleString(2) }} ROI
+                        <p v-if="currency_type === 'EZC'">
+                            {{ totalFeeBig.toLocaleString(2) }} EZC
                         </p>
                         <p v-if="currency_type === 'USD'">
                             ${{ totalFeeUsdBig.toLocaleString(2) }} USD
@@ -200,7 +200,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 //@ts-ignore
-import { QrInput } from '@avalabs/vue_components'
+import { QrInput } from 'ezchain-vue_components'
 import ValidatorsList from '@/components/misc/ValidatorList/ValidatorsList.vue'
 import { ValidatorRaw } from '@/components/misc/ValidatorList/types'
 import StakingCalculator from '@/components/wallet/earn/StakingCalculator.vue'
@@ -208,12 +208,12 @@ import ConfirmPage from '@/components/wallet/earn/Delegate/ConfirmPage.vue'
 import Big from 'big.js'
 import moment from 'moment'
 
-import { BN } from 'avalanche'
-import { AmountOutput, PlatformVMConstants, UTXO, UTXOSet } from 'avalanche/dist/apis/platformvm'
+import { BN } from 'ezchainjs2'
+import { AmountOutput, PlatformVMConstants, UTXO, UTXOSet } from 'ezchainjs2/dist/apis/platformvm'
 import { ava, avm, bintools, infoApi, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
 import { bnToBig, calculateStakingReward } from '@/helpers/helper'
-import { Defaults, ONEAVAX } from 'avalanche/dist/utils'
+import { Defaults, ONEAVAX } from 'ezchainjs2/dist/utils'
 import { ValidatorListItem } from '@/store/modules/platform/types'
 import NodeSelection from '@/components/wallet/earn/Delegate/NodeSelection.vue'
 import CurrencySelect from '@/components/misc/CurrencySelect/CurrencySelect.vue'
@@ -267,7 +267,7 @@ export default class AddDelegator extends Vue {
     formEnd: Date = new Date()
     formRewardAddr = ''
 
-    currency_type = 'ROI'
+    currency_type = 'EZC'
 
     mounted() {
         this.rewardSelect('local')

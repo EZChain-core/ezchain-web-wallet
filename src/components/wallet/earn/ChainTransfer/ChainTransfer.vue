@@ -16,16 +16,16 @@
 
                         <p>
                             Export Fee
-                            <span>{{ exportFee.toLocaleString() }} ROI</span>
+                            <span>{{ exportFee.toLocaleString() }} EZC</span>
                         </p>
                         <p>
                             Import Fee
-                            <span>{{ importFee.toLocaleString() }} ROI</span>
+                            <span>{{ importFee.toLocaleString() }} EZC</span>
                         </p>
                         <p>
                             <b>
                                 Total
-                                <span>{{ fee.toLocaleString() }} ROI</span>
+                                <span>{{ fee.toLocaleString() }} EZC</span>
                             </b>
                         </p>
                     </div>
@@ -117,14 +117,13 @@
 </template>
 <script lang="ts">
 import 'reflect-metadata'
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import Dropdown from '@/components/misc/Dropdown.vue'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 import AvaAsset from '@/js/AvaAsset'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import { avm, cChain, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
-import { bnToBig } from '@/helpers/helper'
 import Spinner from '@/components/misc/Spinner.vue'
 import ChainCard from '@/components/wallet/earn/ChainTransfer/ChainCard.vue'
 import TxStateCard from '@/components/wallet/earn/ChainTransfer/TxState.vue'
@@ -141,7 +140,7 @@ import {
     GasHelper,
     Utils,
     Big,
-} from '@avalabs/avalanche-wallet-sdk'
+} from 'ezchain-wallet-sdk'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms
@@ -186,8 +185,12 @@ export default class ChainTransfer extends Vue {
     importStatus: string | null = null
     importReason: string | null = null
 
-    activated() {
-        this.$refs.form.clear()
+    @Watch('sourceChain')
+    @Watch('targetChain')
+    onChainChange() {
+        if (this.sourceChain === 'C' || this.targetChain === 'C') {
+            this.updateBaseFee()
+        }
     }
 
     created() {
@@ -256,11 +259,7 @@ export default class ChainTransfer extends Vue {
                       this.wallet.getEvmAddress(),
                       this.wallet.getCurrentAddressPlatform()
                   )
-                : GasHelper.estimateImportGasFeeFromMockTx(
-                      this.sourceChain as ExportChainsC,
-                      this.amt,
-                      this.wallet.getEvmAddress()
-                  )
+                : GasHelper.estimateImportGasFeeFromMockTx(1, 1)
 
             const totFeeWei = this.baseFee.mul(new BN(fee))
             return Utils.bnToBigAvaxC(totFeeWei)

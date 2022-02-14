@@ -12,7 +12,7 @@
                 @change="amount_in"
             ></BigNumInput>
         </div>
-        <p class="ticker">ROI</p>
+        <p class="ticker">EZC</p>
         <div v-if="balance" class="balance">
             <div>
                 <p>
@@ -31,10 +31,10 @@
 <script lang="ts">
 import 'reflect-metadata'
 import { Vue, Component, Prop, Model } from 'vue-property-decorator'
-import { Utils, Big } from '@avalabs/avalanche-wallet-sdk'
+import { Utils, Big } from 'ezchain-wallet-sdk'
 //@ts-ignore
-import { BigNumInput } from '@avalabs/vue_components'
-import { BN } from 'avalanche'
+import { BigNumInput } from 'ezchain-vue_components'
+import { BN } from 'ezchainjs2'
 import { priceDict } from '../../store/types'
 
 @Component({

@@ -24,11 +24,11 @@ import {
     UTXO as AVMUTXO,
     UTXO,
     NFTMintOutput,
-} from 'avalanche/dist/apis/avm'
-import { UnixNow } from 'avalanche/dist/utils'
-import { BN } from 'avalanche'
-import { UTXOSet as PlatformUTXOSet } from 'avalanche/dist/apis/platformvm/utxos'
-import { StakeableLockOut } from 'avalanche/dist/apis/platformvm'
+} from 'ezchainjs2/dist/apis/avm'
+import { UnixNow } from 'ezchainjs2/dist/utils'
+import { BN } from 'ezchainjs2'
+import { UTXOSet as PlatformUTXOSet } from 'ezchainjs2/dist/apis/platformvm/utxos'
+import { StakeableLockOut } from 'ezchainjs2/dist/apis/platformvm'
 import axios from 'axios'
 import Erc20Token from '@/js/Erc20Token'
 import { AvaNetwork } from '@/js/AvaNetwork'
@@ -360,7 +360,7 @@ const assets_module: Module<AssetsState, RootState> = {
 
         // What is the AVA coin in the network
         async updateAvaAsset({ state, commit }) {
-            let res = await avm.getAssetDescription('AVAX')
+            let res = await avm.getAssetDescription('EZC')
             let id = bintools.cb58Encode(res.assetID)
             state.AVA_ASSET_ID = id
             let asset = new AvaAsset(id, res.name, res.symbol, res.denomination)

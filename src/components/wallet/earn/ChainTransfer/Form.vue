@@ -42,14 +42,14 @@
         </div>
         <div class="confirmation_val" v-else>
             <label>{{ $t('earn.transfer.amount') }}</label>
-            <p>{{ formAmtText }} ROI</p>
+            <p>{{ formAmtText }} EZC</p>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import Big from 'big.js'
 import { bnToBig } from '@/helpers/helper'
 import { ChainIdType } from '@/constants'

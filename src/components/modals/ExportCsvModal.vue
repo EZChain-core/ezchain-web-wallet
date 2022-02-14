@@ -198,8 +198,8 @@ export default class ExportCsvModal extends Vue {
             'Stake Start Date',
             'Stake Duration',
             'Reward Date',
-            'ROI Price at Reward Date',
-            'Reward Received (ROI)',
+            'EZC Price at Reward Date',
+            'Reward Received (EZC)',
             'Reward Received (USD)',
         ]
 

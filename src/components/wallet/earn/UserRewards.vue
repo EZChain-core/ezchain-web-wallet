@@ -2,7 +2,7 @@
     <div v-if="totLength > 0" class="user_rewards">
         <div>
             <label>{{ $t('earn.rewards.total') }}</label>
-            <p class="amt">{{ totalRewardBig.toLocaleString(9) }} ROI</p>
+            <p class="amt">{{ totalRewardBig.toLocaleString(9) }} EZC</p>
         </div>
         <div v-if="validators.length > 0">
             <h3>{{ $t('earn.rewards.validation') }}</h3>
@@ -40,7 +40,7 @@ import {
 import UserRewardRow from '@/components/wallet/earn/UserRewardRow.vue'
 import { bnToBig } from '@/helpers/helper'
 import Big from 'big.js'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 
 @Component({
     components: {

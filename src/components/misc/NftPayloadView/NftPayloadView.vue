@@ -4,7 +4,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { PayloadBase } from 'avalanche/dist/utils'
+import { PayloadBase } from 'ezchainjs2/dist/utils'
 
 import UrlPayloadView from '@/components/misc/NftPayloadView/views/UrlPayloadView.vue'
 import UtfPayloadView from '@/components/misc/NftPayloadView/views/UtfPayloadView.vue'

@@ -6,7 +6,7 @@
         </div>
         <div>
             <label>{{ $t('earn.validate.confirmation.amount') }}</label>
-            <p>{{ amtText }} ROI</p>
+            <p>{{ amtText }} EZC</p>
         </div>
         <div>
             <label>{{ $t('earn.validate.confirmation.start') }}</label>
@@ -29,7 +29,7 @@
 <script lang="ts">
 import 'reflect-metadata'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import { BN } from 'avalanche'
+import { BN } from 'ezchainjs2'
 import Big from 'big.js'
 
 @Component
