@@ -1,36 +1,42 @@
 <template>
-    <button @click="toggle">
-        <img v-if="val" src="@/assets/theme_toggle/night.svg" />
-        <img v-else src="@/assets/theme_toggle/day.svg" />
-    </button>
+    <div class="container_button">
+        <button @click="toggle1" :class="val ? 'button_active' : ''">
+            <img src="@/assets/sidebar/sun.png" />
+        </button>
+        <button @click="toggle2" :class="night ? 'button_active' : ''">
+            <img src="@/assets/sidebar/moon.png" />
+        </button>
+    </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            val: false,
+            val: true,
+            night: false,
+            sun: false,
         }
     },
     methods: {
         setNight() {
-            this.val = true
+            this.val = false
+            this.night = true
             localStorage.setItem('theme', 'night')
             document.documentElement.setAttribute('data-theme', 'night')
             this.$root.theme = 'night'
         },
         setDay() {
-            this.val = false
+            this.val = true
+            this.night = false
             localStorage.setItem('theme', 'day')
             document.documentElement.setAttribute('data-theme', 'day')
             this.$root.theme = 'day'
         },
-        toggle() {
-            this.val = !this.val
-            if (this.val) {
-                this.setNight()
-            } else {
-                this.setDay()
-            }
+        toggle1() {
+            this.setDay()
+        },
+        toggle2() {
+            this.setNight()
         },
     },
     mounted() {
@@ -48,11 +54,30 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-button {
+.container_button {
     display: flex;
     align-items: center;
-    img {
-        max-height: 18px;
+    justify-content: space-between;
+    width: 156px;
+    height: 48px;
+    padding: 4px;
+    background: #f5f5f5;
+    border-radius: 24px !important;
+    button {
+        width: 72px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 21px;
+            height: 21px;
+        }
+    }
+    .button_active {
+        background: #ffffff;
+        box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+        border-radius: 20px;
     }
 }
 </style>

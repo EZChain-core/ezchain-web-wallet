@@ -3,10 +3,10 @@
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <div class="panel_nav">
             <DayNightToggle class="hover_but"></DayNightToggle>
-            <network-menu class="net_menu"></network-menu>
-            <button @click="logout" class="logout">
-                {{ $t('logout.button') }}
-            </button>
+            <!--            <network-menu class="net_menu"></network-menu>-->
+            <!--            <button @click="logout" class="logout">-->
+            <!--                {{ $t('logout.button') }}-->
+            <!--            </button>-->
         </div>
     </div>
 </template>
