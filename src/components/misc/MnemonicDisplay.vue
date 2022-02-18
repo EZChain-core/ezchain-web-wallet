@@ -10,7 +10,6 @@
 import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import MnemonicPhrase from '@/js/wallets/MnemonicPhrase'
-
 @Component
 export default class MnemonicDisplay extends Vue {
     @Prop({ default: '#FFFFFF' }) bgColor?: string
