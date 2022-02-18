@@ -1,65 +1,51 @@
-name: Main Commit Checks
-on: [push]
+name: deploy ezchain wallet v2
+on:
+  push:
+    branches:
+      - ezchain-v2-update
 
 jobs:
-    build:
-        runs-on: macos-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                # The node version, you can put one or many versions in here to test with
-                node: [15.6.0]
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v1
+    strategy:
+      matrix:
+          node: [15.6.0]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
 
-            - name: Use Node.js ${{ matrix.node }}
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node }}
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+            node-version: ${{ matrix.node }}
 
-            # This should be caching node modules, hashing the cache key with the yarn lock code and busting that when yarn lock changes
-            - name: cache modules
-              uses: actions/cache@v2
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: cache modules
+        uses: actions/cache@v2
+        with:
+            path: '**/node_modules'
+            key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-            - run: sudo npm install -g yarn
+      - run: sudo npm install -g yarn
 
-            - run: yarn install --network-timeout 1000000
-              env:
-                  CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+      - run: yarn install --network-timeout 1000000
+      - run: yarn build
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-            - name: linting
-              run: yarn run lint
+      - name: Deploy with rsync
+        run: rsync -avz ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/ezc-wallet-v2/
 
-            - name: jest-run
-              run: yarn test
-
-            - name: cypress-run
-              uses: cypress-io/github-action@v2
-              env:
-                  USE_HTTP: true
-              with:
-                  start: yarn serve --mode e2e
-                  wait-on: 'http://localhost:5000/'
-                  # wait for 3 minutes for the server to respond
-                  wait-on-timeout: 180
-                  browser: chrome
-                  headless: true
-
-            # These extract all artifacts out from the container to git so they can be previewed
-            - name: extract screenshots to git
-              uses: actions/upload-artifact@v2
-              if: failure()
-              with:
-                  name: cypress-screenshots
-                  path: cypress/screenshots
-            # Test run video was always captured, so this action uses "always()" condition
-            - name: extract videos to git
-              uses: actions/upload-artifact@v2
-              if: always()
-              with:
-                  name: cypress-videos
-                  path: cypress/videos
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: service nginx restart
