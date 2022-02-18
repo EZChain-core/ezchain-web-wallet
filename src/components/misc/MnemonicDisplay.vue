@@ -39,7 +39,6 @@ export default class MnemonicDisplay extends Vue {
     border-radius: 8px;
     padding: 16px;
 }
-
 .word {
     display: flex;
     overflow: hidden;
