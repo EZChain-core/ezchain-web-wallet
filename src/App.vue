@@ -3,7 +3,7 @@
         <v-main>
             <template>
                 <!--                <UrlBanner></UrlBanner>-->
-                <!--                <navbar v-show="isNavbar"></navbar>-->
+                <navbar v-show="isNavbar"></navbar>
                 <div class="main_cols" :wallet_view="!isNavbar">
                     <UpgradeToAccountModal></UpgradeToAccountModal>
                     <transition name="fade" mode="out-in">
@@ -158,14 +158,15 @@ p {
 }
 
 #nav {
-    height: 80px;
+    height: 96px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
     background-color: transparent;
-    padding: main.$container_padding_m;
+    padding: 24px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 @include main.mobile-device {

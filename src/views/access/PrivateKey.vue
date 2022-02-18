@@ -1,6 +1,5 @@
 <template>
     <div>
-        <LogoCenter></LogoCenter>
         <div class="access_card">
             <div class="content">
                 <h1>Private Key</h1>
@@ -22,7 +21,7 @@
                                 background: #ef6825 !important;
                                 border-radius: 8px;
                                 width: 49%;
-                                height: 60px;
+                                height: 48px;
                             "
                             class="ava_button button_primary"
                             @click="access"
@@ -37,7 +36,7 @@
                                 border: 1px solid #262626;
                                 box-sizing: border-box;
                                 border-radius: 8px;
-                                height: 60px;
+                                height: 48px;
                                 width: 49%;
                             "
                         >
@@ -46,7 +45,7 @@
                                     display: inline-block;
                                     width: 100%;
                                     height: 100%;
-                                    line-height: 60px;
+                                    line-height: 48px;
                                 "
                                 to="/access"
                                 tag="span"
@@ -62,11 +61,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { ImportKeyfileInput } from '@/store/types'
-import { SingletonWallet } from '@/js/wallets/SingletonWallet'
-import { privateToAddress } from 'ethereumjs-util'
-import { bintools } from '@/AVA'
-import { Buffer } from 'avalanche'
 import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 @Component({
     components: {
@@ -130,7 +124,6 @@ export default class PrivateKey extends Vue {
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    margin-top: 150px;
 }
 .content {
     width: 340px;
@@ -139,7 +132,7 @@ export default class PrivateKey extends Vue {
 }
 h1 {
     font-size: main.$m-size;
-    font-weight: 400;
+    font-weight: bold;
     margin-bottom: 30px;
 }
 .file_in {
@@ -171,6 +164,9 @@ a {
     }
     .but_primary {
         width: 100%;
+    }
+    .access_card {
+        padding: 0;
     }
 }
 </style>

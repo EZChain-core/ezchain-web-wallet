@@ -1,22 +1,26 @@
 <template>
     <div>
-        <LogoCenter style="margin-bottom: 150px"></LogoCenter>
         <div class="mnemonic_auth">
             <div class="left">
                 <header>
                     <h1>{{ $t('access.mnemonic.title') }}</h1>
                 </header>
-                <label>{{ $t('access.mnemonic.subtitle') }}</label>
-                <textarea @input="onPhraseIn" translate="no"></textarea>
+                <!--                <label>{{ $t('access.mnemonic.subtitle') }}</label>-->
+                <textarea
+                    style="background: #f5f5f5; border-radius: 8px; height: 344px"
+                    placeholder="Hit ‘SPACE’ after every successful word entry."
+                    @input="onPhraseIn"
+                    translate="no"
+                ></textarea>
                 <div class="button_container">
                     <p class="err" v-if="err">{{ err }}</p>
-                    <div style="display: flex; width: 318px; align-items: center">
+                    <div style="display: flex; width: 100%; align-items: center">
                         <v-btn
                             style="
                                 background: #ef6825 !important;
                                 border-radius: 8px;
                                 width: 49%;
-                                height: 60px;
+                                height: 48px;
                                 margin: 0;
                             "
                             class="ava_button but_primary button_primary access"
@@ -34,7 +38,7 @@
                                 box-sizing: border-box;
                                 border-radius: 8px;
                                 width: 49%;
-                                height: 60px;
+                                height: 48px;
                             "
                         >
                             <router-link
@@ -44,7 +48,8 @@
                                     display: inline-block;
                                     width: 100%;
                                     height: 100%;
-                                    line-height: 60px;
+                                    line-height: 48px;
+                                    cursor: pointer;
                                 "
                             >
                                 {{ $t('access.mnemonic.cancel') }}
@@ -54,7 +59,9 @@
                 </div>
             </div>
             <div class="right">
-                <label>Preview</label>
+                <header>
+                    <h1 style="margin-bottom: 20px">Preview</h1>
+                </header>
                 <mnemonic-display
                     :phrase="phrase"
                     class="phrase_disp"
@@ -146,12 +153,14 @@ export default class Mnemonic extends Vue {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
+input[type='text'],
+textarea {
+    background-color: #f5f5f5 !important;
+}
 .mnemonic_auth {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 60px;
-    background-color: var(--bg-light);
+    grid-template-columns: 480px 480px;
+    column-gap: 16px;
     padding: main.$container-padding;
     width: 100%;
     max-width: 1200px;
@@ -167,7 +176,6 @@ export default class Mnemonic extends Vue {
         width: 100%;
     }
 }
-
 h1 {
     text-align: left;
     font-size: main.$m-size;
@@ -178,8 +186,10 @@ textarea {
 
 label {
     text-align: left;
-    color: main.$primary-color-light;
-    font-size: 12px;
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: bold;
+    color: #262626;
     margin-bottom: 20px;
 }
 
@@ -187,7 +197,7 @@ textarea {
     margin: 20px 0;
     margin-bottom: main.$vertical-padding;
     width: 100%;
-    background-color: var(--bg) !important;
+    background-color: #f5f5f5 !important;
     resize: none;
     min-height: 120px;
     padding: 8px 16px;
@@ -232,6 +242,8 @@ textarea {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
+    margin-top: 42px;
 }
 
 @include main.mobile_device {

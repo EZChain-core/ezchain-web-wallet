@@ -2,7 +2,7 @@
     <div class="wallet_sidebar">
         <div class="stick">
             <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/sidebar/logo_nav.png" />
+                <img v-if="$root.theme === 'day'" src="@/assets/logo_main.png" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
             <div class="links">
@@ -95,8 +95,8 @@ export default {
         padding-left: 24px;
 
         img {
-            width: 124px;
-            height: 41px;
+            width: 186px;
+            height: 40px;
             object-fit: contain;
         }
     }
@@ -110,6 +110,8 @@ export default {
             opacity: 0.6;
             color: var(--primary-color-light);
             text-decoration: none;
+            margin: 0 24px;
+            padding: 12px 16px;
 
             img {
                 opacity: 0.5;
@@ -124,9 +126,12 @@ export default {
         }
 
         a.router-link-exact-active {
-            color: var(--primary-color) !important;
             opacity: 1;
-            background-color: var(--bg-wallet);
+            position: static;
+            height: 48px;
+            background: #f5f5f5;
+            box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+            border-radius: 8px;
 
             img {
                 opacity: 1;

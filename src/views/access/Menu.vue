@@ -1,6 +1,5 @@
 <template>
     <div>
-        <LogoCenter style="margin-bottom: 234px"></LogoCenter>
         <div class="access_card">
             <h1>{{ $t('access.title') }}</h1>
             <div class="menus">
@@ -9,21 +8,21 @@
                     <router-link to="/access/privatekey" class="menu_option button_primary">
                         {{ $t('access.but_private_key') }}
                         <ImageDayNight
-                            day="/img/access_icons/day/privatekey.svg"
+                            day="/img/access_icons/day/key.svg"
                             night="/img/access_icons/night/privatekey.svg"
                         ></ImageDayNight>
                     </router-link>
                     <router-link to="/access/mnemonic" class="menu_option button_primary">
                         {{ $t('access.but_mnemonic') }}
                         <ImageDayNight
-                            day="/img/access_icons/day/mnemonic.svg"
+                            day="/img/access_icons/day/document-text.svg"
                             night="/img/access_icons/night/mnemonic.svg"
                         ></ImageDayNight>
                     </router-link>
                     <router-link to="/access/keystore" class="menu_option button_primary">
                         {{ $t('access.but_keystore') }}
                         <ImageDayNight
-                            day="/img/access_icons/day/keystore.svg"
+                            day="/img/access_icons/day/folder-open.svg"
                             night="/img/access_icons/night/keystore.svg"
                         ></ImageDayNight>
                     </router-link>
@@ -102,11 +101,18 @@ hr {
 
 .accounts_menu {
     margin-bottom: 30px;
+    background: #fafafa;
+    border-radius: 8px;
+    width: 480px;
 }
 
 .options {
+    padding: 16px;
     display: flex;
     flex-direction: column;
+    background: #fafafa;
+    border-radius: 8px;
+    width: 480px;
     //display: grid;
     //grid-template-columns: repeat(4, 1fr);
     //grid-gap: 30px;
@@ -115,6 +121,9 @@ hr {
 .menu_option {
     justify-content: space-between;
     align-items: center;
+    background: #ffffff;
+    box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+    border-radius: 8px;
     img {
         width: 24px;
         height: 24px;
@@ -170,12 +179,14 @@ hr {
     .options {
         display: block;
         grid-template-columns: none;
+        width: 100%;
     }
-
-    //.option {
-    //    width: 100%;
-    //    margin: 12px 0px;
-    //    display: block;
-    //}
+    .accounts_menu {
+        width: 100%;
+    }
+    .access_card {
+        margin: 0;
+        width: 100%;
+    }
 }
 </style>

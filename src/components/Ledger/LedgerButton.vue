@@ -3,7 +3,7 @@
         <template v-if="!isLoading">
             Ledger
             <ImageDayNight
-                day="/img/access_icons/day/ledger.svg"
+                day="/img/access_icons/day/external-drive.svg"
                 night="/img/access_icons/night/ledger.svg"
                 class="ledger_img"
             ></ImageDayNight>

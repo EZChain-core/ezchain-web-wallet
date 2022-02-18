@@ -3,8 +3,6 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <LogoCenter v-if="!keyPhrase" style="margin-bottom: 298px"></LogoCenter>
-                    <LogoCenter v-else style="margin-bottom: 106px"></LogoCenter>
                     <transition name="fade" mode="out-in">
                         <!-- PHASE 1 -->
                         <div v-if="!keyPhrase" class="stage_1">
@@ -322,14 +320,15 @@ export default class CreateWallet extends Vue {
     background: #ef6825 !important;
     border-radius: 8px;
     width: 100%;
-    height: 64px;
+    height: 48px;
+    margin-top: 20px;
 }
 .button_cancel {
     margin-top: 16px;
     display: block;
     background: white;
     width: 100%;
-    height: 64px;
+    height: 48px;
     border: 1px solid #262626;
     box-sizing: border-box;
     border-radius: 8px;
@@ -367,6 +366,7 @@ a {
 .button_cont2a {
     display: flex;
     align-items: center;
+    margin-top: 80px;
 }
 .mneumonic_disp_col {
     .mnemonic_disp {
@@ -382,7 +382,7 @@ a {
         border-radius: 8px;
         padding: 14px 24px;
         text-align: justify;
-        margin: 30px 0px !important;
+        margin: 12px 0px !important;
     }
 
     .mnemonic_display {
@@ -406,12 +406,10 @@ a {
 }
 
 .phrase_disp_col {
-    padding: 0 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
 
     > * {
         width: 100%;
@@ -523,14 +521,22 @@ a {
     }
 
     .options {
-        margin: 30px 0px;
+        margin: 0;
         flex-direction: column;
 
         > button {
-            width: 100%;
+            width: 60%;
         }
     }
-
+    .options2 {
+        margin-top: 0;
+        > button {
+            width: 60%;
+        }
+    }
+    .create_wallet {
+        align-items: flex-start;
+    }
     .mneumonic_disp_col {
         .mnemonic_disp {
             margin: 0 auto;

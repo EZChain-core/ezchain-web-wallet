@@ -4,7 +4,6 @@
             <b-row>
                 <b-col class="flex_column">
                     <div class="home_wrapper">
-                        <LogoCenter></LogoCenter>
                         <h1>{{ $t('home.desc') }}</h1>
                         <div class="login_wrapper">
                             <div class="login_option">
@@ -87,11 +86,10 @@ export default class Home extends Vue {}
         h1 {
             font-style: normal;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 18px !important;
             line-height: 28px;
             color: #262626;
             text-align: center;
-            margin-top: 224px;
         }
 
         .login_wrapper {
@@ -206,7 +204,7 @@ img {
     .home {
         .home_wrapper {
             h1 {
-                font-size: main.$xl-size-mobile;
+                font-size: 18px;
             }
 
             .login_wrapper {
@@ -234,6 +232,7 @@ img {
                         h2 {
                             padding-top: main.$s-size-mobile;
                             font-size: main.$s-size-mobile;
+                            text-align: center;
                         }
 
                         p {

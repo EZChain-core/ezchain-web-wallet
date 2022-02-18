@@ -24,7 +24,7 @@
                 <br />
                 <br />
             </form>
-            <router-link to="/access" class="link">Cancel</router-link>
+            <router-link to="/access" tag="p" style="color: #ef6825 !important">Cancel</router-link>
         </div>
     </div>
 </template>

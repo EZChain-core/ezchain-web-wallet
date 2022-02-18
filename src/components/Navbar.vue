@@ -2,27 +2,10 @@
     <div id="nav">
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <router-link to="/" class="logo">
-            <img v-if="$root.theme === 'day'" src="@/assets/wallet_logo.png" />
-            <img v-else src="@/assets/wallet_logo_dark.png" />
-            <!--            <span class="slogan">by EZChain</span>-->
+            <img v-if="$root.theme === 'day'" src="@/assets/logo_main.png" />
         </router-link>
-        <v-spacer></v-spacer>
-
         <div class="buts_right">
-            <DayNightToggle class="action_but"></DayNightToggle>
-            <template v-if="isAuth">
-                <button @click="logout">{{ $t('logout.button') }}</button>
-            </template>
-            <template v-else>
-                <router-link to="/access" class="action_but" data-cy="access">
-                    {{ $t('nav.access') }}
-                </router-link>
-                <router-link to="/create" class="action_but" data-cy="create">
-                    {{ $t('nav.create') }}
-                </router-link>
-            </template>
             <network-menu></network-menu>
-            <LanguageSelect class="lang_web"></LanguageSelect>
         </div>
 
         <div class="mobile_right">
@@ -42,7 +25,7 @@
         >
             <v-list dense nav>
                 <div style="display: flex; justify-content: space-between; padding: 4px 8px">
-                    <img v-if="$root.theme === 'day'" src="@/assets/wallet_logo.svg" />
+                    <img v-if="$root.theme === 'day'" src="@/assets/logo_main.png" />
                     <img v-else src="@/assets/wallet_logo_dark.svg" />
                     <DayNightToggle class="action_but"></DayNightToggle>
                 </div>
@@ -145,10 +128,11 @@ button {
         }
 
         img {
-            height: 30px;
+            height: 48px;
             max-height: none !important;
             object-fit: contain;
             margin-right: 5px;
+            width: 224px;
         }
     }
 }
@@ -156,6 +140,10 @@ button {
 .buts_right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    right: 24px;
+    top: 34px;
 
     a {
         margin: 0;
@@ -221,6 +209,13 @@ button {
 
     .logout {
         margin-top: 40px;
+    }
+    #nav {
+        .logo {
+            img {
+                height: 30px;
+            }
+        }
     }
 }
 </style>

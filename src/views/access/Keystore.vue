@@ -1,6 +1,5 @@
 <template>
     <div>
-        <LogoCenter style="margin-bottom: 150px"></LogoCenter>
         <div class="access_card">
             <div class="content">
                 <h1>{{ $t('keystore.title') }}</h1>
@@ -35,12 +34,12 @@
                         border: 1px solid #262626;
                         box-sizing: border-box;
                         border-radius: 8px;
-                        height: 60px;
-                        line-height: 60px;
+                        height: 48px;
+                        line-height: 48px;
                     "
                 >
                     <router-link
-                        style="display: inline-block; width: 100%; height: 100%"
+                        style="display: inline-block; width: 100%; height: 100%; cursor: pointer"
                         to="/access"
                         tag="span"
                     >
@@ -180,7 +179,7 @@ export default class Keystore extends Vue {
 
 h1 {
     font-size: main.$m-size;
-    font-weight: 400;
+    font-weight: bold;
 }
 
 .file_in {
@@ -188,11 +187,12 @@ h1 {
     color: white;
     font-size: 13px;
     border: none !important;
-    height: 60px;
+    height: 48px;
     background: #ef6825 !important;
     border-radius: 8px;
-    line-height: 45px;
-    /*min-width: 200px*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a {
@@ -221,6 +221,9 @@ a {
 
     .but_primary {
         width: 100%;
+    }
+    .access_card {
+        padding: 0;
     }
 }
 </style>

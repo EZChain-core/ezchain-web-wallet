@@ -1,6 +1,6 @@
 <template>
     <div class="img_container_logo">
-        <img src="@/assets/logo1.png" alt="" />
+        <img width="300" height="64" src="@/assets/logo_main.png" alt="" />
     </div>
 </template>
 <style scoped>
