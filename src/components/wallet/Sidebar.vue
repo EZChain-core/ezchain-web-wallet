@@ -54,7 +54,6 @@
                 <transition name="fade" mode="out-in">
                     <main-panel class="panel"></main-panel>
                 </transition>
-                <AccountMenu class="wallet_link"></AccountMenu>
             </div>
         </div>
     </div>

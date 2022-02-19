@@ -1,6 +1,7 @@
 <template>
     <div class="top_nav">
-        <network-menu class="net_menu"></network-menu>
+        <network-menu class="net_menu" style="margin-right: 40px"></network-menu>
+        <AccountMenu class="wallet_link"></AccountMenu>
         <router-link to="/wallet/advanced" class="wallet_links">
             <img src="@/assets/sidebar/setting.png" />
         </router-link>
@@ -8,10 +9,11 @@
 </template>
 <script>
 import NetworkMenu from '@/components/NetworkSettings/NetworkMenu'
-
+import AccountMenu from '@/components/wallet/sidebar/AccountMenu'
 export default {
     components: {
         NetworkMenu,
+        AccountMenu,
     },
 }
 </script>

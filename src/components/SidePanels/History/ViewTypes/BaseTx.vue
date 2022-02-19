@@ -2,6 +2,20 @@
     <div>
         <div class="utxos">
             <div v-if="hasSent">
+                <span>
+                    <p class="time">
+                        {{ timeText }}
+                        <a
+                            v-if="explorerUrl"
+                            :href="explorerUrl"
+                            target="_blank"
+                            tooltip="View in Explorer"
+                            class="explorer_link"
+                        >
+                            <img src="@/assets/show.png" alt="show" />
+                        </a>
+                    </p>
+                </span>
                 <label
                     style="
                         font-style: normal;
@@ -112,6 +126,7 @@ import TxHistoryNftFamilyGroup from '@/components/SidePanels/TxHistoryNftFamilyG
 import { getTransactionSummary } from '@/helpers/history_helper'
 import BaseTxOutput from '@/components/SidePanels/History/ViewTypes/BaseTxOutput.vue'
 import BaseTxNFTOutput from '@/components/SidePanels/History/ViewTypes/BaseTxNFTOutput.vue'
+import { eventBus } from '@/main'
 
 let payloadtypes = PayloadTypes.getInstance()
 

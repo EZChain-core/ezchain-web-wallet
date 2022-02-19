@@ -1,7 +1,35 @@
 <template>
     <div class="nft_col">
         <h4>{{ $t('top.balance.collectibles') }}</h4>
-        <p v-if="isEmpty">{{ $t('top.nftempty') }}</p>
+        <div
+            v-if="isEmpty"
+            style="
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 16px;
+            "
+        >
+            <img v-if="isEmpty" src="@/assets/emtry_card.png" alt="" />
+            <p
+                style="
+                    margin-top: 14px;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                    text-align: center;
+                    color: #737373;
+                "
+                v-if="isEmpty"
+            >
+                You have not collected
+                <br />
+                any non fungible tokens.
+            </p>
+        </div>
         <div v-else class="rows">
             <p>{{ statusText }}</p>
             <div class="nft_list">

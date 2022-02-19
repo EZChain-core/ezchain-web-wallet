@@ -1,50 +1,53 @@
 <template>
-    <div class="addr_card">
-        <q-r-modal ref="qr_modal" :address="activeAddress"></q-r-modal>
-        <paper-wallet
-            ref="print_modal"
-            v-if="walletType === 'mnemonic'"
-            :wallet="activeWallet"
-        ></paper-wallet>
-        <p class="addr_info">{{ addressMsg }}</p>
-        <div class="bottom">
-            <div class="col_qr">
-                <canvas ref="qr"></canvas>
+    <div style="padding: 24px 24px 24px 0 !important; height: 100%">
+        <div class="addr_card">
+            <div class="bottom_tabs">
+                <ChainSelect v-model="chainNow"></ChainSelect>
             </div>
-            <div class="bottom_rest">
-                <p class="subtitle">{{ addressLabel }}</p>
+            <q-r-modal ref="qr_modal" :address="activeAddress"></q-r-modal>
+            <paper-wallet
+                ref="print_modal"
+                v-if="walletType === 'mnemonic'"
+                :wallet="activeWallet"
+            ></paper-wallet>
+            <div class="bottom">
+                <div class="col_qr">
+                    <canvas ref="qr"></canvas>
+                </div>
+                <div class="bottom_rest">
+                    <p class="subtitle">{{ addressLabel }}</p>
 
-                <p class="addr_text" data-cy="wallet_address">
-                    {{ activeAddress }}
-                </p>
-                <div class="buts">
-                    <button
-                        :tooltip="$t('top.hover1')"
-                        @click="viewQRModal"
-                        class="qr_but"
-                    ></button>
-                    <button
-                        v-if="walletType === 'mnemonic'"
-                        :tooltip="$t('top.hover2')"
-                        @click="viewPrintModal"
-                        class="print_but"
-                    ></button>
-                    <button
-                        v-if="walletType === 'ledger'"
-                        :tooltip="$t('create.verify')"
-                        @click="verifyLedgerAddress"
-                        class="ledger_but"
-                    ></button>
-                    <CopyText
-                        :tooltip="$t('top.hover3')"
-                        :value="activeAddress"
-                        class="copy_but"
-                    ></CopyText>
+                    <p class="addr_text" data-cy="wallet_address">
+                        {{ activeAddress }}
+                    </p>
+                    <div class="buts">
+                        <button :tooltip="$t('top.hover1')" @click="viewQRModal" class="qr_but">
+                        </button>
+                        <button
+                            v-if="walletType === 'ledger'"
+                            :tooltip="$t('create.verify')"
+                            @click="verifyLedgerAddress"
+                            class="ledger_but"
+                        ></button>
+                        <CopyText
+                            :tooltip="$t('top.hover3')"
+                            :value="activeAddress"
+                            class="copy_but"
+                        ></CopyText>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bottom_tabs">
-            <ChainSelect v-model="chainNow"></ChainSelect>
+            <p
+                style="
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #737373;
+                "
+            >
+                This is your X-Chain address to receive funds.
+            </p>
         </div>
     </div>
 </template>
@@ -262,14 +265,18 @@ export default class AddressCard extends Vue {
 .addr_card {
     display: flex;
     flex-direction: column;
-    padding: 0 !important;
+    padding: 16px !important;
+    background: #fafafa;
+    border-radius: 8px;
+    height: 260px;
 }
 .buts {
     width: 100%;
     display: flex;
     align-items: center;
     color: var(--primary-color-light);
-    justify-content: flex-end;
+    justify-content: flex-start;
+    margin-top: 15px;
 
     > * {
         font-size: 16px;
