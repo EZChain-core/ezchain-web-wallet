@@ -1,99 +1,133 @@
 <template>
-    <div class="earn_page">
-        <div class="header">
-            <h1>{{ $t('earn.title') }}</h1>
-            <h1 class="subtitle" v-if="pageNow">
-                / {{ subtitle }}
-                <span @click="cancel"><fa icon="times"></fa></span>
-            </h1>
-        </div>
-        <transition name="fade" mode="out-in">
-            <div v-if="!pageNow">
-                <p>{{ $t('earn.desc') }}</p>
-                <div class="options">
-                    <div>
-                        <h4 class="title">
-                            {{ $t('earn.validate_card.title') }}
-                        </h4>
-                        <p style="flex-grow: 1">
-                            {{ $t('earn.validate_card.desc') }}
-                        </p>
-                        <p v-if="!canValidate" class="no_balance">
-                            {{ $t('earn.warning_1', [minStakeAmt.toLocaleString()]) }}
-                        </p>
-                        <v-btn
-                            class="button_secondary"
-                            data-cy="validate"
-                            @click="addValidator"
-                            depressed
-                            small
-                            :disabled="!canValidate"
+    <div>
+        <h1
+            style="
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 44px;
+                color: #262626;
+            "
+        >
+            {{ $t('earn.title') }}
+        </h1>
+        <div class="flex_three">
+            <div class="earn_page">
+                <div class="header">
+                    <div v-if="pageNow" style="display: flex; align-items: center">
+                        <img
+                            style="width: 15px; height: 12px; cursor: pointer"
+                            @click="cancel"
+                            src="@/assets/back.png"
+                            alt=""
+                        />
+                        <h1
+                            style="
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 16px;
+                                line-height: 24px;
+                                color: #0c1527;
+                                display: inline;
+                                margin-left: 8px;
+                            "
                         >
-                            {{ $t('earn.validate_card.submit') }}
-                        </v-btn>
-                    </div>
-                    <div>
-                        <h4 class="title">
-                            {{ $t('earn.delegate_card.title') }}
-                        </h4>
-                        <p style="flex-grow: 1">
-                            {{ $t('earn.delegate_card.desc') }}
-                        </p>
-                        <p v-if="!canDelegate" class="no_balance">
-                            {{ $t('earn.warning_2', [minDelegationAmt.toLocaleString()]) }}
-                        </p>
-                        <v-btn
-                            class="button_secondary"
-                            data-cy="delegate"
-                            @click="addDelegator"
-                            depressed
-                            small
-                            :disabled="!canDelegate"
-                        >
-                            {{ $t('earn.delegate_card.submit') }}
-                        </v-btn>
-                    </div>
-                    <div>
-                        <h4 class="title">
-                            {{ $t('earn.transfer_card.title') }}
-                        </h4>
-                        <p style="flex-grow: 1">
-                            {{ $t('earn.transfer_card.desc') }}
-                        </p>
-                        <v-btn
-                            class="button_secondary"
-                            data-cy="swap"
-                            @click="transfer"
-                            depressed
-                            small
-                        >
-                            {{ $t('earn.transfer_card.submit') }}
-                        </v-btn>
-                    </div>
-                    <div>
-                        <h4 class="title">
-                            {{ $t('earn.rewards_card.title') }}
-                        </h4>
-                        <p style="flex-grow: 1">
-                            {{ $t('earn.rewards_card.desc') }}
-                        </p>
-                        <v-btn
-                            class="button_secondary"
-                            data-cy="rewards"
-                            @click="viewRewards"
-                            depressed
-                            small
-                        >
-                            {{ $t('earn.rewards_card.submit') }}
-                        </v-btn>
+                            {{ subtitle }}
+                        </h1>
                     </div>
                 </div>
-                <!--                <v-btn @click="viewRewards" depressed small>View Estimated Rewards</v-btn>-->
+                <transition name="fade" mode="out-in">
+                    <div v-if="!pageNow">
+                        <p>{{ $t('earn.desc') }}</p>
+                        <div class="options">
+                            <div>
+                                <h4 class="title">
+                                    {{ $t('earn.validate_card.title') }}
+                                </h4>
+                                <p style="flex-grow: 1">
+                                    {{ $t('earn.validate_card.desc') }}
+                                </p>
+                                <p v-if="!canValidate" class="no_balance">
+                                    {{ $t('earn.warning_1', [minStakeAmt.toLocaleString()]) }}
+                                </p>
+                                <v-btn
+                                    class="button_secondary"
+                                    data-cy="validate"
+                                    @click="addValidator"
+                                    depressed
+                                    small
+                                    :disabled="!canValidate"
+                                >
+                                    {{ $t('earn.validate_card.submit') }}
+                                </v-btn>
+                            </div>
+                            <div>
+                                <h4 class="title">
+                                    {{ $t('earn.delegate_card.title') }}
+                                </h4>
+                                <p style="flex-grow: 1">
+                                    {{ $t('earn.delegate_card.desc') }}
+                                </p>
+                                <p v-if="!canDelegate" class="no_balance">
+                                    {{ $t('earn.warning_2', [minDelegationAmt.toLocaleString()]) }}
+                                </p>
+                                <v-btn
+                                    class="button_secondary"
+                                    data-cy="delegate"
+                                    @click="addDelegator"
+                                    depressed
+                                    small
+                                    :disabled="!canDelegate"
+                                >
+                                    {{ $t('earn.delegate_card.submit') }}
+                                </v-btn>
+                            </div>
+                            <div>
+                                <h4 class="title">
+                                    {{ $t('earn.transfer_card.title') }}
+                                </h4>
+                                <p style="flex-grow: 1">
+                                    {{ $t('earn.transfer_card.desc') }}
+                                </p>
+                                <v-btn
+                                    class="button_secondary"
+                                    data-cy="swap"
+                                    @click="transfer"
+                                    depressed
+                                    small
+                                >
+                                    {{ $t('earn.transfer_card.submit') }}
+                                </v-btn>
+                            </div>
+                            <div>
+                                <h4 class="title">
+                                    {{ $t('earn.rewards_card.title') }}
+                                </h4>
+                                <p style="flex-grow: 1">
+                                    {{ $t('earn.rewards_card.desc') }}
+                                </p>
+                                <v-btn
+                                    class="button_secondary"
+                                    data-cy="rewards"
+                                    @click="viewRewards"
+                                    depressed
+                                    small
+                                >
+                                    {{ $t('earn.rewards_card.submit') }}
+                                </v-btn>
+                            </div>
+                        </div>
+                        <!--                <v-btn @click="viewRewards" depressed small>View Estimated Rewards</v-btn>-->
+                    </div>
+                    <div v-else>
+                        <component :is="pageNow" class="comp" @cancel="cancel"></component>
+                    </div>
+                </transition>
             </div>
-            <div v-else>
-                <component :is="pageNow" class="comp" @cancel="cancel"></component>
-            </div>
-        </transition>
+            <transition name="fade" mode="out-in">
+                <transaction-history-panel class="panel_content"></transaction-history-panel>
+            </transition>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -106,6 +140,7 @@ import { BN } from 'ezchainjs2/dist'
 import UserRewards from '@/components/wallet/earn/UserRewards.vue'
 import { bnToBig } from '@/helpers/helper'
 import Big from 'big.js'
+import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
 
 @Component({
     name: 'earn',
@@ -113,6 +148,7 @@ import Big from 'big.js'
         UserRewards,
         AddValidator,
         AddDelegator,
+        TransactionHistoryPanel,
     },
 })
 export default class Earn extends Vue {
@@ -209,6 +245,17 @@ export default class Earn extends Vue {
 .earn_page {
     display: grid;
     grid-template-rows: max-content 1fr;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding: 24px 16px;
+}
+.flex_three {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    grid-gap: 12px;
+    height: 506px;
 }
 .header {
     h1 {

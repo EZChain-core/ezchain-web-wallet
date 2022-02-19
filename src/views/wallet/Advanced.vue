@@ -1,8 +1,16 @@
 <template>
     <div>
-        <div>
-            <h1>{{ $t('advanced.title') }}</h1>
-        </div>
+        <h1
+            style="
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 44px;
+                color: #262626;
+            "
+        >
+            Setting
+        </h1>
         <TokenListModal ref="token_list"></TokenListModal>
         <!--        <div class="buts grid_box">-->
         <!--            <button @click="openTokenlist">Manage Token Lists</button>-->
@@ -52,6 +60,10 @@ h1 {
     column-gap: 14px;
     row-gap: 14px;
     grid-template-columns: repeat(3, 1fr);
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    height: 506px;
 }
 
 .grid_box {

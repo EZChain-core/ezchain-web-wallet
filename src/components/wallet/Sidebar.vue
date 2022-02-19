@@ -39,16 +39,11 @@
                     <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
                     {{ $t('wallet.sidebar.activity') }}
                 </router-link>
-                <router-link to="/wallet/keys" data-cy="wallet_manage" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/manage_nav.png" />
-                    <img v-else src="@/assets/sidebar/manage_nav_night.svg" />
-                    {{ $t('wallet.sidebar.manage') }}
-                </router-link>
-                <router-link to="/wallet/advanced" data-cy="wallet_advanced" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/advanced_nav.png" />
-                    <img v-else src="@/assets/sidebar/advanced_nav_night.png" />
-                    {{ $t('wallet.sidebar.advanced') }}
-                </router-link>
+                <!--                <router-link to="/wallet/keys" data-cy="wallet_manage" class="wallet_link">-->
+                <!--                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/manage_nav.png" />-->
+                <!--                    <img v-else src="@/assets/sidebar/manage_nav_night.svg" />-->
+                <!--                    {{ $t('wallet.sidebar.manage') }}-->
+                <!--                </router-link>-->
             </div>
             <div class="bottom">
                 <transition name="fade" mode="out-in">

@@ -573,6 +573,11 @@ export default class ChainTransfer extends Vue {
     display: grid;
     grid-template-columns: max-content 1fr;
     column-gap: 5vw;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding: 10px 16px;
 }
 
 .right_col {

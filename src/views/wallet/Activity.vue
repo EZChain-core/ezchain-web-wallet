@@ -1,82 +1,95 @@
 <template>
-    <div class="activity_page">
-        <ExportCsvModal ref="csv_modal"></ExportCsvModal>
-        <ExportAvaxCsvModal ref="avax_csv_modal"></ExportAvaxCsvModal>
-        <div class="explorer_warning" v-if="!hasExplorer">
-            <div class="warning_body">
-                <h1>{{ $t('activity.no_explorer.title') }}</h1>
-                <p>{{ $t('activity.no_explorer.desc') }}</p>
+    <div>
+        <h1
+            style="
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 44px;
+                color: #262626;
+            "
+        >
+            Activity
+        </h1>
+        <div class="activity_page">
+            <ExportCsvModal ref="csv_modal"></ExportCsvModal>
+            <ExportAvaxCsvModal ref="avax_csv_modal"></ExportAvaxCsvModal>
+            <div class="explorer_warning" v-if="!hasExplorer">
+                <div class="warning_body">
+                    <h1>{{ $t('activity.no_explorer.title') }}</h1>
+                    <p>{{ $t('activity.no_explorer.desc') }}</p>
+                </div>
             </div>
-        </div>
-        <div class="settings">
-            <div class="filter_col">
-                <div class="filter_cont">
-                    <label>Export CSV File (BETA)</label>
-                    <div class="csv_buttons">
-                        <v-btn
-                            x-small
-                            @click="openCsvModal"
-                            class="button_secondary"
-                            depressed
-                            :disabled="!showList"
-                        >
-                            Export Rewards
-                        </v-btn>
-                        <v-btn
-                            x-small
-                            @click="openAvaxCsvModal"
-                            class="button_secondary"
-                            depressed
-                            :disabled="!showList"
-                        >
-                            Export EZC Transfers
-                        </v-btn>
+            <div class="settings">
+                <div class="filter_col">
+                    <div class="filter_cont">
+                        <label>Export CSV File (BETA)</label>
+                        <div class="csv_buttons">
+                            <v-btn
+                                x-small
+                                @click="openCsvModal"
+                                class="button_secondary"
+                                depressed
+                                :disabled="!showList"
+                            >
+                                Export Rewards
+                            </v-btn>
+                            <v-btn
+                                x-small
+                                @click="openAvaxCsvModal"
+                                class="button_secondary"
+                                depressed
+                                :disabled="!showList"
+                            >
+                                Export EZC Transfers
+                            </v-btn>
+                        </div>
+                    </div>
+                    <div class="filter_cont">
+                        <label>{{ $t('activity.label1') }}</label>
+                        <RadioButtons :labels="modes" :keys="modeKey" v-model="mode"></RadioButtons>
                     </div>
                 </div>
-                <div class="filter_cont">
-                    <label>{{ $t('activity.label1') }}</label>
-                    <RadioButtons :labels="modes" :keys="modeKey" v-model="mode"></RadioButtons>
-                </div>
-            </div>
-            <div>
-                <div class="pagination">
-                    <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
-                    <div>
-                        <button @click="prevPage" :disabled="!isPrevPage">
-                            <fa icon="angle-left"></fa>
-                        </button>
-                        <button @click="nextPage" :disabled="!isNextPage">
-                            <fa icon="angle-right"></fa>
+                <div>
+                    <div class="pagination">
+                        <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
+                        <div>
+                            <button @click="prevPage" :disabled="!isPrevPage">
+                                <fa icon="angle-left"></fa>
+                            </button>
+                            <button @click="nextPage" :disabled="!isNextPage">
+                                <fa icon="angle-right"></fa>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pagination_info">
+                        <p>{{ $t('activity.found', [txs.length]) }}</p>
+                        <button @click="updateHistory">
+                            <fa icon="sync"></fa>
                         </button>
                     </div>
                 </div>
-                <div class="pagination_info">
-                    <p>{{ $t('activity.found', [txs.length]) }}</p>
-                    <button @click="updateHistory">
-                        <fa icon="sync"></fa>
-                    </button>
-                </div>
             </div>
-        </div>
-        <div class="tx_table" ref="list">
-            <div class="tx_list" v-show="showList">
-                <virtual-list
-                    v-show="txs.length > 0"
-                    :style="{ height: `${listH}px`, overflowY: 'auto' }"
-                    :data-key="'id'"
-                    :data-sources="txsProcessed"
-                    :data-component="RowComponent"
-                    :keeps="20"
-                    ref="vlist"
-                    :estimate-size="txsProcessed.length"
-                ></virtual-list>
-                <div v-if="txs.length === 0" class="empty">
-                    <p>{{ $t('activity.empty') }}</p>
+            <div class="tx_table" ref="list">
+                <div class="tx_list" v-show="showList">
+                    <virtual-list
+                        v-show="txs.length > 0"
+                        :style="{ height: `${listH}px`, overflowY: 'auto' }"
+                        :data-key="'id'"
+                        :data-sources="txsProcessed"
+                        :data-component="RowComponent"
+                        :keeps="20"
+                        ref="vlist"
+                        :estimate-size="txsProcessed.length"
+                    ></virtual-list>
+                    <div v-if="txs.length === 0" class="empty">
+                        <p>{{ $t('activity.empty') }}</p>
+                    </div>
                 </div>
-            </div>
-            <div v-if="!showList" class="loading">
-                <Spinner class="spinner"></Spinner>
-                <p>{{ $t('activity.loading') }}</p>
+                <div v-if="!showList" class="loading">
+                    <Spinner class="spinner"></Spinner>
+                    <p>{{ $t('activity.loading') }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -363,7 +376,12 @@ export default class Activity extends Vue {
     position: relative;
     display: grid;
     grid-template-rows: max-content 1fr;
-    padding-bottom: 14px;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding: 24px 16px;
+    height: 506px;
 }
 
 .explorer_warning {

@@ -8,16 +8,7 @@
             <top-nav-bar></top-nav-bar>
             <div class="wallet_main">
                 <transition name="page_fade" mode="out-in">
-                    <keep-alive
-                        :exclude="[
-                            'cross_chain',
-                            'activity',
-                            'advanced',
-                            'earn',
-                            'manage',
-                            'studio',
-                        ]"
-                    >
+                    <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
                         <router-view id="wallet_router" :key="$route.path"></router-view>
                     </keep-alive>
                 </transition>
