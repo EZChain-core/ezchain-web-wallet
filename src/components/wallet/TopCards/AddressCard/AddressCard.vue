@@ -21,8 +21,11 @@
                         {{ activeAddress }}
                     </p>
                     <div class="buts">
-                        <button :tooltip="$t('top.hover1')" @click="viewQRModal" class="qr_but">
-                        </button>
+                        <button
+                            :tooltip="$t('top.hover1')"
+                            @click="viewQRModal"
+                            class="qr_but"
+                        ></button>
                         <button
                             v-if="walletType === 'ledger'"
                             :tooltip="$t('create.verify')"
