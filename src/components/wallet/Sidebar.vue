@@ -54,6 +54,7 @@
                 <transition name="fade" mode="out-in">
                     <main-panel class="panel"></main-panel>
                 </transition>
+                <AccountMenu class="wallet_link"></AccountMenu>
             </div>
         </div>
     </div>
@@ -86,7 +87,7 @@ export default {
     }
 
     .brand {
-        height: 150px;
+        height: 96px;
         display: flex;
         justify-content: flex-start;
         align-items: center;

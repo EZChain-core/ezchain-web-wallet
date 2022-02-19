@@ -21,7 +21,6 @@ export default {
 .top_cards {
     display: grid;
     grid-template-columns: 1fr 360px;
-    grid-gap: 15px;
 }
 .top_card {
     flex-grow: 1;

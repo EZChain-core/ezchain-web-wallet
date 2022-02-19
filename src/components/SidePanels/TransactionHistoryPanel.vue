@@ -4,6 +4,18 @@
         <div class="header">
             <h2>Transactions</h2>
             <Spinner v-if="isUpdating" class="spinner"></Spinner>
+            <h3
+                style="
+                    color: #ef6825;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 16px;
+                    cursor: pointer;
+                "
+            >
+                View all
+            </h3>
         </div>
         <div class="empty" v-if="!isExplorer">
             <h4>{{ $t('transactions.error_api') }}</h4>
@@ -99,6 +111,12 @@ export default class TransactionHistoryPanel extends Vue {
     grid-template-rows: max-content 1fr;
     overflow: auto;
     position: relative;
+    background: #ffffff;
+    /* Card Style */
+
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
 }
 
 .header {

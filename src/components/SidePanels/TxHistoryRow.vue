@@ -10,7 +10,7 @@
                     tooltip="View in Explorer"
                     class="explorer_link"
                 >
-                    <fa icon="search"></fa>
+                    <img src="@/assets/show.png" alt="show" />
                 </a>
             </p>
             <div v-if="memo" class="memo">

@@ -60,7 +60,9 @@
                                                 />
                                             </div>
                                             <h1 style="color: #262626">
-                                                {{ $t('create.mnemonic_title') }}
+                                                This is your
+                                                <br />
+                                                key phrase
                                             </h1>
                                         </div>
                                     </template>

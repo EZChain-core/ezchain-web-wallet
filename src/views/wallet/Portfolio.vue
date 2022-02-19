@@ -1,49 +1,51 @@
 <template>
-    <div class="home_view">
-        <div>
-            <div class="header">
-                <h1>{{ $t('portfolio.assets') }}</h1>
-                <div>
-                    <button
-                        @click="tab = 'fungibles'"
-                        :active="tab === `fungibles`"
-                        data-cy="wallet_fungible"
-                    >
-                        {{ $t('portfolio.assets1') }}
-                    </button>
-                    <button
-                        @click="tab = 'collectibles'"
-                        :active="tab === `collectibles`"
-                        data-cy="wallet_nft"
-                    >
-                        {{ $t('portfolio.assets2') }}
-                    </button>
+    <div>
+        <h1>{{ $t('portfolio.assets') }}</h1>
+        <div class="home_view">
+            <div class="left_home_view">
+                <div class="header">
+                    <div>
+                        <button
+                            @click="tab = 'fungibles'"
+                            :active="tab === `fungibles`"
+                            data-cy="wallet_fungible"
+                        >
+                            {{ $t('portfolio.assets1') }}
+                        </button>
+                        <button
+                            @click="tab = 'collectibles'"
+                            :active="tab === `collectibles`"
+                            data-cy="wallet_nft"
+                        >
+                            {{ $t('portfolio.assets2') }}
+                        </button>
+                    </div>
+                    <div style="flex-grow: 1"></div>
+                    <div class="search hover_border">
+                        <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
+                        <img v-else src="@/assets/search_night.svg" />
+                        <input :placeholder="$t('portfolio.search')" v-model="search" />
+                    </div>
                 </div>
-                <div style="flex-grow: 1"></div>
-                <div class="search hover_border">
-                    <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
-                    <img v-else src="@/assets/search_night.svg" />
-                    <input :placeholder="$t('portfolio.search')" v-model="search" />
+                <div class="pages">
+                    <transition-group name="fade" mode="out-in">
+                        <fungibles
+                            v-show="tab === `fungibles`"
+                            key="fungibles"
+                            :search="search"
+                        ></fungibles>
+                        <collectibles
+                            v-show="tab === `collectibles`"
+                            key="collectibles"
+                            :search="search"
+                        ></collectibles>
+                    </transition-group>
                 </div>
             </div>
-            <div class="pages">
-                <transition-group name="fade" mode="out-in">
-                    <fungibles
-                        v-show="tab === `fungibles`"
-                        key="fungibles"
-                        :search="search"
-                    ></fungibles>
-                    <collectibles
-                        v-show="tab === `collectibles`"
-                        key="collectibles"
-                        :search="search"
-                    ></collectibles>
-                </transition-group>
-            </div>
+            <transition name="fade" mode="out-in">
+                <transaction-history-panel class="panel_content"></transaction-history-panel>
+            </transition>
         </div>
-        <transition name="fade" mode="out-in">
-            <transaction-history-panel class="panel_content"></transaction-history-panel>
-        </transition>
     </div>
 </template>
 <script>
@@ -76,7 +78,15 @@ export default {
 .home_view {
     display: grid;
     grid-template-columns: 1fr 360px;
-    grid-gap: 16px;
+    grid-gap: 12px;
+    height: 506px;
+}
+.left_home_view {
+    padding: 16px;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
 }
 .header {
     display: flex;
@@ -107,10 +117,8 @@ export default {
 }
 
 .search {
-    background-color: var(--bg-light);
-    border-radius: 4px;
     /*flex-grow: 1;*/
-    height: 46px;
+    height: 40px;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -118,7 +126,10 @@ export default {
     flex-basis: 420px;
     flex-shrink: 1;
     border: 1px solid transparent;
-
+    flex-direction: row-reverse;
+    width: 268px;
+    background: #f5f5f5;
+    border-radius: 8px;
     $icon_w: 36px;
 
     img {

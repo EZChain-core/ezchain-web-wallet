@@ -4,15 +4,25 @@
         <transition name="fade" mode="out-in">
             <sidebar class="panel sidenav"></sidebar>
         </transition>
-        <div class="wallet_main">
-            <transition name="page_fade" mode="out-in">
-                <keep-alive
-                    :exclude="['cross_chain', 'activity', 'advanced', 'earn', 'manage', 'studio']"
-                >
-                    <router-view id="wallet_router" :key="$route.path"></router-view>
-                </keep-alive>
-            </transition>
-            <top-info class="wallet_top"></top-info>
+        <div>
+            <top-nav-bar></top-nav-bar>
+            <div class="wallet_main">
+                <transition name="page_fade" mode="out-in">
+                    <keep-alive
+                        :exclude="[
+                            'cross_chain',
+                            'activity',
+                            'advanced',
+                            'earn',
+                            'manage',
+                            'studio',
+                        ]"
+                    >
+                        <router-view id="wallet_router" :key="$route.path"></router-view>
+                    </keep-alive>
+                </transition>
+                <top-info class="wallet_top" style="margin-top: 12px"></top-info>
+            </div>
         </div>
     </div>
 </template>
@@ -21,6 +31,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import TopInfo from '@/components/wallet/TopInfo.vue'
 import Sidebar from '@/components/wallet/Sidebar.vue'
+import TopNavBar from '@/components/wallet/TopNavbar.vue'
 import MainPanel from '@/components/SidePanels/MainPanel.vue'
 import UpdateKeystoreModal from '@/components/modals/UpdateKeystore/UpdateKeystoreModal.vue'
 
@@ -32,6 +43,7 @@ const TIMEOUT_DUR_MS = TIMEOUT_DURATION * 1000
         Sidebar,
         MainPanel,
         TopInfo,
+        TopNavBar,
         UpdateKeystoreModal,
     },
 })
@@ -114,9 +126,8 @@ export default class Wallet extends Vue {
     padding-bottom: 0;
     display: grid;
     grid-template-columns: 300px 1fr;
-    column-gap: 15px;
     height: 100%;
-    background-color: var(--bg-wallet);
+    background: #f5f5f5;
 }
 
 .sidenav {
@@ -129,17 +140,14 @@ export default class Wallet extends Vue {
 }
 
 .wallet_main {
-    height: 100%;
     display: grid;
-    grid-template-rows: 1fr max-content;
-    grid-gap: 15px;
-    padding-top: 8px;
+    grid-template-rows: 550px 306px;
+    padding: 13px 40px 28px 40px;
 }
 
 #wallet_router {
-    padding: 22px 20px;
-    background-color: var(--bg-wallet-light);
-    border-radius: 4px;
+    //padding: 22px 20px;
+    //border-radius: 8px;
 }
 
 .page_fade-enter-active,
@@ -156,10 +164,10 @@ export default class Wallet extends Vue {
         display: block;
         column-gap: 9px;
     }
-    .wallet_main {
-        grid-gap: 9px;
-        padding-top: 0;
-    }
+    //.wallet_main {
+    //    grid-gap: 9px;
+    //    padding-top: 0;
+    //}
 
     .wallet_sidebar {
         display: none;
@@ -172,9 +180,9 @@ export default class Wallet extends Vue {
         column-gap: 9px;
     }
 
-    .wallet_main {
-        grid-gap: 9px;
-    }
+    //.wallet_main {
+    //    grid-gap: 9px;
+    //}
 
     #wallet_router {
         padding: 12px 18px;
