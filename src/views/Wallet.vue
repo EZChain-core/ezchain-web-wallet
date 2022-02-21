@@ -133,7 +133,7 @@ export default class Wallet extends Vue {
 .wallet_main {
     display: grid;
     grid-template-rows: 550px 306px;
-    padding: 13px 40px 28px 40px;
+    padding: 2px 40px 5px 40px;
 }
 
 #wallet_router {

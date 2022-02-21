@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 @use '../../main';
 .top_nav {
-    height: 96px;
+    height: 55px;
     width: 100%;
     background-color: #ffffff;
     display: flex;

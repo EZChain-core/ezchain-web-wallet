@@ -81,7 +81,7 @@ export default {
     }
 
     .brand {
-        height: 96px;
+        height: 55px;
         display: flex;
         justify-content: flex-start;
         align-items: center;

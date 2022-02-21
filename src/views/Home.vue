@@ -47,7 +47,6 @@ import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ToS from '@/components/misc/ToS.vue'
 import LogoCenter from '@/components/LogoEzChain/Logo.vue'
-
 @Component({
     name: 'home',
     components: { ToS, LogoCenter },
