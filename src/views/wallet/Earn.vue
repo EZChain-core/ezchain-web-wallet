@@ -356,6 +356,7 @@ export default class Earn extends Vue {
         font-size: 16px;
         line-height: 24px;
         color: #0c1527;
+        margin-bottom: 8px;
     }
 
     p {

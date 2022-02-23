@@ -209,7 +209,7 @@ export default class Studio extends Vue {
 
 .options {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 14px;
     > div {
         border: 1px solid var(--bg-light);
@@ -246,7 +246,8 @@ export default class Studio extends Vue {
 
     .v-btn {
         width: max-content;
-        height: 48px;
+        height: 40px;
+        margin-top: 24px;
         background: #ffffff;
         /* Card Style */
 
