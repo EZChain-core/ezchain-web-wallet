@@ -2,8 +2,12 @@
     <Modal title="Wallet UTXO Breakdown" ref="modal">
         <div class="utxos_breakdown_body">
             <div class="tabs">
-                <button @click="setChain('X')" :active="chain === 'X'">X Chain</button>
-                <button @click="setChain('P')" :active="chain === 'P'">P Chain</button>
+                <button class="ez_button" @click="setChain('X')" :active="chain === 'X'">
+                    X Chain
+                </button>
+                <button class="ez_button" @click="setChain('P')" :active="chain === 'P'">
+                    P Chain
+                </button>
             </div>
             <div class="scrollable">
                 <div style="height: 90px">
@@ -167,7 +171,6 @@ export default class UtxosBreakdownModal extends Vue {
     display: grid;
     grid-template-rows: max-content 1fr;
 }
-
 .scrollable {
     height: 100%;
     overflow: scroll;

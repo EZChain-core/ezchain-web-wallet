@@ -38,7 +38,6 @@
                 </div>
                 <transition name="fade" mode="out-in">
                     <div v-if="!pageNow">
-                        <p>{{ $t('earn.desc') }}</p>
                         <div class="options">
                             <div>
                                 <h4 class="title">
@@ -82,40 +81,52 @@
                                     {{ $t('earn.delegate_card.submit') }}
                                 </v-btn>
                             </div>
-                            <div>
-                                <h4 class="title">
-                                    {{ $t('earn.transfer_card.title') }}
-                                </h4>
-                                <p style="flex-grow: 1">
-                                    {{ $t('earn.transfer_card.desc') }}
-                                </p>
-                                <v-btn
-                                    class="button_secondary"
-                                    data-cy="swap"
-                                    @click="transfer"
-                                    depressed
-                                    small
-                                >
-                                    {{ $t('earn.transfer_card.submit') }}
-                                </v-btn>
-                            </div>
-                            <div>
-                                <h4 class="title">
-                                    {{ $t('earn.rewards_card.title') }}
-                                </h4>
-                                <p style="flex-grow: 1">
-                                    {{ $t('earn.rewards_card.desc') }}
-                                </p>
-                                <v-btn
-                                    class="button_secondary"
-                                    data-cy="rewards"
-                                    @click="viewRewards"
-                                    depressed
-                                    small
-                                >
-                                    {{ $t('earn.rewards_card.submit') }}
-                                </v-btn>
-                            </div>
+                            <!--                            <div>-->
+                            <!--                                <h4 class="title">-->
+                            <!--                                    {{ $t('earn.transfer_card.title') }}-->
+                            <!--                                </h4>-->
+                            <!--                                <p style="flex-grow: 1">-->
+                            <!--                                    {{ $t('earn.transfer_card.desc') }}-->
+                            <!--                                </p>-->
+                            <!--                                <v-btn-->
+                            <!--                                    class="button_secondary"-->
+                            <!--                                    data-cy="swap"-->
+                            <!--                                    @click="transfer"-->
+                            <!--                                    depressed-->
+                            <!--                                    small-->
+                            <!--                                >-->
+                            <!--                                    {{ $t('earn.transfer_card.submit') }}-->
+                            <!--                                </v-btn>-->
+                            <!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <h4 class="title">-->
+                            <!--                                    {{ $t('earn.rewards_card.title') }}-->
+                            <!--                                </h4>-->
+                            <!--                                <p style="flex-grow: 1">-->
+                            <!--                                    {{ $t('earn.rewards_card.desc') }}-->
+                            <!--                                </p>-->
+                            <!--                                <v-btn-->
+                            <!--                                    class="button_secondary"-->
+                            <!--                                    data-cy="rewards"-->
+                            <!--                                    @click="viewRewards"-->
+                            <!--                                    depressed-->
+                            <!--                                    small-->
+                            <!--                                >-->
+                            <!--                                    {{ $t('earn.rewards_card.submit') }}-->
+                            <!--                                </v-btn>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="bottom_earn">
+                            <button
+                                style="margin-right: 12px"
+                                class="button_earn"
+                                @click="transfer"
+                            >
+                                Cross Chain Transfer
+                            </button>
+                            <button class="button_earn" @click="viewRewards">
+                                Estimated Rewards
+                            </button>
                         </div>
                         <!--                <v-btn @click="viewRewards" depressed small>View Estimated Rewards</v-btn>-->
                     </div>
@@ -250,6 +261,41 @@ export default class Earn extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 24px 16px;
+}
+.bottom_earn {
+    display: flex;
+    align-items: center;
+    margin-top: 140px;
+}
+.button_earn {
+    border: 1px solid #525252;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 8px 16px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #525252;
+}
+.button_earn:hover,
+.button_earn:active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    background: #ef6825;
+    border-radius: 8px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    color: #ffffff;
+    border: none;
 }
 .flex_three {
     display: grid;

@@ -1,9 +1,23 @@
 <template>
-    <div v-if="isEVMSupported">
-        <label>{{ $t('transfer.source_chain.title') }}</label>
-        <div class="chain_select">
-            <button :active="formType === 'X'" @click="set('X')">X</button>
-            <button :active="formType === 'C'" @click="set('C')">C</button>
+    <div>
+        <div v-if="isEVMSupported">
+            <label
+                style="
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #171717;
+                "
+            >
+                {{ $t('transfer.source_chain.title') }}
+            </label>
+            <div class="chain_select" style="margin-top: 16px">
+                <button style="margin-right: 8px" :active="formType === 'X'" @click="set('X')">
+                    X Chain
+                </button>
+                <button :active="formType === 'C'" @click="set('C')">C Chain</button>
+            </div>
         </div>
     </div>
 </template>
@@ -40,26 +54,33 @@ label {
     display: flex;
     width: max-content;
     > button {
-        //border: 1px solid var(--primary-color);
-        //margin-right: 14px;
-        padding-right: 14px;
-        opacity: 0.2;
         transition-duration: 0.1s;
         cursor: pointer;
-        color: var(--primary-color);
-        //background-color: var(--bg-light);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #a3a3a3;
         display: flex;
         align-items: center;
-        font-size: 28px;
-
+        justify-content: center;
+        width: 104px;
+        height: 32px;
+        background: #fafafa;
+        border-radius: 24px;
         &:hover {
-            opacity: 1;
+            background: #fef6f2;
+            border: 1px solid #ef6825;
+            box-sizing: border-box;
+            border-radius: 24px;
+            color: #ef6825;
         }
         &[active] {
-            //background-color: var(--secondary-color);
-            color: var(--secondary-color);
-            //border-color: var(--primary-color-light);
-            opacity: 1;
+            background: #fef6f2;
+            border: 1px solid #ef6825;
+            box-sizing: border-box;
+            border-radius: 24px;
+            color: #ef6825;
         }
     }
 }
