@@ -8,7 +8,7 @@
         <!--        <td>{{ uptimeText }}</td>-->
         <td>{{ feeText }}%</td>
         <td>
-            <button class="button_secondary" @click="select">Select</button>
+            <button @click="select">Select</button>
         </td>
     </tr>
 </template>
@@ -125,19 +125,30 @@ export default class ValidatorsList extends Vue {
 }
 
 button {
-    padding: 3px 12px;
+    padding: 8px 16px;
     font-size: 13px;
-    border-radius: 3px;
+    border: 1px solid #525252;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #ffffff !important;
+}
+button:hover,
+button:active {
+    background-color: var(--secondary-color) !important;
+    color: #fff !important;
+    text-decoration: none;
 }
 
 .id {
     word-break: break-all;
 }
 td {
-    padding: 4px 14px;
-    background-color: var(--bg-light);
-    border: 1px solid var(--bg);
-    font-size: 13px;
+    padding: 12px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #262626;
 }
 
 @include main.medium-device {

@@ -134,7 +134,8 @@ export default class ValidatorsList extends Vue {
 
 .table_cont {
     overflow: scroll;
-    max-height: 450px;
+    max-height: 330px;
+    height: 330px;
 }
 
 table {
@@ -147,8 +148,11 @@ th {
     position: sticky;
     top: 0;
     padding: 2px 14px;
-    font-size: 14px;
-    background-color: var(--bg-wallet-light);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    color: #a3a3a3;
 }
 
 .empty_list {
