@@ -2,13 +2,13 @@
     <div class="add_delegator">
         <NodeSelection v-if="!selected" @select="onselect" class="node_selection"></NodeSelection>
         <div class="cols" v-else>
-            <div class="node_col">
-                <button @click="selected = null" class="close_but button_secondary">
-                    <fa icon="sync"></fa>
-                    Change Node
-                </button>
-                <NodeCard :node="selected"></NodeCard>
-            </div>
+            <!--            <div class="node_col">-->
+            <!--                <button @click="selected = null" class="close_but button_secondary">-->
+            <!--                    <fa icon="sync"></fa>-->
+            <!--                    Change Node-->
+            <!--                </button>-->
+            <!--                <NodeCard :node="selected"></NodeCard>-->
+            <!--            </div>-->
             <transition-group name="fade" mode="out-in">
                 <div class="ins_col" key="form" v-show="!isConfirm">
                     <div style="margin-bottom: 30px">
@@ -636,6 +636,7 @@ export default class AddDelegator extends Vue {
     display: grid;
     grid-template-columns: max-content 1fr 340px;
     column-gap: 2vw;
+    max-height: 373px;
 }
 
 .ins_col {

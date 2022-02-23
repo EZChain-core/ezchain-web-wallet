@@ -16,17 +16,7 @@
                         </a>
                     </p>
                 </span>
-                <label
-                    style="
-                        font-style: normal;
-                        font-weight: bold;
-                        font-size: 16px;
-                        line-height: 24px;
-                        color: #000000;
-                    "
-                >
-                    Sent
-                </label>
+                <label>Sent</label>
                 <BaseTxOutput
                     v-for="(asset, assetId) in tokensSent"
                     :key="assetId"
@@ -51,17 +41,7 @@
                 </div>
             </div>
             <div v-if="hasReceived">
-                <label
-                    style="
-                        font-style: normal;
-                        font-weight: bold;
-                        font-size: 16px;
-                        line-height: 24px;
-                        color: #000000;
-                    "
-                >
-                    Received
-                </label>
+                <label>Received</label>
                 <BaseTxOutput
                     v-for="(asset, assetId) in tokensReceived"
                     :key="assetId"
