@@ -265,7 +265,7 @@ export default class Earn extends Vue {
 .bottom_earn {
     display: flex;
     align-items: center;
-    margin-top: 140px;
+    margin-top: 202px;
 }
 .button_earn {
     border: 1px solid #525252;
@@ -331,34 +331,44 @@ export default class Earn extends Vue {
 .options {
     margin: 30px 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 14px;
     //display: flex;
     //justify-content: space-evenly;
     //padding: 60px;
 
     > div {
+        min-width: 326px;
         width: 100%;
         justify-self: center;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        //max-width: 260px;
-        padding: 30px;
-        border-radius: 4px;
-        background-color: var(--bg-light);
+        padding: 16px;
+        background: #fafafa;
+        border-radius: 8px;
     }
 
     h4 {
-        font-size: 32px !important;
-        font-weight: lighter;
-        color: var(--primary-color-light);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #0c1527;
     }
 
     p {
         /*color: var(--primary-color-light);*/
-        margin: 14px 0 !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.1px;
+
+        /* Neutral/500 */
+
+        color: #737373;
     }
 
     .no_balance {
@@ -366,7 +376,19 @@ export default class Earn extends Vue {
     }
 
     .v-btn {
-        margin-top: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        position: static;
+        background: #ef6825;
+        border-radius: 8px;
+        height: 40px;
+        margin-top: 24px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
     }
 }
 
