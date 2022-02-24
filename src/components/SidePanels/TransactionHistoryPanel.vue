@@ -4,18 +4,18 @@
         <div class="header">
             <h2>Transactions</h2>
             <Spinner v-if="isUpdating" class="spinner"></Spinner>
-            <h3
-                style="
-                    color: #ef6825;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 12px;
-                    line-height: 16px;
-                    cursor: pointer;
-                "
-            >
-                View all
-            </h3>
+            <!--            <h3-->
+            <!--                style="-->
+            <!--                    color: #ef6825;-->
+            <!--                    font-style: normal;-->
+            <!--                    font-weight: 600;-->
+            <!--                    font-size: 12px;-->
+            <!--                    line-height: 16px;-->
+            <!--                    cursor: pointer;-->
+            <!--                "-->
+            <!--            >-->
+            <!--                View all-->
+            <!--            </h3>-->
         </div>
         <div class="empty" v-if="!isExplorer">
             <h4>{{ $t('transactions.error_api') }}</h4>
