@@ -7,7 +7,7 @@
             @change="applyFilter"
             :validators="validators"
         ></FilterSettings>
-        <div class="table_cont">
+        <div class="table_cont no_scroll_bar">
             <table>
                 <thead>
                     <tr class="header_tr">

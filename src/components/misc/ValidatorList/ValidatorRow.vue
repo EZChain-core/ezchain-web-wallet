@@ -143,7 +143,7 @@ button:active {
     word-break: break-all;
 }
 td {
-    padding: 12px;
+    padding: 14px;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
