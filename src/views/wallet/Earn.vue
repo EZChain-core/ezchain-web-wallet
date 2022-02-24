@@ -12,7 +12,7 @@
             {{ $t('earn.title') }}
         </h1>
         <div class="flex_three">
-            <div class="earn_page">
+            <div class="earn_page no_scroll_bar">
                 <div class="header">
                     <div v-if="pageNow" style="display: flex; align-items: center">
                         <img
@@ -261,6 +261,7 @@ export default class Earn extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 24px 16px;
+    overflow: overlay;
 }
 .bottom_earn {
     display: flex;
