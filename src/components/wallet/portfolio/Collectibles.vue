@@ -150,9 +150,9 @@ $flip_dur: 0.6s;
     }
 }
 
-.list {
-    max-height: 50px;
-}
+// .list {
+//     max-height: 50px;
+// }
 
 .coming_soon {
     padding-top: 60px;

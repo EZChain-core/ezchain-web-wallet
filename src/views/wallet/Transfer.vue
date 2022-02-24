@@ -12,7 +12,7 @@
             {{ $t('transfer.title') }}
         </h1>
         <div class="top_transfer">
-            <div class="transfer_card">
+            <div class="transfer_card no_scroll_bar">
                 <div v-if="networkStatus !== 'connected'" class="disconnected">
                     <p>{{ $t('transfer.disconnected') }}</p>
                 </div>
@@ -542,6 +542,7 @@ $padTop: 8px;
     background: #ffffff;
     border-radius: 8px;
     padding: 24px 16px;
+    overflow: overlay;
 }
 .disconnected {
     padding: 30px;
