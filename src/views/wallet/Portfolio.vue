@@ -2,7 +2,7 @@
     <div>
         <h1>{{ $t('portfolio.assets') }}</h1>
         <div class="home_view">
-            <div class="left_home_view">
+            <div class="left_home_view no_scroll_bar">
                 <div class="header">
                     <div>
                         <button
@@ -87,6 +87,7 @@ export default {
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
+    overflow: overlay;
 }
 .header {
     display: flex;
