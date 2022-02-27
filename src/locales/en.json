@@ -439,7 +439,7 @@
                 "end": "End Date & Time"
             },
             "amount": {
-                "label": "Stake Amount",
+                "label": "Staking Amount",
                 "desc": "The amount of EZC to lock for staking."
             },
             "fee": {

@@ -4,7 +4,7 @@
             <form @submit.prevent="">
                 <transition-group name="fade" mode="out-in">
                     <div v-show="!isConfirm" key="form" class="ins_col">
-                        <div style="margin-bottom: 30px">
+                        <div style="margin-bottom: 16px">
                             <h4>{{ $t('earn.validate.label_1') }}</h4>
                             <input
                                 type="text"
@@ -13,87 +13,74 @@
                                 placeholder="NodeID-"
                             />
                         </div>
-                        <div style="margin: 30px 0">
+                        <div style="margin: 16px 0">
                             <h4>{{ $t('earn.validate.duration.label') }}</h4>
-                            <p class="desc">
-                                {{ $t('earn.validate.duration.desc') }}
-                            </p>
                             <DateForm @change_end="setEnd"></DateForm>
                         </div>
-                        <div style="margin: 30px 0">
+                        <div style="margin: 16px 0">
                             <h4>{{ $t('earn.validate.amount.label') }}</h4>
-                            <p class="desc">
-                                {{ $t('earn.validate.amount.desc') }}
-                            </p>
                             <AvaxInput v-model="stakeAmt" :max="maxAmt" class="amt_in"></AvaxInput>
                         </div>
-                        <div style="margin: 30px 0">
-                            <h4>{{ $t('earn.validate.fee.label') }}</h4>
-                            <p class="desc">
-                                {{ $t('earn.validate.fee.desc') }}
-                            </p>
-                            <input
-                                type="number"
-                                :min="minFee"
-                                max="100"
-                                step="0.01"
-                                v-model="delegationFee"
-                                @change="onFeeChange"
-                            />
-                        </div>
-                        <div class="reward_in" style="margin: 30px 0" :type="rewardDestination">
-                            <h4>{{ $t('earn.validate.reward.label') }}</h4>
-                            <p class="desc">
-                                {{ $t('earn.validate.reward.desc') }}
-                            </p>
-                            <div class="reward_tabs">
-                                <button
-                                    @click="rewardSelect('local')"
-                                    :selected="this.rewardDestination === 'local'"
-                                >
-                                    {{ $t('earn.delegate.form.reward.chip_1') }}
-                                </button>
-                                <span>or</span>
-                                <button
-                                    @click="rewardSelect('custom')"
-                                    :selected="this.rewardDestination === 'custom'"
-                                >
-                                    {{ $t('earn.delegate.form.reward.chip_2') }}
-                                </button>
+                        <div
+                            style="
+                                display: grid;
+
+                                grid-template-columns: max-content 1fr;
+                                column-gap: 12px;
+                            "
+                        >
+                            <div>
+                                <h4>
+                                    {{ $t('earn.validate.fee.label') }}
+                                </h4>
+                                <input
+                                    type="number"
+                                    :min="minFee"
+                                    style="height: 40px"
+                                    max="100"
+                                    step="0.01"
+                                    v-model="delegationFee"
+                                    @change="onFeeChange"
+                                />
                             </div>
-                            <!--                            <v-chip-group mandatory @change="rewardSelect">-->
-                            <!--                                <v-chip small value="local">-->
-                            <!--                                    {{ $t('earn.validate.reward.chip_1') }}-->
-                            <!--                                </v-chip>-->
-                            <!--                                <v-chip small value="custom">-->
-                            <!--                                    {{ $t('earn.validate.reward.chip_2') }}-->
-                            <!--                                </v-chip>-->
-                            <!--                            </v-chip-group>-->
-                            <QrInput
-                                style="height: 40px; border-radius: 2px"
-                                v-model="rewardIn"
-                                placeholder="Reward Address"
-                                class="reward_addr_in"
-                            ></QrInput>
+                            <div class="reward_in" :type="rewardDestination">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                    "
+                                >
+                                    <h4>
+                                        {{ $t('earn.validate.reward.label') }}
+                                    </h4>
+                                    <button
+                                        v-if="this.rewardDestination === 'custom'"
+                                        @click="rewardSelect('local')"
+                                        :selected="this.rewardDestination === 'local'"
+                                    >
+                                        {{ $t('earn.delegate.form.reward.chip_1') }}
+                                    </button>
+                                    <button
+                                        v-else
+                                        @click="rewardSelect('custom')"
+                                        :selected="this.rewardDestination === 'local'"
+                                    >
+                                        {{ $t('earn.delegate.form.reward.chip_2') }}
+                                    </button>
+                                </div>
+                                <QrInput
+                                    style="
+                                        height: 40px;
+                                        border-radius: 8px;
+                                        background-color: #f5f5f5 !important;
+                                    "
+                                    v-model="rewardIn"
+                                    placeholder="Reward Address"
+                                    class="reward_addr_in"
+                                ></QrInput>
+                            </div>
                         </div>
-                        <Expandable>
-                            <template v-slot:triggerOn>
-                                <p>
-                                    {{ $t('earn.shared.advanced.toggle_on') }}
-                                </p>
-                            </template>
-                            <template v-slot:triggerOff>
-                                <p>
-                                    {{ $t('earn.shared.advanced.toggle_off') }}
-                                </p>
-                            </template>
-                            <template v-slot:content>
-                                <UtxoSelectForm
-                                    style="margin: 10px 0"
-                                    v-model="formUtxos"
-                                ></UtxoSelectForm>
-                            </template>
-                        </Expandable>
                     </div>
                     <ConfirmPage
                         key="confirm"
@@ -108,7 +95,7 @@
                 </transition-group>
                 <div>
                     <div class="summary" v-if="!isSuccess">
-                        <CurrencySelect v-model="currency_type"></CurrencySelect>
+                        <!--                        <CurrencySelect v-model="currency_type"></CurrencySelect>-->
                         <div>
                             <label>
                                 {{ $t('earn.validate.summary.max_del') }}
@@ -129,16 +116,17 @@
                         <div>
                             <label>{{ $t('earn.validate.summary.rewards') }}</label>
                             <p v-if="currency_type === 'EZC'">
-                                {{ estimatedReward.toLocaleString(2) }} EZC
+                                <!--                                {{ estimatedReward.toLocaleString(2) }} EZC-->
+                                EZC
                             </p>
                             <p v-if="currency_type === 'USD'">
                                 ${{ estimatedRewardUSD.toLocaleString(2) }} USD
                             </p>
                         </div>
                         <div class="submit_box">
-                            <label style="margin: 8px 0 !important">
-                                * {{ $t('earn.validate.summary.warn') }}
-                            </label>
+                            <!--                            <label style="margin: 8px 0 !important">-->
+                            <!--                                * {{ $t('earn.validate.summary.warn') }}-->
+                            <!--                            </label>-->
                             <p v-if="warnShortDuration" class="err">
                                 {{ $t('earn.validate.errs.duration_warn') }}
                             </p>
@@ -667,8 +655,10 @@ form {
 
 input {
     color: var(--primary-color);
-    background-color: var(--bg-light);
+    //background-color: var(--bg-light);
     padding: 6px 14px;
+    background: #f5f5f5;
+    border-radius: 8px;
 }
 
 .desc {
@@ -678,7 +668,12 @@ input {
 }
 
 h4 {
+    font-style: normal;
     font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #171717;
+    margin-bottom: 8px;
 }
 
 label {
@@ -744,7 +739,7 @@ label {
     transition-duration: 0.2s;
     &[type='local'] {
         .reward_addr_in {
-            opacity: 0.3;
+            opacity: 0.4;
             user-select: none;
             pointer-events: none;
         }
@@ -752,22 +747,26 @@ label {
 }
 
 .reward_tabs {
-    margin-bottom: 8px;
+    //margin-bottom: 8px;
     font-size: 13px;
-    button {
-        color: var(--primary-color-light);
-
-        &:hover {
-            color: var(--primary-color);
-        }
-
-        &[selected] {
-            color: var(--secondary-color);
-        }
-    }
 
     span {
         margin: 0px 12px;
+    }
+}
+button {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: #2f80ed;
+
+    &:hover {
+        color: #2f80ed;
+    }
+
+    &[selected] {
+        color: #2f80ed;
     }
 }
 

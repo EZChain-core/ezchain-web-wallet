@@ -81,40 +81,6 @@
                                     {{ $t('earn.delegate_card.submit') }}
                                 </v-btn>
                             </div>
-                            <!--                            <div>-->
-                            <!--                                <h4 class="title">-->
-                            <!--                                    {{ $t('earn.transfer_card.title') }}-->
-                            <!--                                </h4>-->
-                            <!--                                <p style="flex-grow: 1">-->
-                            <!--                                    {{ $t('earn.transfer_card.desc') }}-->
-                            <!--                                </p>-->
-                            <!--                                <v-btn-->
-                            <!--                                    class="button_secondary"-->
-                            <!--                                    data-cy="swap"-->
-                            <!--                                    @click="transfer"-->
-                            <!--                                    depressed-->
-                            <!--                                    small-->
-                            <!--                                >-->
-                            <!--                                    {{ $t('earn.transfer_card.submit') }}-->
-                            <!--                                </v-btn>-->
-                            <!--                            </div>-->
-                            <!--                            <div>-->
-                            <!--                                <h4 class="title">-->
-                            <!--                                    {{ $t('earn.rewards_card.title') }}-->
-                            <!--                                </h4>-->
-                            <!--                                <p style="flex-grow: 1">-->
-                            <!--                                    {{ $t('earn.rewards_card.desc') }}-->
-                            <!--                                </p>-->
-                            <!--                                <v-btn-->
-                            <!--                                    class="button_secondary"-->
-                            <!--                                    data-cy="rewards"-->
-                            <!--                                    @click="viewRewards"-->
-                            <!--                                    depressed-->
-                            <!--                                    small-->
-                            <!--                                >-->
-                            <!--                                    {{ $t('earn.rewards_card.submit') }}-->
-                            <!--                                </v-btn>-->
-                            <!--                            </div>-->
                         </div>
                         <div class="bottom_earn">
                             <button
