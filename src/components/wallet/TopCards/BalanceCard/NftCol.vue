@@ -169,13 +169,13 @@ export default class NftCol extends Vue {
     }
 }
 
-$nft_w: 35px;
+$nft_w: 74px;
 
 .nft_list {
     margin-top: 8px;
     grid-gap: 8px;
     display: grid;
-    grid-template-columns: repeat(5, $nft_w);
+    grid-template-columns: repeat(3, $nft_w);
 }
 
 .nft_item {
