@@ -80,7 +80,7 @@ export default class AvaxInput extends Vue {
 
 .avax_input {
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-rows: 1fr max-content;
     color: var(--primary-color);
     width: 100%;
     height: 40px;

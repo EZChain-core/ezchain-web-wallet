@@ -1,7 +1,7 @@
 <template>
     <div class="new_family">
         <div>
-            <p>{{ $t('studio.family.desc') }}</p>
+            <!--            <p>{{ $t('studio.family.desc') }}</p>-->
             <form @submit.prevent="submit" v-if="!isSuccess">
                 <div style="display: flex">
                     <div style="flex-grow: 1">
@@ -14,18 +14,11 @@
                             maxlength="128"
                         />
                     </div>
-                    <div class="symbol">
-                        <label>{{ $t('studio.family.label2') }}</label>
-                        <input
-                            type="text"
-                            placeholder="xxxx"
-                            v-model="symbol"
-                            max="4"
-                            maxlength="4"
-                        />
-                    </div>
                 </div>
-
+                <div class="symbol">
+                    <label>{{ $t('studio.family.label2') }}</label>
+                    <input type="text" placeholder="xxxx" v-model="symbol" max="4" maxlength="4" />
+                </div>
                 <div>
                     <label>{{ $t('studio.family.label3') }}</label>
                     <input
@@ -37,10 +30,30 @@
                     />
                 </div>
                 <div>
-                    <p>{{ $t('studio.family.fee') }}: {{ txFee.toLocaleString() }} AVAX</p>
+                    <p
+                        style="
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 14px;
+                            line-height: 16px;
+                            /* identical to box height, or 114% */
+
+                            /* Neutral/900 */
+
+                            color: #171717;
+                        "
+                    >
+                        {{ $t('studio.family.fee') }}: {{ txFee.toLocaleString() }} AVAX
+                    </p>
                 </div>
                 <p v-if="error" class="err">{{ error }}</p>
-                <v-btn :loading="isLoading" type="submit" class="button_secondary" small>
+                <v-btn
+                    style="height: 40px !important"
+                    :loading="isLoading"
+                    type="submit"
+                    class="button_secondary"
+                    small
+                >
                     {{ $t('studio.family.submit') }}
                 </v-btn>
             </form>
@@ -172,34 +185,55 @@ export default class NewCollectibleFamily extends Vue {
 <style scoped lang="scss">
 .new_family {
     max-width: 100%;
-    width: 340px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     //display: grid;
     //grid-template-columns: 1fr 350px;
 }
 form > div {
     margin: 12px 0;
 }
-
+.button_secondary {
+    width: 184px;
+    height: 40px;
+    background: #ef6825;
+    border-radius: 8px;
+}
 label {
     margin-top: 6px;
-    color: var(--primary-color-light);
+    font-style: normal;
+    font-weight: bold;
     font-size: 14px;
-    margin-bottom: 3px;
+    line-height: 16px;
+    /* identical to box height, or 114% */
+
+    /* Neutral/900 */
+
+    color: #171717;
 }
 
 input {
     display: block;
     background-color: var(--bg-light);
-    color: var(--primary-color);
+    width: 397px;
+    height: 40px;
+    background: #f5f5f5;
+    border-radius: 8px;
     padding: 6px 14px;
     font-size: 13px;
 }
 
 .symbol {
-    margin-left: 12px;
     > input {
-        width: 60px;
-        text-align: center;
+        width: 397px;
+        text-align: left;
+        height: 40px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-size: 13px;
     }
 }
 
@@ -222,11 +256,15 @@ input {
     > div {
         padding: 3px 12px;
         margin-bottom: 5px;
-        background-color: var(--bg-light);
+        border-bottom: 1px solid #f5f5f5;
     }
 
     .v-btn {
         margin-top: 12px;
+        width: 184px;
+        height: 40px;
+        background: #171717 !important;
+        border-radius: 8px;
     }
 }
 </style>

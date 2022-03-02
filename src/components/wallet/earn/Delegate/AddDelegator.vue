@@ -1,7 +1,7 @@
 <template>
     <div class="add_delegator">
         <NodeSelection v-if="!selected" @select="onselect" class="node_selection"></NodeSelection>
-        <div class="cols" v-else>
+        <div style="display: grid; grid-template-columns: 2fr 1fr; grid-gap: 20px" class="" v-else>
             <!--            <div class="node_col">-->
             <!--                <button @click="selected = null" class="close_but button_secondary">-->
             <!--                    <fa icon="sync"></fa>-->
@@ -634,13 +634,13 @@ export default class AddDelegator extends Vue {
 
 .cols {
     display: grid;
-    grid-template-columns: max-content 1fr 340px;
+    grid-template-columns: max-content 1fr;
     column-gap: 2vw;
     max-height: 373px;
 }
 
 .ins_col {
-    margin: 0px auto;
+    //margin: 0px auto;
     align-self: flex-end;
     justify-self: flex-end;
     max-width: 490px;

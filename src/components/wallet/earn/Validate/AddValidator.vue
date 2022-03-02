@@ -80,6 +80,24 @@
                                     class="reward_addr_in"
                                 ></QrInput>
                             </div>
+                            <Expandable>
+                                <template v-slot:triggerOn>
+                                    <p>
+                                        {{ $t('earn.shared.advanced.toggle_on') }}
+                                    </p>
+                                </template>
+                                <template v-slot:triggerOff>
+                                    <p>
+                                        {{ $t('earn.shared.advanced.toggle_off') }}
+                                    </p>
+                                </template>
+                                <template v-slot:content>
+                                    <UtxoSelectForm
+                                        style="margin: 10px 0"
+                                        v-model="formUtxos"
+                                    ></UtxoSelectForm>
+                                </template>
+                            </Expandable>
                         </div>
                     </div>
                     <ConfirmPage
