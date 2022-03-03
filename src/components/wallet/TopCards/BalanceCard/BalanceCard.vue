@@ -365,7 +365,7 @@ export default class BalanceCard extends Vue {
 }
 .fungible_card {
     height: 100%;
-    display: grid !important;
+    //display: grid !important;
     grid-template-rows: max-content 1fr max-content;
     flex-direction: column;
 }
@@ -382,7 +382,6 @@ export default class BalanceCard extends Vue {
     justify-content: space-between;
 
     h4 {
-        margin-left: 12px;
         flex-grow: 1;
     }
 }

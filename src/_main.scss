@@ -395,12 +395,26 @@ textarea {
 }
 
 .v-chip {
-    background-color: var(--bg-light) !important;
-    color: var(--primary-color) !important;
+    width: 109px;
+    height: 32px;
+    background: #FAFAFA;
+    border-radius: 24px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #A3A3A3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .v-chip--active {
-    background-color: var(--primary-color) !important;
-    color: var(--bg-wallet) !important;
+    background: #FEF6F2;
+    border: 1px solid #EF6825;
+    box-sizing: border-box;
+    border-radius: 24px;
+    color: #EF6825;
 }
 
 .vue__time-picker {

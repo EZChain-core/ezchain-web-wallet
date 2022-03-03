@@ -12,7 +12,7 @@
             My NFT
         </h1>
         <div class="flex_four">
-            <div class="my_nft">
+            <div class="my_nft no_scroll_bar">
                 <div class="header">
                     <div v-if="pageNow" style="display: flex; align-items: center">
                         <img
@@ -169,7 +169,8 @@ export default class Studio extends Vue {
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
-    padding: 24px 16px;
+    padding: 16px 16px;
+    overflow: overlay;
 }
 .header {
     display: flex;

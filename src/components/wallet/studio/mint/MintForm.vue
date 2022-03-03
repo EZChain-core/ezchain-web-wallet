@@ -1,6 +1,61 @@
 <template>
     <div class="mint_form">
         <div class="cols">
+            <div class="type_col">
+                <div class="type_sel">
+                    <v-chip-group mandatory v-model="nftFormType">
+                        <v-chip value="generic" :disabled="isSuccess">
+                            {{ $t('studio.mint.type_col.types.generic') }}
+                        </v-chip>
+                        <v-chip value="custom" :disabled="isSuccess">
+                            {{ $t('studio.mint.type_col.types.custom') }}
+                        </v-chip>
+                    </v-chip-group>
+
+                    <template v-if="nftFormType === 'custom'">
+                        <!--                        <label>{{ $t('studio.mint.type_col.label2') }}</label>-->
+                        <lable>Title</lable>
+                        <v-chip-group mandatory v-model="nftType">
+                            <v-chip value="utf8" :disabled="isSuccess">UTF-8</v-chip>
+                            <v-chip value="url" :disabled="isSuccess">URL</v-chip>
+                            <v-chip value="json" :disabled="isSuccess">JSON</v-chip>
+                        </v-chip-group>
+                    </template>
+                </div>
+                <div class="form_col">
+                    <template>
+                        <div class="form_cont">
+                            <Component
+                                v-if="nftFormType === 'custom'"
+                                :is="formComponent"
+                                @onInput="onInput"
+                            ></Component>
+                            <GenericForm v-else @onInput="onInput"></GenericForm>
+                        </div>
+                        <div>
+                            <label>{{ $t('studio.mint.form_col.label1') }}</label>
+                            <input type="number" min="1" v-model="quantity" style="width: 100%" />
+                        </div>
+                        <div class="fee">
+                            <p>
+                                {{ $t('studio.mint.form_col.fee') }}
+                                <span>{{ txFee.toLocaleString() }} EZC</span>
+                            </p>
+                        </div>
+                        <v-btn
+                            :disabled="!canSubmit"
+                            @click="submit"
+                            block
+                            :loading="isLoading"
+                            class="button_primary"
+                            style="margin: 14px 0"
+                            v-if="!isSuccess"
+                        >
+                            {{ $t('studio.mint.form_col.submit') }}
+                        </v-btn>
+                    </template>
+                </div>
+            </div>
             <div class="utxo_col">
                 <div class="utxo">
                     <div>
@@ -30,94 +85,34 @@
                     </div>
                 </div>
             </div>
-            <div class="type_col">
-                <div class="type_sel">
-                    <label>{{ $t('studio.mint.type_col.label1') }}</label>
-                    <p>{{ $t('studio.mint.type_col.desc') }}</p>
-                    <v-chip-group mandatory v-model="nftFormType">
-                        <v-chip value="generic" :disabled="isSuccess">
-                            {{ $t('studio.mint.type_col.types.generic') }}
-                        </v-chip>
-                        <v-chip value="custom" :disabled="isSuccess">
-                            {{ $t('studio.mint.type_col.types.custom') }}
-                        </v-chip>
-                    </v-chip-group>
-
-                    <template v-if="nftFormType === 'custom'">
-                        <label>{{ $t('studio.mint.type_col.label2') }}</label>
-                        <v-chip-group mandatory v-model="nftType">
-                            <v-chip value="utf8" :disabled="isSuccess">UTF-8</v-chip>
-                            <v-chip value="url" :disabled="isSuccess">URL</v-chip>
-                            <v-chip value="json" :disabled="isSuccess">JSON</v-chip>
-                        </v-chip-group>
-                    </template>
-                </div>
-                <p>
-                    {{ typeDescription }}
-                </p>
-            </div>
-            <div class="form_col">
-                <template>
-                    <div class="form_cont">
-                        <Component
-                            v-if="nftFormType === 'custom'"
-                            :is="formComponent"
-                            @onInput="onInput"
-                        ></Component>
-                        <GenericForm v-else @onInput="onInput"></GenericForm>
-                    </div>
-                    <div>
-                        <label>{{ $t('studio.mint.form_col.label1') }}</label>
-                        <input type="number" min="1" v-model="quantity" style="width: 100%" />
-                    </div>
-                    <div class="fee">
-                        <p>
-                            {{ $t('studio.mint.form_col.fee') }}
-                            <span>{{ txFee.toLocaleString() }} EZC</span>
-                        </p>
-                    </div>
-                    <v-btn
-                        :disabled="!canSubmit"
-                        @click="submit"
-                        block
-                        :loading="isLoading"
-                        class="button_primary"
-                        style="margin: 14px 0"
-                        v-if="!isSuccess"
-                    >
-                        {{ $t('studio.mint.form_col.submit') }}
-                    </v-btn>
-                </template>
-            </div>
-
-            <div class="right_col">
-                <div class="preview">
-                    <label>{{ $t('studio.mint.preview.label1') }}</label>
-                    <div class="payload_view_cont" v-if="payloadPreview">
-                        <NftCard :payload="payloadPreview" :group-i-d="groupId"></NftCard>
-                    </div>
-                    <div class="nft_preview preview_holder" v-else>
-                        <p>{{ $t('studio.mint.preview.info1') }}</p>
-                    </div>
-                </div>
-                <template v-if="isSuccess">
-                    <div class="success_cont">
-                        <p style="color: var(--success)">
-                            <fa icon="check-circle"></fa>
-                            {{ $t('studio.mint.preview.success.text1') }}
-                            <br />
-                            {{ $t('studio.mint.preview.success.text2') }}
-                        </p>
-                        <div>
-                            <label>{{ $t('studio.mint.preview.success.label1') }}</label>
-                            <p style="word-break: break-all">{{ txId }}</p>
-                        </div>
-                        <v-btn @click="clearUtxo" class="button_secondary" small depressed>
-                            {{ $t('studio.mint.preview.success.back') }}
-                        </v-btn>
-                    </div>
-                </template>
-            </div>
+            <!--            <div class="right_col">-->
+            <!--                <div class="preview">-->
+            <!--                    <label>{{ $t('studio.mint.preview.label1') }}</label>-->
+            <!--                    <div class="payload_view_cont" v-if="payloadPreview">-->
+            <!--                        <NftCard :payload="payloadPreview" :group-i-d="groupId"></NftCard>-->
+            <!--                    </div>-->
+            <!--                    <div class="nft_preview preview_holder" v-else>-->
+            <!--                        <p>{{ $t('studio.mint.preview.info1') }}</p>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <template v-if="isSuccess">-->
+            <!--                    <div class="success_cont">-->
+            <!--                        <p style="color: var(&#45;&#45;success)">-->
+            <!--                            <fa icon="check-circle"></fa>-->
+            <!--                            {{ $t('studio.mint.preview.success.text1') }}-->
+            <!--                            <br />-->
+            <!--                            {{ $t('studio.mint.preview.success.text2') }}-->
+            <!--                        </p>-->
+            <!--                        <div>-->
+            <!--                            <label>{{ $t('studio.mint.preview.success.label1') }}</label>-->
+            <!--                            <p style="word-break: break-all">{{ txId }}</p>-->
+            <!--                        </div>-->
+            <!--                        <v-btn @click="clearUtxo" class="button_secondary" small depressed>-->
+            <!--                            {{ $t('studio.mint.preview.success.back') }}-->
+            <!--                        </v-btn>-->
+            <!--                    </div>-->
+            <!--                </template>-->
+            <!--            </div>-->
         </div>
     </div>
 </template>
@@ -396,7 +391,13 @@ export default class MintNft extends Vue {
 .mint_form {
     padding: 10px 0;
 }
-
+lable {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #171717;
+}
 .options {
     display: flex;
 
@@ -447,7 +448,7 @@ export default class MintNft extends Vue {
 $col_pad: 24px;
 .cols {
     display: grid;
-    grid-template-columns: max-content 1fr 340px 1fr;
+    grid-template-columns: 1fr max-content 340px;
     column-gap: $col_pad;
     > div {
         padding-left: $col_pad;
