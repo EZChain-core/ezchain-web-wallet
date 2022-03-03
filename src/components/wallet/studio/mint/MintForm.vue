@@ -364,7 +364,8 @@ export default class MintNft extends Vue {
 
     input,
     textarea {
-        background-color: var(--bg-light);
+        background: #f5f5f5;
+        border-radius: 8px;
         padding: 8px 12px;
         display: block;
         font-size: 14px;
