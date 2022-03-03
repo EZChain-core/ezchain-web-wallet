@@ -12,6 +12,7 @@
                 />
                 <p class="err">{{ error }}</p>
                 <v-btn
+                    style="height: 40px"
                     class="ava_button button_primary"
                     @click="access"
                     :loading="isLoading"
@@ -113,7 +114,9 @@ export default class Account extends Vue {
 @use '../../main';
 .pass {
     text-align: center;
-    background-color: var(--bg-light) !important;
+    //background-color: var(--bg-light) !important;
+    background: #f5f5f5;
+    border-radius: 8px;
 }
 .ava_button {
     width: 100%;

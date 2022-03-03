@@ -22,8 +22,18 @@
             </div>
             <div class="settings">
                 <div class="filter_col">
-                    <div class="filter_cont">
-                        <label>Export CSV File (BETA)</label>
+                    <div class="filter_cont" style="display: flex; align-items: center">
+                        <label
+                            style="
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 16px;
+                                line-height: 24px;
+                                color: #000000;
+                            "
+                        >
+                            Export CSV File:
+                        </label>
                         <div class="csv_buttons">
                             <v-btn
                                 x-small
