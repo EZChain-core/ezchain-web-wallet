@@ -114,11 +114,12 @@ export default class UtxoSelectForm extends Vue {
 .available {
     max-width: 100%;
     padding: 6px 14px;
-    background-color: var(--bg-light);
+    background-color: #f5f5f5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-radius: 8px;
 }
 
 label {

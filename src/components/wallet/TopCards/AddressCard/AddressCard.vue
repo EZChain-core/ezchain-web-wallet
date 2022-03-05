@@ -49,7 +49,8 @@
                     color: #737373;
                 "
             >
-                This is your X-Chain address to receive funds.
+                <!-- This is your X-Chain address to receive funds. -->
+                {{ addressMsg }}
             </p>
         </div>
     </div>

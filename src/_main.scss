@@ -411,10 +411,10 @@ textarea {
 }
 .v-chip--active {
     background: #FEF6F2;
-    border: 1px solid #EF6825;
+    border: 1px solid #EF6825 !important;
     box-sizing: border-box;
     border-radius: 24px;
-    color: #EF6825;
+    color: #EF6825 !important;
 }
 
 .vue__time-picker {

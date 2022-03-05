@@ -29,7 +29,6 @@
                             <div
                                 style="
                                     display: grid;
-
                                     grid-template-columns: max-content 1fr;
                                     column-gap: 12px;
                                 "
@@ -102,34 +101,33 @@
                         <p v-if="warnShortDuration" class="err">
                             {{ $t('earn.validate.errs.duration_warn') }}
                         </p>
-                        <div class="submit_box" style="width: 184px !important; height: 40px">
-                            <!--                            <label style="margin: 8px 0 !important">-->
-                            <!--                                * {{ $t('earn.validate.summary.warn') }}-->
-                            <!--                            </label>-->
-                            <p class="err">
+                        <div
+                            class="submit_box"
+                            style="width: 184px !important; height: 40px; padding-left: 12px"
+                        >
+                            <p class="err" style="max-width: 667px; min-width: 500px">
                                 {{ err }}
-                                <v-btn
-                                    v-if="!isConfirm"
-                                    style="
-                                        width: 184px !important;
-                                        height: 40px;
-                                        border-radius: 8px;
-                                    "
-                                    @click="confirm"
-                                    class="button_secondary"
-                                    depressed
-                                    :loading="isLoading"
-                                    :disabled="!canSubmit"
-                                    block
-                                >
-                                    {{ $t('earn.validate.confirm') }}
-                                </v-btn>
-                                <template v-else>
+                            </p>
+                            <v-btn
+                                v-if="!isConfirm"
+                                style="width: 184px !important; height: 40px; border-radius: 8px"
+                                @click="confirm"
+                                class="button_secondary"
+                                depressed
+                                :loading="isLoading"
+                                :disabled="!canSubmit"
+                                block
+                            >
+                                {{ $t('earn.validate.confirm') }}
+                            </v-btn>
+                            <template v-else>
+                                <div style="display: flex; max-width: 300px; padding-bottom: 28px">
                                     <v-btn
                                         style="
                                             width: 184px !important;
                                             height: 40px;
                                             border-radius: 8px;
+                                            margin-right: 12px;
                                         "
                                         @click="submit"
                                         class="button_secondary"
@@ -139,21 +137,22 @@
                                     >
                                         {{ $t('earn.validate.submit') }}
                                     </v-btn>
-                                    <!--                                    <v-btn-->
-                                    <!--                                        text-->
-                                    <!--                                        @click="cancelConfirm"-->
-                                    <!--                                        block-->
-                                    <!--                                        style="-->
-                                    <!--                                            color: var(&#45;&#45;primary-color);-->
-                                    <!--                                            margin-top: 20px;-->
-                                    <!--                                            width: 184px !important;-->
-                                    <!--                                            height: 40px;-->
-                                    <!--                                        "-->
-                                    <!--                                    >-->
-                                    <!--                                        {{ $t('earn.validate.cancel') }}-->
-                                    <!--                                    </v-btn>-->
-                                </template>
-                            </p>
+                                    <v-btn
+                                        text
+                                        @click="cancelConfirm"
+                                        block
+                                        style="
+                                            border: 1px solid #525252;
+                                            box-sizing: border-box;
+                                            border-radius: 8px;
+                                            height: 40px;
+                                            width: 102px;
+                                        "
+                                    >
+                                        {{ $t('earn.validate.cancel') }}
+                                    </v-btn>
+                                </div>
+                            </template>
                         </div>
                     </div>
                     <v-btn
@@ -682,7 +681,7 @@ form {
 }
 .ins_col {
     max-width: 490px;
-    padding-bottom: 8vh;
+    padding-bottom: 4vh;
 }
 .amt {
     width: 100%;
@@ -754,6 +753,8 @@ label {
         margin-bottom: 14px;
         p {
             font-size: 16px;
+            font-weight: bold;
+            color: #262626;
         }
     }
 

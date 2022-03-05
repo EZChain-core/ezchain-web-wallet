@@ -147,12 +147,13 @@ tr {
 th {
     position: sticky;
     top: 0;
-    padding: 2px 14px;
+    padding: 8px 14px;
     font-style: normal;
     font-weight: bold;
     font-size: 12px;
     line-height: 16px;
     color: #a3a3a3;
+    border-bottom: 1px solid #f5f5f5;
 }
 
 .empty_list {
