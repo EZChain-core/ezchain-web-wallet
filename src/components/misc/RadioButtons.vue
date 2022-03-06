@@ -36,25 +36,31 @@ button {
     word-break: normal;
     white-space: nowrap;
     font-weight: bold;
-    font-size: 14px;
     padding: 4px 14px;
     border: 1px solid transparent;
-    color: var(--primary-color-light);
-    background-color: var(--bg-wallet);
-    border-radius: 4px;
     margin-right: 6px;
     margin-bottom: 6px;
     transition-duration: 0.2s;
     font-family: Inconsolata, monospace;
-
-    //&:hover {
-    //    border-color: var(--bg-light);
-    //}
+    height: 32px;
+    left: 360px;
+    top: 240px;
+    background: #fafafa;
+    box-sizing: border-box;
+    border-radius: 24px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #a3a3a3;
+    &:hover {
+        border: 1px solid #ef6825 !important;
+        color: #ef6825;
+    }
 
     &[active] {
-        color: var(--primary-color);
-        //border-color: #285599;
-        background-color: var(--bg-light);
+        border: 1px solid #ef6825;
+        color: #ef6825;
     }
 }
 

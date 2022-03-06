@@ -21,7 +21,32 @@
                 </div>
             </div>
             <div class="settings">
-                <div class="filter_col">
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                    "
+                >
+                    <div class="pagination">
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 250px;
+                            "
+                        >
+                            <button @click="prevPage" :disabled="!isPrevPage">
+                                <fa icon="angle-left"></fa>
+                            </button>
+                            <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
+                            <button @click="nextPage" :disabled="!isNextPage">
+                                <fa icon="angle-right"></fa>
+                            </button>
+                        </div>
+                    </div>
                     <div class="filter_cont" style="display: flex; align-items: center">
                         <label
                             style="
@@ -30,12 +55,19 @@
                                 font-size: 16px;
                                 line-height: 24px;
                                 color: #000000;
+                                margin-right: 24px;
                             "
                         >
                             Export CSV File:
                         </label>
                         <div class="csv_buttons">
                             <v-btn
+                                style="
+                                    background-color: white !important;
+                                    color: #2f80ed !important;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                "
                                 x-small
                                 @click="openCsvModal"
                                 class="button_secondary"
@@ -46,6 +78,12 @@
                             </v-btn>
                             <v-btn
                                 x-small
+                                style="
+                                    background-color: white !important;
+                                    color: #2f80ed !important;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                "
                                 @click="openAvaxCsvModal"
                                 class="button_secondary"
                                 depressed
@@ -55,32 +93,36 @@
                             </v-btn>
                         </div>
                     </div>
-                    <div class="filter_cont">
-                        <label>{{ $t('activity.label1') }}</label>
-                        <RadioButtons :labels="modes" :keys="modeKey" v-model="mode"></RadioButtons>
-                    </div>
                 </div>
-                <div>
-                    <div class="pagination">
-                        <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
-                        <div>
-                            <button @click="prevPage" :disabled="!isPrevPage">
-                                <fa icon="angle-left"></fa>
-                            </button>
-                            <button @click="nextPage" :disabled="!isNextPage">
-                                <fa icon="angle-right"></fa>
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                        margin-top: 16px;
+                    "
+                >
+                    <div class="filter_col">
+                        <div class="filter_cont">
+                            <RadioButtons
+                                :labels="modes"
+                                :keys="modeKey"
+                                v-model="mode"
+                            ></RadioButtons>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pagination_info">
+                            <p>{{ $t('activity.found', [txs.length]) }}</p>
+                            <button @click="updateHistory">
+                                <fa icon="sync"></fa>
                             </button>
                         </div>
                     </div>
-                    <div class="pagination_info">
-                        <p>{{ $t('activity.found', [txs.length]) }}</p>
-                        <button @click="updateHistory">
-                            <fa icon="sync"></fa>
-                        </button>
-                    </div>
                 </div>
             </div>
-            <div class="tx_table" ref="list">
+            <div class="tx_table no_scroll_bar" ref="list">
                 <div class="tx_list" v-show="showList">
                     <virtual-list
                         v-show="txs.length > 0"
@@ -437,9 +479,8 @@ export default class Activity extends Vue {
 
 .settings {
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 12px;
 }
 
@@ -514,7 +555,11 @@ export default class Activity extends Vue {
     flex-direction: row;
     align-items: center;
     p {
-        margin-right: 12px !important;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
     }
     button {
         width: 24px;
