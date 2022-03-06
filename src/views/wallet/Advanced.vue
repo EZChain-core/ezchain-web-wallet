@@ -65,6 +65,7 @@ h1 {
     height: 506px;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     overflow: overlay;
 }
 
