@@ -32,27 +32,48 @@
                             ></Component>
                             <GenericForm v-else @onInput="onInput"></GenericForm>
                         </div>
-                        <div>
-                            <label>{{ $t('studio.mint.form_col.label1') }}</label>
-                            <input type="number" min="1" v-model="quantity" style="width: 100%" />
+                        <div style="display: flex; align-items: center">
+                            <div style="margin-right: 12px">
+                                <label>{{ $t('studio.mint.form_col.label1') }}</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    v-model="quantity"
+                                    style="width: 100%"
+                                />
+                            </div>
+                            <div class="fee">
+                                <label style="display: block; padding-bottom: 8px">
+                                    {{ $t('studio.mint.form_col.fee') }}
+                                </label>
+                                <span
+                                    style="
+                                        height: 40px;
+                                        display: block;
+                                        font-style: normal;
+                                        font-weight: normal;
+                                        font-size: 16px;
+                                        line-height: 24px;
+                                        color: #262626;
+                                    "
+                                >
+                                    {{ txFee.toLocaleString() }} EZC
+                                </span>
+                            </div>
                         </div>
-                        <div class="fee">
-                            <p>
-                                {{ $t('studio.mint.form_col.fee') }}
-                                <span>{{ txFee.toLocaleString() }} EZC</span>
-                            </p>
+                        <div style="width: 184px">
+                            <v-btn
+                                :disabled="!canSubmit"
+                                @click="submit"
+                                block
+                                :loading="isLoading"
+                                class="button_primary"
+                                style="margin: 14px 0"
+                                v-if="!isSuccess"
+                            >
+                                {{ $t('studio.mint.form_col.submit') }}
+                            </v-btn>
                         </div>
-                        <v-btn
-                            :disabled="!canSubmit"
-                            @click="submit"
-                            block
-                            :loading="isLoading"
-                            class="button_primary"
-                            style="margin: 14px 0"
-                            v-if="!isSuccess"
-                        >
-                            {{ $t('studio.mint.form_col.submit') }}
-                        </v-btn>
                     </template>
                 </div>
             </div>
@@ -62,25 +83,25 @@
                         <v-btn text @click="clearUtxo" block>
                             {{ $t('studio.mint.utxo_col.change') }}
                         </v-btn>
-                        <div style="height: 110px; margin-top: 22px" v-if="groupUtxos.length > 0">
-                            <NftFamilyCardsPreview
-                                :utxos="groupUtxos"
-                                :spread="isSuccess"
-                                :max="maxPreviewUtxoLen"
-                            ></NftFamilyCardsPreview>
-                        </div>
-                        <div v-else class="empty_card">
-                            <p><fa icon="plus"></fa></p>
-                        </div>
+                        <!--                        <div style="height: 110px; margin-top: 22px" v-if="groupUtxos.length > 0">-->
+                        <!--                            <NftFamilyCardsPreview-->
+                        <!--                                :utxos="groupUtxos"-->
+                        <!--                                :spread="isSuccess"-->
+                        <!--                                :max="maxPreviewUtxoLen"-->
+                        <!--                            ></NftFamilyCardsPreview>-->
+                        <!--                        </div>-->
+                        <!--                        <div v-else class="empty_card">-->
+                        <!--                            <p><fa icon="plus"></fa></p>-->
+                        <!--                        </div>-->
                     </div>
                     <div>
-                        <div>
-                            <label>{{ $t('studio.mint.utxo_col.label1') }}</label>
-                            <p>{{ family.name }}</p>
+                        <div style="border-bottom: 1px solid #f5f5f5; padding: 10px 0">
+                            <p>{{ $t('studio.mint.utxo_col.label1') }}</p>
+                            <lable>{{ family.name }}</lable>
                         </div>
-                        <div>
-                            <label>{{ $t('studio.mint.utxo_col.label2') }}</label>
-                            <p>{{ family.symbol }}</p>
+                        <div style="border-bottom: 1px solid #f5f5f5; padding: 10px 0">
+                            <p>{{ $t('studio.mint.utxo_col.label2') }}</p>
+                            <lable>{{ family.symbol }}</lable>
                         </div>
                     </div>
                 </div>
@@ -353,9 +374,13 @@ export default class MintNft extends Vue {
 .mint_form {
     label {
         margin-top: 6px;
-        color: var(--primary-color);
+        //color: var(--primary-color);
         font-size: 14px;
         margin-bottom: 3px;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 16px;
+        color: #171717;
     }
 
     p {
@@ -449,7 +474,7 @@ lable {
 $col_pad: 24px;
 .cols {
     display: grid;
-    grid-template-columns: 1fr max-content 340px;
+    grid-template-columns: 1fr 340px max-content;
     column-gap: $col_pad;
     > div {
         padding-left: $col_pad;
