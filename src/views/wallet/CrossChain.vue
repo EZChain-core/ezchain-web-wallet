@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ $t('cross_chain.title') }}</h1>
-        <div class="flex_two">
+        <div class="flex_two no_scroll_bar">
             <ChainTransfer></ChainTransfer>
             <transition name="fade" mode="out-in">
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
@@ -29,6 +29,7 @@ export default class CrossChain extends Vue {}
     grid-template-columns: 1fr 360px;
     grid-gap: 12px;
     height: 506px;
+    overflow: overlay;
 }
 h1 {
     font-style: normal;

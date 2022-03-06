@@ -59,27 +59,46 @@
                                 {{ $t('earn.transfer.confirm') }}
                             </v-btn>
                             <template v-else>
-                                <v-btn
-                                    data-cy="submit"
-                                    class="button_secondary"
-                                    @click="submit"
-                                    :loading="isLoading"
-                                    depressed
-                                    block
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        max-width: 300px;
+                                        width: 170px;
+                                    "
                                 >
-                                    {{ $t('earn.transfer.submit') }}
-                                </v-btn>
-                                <v-btn
-                                    v-if="!isLoading"
-                                    data-cy="cancel"
-                                    style="color: var(--primary-color); margin: 12px 0 !important"
-                                    @click="cancelConfirm"
-                                    depressed
-                                    text
-                                    block
-                                >
-                                    {{ $t('earn.transfer.cancel') }}
-                                </v-btn>
+                                    <v-btn
+                                        data-cy="submit"
+                                        class="button_secondary"
+                                        @click="submit"
+                                        :loading="isLoading"
+                                        depressed
+                                        block
+                                    >
+                                        {{ $t('earn.transfer.submit') }}
+                                    </v-btn>
+                                    <v-btn
+                                        v-if="!isLoading"
+                                        data-cy="cancel"
+                                        style="
+                                            color: var(--primary-color);
+                                            margin: 12px 0 !important;
+                                            width: 102px;
+                                            height: 40px;
+                                            border: 1px solid #525252;
+                                            box-sizing: border-box;
+                                            border-radius: 8px;
+                                            margin-left: 12px;
+                                        "
+                                        @click="cancelConfirm"
+                                        depressed
+                                        text
+                                        block
+                                    >
+                                        {{ $t('earn.transfer.cancel') }}
+                                    </v-btn>
+                                </div>
                             </template>
                         </template>
                     </div>
