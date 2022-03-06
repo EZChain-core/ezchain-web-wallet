@@ -15,10 +15,11 @@
         <!--        <div class="buts grid_box">-->
         <!--            <button @click="openTokenlist">Manage Token Lists</button>-->
         <!--        </div>-->
-        <div class="grids">
+        <div class="grids no_scroll_bar">
+            <h2>Advanced</h2>
             <ChainImport class="grid_box"></ChainImport>
-            <SignMessage class="grid_box"></SignMessage>
-            <VerifyMessage class="grid_box"></VerifyMessage>
+            <!--                <SignMessage class="grid_box"></SignMessage>-->
+            <!--                <VerifyMessage class="grid_box"></VerifyMessage>-->
         </div>
     </div>
 </template>
@@ -56,21 +57,23 @@ h1 {
     font-weight: normal;
 }
 .grids {
-    display: grid;
-    column-gap: 14px;
-    row-gap: 14px;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    background: #ffffff;
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     height: 506px;
+    justify-content: center;
+    align-items: center;
+    overflow: overlay;
 }
 
 .grid_box {
-    background-color: var(--bg-light);
+    background: #fafafa;
+    border-radius: 8px;
     padding: 30px;
-    border-radius: 4px;
-    overflow: auto;
+    width: 650px;
+    margin-bottom: 32px;
 }
 
 @include main.mobile-device {

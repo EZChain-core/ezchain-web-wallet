@@ -9,7 +9,11 @@
             <div class="wallet_main">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
-                        <router-view id="wallet_router" :key="$route.path"></router-view>
+                        <router-view
+                            class="no_scroll_bar"
+                            id="wallet_router"
+                            :key="$route.path"
+                        ></router-view>
                     </keep-alive>
                 </transition>
                 <top-info class="wallet_top" style="margin-top: 12px"></top-info>
@@ -42,7 +46,6 @@ export default class Wallet extends Vue {
     intervalId: NodeJS.Timeout | null = null
     logoutTimestamp = Date.now() + TIMEOUT_DUR_MS
     isLogOut = false
-
     // Set the logout timestamp to now + TIMEOUT_DUR_MS
     resetTimer() {
         this.logoutTimestamp = Date.now() + TIMEOUT_DUR_MS
@@ -78,7 +81,7 @@ export default class Wallet extends Vue {
 
     mounted() {
         let view = this.$refs.wallet_view as HTMLDivElement
-
+        console.log('hello', this.$route.path)
         view.addEventListener('mousemove', this.resetTimer)
         view.addEventListener('mousedown', this.resetTimer)
 
@@ -177,6 +180,7 @@ export default class Wallet extends Vue {
 
     #wallet_router {
         padding: 12px 18px;
+        overflow: overlay;
     }
 }
 </style>
