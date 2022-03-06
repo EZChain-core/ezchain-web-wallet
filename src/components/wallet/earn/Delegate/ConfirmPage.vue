@@ -66,16 +66,23 @@ export default class ConfirmPage extends Vue {
 <style scoped lang="scss">
 .confirmation {
     > div {
-        background-color: var(--bg-light);
+        border-bottom: 1px solid #f5f5f5;
         margin: 14px 0;
         padding: 6px 14px;
 
         label {
+            font-style: normal;
+            font-weight: bold;
             font-size: 14px;
-            color: var(--primary-color-light);
+            line-height: 16px;
+            color: #171717;
         }
         p {
-            font-size: 18px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: #737373;
         }
     }
 

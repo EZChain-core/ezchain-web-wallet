@@ -155,15 +155,24 @@
                             </template>
                         </div>
                     </div>
-                    <v-btn
-                        @click="cancel"
-                        block
-                        class="button_secondary"
-                        depressed
-                        v-if="txStatus && isSuccess"
-                    >
-                        Back to Earn
-                    </v-btn>
+                    <div style="width: 184px !important; padding-left: 12px">
+                        <v-btn
+                            @click="cancel"
+                            block
+                            style="
+                                width: 184px !important;
+                                height: 40px;
+                                border-radius: 8px;
+                                margin-right: 12px;
+                                background: #171717 !important;
+                            "
+                            class="button_secondary"
+                            depressed
+                            v-if="txStatus && isSuccess"
+                        >
+                            Back to Earn
+                        </v-btn>
+                    </div>
                 </div>
                 <div>
                     <div class="summary">
@@ -196,15 +205,20 @@
                             </p>
                         </div>
                     </div>
-                    <div class="success_cont" v-if="isSuccess">
-                        <h2>{{ $t('earn.validate.success.title') }}</h2>
-                        <p>{{ $t('earn.validate.success.desc') }}</p>
-                        <p class="tx_id">Tx ID: {{ txId }}</p>
+                    <div class="success_cont" v-if="isSuccess" style="padding-left: 30px">
+                        <!--                        <h2>{{ $t('earn.validate.success.title') }}</h2>-->
+                        <!--                        <p>{{ $t('earn.validate.success.desc') }}</p>-->
+                        <!--                        <p class="tx_id">Tx ID: {{ txId }}</p>-->
                         <div class="tx_status">
                             <div>
                                 <label>{{ $t('earn.validate.success.status') }}</label>
                                 <p v-if="!txStatus">Waiting..</p>
-                                <p v-else>{{ txStatus }}</p>
+                                <p
+                                    v-else
+                                    :style="`color: ${txStatus === 'Committed' ? 'green' : 'red'}`"
+                                >
+                                    {{ $t('earn.validate.success.title') }}
+                                </p>
                             </div>
                             <div class="status_icon">
                                 <Spinner

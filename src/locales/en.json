@@ -532,7 +532,7 @@
                     "end": "End Date & Time"
                 },
                 "amount": {
-                    "label": "Stake Amount",
+                    "label": "Staking Amount",
                     "desc": "The amount of EZC to lock for staking.",
                     "desc2": "The available delegation amount for this node is {0} EZC"
                 },

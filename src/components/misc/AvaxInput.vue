@@ -16,12 +16,12 @@
         <div v-if="balance" class="balance">
             <div>
                 <p>
-                    <b>{{ $t('misc.balance') }}:</b>
-                    {{ balance.toLocaleString() }}
-                </p>
-                <p>
                     <b>$</b>
                     {{ amountUSD.toLocaleString(2) }}
+                </p>
+                <p>
+                    <b>{{ $t('misc.balance') }}:</b>
+                    {{ balance.toLocaleString() }}
                 </p>
             </div>
             <div></div>
