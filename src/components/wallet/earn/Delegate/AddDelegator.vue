@@ -125,7 +125,7 @@
                         </div>
                     </template>
                 </div>
-                <div style="width: 184px !important; padding-left: 12px;">
+                <div style="width: 184px !important; padding-left: 12px">
                     <v-btn
                         @click="cancel"
                         block
