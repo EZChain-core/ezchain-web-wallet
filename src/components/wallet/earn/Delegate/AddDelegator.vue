@@ -294,7 +294,7 @@ export default class AddDelegator extends Vue {
     formAmt = new BN(0)
     formEnd: Date = new Date()
     formRewardAddr = ''
-
+    newConstString: any
     currency_type = 'EZC'
 
     mounted() {
@@ -404,12 +404,13 @@ export default class AddDelegator extends Vue {
         let start = new Date(this.startDate)
         let end = new Date(this.endDate)
         let duration = end.getTime() - start.getTime() // in ms
-
         let currentSupply = this.$store.state.Platform.currentSupply
-
-        let estimation = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
-        let res = Big(estimation.toString()).div(Math.pow(10, 9))
+        console.log('currentSupply: ', this.stakeAmt)
+        let fcb = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
+        console.log('fcb: ', fcb)
+        let res = Big(fcb.toString()).div(Math.pow(10, 9))
         return res
+        // return res
     }
 
     get estimatedRewardUSD() {
