@@ -1,4 +1,5 @@
 import { ava, pChain } from '@/AVA'
+import request from 'sync-request'
 
 import {
     KeyChain as AVMKeyChain,
@@ -41,7 +42,6 @@ function keyToKeypair(key: string, chainID: string = 'X'): AVMKeyPair {
 }
 
 // function calculateStakingReward(amount: BN, duration: number, currentSupply: BN): BN {
-//     debugger
 //     let networkID = ava.getNetworkID()
 
 //     //@ts-ignore
@@ -77,43 +77,29 @@ function keyToKeypair(key: string, chainID: string = 'X'): AVMKeyPair {
 //     return rewardBN
 // }
 
-function calculateStakingReward(
+async function calculateStakingReward(
     amount: BN,
     duration: number,
     currentSupply: BN
     // cb: (n: BN) => void
 ) {
-    pChain
-        .getTotalOfStake()
-        .then((result) => {
-            let networkID = ava.getNetworkID()
-            //@ts-ignore
-            let defValues = Defaults.network[networkID]
+    let result = await pChain.getTotalOfStake()
+    let networkID = ava.getNetworkID()
+    //@ts-ignore
+    let defValues = Defaults.network[networkID]
 
-            if (!defValues) {
-                console.error('Network default values not found.')
-                return new BN(0)
-            }
-            let _amount: number = parseInt(amount.toString())
-            let _currentSupply: number = parseInt(currentSupply.toString())
-            const defPlatformVals = defValues.P
-            let maxSupply: BN = defPlatformVals.maxSupply
-            let remainingSupply: number = parseInt(maxSupply.sub(currentSupply).toString())
-            var totalOfStake: any = result.totalStake
-            let num: number = reward(
-                duration,
-                _amount,
-                parseInt(totalOfStake.toString()),
-                remainingSupply
-            )
-            console.log('test thuc', result)
-            console.log('result new cb :', new BN(num))
-            return new BN(num)
-        })
-        .catch((err) => {
-            console.log('loi errr', err)
-        })
-    return 1
+    if (!defValues) {
+        console.error('Network default values not found.')
+        return 0
+    }
+    let _amount: number = parseInt(amount.toString())
+    let _currentSupply: number = parseInt(currentSupply.toString())
+    const defPlatformVals = defValues.P
+    let maxSupply: BN = defPlatformVals.maxSupply
+    let remainingSupply: number = parseInt(maxSupply.sub(currentSupply).toString())
+    var totalOfStake: any = result.totalStake
+    let num: number = reward(duration, _amount, parseInt(totalOfStake.toString()), remainingSupply)
+    return num
 }
 
 // async function calculateStakingReward2(
@@ -217,10 +203,15 @@ function rewardPercent(ts: number): Big {
     r = r.add(b.toString())
     r = r.sub(RAT_1)
     let p: Big = r.mul(PC_STEP)
-    p = p.add(PC_BASE)
-    if (p.s < 0) {
-        p = RAT_1
+    if (p.gte(PC_BASE)) {
+        p = PC_BASE
+    } else {
+        p = p.add(PC_BASE)
+        if (p.s < 0) {
+            p = RAT_1
+        }
     }
+
     return p
 }
 
@@ -229,9 +220,9 @@ function reward(duration: number, stake: number, totalStake: number, rewardPool:
     if (_duration < 0) {
         _duration = 0
     }
-    let _stake: Big = new Big(stake)
-    let _totalStake: Big = new Big(totalStake)
-    let _rewardPool: Big = new Big(rewardPool)
+    let _stake: Big = new Big(stake * 10 ** 9)
+    let _totalStake: Big = new Big(totalStake * 10 ** 9)
+    let _rewardPool: Big = new Big(rewardPool * 10 ** 9)
     let ts: Big = _totalStake.add(_stake)
     if (ts.sub(new Big(BASE_TS.toString())).cmp(new Big(0)) == -1) {
         ts = new Big(BASE_TS.toString())
@@ -248,7 +239,7 @@ function reward(duration: number, stake: number, totalStake: number, rewardPool:
     let reward: any = tr.mul(_stake).div(ts)
     // reward *= duration / SECONDS_PER_YEAR
     reward = reward.mul(_duration).div(SECONDS_PER_YEAR)
-    return parseInt(reward.mul(Math.pow(10, 18)))
+    return reward
 }
 
 function digestMessage(msgStr: string) {
