@@ -252,6 +252,8 @@ import { WalletType } from '@/js/wallets/types'
 import UtxoSelectForm from '@/components/wallet/earn/UtxoSelectForm.vue'
 import Expandable from '@/components/misc/Expandable.vue'
 import NodeCard from '@/components/wallet/earn/Delegate/NodeCard.vue'
+import { result } from 'cypress/types/lodash'
+import { eventBus } from '@/main'
 
 const MIN_MS = 60000
 const HOUR_MS = MIN_MS * 60
@@ -288,17 +290,27 @@ export default class AddDelegator extends Vue {
     txId = ''
     txStatus = ''
     txReason: null | string = null
-
     formNodeID = ''
     formUtxos: UTXO[] = []
     formAmt = new BN(0)
     formEnd: Date = new Date()
     formRewardAddr = ''
-    newConstString: any
+    totalStakeData: any = ''
+
     currency_type = 'EZC'
 
     mounted() {
         this.rewardSelect('local')
+        let b = 1
+        b++
+        console.log('b', b)
+        eventBus.$on('changeData', (event: any) => {
+            this.totalStakeData = event
+        })
+    }
+    async created() {
+        const testData = await pChain.getTotalOfStake()
+        this.totalStakeData = testData
     }
     setEnd(val: string) {
         this.endDate = val
@@ -405,10 +417,14 @@ export default class AddDelegator extends Vue {
         let end = new Date(this.endDate)
         let duration = end.getTime() - start.getTime() // in ms
         let currentSupply = this.$store.state.Platform.currentSupply
-        console.log('currentSupply: ', this.stakeAmt)
-        let fcb = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
-        console.log('fcb: ', fcb)
+        let fcb = calculateStakingReward(
+            this.stakeAmt,
+            duration / 1000,
+            currentSupply,
+            this.totalStakeData.totalStake
+        )
         let res = Big(fcb.toString()).div(Math.pow(10, 9))
+        console.log('fcb: ', res)
         return res
         // return res
     }

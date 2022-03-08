@@ -40,138 +40,23 @@ function keyToKeypair(key: string, chainID: string = 'X'): AVMKeyPair {
     return keychain.importKey(key)
 }
 
-// function calculateStakingReward(amount: BN, duration: number, currentSupply: BN): BN {
-//     debugger
-//     let networkID = ava.getNetworkID()
+function calculateStakingReward(amount: BN, duration: number, currentSupply: BN, result: string) {
+    let networkID = ava.getNetworkID()
+    let defValues = Defaults.network[networkID]
 
-//     //@ts-ignore
-//     let defValues = Defaults.network[networkID]
-
-//     if (!defValues) {
-//         console.error('Network default values not found.')
-//         return new BN(0)
-//     }
-//     const defPlatformVals = defValues.P
-
-//     let maxConsumption: number = defPlatformVals.maxConsumption
-//     let minConsumption: number = defPlatformVals.minConsumption
-//     let diffConsumption = maxConsumption - minConsumption
-//     let maxSupply: BN = defPlatformVals.maxSupply
-//     let maxStakingDuration: BN = defPlatformVals.maxStakingDuration
-//     let remainingSupply = maxSupply.sub(currentSupply)
-
-//     let amtBig = Big(amount.div(ONEAVAX).toString())
-//     let currentSupplyBig = Big(currentSupply.div(ONEAVAX).toString())
-//     let remainingSupplyBig = Big(remainingSupply.div(ONEAVAX).toString())
-//     let portionOfExistingSupplyBig = amtBig.div(currentSupplyBig)
-
-//     let portionOfStakingDuration = duration / maxStakingDuration.toNumber()
-//     let mintingRate = minConsumption + diffConsumption * portionOfStakingDuration
-
-//     let rewardBig: Big = remainingSupplyBig.times(portionOfExistingSupplyBig)
-//     rewardBig = rewardBig.times(Big(mintingRate * portionOfStakingDuration))
-
-//     let rewardStr = rewardBig.times(Math.pow(10, 9)).toFixed(0)
-//     let rewardBN = new BN(rewardStr)
-
-//     return rewardBN
-// }
-
-function calculateStakingReward(
-    amount: BN,
-    duration: number,
-    currentSupply: BN
-    // cb: (n: BN) => void
-) {
-    pChain
-        .getTotalOfStake()
-        .then((result) => {
-            let networkID = ava.getNetworkID()
-            //@ts-ignore
-            let defValues = Defaults.network[networkID]
-
-            if (!defValues) {
-                console.error('Network default values not found.')
-                return new BN(0)
-            }
-            let _amount: number = parseInt(amount.toString())
-            let _currentSupply: number = parseInt(currentSupply.toString())
-            const defPlatformVals = defValues.P
-            let maxSupply: BN = defPlatformVals.maxSupply
-            let remainingSupply: number = parseInt(maxSupply.sub(currentSupply).toString())
-            var totalOfStake: any = result.totalStake
-            let num: number = reward(
-                duration,
-                _amount,
-                parseInt(totalOfStake.toString()),
-                remainingSupply
-            )
-            console.log('test thuc', result)
-            console.log('result new cb :', new BN(num))
-            return new BN(num)
-        })
-        .catch((err) => {
-            console.log('loi errr', err)
-        })
-    return 1
+    if (!defValues) {
+        console.error('Network default values not found.')
+        return new BN(0)
+    }
+    let _amount: number = parseInt(amount.toString())
+    let _currentSupply: number = parseInt(currentSupply.toString())
+    const defPlatformVals = defValues.P
+    let maxSupply: BN = defPlatformVals.maxSupply
+    let remainingSupply: number = parseInt(maxSupply.sub(currentSupply).toString())
+    var totalOfStake: any = result
+    let num: number = reward(duration, _amount, parseInt(totalOfStake.toString()), remainingSupply)
+    return new BN(num)
 }
-
-// async function calculateStakingReward2(
-//     amount: BN,
-//     duration: number,
-//     currentSupply: BN
-//     // cb: (n: BN) => void
-// ) {
-//     let res1 = await pChain
-//         .getTotalOfStake();
-//
-//
-//         .then((result) => {
-//             let networkID = ava.getNetworkID()
-//             //@ts-ignore
-//             let defValues = Defaults.network[networkID]
-//
-//             if (!defValues) {
-//                 console.error('Network default values not found.')
-//                 return new BN(0)
-//             }
-//             let _amount: number = parseInt(amount.toString())
-//             let _currentSupply: number = parseInt(currentSupply.toString())
-//             const defPlatformVals = defValues.P
-//             let maxSupply: BN = defPlatformVals.maxSupply
-//             let remainingSupply: number = parseInt(maxSupply.sub(currentSupply).toString())
-//             var totalOfStake: any = result.totalStake
-//             let num: number = reward(
-//                 duration,
-//                 _amount,
-//                 parseInt(totalOfStake.toString()),
-//                 remainingSupply
-//             )
-//             console.log('test thuc', result)
-//             console.log('result new cb :', new BN(num))
-//             return new BN(num)
-//         })
-//         .catch((err) => {
-//             console.log('loi errr', err)
-//         })
-//     return 1
-// }
-
-var getGenres = function () {
-    return new Promise(function (resolve) {
-        setTimeout(function () {
-            resolve(['comedy', 'drama', 'action'])
-        }, 2000)
-    })
-}
-
-// var getGenres = function() {
-//     return new Promise(function(resolve) {
-//         setTimeout(function(){
-//             resolve(['comedy', 'drama', 'action'])
-//         }, 2000);
-//     });
-// }
 
 function convert(n: any): any {
     let sign: string = +n < 0 ? '-' : ''
@@ -264,11 +149,9 @@ let payloadtypes = PayloadTypes.getInstance()
 function getPayloadFromUTXO(utxo: UTXO): PayloadBase {
     let out = utxo.getOutput() as NFTTransferOutput
     let payload = out.getPayloadBuffer()
-
     let typeId = payloadtypes.getTypeID(payload)
     let pl: Buffer = payloadtypes.getContent(payload)
     let payloadbase: PayloadBase = payloadtypes.select(typeId, pl)
-
     return payloadbase
 }
 

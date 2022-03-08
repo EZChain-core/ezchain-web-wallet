@@ -36,6 +36,8 @@ import { Utils, Big } from 'ezchain-wallet-sdk'
 import { BigNumInput } from 'ezchain-vue_components'
 import { BN } from 'ezchainjs2'
 import { priceDict } from '../../store/types'
+import { pChain } from '@/AVA'
+import { eventBus } from '@/main'
 
 @Component({
     components: {
@@ -59,10 +61,11 @@ export default class AvaxInput extends Vue {
         this.$refs.amt_in.maxout()
     }
 
-    amount_in(val: BN) {
+    async amount_in(val: BN) {
         this.$emit('change', val)
+        let changeData = await pChain.getTotalOfStake()
+        eventBus.$emit('changeData', changeData.totalStake)
     }
-
     get amountUSD(): Big {
         let usdPrice = this.priceDict.usd
         let amount = Utils.bnToBig(this.amount, 9)
