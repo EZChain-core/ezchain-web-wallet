@@ -2,13 +2,6 @@
     <div class="add_delegator">
         <NodeSelection v-if="!selected" @select="onselect" class="node_selection"></NodeSelection>
         <div style="display: grid; grid-template-columns: 2fr 1fr; grid-gap: 20px" class="" v-else>
-            <!--            <div class="node_col">-->
-            <!--                <button @click="selected = null" class="close_but button_secondary">-->
-            <!--                    <fa icon="sync"></fa>-->
-            <!--                    Change Node-->
-            <!--                </button>-->
-            <!--                <NodeCard :node="selected"></NodeCard>-->
-            <!--            </div>-->
             <div>
                 <transition-group name="fade" mode="out-in">
                     <div class="ins_col" key="form" v-show="!isConfirm">
@@ -27,6 +20,7 @@
                                 :max="maxAmt"
                                 class="amt_in"
                                 :balance="utxosBalanceBig"
+                                @change="changeInput"
                             ></AvaxInput>
                         </div>
                         <div class="reward_in" :type="rewardDestination">
@@ -146,10 +140,6 @@
             </div>
             <div>
                 <div class="summary">
-                    <!--                    <CurrencySelect-->
-                    <!--                        v-model="currency_type"-->
-                    <!--                        currency="currency_sel"-->
-                    <!--                    ></CurrencySelect>-->
                     <div>
                         <label>{{ $t('earn.delegate.summary.duration') }} *</label>
                         <p>{{ stakingDurationText }}</p>
@@ -157,7 +147,7 @@
                     <div>
                         <label>{{ $t('earn.delegate.summary.reward') }}</label>
                         <p v-if="currency_type === 'EZC'">
-                            {{ estimatedReward.toLocaleString(2) }} EZC
+                            {{ rewardStake.toLocaleString(2) }} EZC
                         </p>
                         <p v-if="currency_type === 'USD'">
                             ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -277,6 +267,7 @@ export default class AddDelegator extends Vue {
     search: string = ''
     selected: ValidatorListItem | null = null
     stakeAmt: BN = new BN(0)
+    rewardStake: Big = new Big(0)
     startDate: string = new Date(Date.now() + MIN_MS * 15).toISOString()
     endDate: string = new Date().toISOString()
     rewardIn: string = ''
@@ -294,7 +285,7 @@ export default class AddDelegator extends Vue {
     formAmt = new BN(0)
     formEnd: Date = new Date()
     formRewardAddr = ''
-
+    newConstString: any
     currency_type = 'EZC'
 
     mounted() {
@@ -400,21 +391,27 @@ export default class AddDelegator extends Vue {
         })
     }
 
-    get estimatedReward(): Big {
+    calculateEstimatedReward(): void {
         let start = new Date(this.startDate)
         let end = new Date(this.endDate)
         let duration = end.getTime() - start.getTime() // in ms
-
         let currentSupply = this.$store.state.Platform.currentSupply
-
-        let estimation = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
-        let res = Big(estimation.toString()).div(Math.pow(10, 9))
-        return res
+        let self = this
+        function successCallback(result: number): void {
+            let convertToBig = new Big(result)
+            self.rewardStake = convertToBig.div(10 ** 18)
+        }
+        function failureCallback(error: Error): void {
+            console.error(error)
+        }
+        let promiseFunc = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
+        promiseFunc.then(successCallback).catch(failureCallback)
+        // return res
     }
 
-    get estimatedRewardUSD() {
-        return this.estimatedReward.times(this.avaxPrice)
-    }
+    // get estimatedRewardUSD() {
+    //     return this.estimatedReward.times(this.avaxPrice)
+    // }
 
     get avaxPrice(): Big {
         return Big(this.$store.state.prices.usd)
@@ -502,7 +499,10 @@ export default class AddDelegator extends Vue {
         this.formEnd = new Date(this.endDate)
         this.formRewardAddr = this.rewardIn
     }
-
+    changeInput() {
+        console.log('nhat')
+        this.calculateEstimatedReward()
+    }
     confirm() {
         if (!this.formCheck()) return
         this.updateFormData()
@@ -553,7 +553,7 @@ export default class AddDelegator extends Vue {
 
     get totalFee(): BN {
         let delegationFee = Big(this.delegationFee).div(Big(100))
-        let cut = this.estimatedReward.times(delegationFee)
+        let cut = this.rewardStake.times(delegationFee)
 
         let txFee: BN = pChain.getTxFee()
         let cutBN = new BN(cut.times(Math.pow(10, 9)).toFixed(0))

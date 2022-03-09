@@ -197,8 +197,7 @@
                         <div>
                             <label>{{ $t('earn.validate.summary.rewards') }}</label>
                             <p v-if="currency_type === 'EZC'">
-                                <!--                                {{ estimatedReward.toLocaleString(2) }} EZC-->
-                                EZC
+                                {{ rewardStake.toLocaleString(2) }} EZC
                             </p>
                             <p v-if="currency_type === 'USD'">
                                 ${{ estimatedRewardUSD.toLocaleString(2) }} USD
@@ -335,6 +334,9 @@ export default class AddValidator extends Vue {
 
     currency_type = 'EZC'
 
+    testNumber: BN = new BN(0)
+    rewardStake: Big = new Big(0)
+
     mounted() {
         this.rewardSelect('local')
     }
@@ -456,6 +458,8 @@ export default class AddValidator extends Vue {
         } else {
             res = absMaxStake.sub(stakeAmt)
         }
+        // trigger event for caculate reward again
+        this.calculateEstimatedReward()
 
         return BN.max(res, new BN(0))
     }
@@ -474,20 +478,33 @@ export default class AddValidator extends Vue {
         return Big(this.$store.state.prices.usd)
     }
 
-    get estimatedReward(): Big {
+    calculateEstimatedReward(): void {
         let start = new Date(this.startDate)
         let end = new Date(this.endDate)
         let duration = end.getTime() - start.getTime() // in ms
-
         let currentSupply = this.$store.state.Platform.currentSupply
-        let estimation = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
-        let res = bnToBig(estimation, 9)
-
-        return res
+        let self = this
+        function successCallback(result: number): void {
+            let convertToBig = new Big(result)
+            self.rewardStake = convertToBig.div(10 ** 18)
+        }
+        function failureCallback(error: Error): void {
+            console.error(error)
+        }
+        let promiseFunc = calculateStakingReward(this.stakeAmt, duration / 1000, currentSupply)
+        promiseFunc.then(successCallback).catch(failureCallback)
     }
 
-    get estimatedRewardUSD() {
-        return this.estimatedReward.times(this.avaxPrice)
+    // get estimatedRewardUSD() {
+    //     return this.estimatedReward.times(this.avaxPrice)
+    // }
+
+    successCallback(result: BN): void {
+        console.log(result)
+    }
+
+    failureCallback(error: any): void {
+        console.error(error)
     }
 
     updateFormData() {
