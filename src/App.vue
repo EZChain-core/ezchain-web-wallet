@@ -76,13 +76,13 @@ export default {
                 vmid: 'description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing EZC.',
             },
             {
                 vmid: 'og:description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing EZC.',
             },
             {
                 vmid: 'og:title',
