@@ -2,7 +2,7 @@
     <div class="wallet_sidebar">
         <div class="stick">
             <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/wallet_logo.png" />
+                <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
             <div class="links">
@@ -45,7 +45,7 @@
                 <!--                    {{ $t('wallet.sidebar.manage') }}-->
                 <!--                </router-link>-->
             </div>
-            <div class="bottom">
+            <div class="bottom" style="display: none">
                 <transition name="fade" mode="out-in">
                     <main-panel class="panel"></main-panel>
                 </transition>
@@ -89,7 +89,6 @@ export default {
 
         img {
             width: 186px;
-            height: 40px;
             object-fit: contain;
         }
     }

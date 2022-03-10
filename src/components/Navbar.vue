@@ -2,7 +2,7 @@
     <div id="nav">
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <router-link to="/" class="logo">
-            <img v-if="$root.theme === 'day'" src="@/assets/wallet_logo.png" />
+            <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
         </router-link>
         <div class="buts_right">
             <network-menu></network-menu>
@@ -128,7 +128,6 @@ button {
         }
 
         img {
-            height: 48px;
             max-height: none !important;
             object-fit: contain;
             margin-right: 5px;

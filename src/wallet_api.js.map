@@ -1,0 +1,1 @@
+{"version":3,"file":"wallet_api.js","sourceRoot":"","sources":["wallet_api.ts"],"names":[],"mappings":"AAAA,oDAAoD;AACpD,OAAO,KAAwB,MAAM,OAAO,CAAA;AAE5C,IAAM,UAAU,GAAkB,KAAK,CAAC,MAAM,CAAC;IAC3C,OAAO,EAAE,MAAM;IACf,eAAe,EAAE,KAAK;IACtB,OAAO,EAAE;QACL,cAAc,EAAE,kBAAkB;KACrC;CACJ,CAAC,CAAA;AACF,OAAO,EAAE,UAAU,EAAE,CAAA"}
