@@ -25,9 +25,9 @@
         >
             <v-list dense nav>
                 <div style="display: flex; justify-content: space-between; padding: 4px 8px">
-                    <img v-if="$root.theme === 'day'" src="@/assets/logo_main.png" />
+                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/logo_nav.png" />
                     <img v-else src="@/assets/wallet_logo_dark.svg" />
-                    <DayNightToggle class="action_but"></DayNightToggle>
+                    <!--                    <DayNightToggle class="action_but"></DayNightToggle>-->
                 </div>
                 <template v-if="isAuth">
                     <router-link to="/wallet">{{ $t('wallet.sidebar.portfolio') }}</router-link>
@@ -41,9 +41,9 @@
                     <router-link to="/wallet/advanced" data-cy="wallet_advanced">
                         {{ $t('wallet.sidebar.advanced') }}
                     </router-link>
-                    <button class="logout" @click="logout">
-                        {{ $t('logout.button') }}
-                    </button>
+                    <!--                    <button class="logout" @click="logout">-->
+                    <!--                        {{ $t('logout.button') }}-->
+                    <!--                    </button>-->
 
                     <!--                    <v-list-item to="/wallet/">Home</v-list-item>-->
                     <!--                    <v-list-item to="/wallet/keys">Manage Keys</v-list-item>-->
@@ -209,13 +209,13 @@ button {
     .logout {
         margin-top: 40px;
     }
-    #nav {
-        .logo {
-            img {
-                height: 30px;
-            }
-        }
-    }
+    //#nav {
+    //    .logo {
+    //        img {
+    //            height: 45px;
+    //        }
+    //    }
+    //}
 }
 </style>
 <style lang="scss">

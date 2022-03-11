@@ -10,7 +10,7 @@
                                 <router-link data-cy="access" to="/access">
                                     <header>
                                         <div class="img_container">
-                                            <img src="@/assets/logo_sys2.png" alt />
+                                            <img src="@/assets/create1.png" alt />
                                             <!--                                        <img v-else src="@/assets/diamond-primary-night.svg" alt />-->
                                         </div>
                                         <div>
@@ -24,7 +24,7 @@
                                 <router-link data-cy="create" to="/create">
                                     <header>
                                         <div class="img_container">
-                                            <img src="@/assets/logo_sys3.png" alt />
+                                            <img src="@/assets/create2.png" alt />
                                         </div>
                                         <div>
                                             <h2>{{ $t('home.create.title') }}</h2>
