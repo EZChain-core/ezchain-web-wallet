@@ -1,12 +1,12 @@
 <template>
-    <div class="copyBut" @click="copy">
+    <div class="copyBut" @click="copy" style="cursor: pointer">
         <!--        <fa icon="copy"></fa>-->
-        <img v-if="$root.theme === 'day'" src="@/assets/copy.png" />
-        <img v-else src="/img/copy_night.svg" />
-        <p class="text">
-            <slot>copy</slot>
-        </p>
-        <input ref="copytext" :value="value" />
+        <div style="display: flex; flex-direction: row">
+            <img v-if="$root.theme === 'day'" src="@/assets/copy.png" />
+            <img v-else src="/img/copy_night.svg" />
+            <p class="text">copy</p>
+            <input ref="copytext" :value="value" />
+        </div>
     </div>
 </template>
 <script>
