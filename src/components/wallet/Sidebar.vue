@@ -103,6 +103,7 @@ export default {
             color: var(--primary-color-light);
             text-decoration: none;
             margin: 0 24px;
+            font-size: 18px;
             padding: 12px 16px;
 
             img {
