@@ -234,7 +234,7 @@ export default class Earn extends Vue {
 .bottom_earn {
     display: flex;
     align-items: center;
-    margin-top: 202px;
+    margin-top: 120px;
 }
 .button_earn {
     border: 1px solid #525252;
