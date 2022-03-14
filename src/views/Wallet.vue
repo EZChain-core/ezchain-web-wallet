@@ -16,7 +16,6 @@
                         ></router-view>
                     </keep-alive>
                 </transition>
-                <top-info class="wallet_top" style="margin-top: 12px"></top-info>
             </div>
         </div>
     </div>

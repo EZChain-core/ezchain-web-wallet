@@ -104,7 +104,6 @@ export default {
         height: 100vh;
 
         #router_view {
-            overflow: auto;
             padding: 0;
             padding-bottom: 0px;
         }
@@ -121,7 +120,6 @@ export default {
     min-height: calc(100vh - 80px);
     position: relative;
     padding: main.$container_padding_m;
-    overflow: auto;
 }
 
 /*.panel {*/

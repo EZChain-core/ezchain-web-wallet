@@ -144,6 +144,7 @@
                 </div>
             </div>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -158,7 +159,7 @@ import moment from 'moment'
 import TxRow from '@/components/wallet/activity/TxRow.vue'
 import RadioButtons from '@/components/misc/RadioButtons.vue'
 import Spinner from '@/components/misc/Spinner.vue'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 type FilterModeType = 'all' | 'transfer' | 'export_import' | 'stake'
 type ModeKeyType = 'all' | 'transfer' | 'swap' | 'stake'
 
@@ -180,6 +181,7 @@ const MONTH_MIN = 8
         ExportCsvModal,
         Spinner,
         TxRow,
+        TopInfo,
         RadioButtons,
         VirtualList,
     },

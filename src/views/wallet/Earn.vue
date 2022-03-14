@@ -105,6 +105,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -118,7 +119,7 @@ import UserRewards from '@/components/wallet/earn/UserRewards.vue'
 import { bnToBig } from '@/helpers/helper'
 import Big from 'big.js'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 @Component({
     name: 'earn',
     components: {
@@ -126,6 +127,7 @@ import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryP
         AddValidator,
         AddDelegator,
         TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class Earn extends Vue {

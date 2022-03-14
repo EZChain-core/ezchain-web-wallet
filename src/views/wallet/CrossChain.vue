@@ -7,11 +7,12 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 import ChainTransfer from '@/components/wallet/earn/ChainTransfer/ChainTransfer.vue'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
 @Component({
@@ -19,6 +20,7 @@ import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryP
     components: {
         ChainTransfer,
         TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class CrossChain extends Vue {}

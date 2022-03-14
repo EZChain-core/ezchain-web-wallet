@@ -78,6 +78,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -90,11 +91,13 @@ import { bnToBig } from '@/helpers/helper'
 import { avm } from '@/AVA'
 import { BN } from 'ezchainjs2'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
+import TopInfo from '@/components/wallet/TopInfo.vue'
 @Component({
     name: 'studio',
     components: {
         NewCollectibleFamily,
         TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class Studio extends Vue {

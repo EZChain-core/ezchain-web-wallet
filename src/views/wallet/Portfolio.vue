@@ -46,12 +46,14 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script>
 import Fungibles from '@/components/wallet/portfolio/Fungibles'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel'
 import Collectibles from '@/components/wallet/portfolio/Collectibles'
+import TopInfo from '@/components/wallet/TopInfo'
 export default {
     name: 'WalletHome',
     data() {
@@ -62,6 +64,7 @@ export default {
     },
     components: {
         Fungibles,
+        TopInfo,
         Collectibles,
         TransactionHistoryPanel,
     },
@@ -87,7 +90,7 @@ export default {
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
-    overflow: overlay;
+    overflow: auto;
 }
 .header {
     display: flex;

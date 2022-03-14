@@ -18,8 +18,8 @@
         <div class="grids no_scroll_bar">
             <h2>Advanced</h2>
             <ChainImport class="grid_box"></ChainImport>
-            <!--                <SignMessage class="grid_box"></SignMessage>-->
-            <!--                <VerifyMessage class="grid_box"></VerifyMessage>-->
+            <SignMessage class="grid_box"></SignMessage>
+            <VerifyMessage class="grid_box"></VerifyMessage>
         </div>
     </div>
 </template>
@@ -31,7 +31,6 @@ import ChainImport from '@/components/wallet/advanced/ChainImport.vue'
 import SignMessage from '@/components/wallet/advanced/SignMessage/SignMessage.vue'
 import VerifyMessage from '@/components/wallet/advanced/VerifyMessage.vue'
 import TokenListModal from '@/components/modals/TokenList/TokenListModal.vue'
-
 @Component({
     name: 'advanced',
     components: {
@@ -62,7 +61,7 @@ h1 {
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
-    height: 506px;
+    height: auto;
     justify-content: center;
     align-items: center;
     flex-direction: column;

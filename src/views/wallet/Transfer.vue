@@ -148,6 +148,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -157,7 +158,7 @@ import TxList from '@/components/wallet/transfer/TxList.vue'
 import Big from 'big.js'
 
 import NftList from '@/components/wallet/transfer/NftList.vue'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 //@ts-ignore
 import { QrInput } from 'ezchain-vue_components'
 import { ava, avm, isValidAddress } from '../../AVA'
@@ -187,6 +188,7 @@ import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryP
         FormC,
         ChainInput,
         TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class Transfer extends Vue {
