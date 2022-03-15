@@ -228,7 +228,7 @@ export default class FilterSettings extends Vue {
     background-color: var(--bg);
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 4px 12px;
-    border-radius: 2px;
+    border-radius: 8px;
     margin-bottom: 4px;
     font-size: 14px;
 }

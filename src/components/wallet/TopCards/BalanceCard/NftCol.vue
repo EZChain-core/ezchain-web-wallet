@@ -39,7 +39,9 @@
                 <div class="nft_item" v-for="item in erc721BalanceArray" :key="item.id">
                     <ERC721View :token="item.token" :index="item.id"></ERC721View>
                 </div>
-                <div v-for="i in dummyAmt" class="nft_item dummy_item" :key="i"></div>
+                <div style="display: none">
+                    <div v-for="i in dummyAmt" class="nft_item dummy_item" :key="i"></div>
+                </div>
             </div>
         </div>
     </div>

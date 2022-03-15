@@ -118,7 +118,7 @@ export default class HdDerivationListRow extends Vue {
 span {
     /*background-color: #ddd;*/
     /*padding: 2px 6px;*/
-    border-radius: 2px;
+    border-radius: 8px;
     font-weight: bold;
 }
 </style>

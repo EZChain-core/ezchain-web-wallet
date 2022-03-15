@@ -244,7 +244,7 @@ export default class CurrencyInputDropdown extends Vue {
 
     > * {
         background-color: var(--bg-light);
-        border-radius: 2px;
+        border-radius: 8px;
     }
 }
 
