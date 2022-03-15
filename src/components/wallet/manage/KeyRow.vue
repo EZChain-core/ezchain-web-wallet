@@ -28,7 +28,7 @@
         <div class="rows">
             <div class="header">
                 <template v-if="is_default">
-                    <img src="@/assets/key_active.svg" class="key_logo" />
+                    <img src="@/assets/active_Key.png" class="key_logo" />
                 </template>
                 <template v-else>
                     <img
@@ -76,10 +76,19 @@
                             <fa icon="upload"></fa>
                         </Tooltip>
                         <div class="text_buts">
-                            <button v-if="walletType == 'mnemonic'" @click="showModal">
-                                {{ $t('keys.view_key') }}
+                            <button
+                                v-if="walletType == 'mnemonic'"
+                                @click="showModal"
+                                style="margin-right: 8px"
+                            >
+                                <img src="@/assets/eyes.png" alt="eyes" />
+                                <span>{{ $t('keys.view_key') }}</span>
                             </button>
-                            <button v-if="walletType == 'singleton'" @click="showPrivateKeyModal">
+                            <button
+                                v-if="walletType == 'singleton'"
+                                @click="showPrivateKeyModal"
+                                style="margin-right: 8px"
+                            >
                                 {{ $t('keys.view_priv_key') }}
                             </button>
                             <button v-if="walletType !== 'ledger'" @click="showPrivateKeyCModal">
@@ -96,15 +105,15 @@
                     <p v-if="Object.keys(balances).length === 0" class="balance_empty">
                         {{ $t('keys.empty') }}
                     </p>
-                    <div class="addressBalance bal_cols" v-else>
-                        <p>This key has:</p>
-                        <div class="bal_rows">
-                            <p v-for="bal in balances" :key="bal.id">
-                                {{ bal.toString() }}
-                                <b>{{ bal.symbol }}</b>
-                            </p>
-                        </div>
-                    </div>
+                    <!--                    <div class="addressBalance bal_cols" v-else>-->
+                    <!--                        <p>This key has:</p>-->
+                    <!--                        <div class="bal_rows">-->
+                    <!--                            <p v-for="bal in balances" :key="bal.id">-->
+                    <!--                                {{ bal.toString() }}-->
+                    <!--                                <b>{{ bal.symbol }}</b>-->
+                    <!--                            </p>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -295,7 +304,7 @@ export default class KeyRow extends Vue {
 }
 
 .key_logo {
-    width: 32px;
+    width: 78px;
 }
 
 .hdlist {
@@ -306,7 +315,7 @@ export default class KeyRow extends Vue {
     display: flex;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 
     > * {
         margin: 0px 8px !important;
@@ -314,6 +323,15 @@ export default class KeyRow extends Vue {
 
     button {
         font-size: 16px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 8px;
+        height: 32px;
+        border: 1px solid #d4d4d4;
+        box-sizing: border-box;
+        border-radius: 8px;
     }
 
     $but_w: 32px;
@@ -332,8 +350,9 @@ export default class KeyRow extends Vue {
     }
 
     .text_buts {
+        margin-top: 10px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         > button {
             text-align: right;
             font-size: 13px;
@@ -372,7 +391,7 @@ export default class KeyRow extends Vue {
 
 .header {
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 78px 1fr;
     grid-gap: 14px;
     /*align-items: center;*/
 }
@@ -380,6 +399,7 @@ export default class KeyRow extends Vue {
 .header_cols {
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: space-between;
 }
 
