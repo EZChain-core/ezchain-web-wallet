@@ -8030,10 +8030,10 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-ezchain-vue_components@1.0.1-mainnet:
-  version "1.0.1-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchain-vue_components/-/ezchain-vue_components-1.0.1-mainnet.tgz#28fb24aa166487a7a402473655e3e843165128db"
-  integrity sha512-LuOfCn9ODPxs2guldrxBap2xWpkh4j+oInZMe443woMu9dumVZe2iVepSSbo5rlo7r4RuhQw/hjSGIc6dgRv9A==
+ezchain-vue_components@1.0.2-mainnet:
+  version "1.0.2-mainnet"
+  resolved "https://registry.yarnpkg.com/ezchain-vue_components/-/ezchain-vue_components-1.0.2-mainnet.tgz#6f9aa404f215bd9c90c73f06e91ec840c4ab4b66"
+  integrity sha512-qI8aPIJZtWtyt/Fy9Sz82R0ftcZEQb5IHL+NIRFFu4nRv5LQdPHjY5tTgtpec5vVd0y6i4sHDZrXoNy9Rll07A==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.27"
     "@fortawesome/free-solid-svg-icons" "^5.12.1"
@@ -8042,10 +8042,10 @@ ezchain-vue_components@1.0.1-mainnet:
     core-js "^3.6.4"
     vue "^2.6.11"
 
-ezchain-wallet-sdk@1.0.1-mainnet:
-  version "1.0.1-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchain-wallet-sdk/-/ezchain-wallet-sdk-1.0.1-mainnet.tgz#1492f2b845de5e6a41a2e299abdf13527035708a"
-  integrity sha512-aJOOvlGcNgT9dxkn59G0PfrAXkQXue1FGTL/vwMBKZwWxroc3W0dEvvtibQLAQ9AUh0XuUG/GsvYfpultOrKbQ==
+ezchain-wallet-sdk@1.0.2-mainnet:
+  version "1.0.2-mainnet"
+  resolved "https://registry.yarnpkg.com/ezchain-wallet-sdk/-/ezchain-wallet-sdk-1.0.2-mainnet.tgz#2457affcd63133ae8b6930764a2032eb30798269"
+  integrity sha512-/F6Y8vuogVDhi9GPVQyd5I4hnqI2bCElHPZMWeNqxohZnj0551QhL9bmAkSZ0tZuA3JHG7PMPR04MzeHX5PDug==
   dependencies:
     "@ethereumjs/common" "2.6.0"
     "@ethereumjs/tx" "3.4.0"
@@ -8068,10 +8068,10 @@ ezchain-wallet-sdk@1.0.1-mainnet:
     web3-eth-contract "1.6.0"
     xss "^1.0.10"
 
-ezchainjs2@1.0.4-mainnet:
-  version "1.0.4-mainnet"
-  resolved "https://registry.yarnpkg.com/ezchainjs2/-/ezchainjs2-1.0.4-mainnet.tgz#0fd9eecf24627390ae082c29da5dc93f341e073d"
-  integrity sha512-5sj+ldi5zP88lD+wF4VL9mUi4Y9dgrLwTo4u84E2DZqhwm0CGLfV0is76aG7hODznVNEMMe57vICGmiqWNOg+Q==
+ezchainjs2@1.0.5-mainnet:
+  version "1.0.5-mainnet"
+  resolved "https://registry.yarnpkg.com/ezchainjs2/-/ezchainjs2-1.0.5-mainnet.tgz#6035622546bbba59e35e2564d19506b90ecd5bba"
+  integrity sha512-TowkATy8jIH8UC8behplgy1tIqNCqbM1CGN0vXrbUf6fCjyRmDQum5pojqzwlavCMJzgdhlcn6ze38LYxlK9FA==
   dependencies:
     assert "2.0.0"
     axios "0.24.0"
