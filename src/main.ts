@@ -7,7 +7,8 @@ import VueI18n from 'vue-i18n'
 //@ts-ignore
 import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
-
+//tailwind css
+import '../public/assets/tailwind.css'
 import { BootstrapVue } from 'bootstrap-vue'
 // Install BootstrapVue
 Vue.use(BootstrapVue)
