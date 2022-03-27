@@ -67,7 +67,7 @@
         "express": "4.17.1",
         "ezchain-vue_components": "1.0.2-mainnet",
         "ezchain-wallet-sdk": "1.0.2-mainnet",
-        "ezchainjs2": "1.0.5-mainnet",
+        "ezchainjs2": "1.0.6-mainnet",
         "hdkey": "2.0.1",
         "helmet": "3.23.3",
         "jdenticon": "2.2.0",
