@@ -12,7 +12,10 @@
             ></paper-wallet>
             <div class="bottom">
                 <div class="col_qr">
-                    <canvas ref="qr"></canvas>
+                    <canvas
+                        style="width: 110px !important; height: 110px !important"
+                        ref="qr"
+                    ></canvas>
                 </div>
                 <div class="bottom_rest">
                     <p class="subtitle">{{ addressLabel }}</p>
@@ -360,8 +363,8 @@ $qr_width: 110px;
     flex-grow: 1;
 
     canvas {
-        width: $qr_width;
-        height: $qr_width;
+        width: $qr_width !important;
+        height: $qr_width !important;
         background-color: transparent;
     }
 
