@@ -2,26 +2,12 @@
     <div>
         <div class="utxos">
             <div v-if="hasSent">
-                <span>
-                    <p class="time">
-                        {{ timeText }}
-                        <a
-                            v-if="explorerUrl"
-                            :href="explorerUrl"
-                            target="_blank"
-                            tooltip="View in Explorer"
-                            class="explorer_link"
-                        >
-                            <img src="@/assets/show.png" alt="show" />
-                        </a>
-                    </p>
-                </span>
                 <label>Sent</label>
                 <BaseTxOutput
+                    :summary="asset"
                     v-for="(asset, assetId) in tokensSent"
                     :key="assetId"
                     :asset-i-d="assetId"
-                    :summary="asset"
                 ></BaseTxOutput>
                 <div class="nft_cols">
                     <div class="nft_addr">
