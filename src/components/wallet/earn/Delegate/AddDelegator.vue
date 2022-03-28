@@ -242,6 +242,7 @@ import { WalletType } from '@/js/wallets/types'
 import UtxoSelectForm from '@/components/wallet/earn/UtxoSelectForm.vue'
 import Expandable from '@/components/misc/Expandable.vue'
 import NodeCard from '@/components/wallet/earn/Delegate/NodeCard.vue'
+import { eventBus } from '@/main'
 
 const MIN_MS = 60000
 const HOUR_MS = MIN_MS * 60
@@ -326,6 +327,7 @@ export default class AddDelegator extends Vue {
             this.isSuccess = true
             this.txId = txId
             this.updateTxStatus(txId)
+            eventBus.$emit('eventTransactions')
         } catch (e) {
             this.onerror(e)
             this.isLoading = false
@@ -507,6 +509,7 @@ export default class AddDelegator extends Vue {
         if (!this.formCheck()) return
         this.updateFormData()
         this.isConfirm = true
+        eventBus.$emit('eventTransactions')
     }
 
     cancelConfirm() {

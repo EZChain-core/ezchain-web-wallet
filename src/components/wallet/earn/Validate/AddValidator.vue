@@ -283,6 +283,7 @@ import UtxoSelectForm from '@/components/wallet/earn/UtxoSelectForm.vue'
 import Expandable from '@/components/misc/Expandable.vue'
 import { AmountOutput, UTXO } from 'ezchainjs2/dist/apis/platformvm'
 import { WalletType } from '@/js/wallets/types'
+import { eventBus } from '@/main'
 
 const MIN_MS = 60000
 const HOUR_MS = MIN_MS * 60
@@ -519,6 +520,7 @@ export default class AddValidator extends Vue {
         if (!this.formCheck()) return
         this.updateFormData()
         this.isConfirm = true
+        eventBus.$emit('eventTransactions')
     }
     cancelConfirm() {
         this.isConfirm = false
@@ -616,6 +618,7 @@ export default class AddValidator extends Vue {
             )
             this.isLoading = false
             this.onTxSubmit(txId)
+            eventBus.$emit('eventTransactions')
         } catch (err) {
             this.isLoading = false
             this.onerror(err)

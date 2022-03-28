@@ -159,6 +159,7 @@ import {
     Utils,
     Big,
 } from 'ezchain-wallet-sdk'
+import { eventBus } from '@/main'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms
@@ -325,6 +326,7 @@ export default class ChainTransfer extends Vue {
     confirm() {
         this.formAmt = this.amt.clone()
         this.isConfirm = true
+        eventBus.$emit('eventTransactions')
     }
 
     cancelConfirm() {
@@ -350,6 +352,7 @@ export default class ChainTransfer extends Vue {
             this.chainExport(this.formAmt, this.sourceChain, this.targetChain).catch((e) => {
                 this.onerror(e)
             })
+            eventBus.$emit('eventTransactions')
         } catch (err) {
             this.onerror(err)
         }
