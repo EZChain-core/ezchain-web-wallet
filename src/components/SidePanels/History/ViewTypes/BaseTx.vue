@@ -51,28 +51,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--            <tx-history-value-->
-            <!--                v-for="(amount, assetId) in valList"-->
-            <!--                :key="assetId"-->
-            <!--                :amount="amount"-->
-            <!--                :type="type"-->
-            <!--                :asset-id="assetId"-->
-            <!--                :is-income="false"-->
-            <!--                :operation-color="operationColor"-->
-            <!--                :operation-direction="operationDirection"-->
-            <!--            ></tx-history-value>-->
-            <!--            <div class="nfts">-->
-            <!--                <div v-for="(groupIDs, assetID) in nftGroups" :key="assetID">-->
-            <!--                    <tx-history-nft-family-group-->
-            <!--                        v-for="(payloads, id) in groupIDs"-->
-            <!--                        :key="id"-->
-            <!--                        :payloads="payloads"-->
-            <!--                        :assetID="assetID"-->
-            <!--                        class="group"-->
-            <!--                    ></tx-history-nft-family-group>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </div>
 </template>

@@ -367,10 +367,10 @@ export default class Transfer extends Vue {
         this.$store
             .dispatch('issueBatchTx', txList)
             .then((res) => {
-                eventBus.$emit('eventTransactions')
                 this.canSendAgain = false
                 this.waitTxConfirm(res)
                 this.txId = res
+                eventBus.$emit('eventTransactions')
             })
             .catch((err) => {
                 this.onerror(err)
