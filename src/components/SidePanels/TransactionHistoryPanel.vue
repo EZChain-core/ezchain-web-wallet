@@ -89,7 +89,7 @@ export default class TransactionHistoryPanel extends Vue {
     }
     mounted() {
         eventBus.$on('eventTransactions', () => {
-            console.log('nhat pham')
+            console.log('')
         })
     }
 }
