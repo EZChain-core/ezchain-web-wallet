@@ -178,6 +178,7 @@ import ChainInput from '@/components/wallet/transfer/ChainInput.vue'
 import AvaAsset from '../../js/AvaAsset'
 import { TxState } from '@/components/wallet/earn/ChainTransfer/types'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
+import { eventBus } from '@/main'
 @Component({
     components: {
         FaucetLink,
@@ -222,7 +223,7 @@ export default class Transfer extends Vue {
     confirm() {
         let isValid = this.formCheck()
         if (!isValid) return
-
+        eventBus.$emit('eventTransactions')
         this.formOrders = [...this.orders]
         this.formNftOrders = [...this.nftOrders]
         this.formAddress = this.addressIn
@@ -236,22 +237,25 @@ export default class Transfer extends Vue {
         this.formMemo = ''
         this.formOrders = []
         this.formNftOrders = []
+        eventBus.$emit('eventTransactions')
         this.formAddress = ''
         this.isConfirm = false
     }
 
     updateTxList(data: ITransaction[]) {
         this.orders = data
+        eventBus.$emit('eventTransactions')
     }
 
     updateNftList(val: UTXO[]) {
         this.nftOrders = val
+        eventBus.$emit('eventTransactions')
     }
 
     formCheck() {
         this.formErrors = []
         let err = []
-
+        eventBus.$emit('eventTransactions')
         let addr = this.addressIn
 
         let chain = addr.split('-')
@@ -300,7 +304,7 @@ export default class Transfer extends Vue {
         this.txId = ''
         this.isSuccess = false
         this.cancelConfirm()
-
+        eventBus.$emit('eventTransactions')
         this.orders = []
         this.nftOrders = []
         this.formOrders = []
@@ -310,7 +314,7 @@ export default class Transfer extends Vue {
     clearForm() {
         this.addressIn = ''
         this.memo = ''
-
+        eventBus.$emit('eventTransactions')
         // Clear transactions list
         this.$refs.txList.reset()
 
@@ -329,7 +333,7 @@ export default class Transfer extends Vue {
             message: this.$t('transfer.success_msg'),
             type: 'success',
         })
-
+        eventBus.$emit('eventTransactions')
         // Update the user's balance
         this.$store.dispatch('Assets/updateUTXOs').then(() => {
             this.updateSendAgainLock()
@@ -340,9 +344,11 @@ export default class Transfer extends Vue {
     updateSendAgainLock() {
         if (!this.wallet.isFetchUtxos) {
             this.canSendAgain = true
+            eventBus.$emit('eventTransactions')
         } else {
             setTimeout(() => {
                 this.updateSendAgainLock()
+                eventBus.$emit('eventTransactions')
             }, 1000)
         }
     }
@@ -350,6 +356,7 @@ export default class Transfer extends Vue {
     onerror(err: any) {
         this.err = err
         this.isAjax = false
+        eventBus.$emit('eventTransactions')
         this.$store.dispatch('Notifications/add', {
             title: this.$t('transfer.error_title'),
             message: this.$t('transfer.error_msg'),
@@ -373,6 +380,7 @@ export default class Transfer extends Vue {
             .dispatch('issueBatchTx', txList)
             .then((res) => {
                 this.canSendAgain = false
+                eventBus.$emit('eventTransactions')
                 this.waitTxConfirm(res)
                 this.txId = res
             })
@@ -382,6 +390,7 @@ export default class Transfer extends Vue {
     }
 
     async waitTxConfirm(txId: string) {
+        eventBus.$emit('eventTransactions')
         let status = await avm.getTxStatus(txId)
         if (status === 'Unknown' || status === 'Processing') {
             // if not confirmed ask again
