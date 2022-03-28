@@ -264,7 +264,10 @@ export default class ChainTransfer extends Vue {
     get feeBN(): BN {
         return this.importFeeBN.add(this.exportFeeBN)
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     getFee(chain: ChainIdType, isExport: boolean): Big {
         if (chain === 'X') {
             return Utils.bnToBigAvaxX(avm.getTxFee())
@@ -326,12 +329,14 @@ export default class ChainTransfer extends Vue {
     confirm() {
         this.formAmt = this.amt.clone()
         this.isConfirm = true
+        this.updateBalance()
         eventBus.$emit('eventTransactions')
     }
 
     cancelConfirm() {
         this.isConfirm = false
         this.formAmt = new BN(0)
+        this.updateBalance()
     }
 
     get wallet() {
@@ -347,13 +352,14 @@ export default class ChainTransfer extends Vue {
         this.err = ''
         this.isLoading = true
         this.isImportErr = false
-
+        this.updateBalance()
         try {
             this.chainExport(this.formAmt, this.sourceChain, this.targetChain).catch((e) => {
                 this.onerror(e)
             })
             eventBus.$emit('eventTransactions')
         } catch (err) {
+            this.updateBalance()
             this.onerror(err)
         }
     }
@@ -567,7 +573,7 @@ export default class ChainTransfer extends Vue {
             title: 'Transfer Complete',
             message: 'Funds transferred between chains.',
         })
-
+        this.updateBalance()
         setTimeout(() => {
             this.$store.dispatch('Assets/updateUTXOs')
             this.$store.dispatch('History/updateTransactionHistory')
@@ -582,7 +588,6 @@ export default class ChainTransfer extends Vue {
         if (this.amt.gt(this.maxAmt)) {
             return false
         }
-
         return true
     }
 }

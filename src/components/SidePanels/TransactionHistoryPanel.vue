@@ -89,7 +89,8 @@ export default class TransactionHistoryPanel extends Vue {
     }
     mounted() {
         eventBus.$on('eventTransactions', () => {
-            console.log('')
+            this.$store.dispatch('Assets/updateUTXOs')
+            this.$store.dispatch('History/updateTransactionHistory')
         })
     }
 }

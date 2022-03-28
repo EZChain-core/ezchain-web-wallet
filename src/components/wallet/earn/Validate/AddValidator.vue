@@ -340,6 +340,7 @@ export default class AddValidator extends Vue {
 
     mounted() {
         this.rewardSelect('local')
+        this.updateBalance()
     }
 
     onFeeChange() {
@@ -520,10 +521,12 @@ export default class AddValidator extends Vue {
         if (!this.formCheck()) return
         this.updateFormData()
         this.isConfirm = true
+        this.updateBalance()
         eventBus.$emit('eventTransactions')
     }
     cancelConfirm() {
         this.isConfirm = false
+        this.updateBalance()
     }
 
     cancel() {
@@ -542,7 +545,7 @@ export default class AddValidator extends Vue {
         if (!this.rewardIn) {
             return false
         }
-
+        this.updateBalance()
         return true
     }
 
@@ -586,7 +589,7 @@ export default class AddValidator extends Vue {
             this.err = this.$t('earn.validate.errs.amount', [big.toLocaleString()]) as string
             return false
         }
-
+        this.updateBalance()
         return true
     }
 
@@ -618,8 +621,10 @@ export default class AddValidator extends Vue {
             )
             this.isLoading = false
             this.onTxSubmit(txId)
+            this.updateBalance()
             eventBus.$emit('eventTransactions')
         } catch (err) {
+            this.updateBalance()
             this.isLoading = false
             this.onerror(err)
         }
@@ -637,7 +642,7 @@ export default class AddValidator extends Vue {
             title: 'Validator Added',
             message: 'Your tokens are now locked to stake.',
         })
-
+        this.updateBalance()
         // Update History
         setTimeout(() => {
             this.$store.dispatch('Assets/updateUTXOs')
@@ -666,6 +671,7 @@ export default class AddValidator extends Vue {
             this.txReason = reason
 
             if (status === 'Committed') {
+                this.updateBalance()
                 this.onsuccess()
             }
         }
@@ -674,7 +680,10 @@ export default class AddValidator extends Vue {
     get minStakeAmt(): BN {
         return this.$store.state.Platform.minStake
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     onerror(err: any) {
         let msg: string = err.message
         console.error(err)
@@ -692,7 +701,7 @@ export default class AddValidator extends Vue {
         } else {
             this.err = err.message
         }
-
+        this.updateBalance()
         this.$store.dispatch('Notifications/add', {
             type: 'error',
             title: 'Validation Failed',
