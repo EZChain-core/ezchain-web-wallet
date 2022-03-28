@@ -12,7 +12,7 @@ const coingeckoApi = axios.create({
 export async function getAvaxPriceUSD(): Promise<number> {
     let res = await axios.get(COINGECKO_URL)
     //return res.data['avalanche-2']['usd']
-    return 1
+    return 0.1
 }
 
 let priceHistory: [number, number][] = []
