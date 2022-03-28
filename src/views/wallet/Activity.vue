@@ -490,15 +490,9 @@ export default class Activity extends Vue {
     height: 100%;
     overflow: auto;
     border-top: 2px solid var(--bg-wallet);
-    //overflow: scroll;
-    //padding-right: 20px;
-    //margin-right: 20px;
-    //border-right: 1px solid var(--bg-light);
 }
 
 .tx_list {
-    //max-height: 480px;
-    //overflow: scroll;
     height: 100%;
     position: relative;
 }
@@ -506,8 +500,6 @@ export default class Activity extends Vue {
 .table_headers {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    //border-bottom: 1px solid var(--bg-light);
-    //background-color: var(--bg-light);
 }
 
 .month_group {
@@ -526,9 +518,6 @@ export default class Activity extends Vue {
 
 .cols {
     height: 100%;
-    //overflow: auto;
-    //display: grid;
-    //grid-template-columns: 1fr 240px;
 }
 
 .empty,

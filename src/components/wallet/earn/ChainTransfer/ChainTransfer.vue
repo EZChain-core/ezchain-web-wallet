@@ -83,13 +83,12 @@
                                         data-cy="cancel"
                                         style="
                                             color: var(--primary-color);
-                                            margin: 12px 0 !important;
+                                            margin: 12px 0 12px 12px !important;
                                             width: 102px;
                                             height: 40px;
                                             border: 1px solid #525252;
                                             box-sizing: border-box;
                                             border-radius: 8px;
-                                            margin-left: 12px;
                                         "
                                         @click="cancelConfirm"
                                         depressed
@@ -597,6 +596,7 @@ export default class ChainTransfer extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 10px 16px;
+    height: 100%;
 }
 
 .right_col {
