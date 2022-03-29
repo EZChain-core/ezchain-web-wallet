@@ -11,7 +11,8 @@ const coingeckoApi = axios.create({
 
 export async function getAvaxPriceUSD(): Promise<number> {
     let res = await axios.get('https://price.ezchain.com/v1/service/token?symbol=ezc')
-    return 2
+    if (res.data.data) return Number(res.data.data.current_price)
+    return 1
 }
 
 let priceHistory: [number, number][] = []
