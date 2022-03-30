@@ -50,10 +50,6 @@
                                 ></qr-input>
                             </div>
                             <div>
-                                <!--                        <template v-if="isConfirm && formMemo.length > 0">-->
-                                <!--                            <h4>Memo (Optional)</h4>-->
-                                <!--                            <p class="confirm_val">{{ formMemo }}</p>-->
-                                <!--                        </template>-->
                                 <h4 v-if="memo || !isConfirm">{{ $t('transfer.memo') }}</h4>
                                 <textarea
                                     class="memo"
@@ -178,6 +174,7 @@ import ChainInput from '@/components/wallet/transfer/ChainInput.vue'
 import AvaAsset from '../../js/AvaAsset'
 import { TxState } from '@/components/wallet/earn/ChainTransfer/types'
 import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
+import { eventBus } from '@/main'
 @Component({
     components: {
         FaucetLink,
@@ -222,13 +219,12 @@ export default class Transfer extends Vue {
     confirm() {
         let isValid = this.formCheck()
         if (!isValid) return
-
         this.formOrders = [...this.orders]
         this.formNftOrders = [...this.nftOrders]
         this.formAddress = this.addressIn
         this.formMemo = this.memo
-
         this.isConfirm = true
+        this.updateBalance()
     }
 
     cancelConfirm() {
@@ -238,6 +234,7 @@ export default class Transfer extends Vue {
         this.formNftOrders = []
         this.formAddress = ''
         this.isConfirm = false
+        this.updateBalance()
     }
 
     updateTxList(data: ITransaction[]) {
@@ -251,7 +248,6 @@ export default class Transfer extends Vue {
     formCheck() {
         this.formErrors = []
         let err = []
-
         let addr = this.addressIn
 
         let chain = addr.split('-')
@@ -292,6 +288,7 @@ export default class Transfer extends Vue {
         } else {
             return false
         }
+        this.updateBalance()
     }
 
     startAgain() {
@@ -300,17 +297,16 @@ export default class Transfer extends Vue {
         this.txId = ''
         this.isSuccess = false
         this.cancelConfirm()
-
         this.orders = []
         this.nftOrders = []
         this.formOrders = []
         this.formNftOrders = []
+        this.updateBalance()
     }
 
     clearForm() {
         this.addressIn = ''
         this.memo = ''
-
         // Clear transactions list
         this.$refs.txList.reset()
 
@@ -323,13 +319,12 @@ export default class Transfer extends Vue {
     async onsuccess(txId: string) {
         this.isAjax = false
         this.isSuccess = true
-
+        this.updateBalance()
         this.$store.dispatch('Notifications/add', {
             title: this.$t('transfer.success_title'),
             message: this.$t('transfer.success_msg'),
             type: 'success',
         })
-
         // Update the user's balance
         this.$store.dispatch('Assets/updateUTXOs').then(() => {
             this.updateSendAgainLock()
@@ -340,7 +335,9 @@ export default class Transfer extends Vue {
     updateSendAgainLock() {
         if (!this.wallet.isFetchUtxos) {
             this.canSendAgain = true
+            this.updateBalance()
         } else {
+            this.updateBalance()
             setTimeout(() => {
                 this.updateSendAgainLock()
             }, 1000)
@@ -368,15 +365,17 @@ export default class Transfer extends Vue {
             memo: Buffer.from(this.formMemo),
             orders: sumArray,
         }
-
         this.$store
             .dispatch('issueBatchTx', txList)
             .then((res) => {
+                this.updateBalance()
                 this.canSendAgain = false
                 this.waitTxConfirm(res)
                 this.txId = res
+                eventBus.$emit('eventTransactions')
             })
             .catch((err) => {
+                this.updateBalance()
                 this.onerror(err)
             })
     }
@@ -489,7 +488,10 @@ export default class Transfer extends Vue {
     deactivated() {
         this.startAgain()
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     activated() {
         this.clearForm()
 

@@ -4,18 +4,6 @@
         <div class="header">
             <h2>Transactions</h2>
             <Spinner v-if="isUpdating" class="spinner"></Spinner>
-            <!--            <h3-->
-            <!--                style="-->
-            <!--                    color: #ef6825;-->
-            <!--                    font-style: normal;-->
-            <!--                    font-weight: 600;-->
-            <!--                    font-size: 12px;-->
-            <!--                    line-height: 16px;-->
-            <!--                    cursor: pointer;-->
-            <!--                "-->
-            <!--            >-->
-            <!--                View all-->
-            <!--            </h3>-->
         </div>
         <div class="empty" v-if="!isExplorer">
             <h4>{{ $t('transactions.error_api') }}</h4>
@@ -24,9 +12,6 @@
         <div class="empty" v-else-if="isEmpty && !isUpdating">
             <p>{{ $t('transactions.notx') }}</p>
         </div>
-        <!--        <div v-else-if="isUpdating">-->
-        <!--            <p class="empty">{{ $t('transactions.loading') }}</p>-->
-        <!--        </div>-->
         <div class="list no_scroll_bar" v-else>
             <tx-history-row
                 v-for="tx in transactions"
@@ -47,6 +32,7 @@ import TxHistoryRow from '@/components/SidePanels/TxHistoryRow.vue'
 import { ITransactionData } from '@/store/modules/history/types'
 import { AvaNetwork } from '@/js/AvaNetwork'
 import { ITransaction } from '@/components/wallet/transfer/types'
+import { eventBus } from '@/main'
 
 @Component({
     components: {
@@ -100,6 +86,12 @@ export default class TransactionHistoryPanel extends Vue {
     get explorerUrl(): string {
         let addr = this.$store.state.address.split('-')[1]
         return `https://explorer.avax.network/address/${addr}`
+    }
+    mounted() {
+        eventBus.$on('eventTransactions', () => {
+            this.$store.dispatch('Assets/updateUTXOs')
+            this.$store.dispatch('History/updateTransactionHistory')
+        })
     }
 }
 </script>

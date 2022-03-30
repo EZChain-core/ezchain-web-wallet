@@ -242,6 +242,7 @@ import { WalletType } from '@/js/wallets/types'
 import UtxoSelectForm from '@/components/wallet/earn/UtxoSelectForm.vue'
 import Expandable from '@/components/misc/Expandable.vue'
 import NodeCard from '@/components/wallet/earn/Delegate/NodeCard.vue'
+import { eventBus } from '@/main'
 
 const MIN_MS = 60000
 const HOUR_MS = MIN_MS * 60
@@ -290,6 +291,7 @@ export default class AddDelegator extends Vue {
 
     mounted() {
         this.rewardSelect('local')
+        this.updateBalance()
     }
     setEnd(val: string) {
         this.endDate = val
@@ -304,7 +306,7 @@ export default class AddDelegator extends Vue {
         if (!this.formCheck()) {
             return
         }
-
+        this.updateBalance()
         this.isLoading = true
         this.err = ''
 
@@ -326,7 +328,9 @@ export default class AddDelegator extends Vue {
             this.isSuccess = true
             this.txId = txId
             this.updateTxStatus(txId)
+            eventBus.$emit('eventTransactions')
         } catch (e) {
+            this.updateBalance()
             this.onerror(e)
             this.isLoading = false
         }
@@ -338,12 +342,11 @@ export default class AddDelegator extends Vue {
             title: 'Delegator Added',
             message: 'Your tokens are now locked for staking.',
         })
-
         // Update History
         setTimeout(() => {
             this.$store.dispatch('Assets/updateUTXOs')
             this.$store.dispatch('History/updateTransactionHistory')
-        }, 3000)
+        }, 2000)
     }
 
     async updateTxStatus(txId: string) {
@@ -370,7 +373,10 @@ export default class AddDelegator extends Vue {
             }
         }
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     onerror(e: any) {
         console.error(e)
         let msg: string = e.message
@@ -489,7 +495,6 @@ export default class AddDelegator extends Vue {
             this.err = this.$t('earn.delegate.errs.amt', [big.toLocaleString()]) as string
             return false
         }
-
         return true
     }
 
@@ -500,17 +505,18 @@ export default class AddDelegator extends Vue {
         this.formRewardAddr = this.rewardIn
     }
     changeInput() {
-        console.log('nhat')
         this.calculateEstimatedReward()
     }
     confirm() {
         if (!this.formCheck()) return
         this.updateFormData()
         this.isConfirm = true
+        this.updateBalance()
     }
 
     cancelConfirm() {
         this.isConfirm = false
+        this.updateBalance()
     }
 
     get canSubmit(): boolean {
@@ -627,6 +633,7 @@ export default class AddDelegator extends Vue {
     // Go Back to earn
     cancel() {
         this.$emit('cancel')
+        this.updateBalance()
     }
 
     // get stakeAmtText() {

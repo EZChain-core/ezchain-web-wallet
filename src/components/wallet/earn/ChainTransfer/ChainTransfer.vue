@@ -83,13 +83,12 @@
                                         data-cy="cancel"
                                         style="
                                             color: var(--primary-color);
-                                            margin: 12px 0 !important;
+                                            margin: 12px 0 12px 12px !important;
                                             width: 102px;
                                             height: 40px;
                                             border: 1px solid #525252;
                                             box-sizing: border-box;
                                             border-radius: 8px;
-                                            margin-left: 12px;
                                         "
                                         @click="cancelConfirm"
                                         depressed
@@ -160,6 +159,7 @@ import {
     Utils,
     Big,
 } from 'ezchain-wallet-sdk'
+import { eventBus } from '@/main'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms
@@ -264,7 +264,10 @@ export default class ChainTransfer extends Vue {
     get feeBN(): BN {
         return this.importFeeBN.add(this.exportFeeBN)
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     getFee(chain: ChainIdType, isExport: boolean): Big {
         if (chain === 'X') {
             return Utils.bnToBigAvaxX(avm.getTxFee())
@@ -326,11 +329,14 @@ export default class ChainTransfer extends Vue {
     confirm() {
         this.formAmt = this.amt.clone()
         this.isConfirm = true
+        this.updateBalance()
+        eventBus.$emit('eventTransactions')
     }
 
     cancelConfirm() {
         this.isConfirm = false
         this.formAmt = new BN(0)
+        this.updateBalance()
     }
 
     get wallet() {
@@ -346,12 +352,14 @@ export default class ChainTransfer extends Vue {
         this.err = ''
         this.isLoading = true
         this.isImportErr = false
-
+        this.updateBalance()
         try {
             this.chainExport(this.formAmt, this.sourceChain, this.targetChain).catch((e) => {
                 this.onerror(e)
             })
+            eventBus.$emit('eventTransactions')
         } catch (err) {
+            this.updateBalance()
             this.onerror(err)
         }
     }
@@ -565,7 +573,7 @@ export default class ChainTransfer extends Vue {
             title: 'Transfer Complete',
             message: 'Funds transferred between chains.',
         })
-
+        this.updateBalance()
         setTimeout(() => {
             this.$store.dispatch('Assets/updateUTXOs')
             this.$store.dispatch('History/updateTransactionHistory')
@@ -580,7 +588,6 @@ export default class ChainTransfer extends Vue {
         if (this.amt.gt(this.maxAmt)) {
             return false
         }
-
         return true
     }
 }
@@ -597,6 +604,7 @@ export default class ChainTransfer extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 10px 16px;
+    height: 100%;
 }
 
 .right_col {
