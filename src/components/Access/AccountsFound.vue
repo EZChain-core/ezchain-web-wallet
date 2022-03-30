@@ -1,7 +1,7 @@
 <template>
     <div v-if="accounts.length">
         <div
-            class="flex_container menu_option"
+            class="flex_container menu_option my-1 rounded-lg"
             v-for="(acct, i) in accounts"
             :key="i"
             @click="selectAccount(i)"

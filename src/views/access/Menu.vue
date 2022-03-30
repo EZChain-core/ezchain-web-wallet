@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="access_card">
-            <h1>{{ $t('access.title') }}</h1>
+            <h1 class="text-center">{{ $t('access.title') }}</h1>
             <div class="menus">
                 <AccountsFound class="accounts_menu"></AccountsFound>
                 <div class="options">

@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <b-container>
+        <div class="container mx-auto">
             <b-row>
                 <b-col class="flex_column">
                     <div class="home_wrapper">
@@ -11,7 +11,6 @@
                                     <header>
                                         <div class="img_container">
                                             <img src="@/assets/create1.png" alt />
-                                            <!--                                        <img v-else src="@/assets/diamond-primary-night.svg" alt />-->
                                         </div>
                                         <div>
                                             <h2>{{ $t('home.access.title') }}</h2>
@@ -38,7 +37,7 @@
                     </div>
                 </b-col>
             </b-row>
-        </b-container>
+        </div>
     </div>
 </template>
 

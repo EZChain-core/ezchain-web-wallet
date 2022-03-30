@@ -2,7 +2,7 @@
     <div class="access_card">
         <div class="content">
             <Identicon :value="account.baseAddresses.join('')"></Identicon>
-            <h1>{{ account.name }}</h1>
+            <h1 class="text-center">{{ account.name }}</h1>
             <form @submit.prevent="access">
                 <input
                     class="single_line_input hover_border pass"
