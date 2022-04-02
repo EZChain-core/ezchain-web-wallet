@@ -1,42 +1,46 @@
 <template>
     <div class="home">
         <div class="container mx-auto">
-            <b-row>
-                <b-col class="flex_column">
+            <div>
+                <div class="flex flex-col items-center">
                     <div class="home_wrapper">
                         <h1>{{ $t('home.desc') }}</h1>
                         <div class="login_wrapper">
-                            <div class="login_option">
-                                <router-link data-cy="access" to="/access">
-                                    <header>
-                                        <div class="img_container">
-                                            <img src="@/assets/create1.png" alt />
-                                        </div>
-                                        <div>
-                                            <h2>{{ $t('home.access.title') }}</h2>
-                                            <p>{{ $t('home.access.desc') }}</p>
-                                        </div>
-                                    </header>
-                                </router-link>
-                            </div>
-                            <div class="login_option" style="margin-top: 16px">
-                                <router-link data-cy="create" to="/create">
-                                    <header>
-                                        <div class="img_container">
-                                            <img src="@/assets/create2.png" alt />
-                                        </div>
-                                        <div>
-                                            <h2>{{ $t('home.create.title') }}</h2>
-                                            <p>{{ $t('home.create.desc') }}</p>
-                                        </div>
-                                    </header>
-                                </router-link>
-                            </div>
+                            <router-link
+                                class="flex items-center min-w-full shadow-lg rounded-lg p-4"
+                                data-cy="access"
+                                to="/access"
+                            >
+                                <header class="flex flex-col lg:flex-row items-center">
+                                    <div class="img_container flex-shrink-0 mr-4">
+                                        <img src="@/assets/create1.png" alt="access" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <h2>{{ $t('home.access.title') }}</h2>
+                                        <p>{{ $t('home.access.desc') }}</p>
+                                    </div>
+                                </header>
+                            </router-link>
+                            <router-link
+                                class="flex items-center min-w-full shadow-lg rounded-lg mt-4 p-4"
+                                data-cy="create"
+                                to="/create"
+                            >
+                                <header class="flex flex-col lg:flex-row items-center">
+                                    <div class="img_container flex-shrink-0 mr-4">
+                                        <img src="@/assets/create2.png" alt="create" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <h2>{{ $t('home.create.title') }}</h2>
+                                        <p>{{ $t('home.create.desc') }}</p>
+                                    </div>
+                                </header>
+                            </router-link>
                         </div>
                         <ToS class="tos" style="align-self: center; margin: 30px !important"></ToS>
                     </div>
-                </b-col>
-            </b-row>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -69,7 +73,6 @@ export default class Home extends Vue {}
     position: relative;
 
     a {
-        margin: 10px;
         text-align: center;
         display: block;
     }
@@ -216,12 +219,6 @@ img {
                     align-items: center;
 
                     header {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-
-                        margin-bottom: 30px;
-
                         img {
                             width: 40px;
                             height: 40px;

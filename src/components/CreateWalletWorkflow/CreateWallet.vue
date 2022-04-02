@@ -322,7 +322,7 @@ export default class CreateWallet extends Vue {
     background: #ef6825 !important;
     border-radius: 8px;
     width: 100%;
-    height: 48px;
+    height: 40px;
     margin-top: 20px;
 }
 .button_cancel {
@@ -330,7 +330,7 @@ export default class CreateWallet extends Vue {
     display: block;
     background: white;
     width: 100%;
-    height: 48px;
+    height: 40px;
     border: 1px solid #262626;
     box-sizing: border-box;
     border-radius: 8px;
