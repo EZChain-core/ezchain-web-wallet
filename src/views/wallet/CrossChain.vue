@@ -2,12 +2,12 @@
     <div>
         <h1>{{ $t('cross_chain.title') }}</h1>
         <div class="flex_two no_scroll_bar">
-            <ChainTransfer></ChainTransfer>
+            <ChainTransfer class="top_crosschain"></ChainTransfer>
             <transition name="fade" mode="out-in">
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
-        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
+        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -49,5 +49,14 @@ h1 {
     //display: flex;
     //align-items: center;
     //justify-content: space-between;
+}
+@media (max-width: 640px) {
+    .flex_two {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .top_crosschain {
+        min-height: 600px;
+    }
 }
 </style>

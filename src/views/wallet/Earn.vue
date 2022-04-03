@@ -105,7 +105,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
-        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
+        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -389,6 +389,15 @@ span {
     .options {
         grid-template-columns: none;
         grid-row-gap: 15px;
+    }
+}
+@media (max-width: 640px) {
+    .flex_three {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .earn_page {
+        min-height: 600px;
     }
 }
 </style>

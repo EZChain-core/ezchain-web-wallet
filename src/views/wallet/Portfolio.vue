@@ -46,7 +46,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
-        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
+        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script>
@@ -212,6 +212,15 @@ export default {
             height: 22px;
             width: 22px;
         }
+    }
+}
+@media (max-width: 640px) {
+    .home_view {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .left_home_view {
+        min-height: 600px;
     }
 }
 </style>

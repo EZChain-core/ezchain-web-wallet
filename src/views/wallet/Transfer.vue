@@ -144,7 +144,7 @@
                 <transaction-history-panel class="panel_content"></transaction-history-panel>
             </transition>
         </div>
-        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
+        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -288,7 +288,6 @@ export default class Transfer extends Vue {
         } else {
             return false
         }
-        this.updateBalance()
     }
 
     startAgain() {
@@ -748,6 +747,15 @@ label {
 
     .lists {
         border: none;
+    }
+    @media (max-width: 640px) {
+        .top_transfer {
+            grid-template-columns: 1fr;
+            height: auto;
+        }
+        .transfer_card {
+            min-height: 600px;
+        }
     }
 }
 </style>

@@ -5,7 +5,7 @@
             <sidebar class="panel sidenav"></sidebar>
         </transition>
         <div>
-            <top-nav-bar></top-nav-bar>
+            <top-nav-bar class="top_nav_bar"></top-nav-bar>
             <div class="wallet_main">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
@@ -137,12 +137,6 @@ export default class Wallet extends Vue {
     grid-template-rows: 550px 306px;
     padding: 2px 40px 5px 40px;
 }
-
-#wallet_router {
-    //padding: 22px 20px;
-    //border-radius: 8px;
-}
-
 .page_fade-enter-active,
 .page_fade-leave-active {
     transition: all 0.2s;
@@ -157,11 +151,6 @@ export default class Wallet extends Vue {
         display: block;
         column-gap: 9px;
     }
-    //.wallet_main {
-    //    grid-gap: 9px;
-    //    padding-top: 0;
-    //}
-
     .wallet_sidebar {
         display: none;
     }
@@ -172,14 +161,17 @@ export default class Wallet extends Vue {
         grid-template-columns: 180px 1fr 240px !important;
         column-gap: 9px;
     }
-
-    //.wallet_main {
-    //    grid-gap: 9px;
-    //}
-
     #wallet_router {
         padding: 12px 18px;
         overflow: overlay;
+    }
+}
+@media (max-width: 640px) {
+    .top_nav_bar {
+        display: none;
+    }
+    .wallet_main {
+        padding: 0;
     }
 }
 </style>
