@@ -1,6 +1,16 @@
 <template>
     <div>
-        <h1>{{ $t('portfolio.assets') }}</h1>
+        <h1
+            style="
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 44px;
+                color: #262626;
+            "
+        >
+            {{ $t('portfolio.assets') }}
+        </h1>
         <div class="home_view">
             <div class="left_home_view no_scroll_bar">
                 <div class="header">
