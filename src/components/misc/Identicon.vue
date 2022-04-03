@@ -1,7 +1,5 @@
 <template>
-    <div class="flex justify-center items-center">
-        <img ref="image_tag" :height="diameter" :width="diameter" />
-    </div>
+    <img ref="image_tag" :height="diameter" :width="diameter" />
 </template>
 
 <script lang="ts">

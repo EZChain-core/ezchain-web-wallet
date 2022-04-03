@@ -1,5 +1,8 @@
 <template>
-    <button class="button_primary" @click="submit">
+    <button
+        class="bg-white-a500 rounded-lg shadow-lg flex justify-between items-center w-full text-1.5xl text-black-a400 p-5"
+        @click="submit"
+    >
         <template v-if="!isLoading">
             Ledger
             <ImageDayNight

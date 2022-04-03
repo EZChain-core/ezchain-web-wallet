@@ -1,66 +1,48 @@
 <template>
     <div>
-        <div class="mnemonic_auth">
-            <div class="left">
+        <div class="flex flex-col-reverse lg:flex-row pb-14">
+            <div class="mr-4 mt-4 mb-4 lg:mb-0 w-full lg:w-1/2">
                 <header>
-                    <h1>{{ $t('access.mnemonic.title') }}</h1>
+                    <h1
+                        class="text-left mb-4 font-bold text-1.75xl leading-7 text-EZC-defaultBlack"
+                    >
+                        {{ $t('access.mnemonic.title') }}
+                    </h1>
                 </header>
-                <!--                <label>{{ $t('access.mnemonic.subtitle') }}</label>-->
                 <textarea
-                    style="background: #f5f5f5; border-radius: 8px; height: 344px"
                     placeholder="Hit ‘SPACE’ after every successful word entry."
                     @input="onPhraseIn"
                     translate="no"
+                    class="w-full mb-20 h-80 rounded-lg bg-EZC-bgDefault p-4"
                 ></textarea>
-                <div class="button_container">
+                <div class="w-full">
                     <p class="err" v-if="err">{{ err }}</p>
-                    <div style="display: flex; width: 100%; align-items: center">
-                        <v-btn
-                            style="
-                                background: #ef6825 !important;
-                                border-radius: 8px;
-                                width: 49%;
-                                height: 48px;
-                                margin: 0;
-                            "
-                            class="ava_button but_primary button_primary access"
-                            @click="access"
-                            depressed
-                            :loading="isLoading"
-                        >
-                            {{ $t('access.mnemonic.submit') }}
-                        </v-btn>
-                        <div
-                            style="
-                                margin-left: 16px;
-                                background: #ffffff;
-                                border: 1px solid #262626;
-                                box-sizing: border-box;
-                                border-radius: 8px;
-                                width: 49%;
-                                height: 48px;
-                            "
-                        >
-                            <router-link
-                                to="/access"
-                                tag="span"
-                                style="
-                                    display: inline-block;
-                                    width: 100%;
-                                    height: 100%;
-                                    line-height: 48px;
-                                    cursor: pointer;
-                                "
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+                        <v-btn class="button_access" @click="access" depressed :loading="isLoading">
+                            <span
+                                class="text-white-a500 font-bold text-1.5xl text-center capitalize"
                             >
+                                {{ $t('access.mnemonic.submit') }}
+                            </span>
+                        </v-btn>
+
+                        <router-link
+                            class="bg-white-a500 cursor-pointer border rounded-lg h-16 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+                            to="/access"
+                            tag="div"
+                        >
+                            <span class="text-1.5xl text-EZC-defaultBlack font-bold leading-7">
                                 {{ $t('access.mnemonic.cancel') }}
-                            </router-link>
-                        </div>
+                            </span>
+                        </router-link>
                     </div>
                 </div>
             </div>
-            <div class="right">
+            <div class="w-full mt-4 lg:w-1/2">
                 <header>
-                    <h1 style="margin-bottom: 20px">Preview</h1>
+                    <h1 class="mb-4 font-bold text-1.75xl leading-7 text-EZC-defaultBlack">
+                        Preview
+                    </h1>
                 </header>
                 <mnemonic-display
                     :phrase="phrase"
@@ -152,175 +134,17 @@ export default class Mnemonic extends Vue {
 }
 </script>
 <style scoped lang="scss">
-@use '../../main';
-input[type='text'],
-textarea {
-    background-color: #f5f5f5 !important;
-}
-.mnemonic_auth {
-    display: grid;
-    grid-template-columns: 480px 480px;
-    column-gap: 16px;
-    padding: main.$container-padding;
+.button_access {
     width: 100%;
-    max-width: 1200px;
-
-    .left,
-    .right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-    > * {
-        width: 100%;
-    }
-}
-h1 {
-    text-align: left;
-    font-size: main.$m-size;
-}
-
-textarea {
-}
-
-label {
-    text-align: left;
-    font-size: 24px;
-    line-height: 28px;
+    background-color: #ef6825 !important;
+    height: 64px !important;
+    font-size: 18px;
     font-weight: bold;
-    color: #262626;
-    margin-bottom: 20px;
-}
-
-textarea {
-    margin: 20px 0;
-    margin-bottom: main.$vertical-padding;
-    width: 100%;
-    background-color: #f5f5f5 !important;
-    resize: none;
-    min-height: 120px;
-    padding: 8px 16px;
-    font-size: 14px;
-    color: var(--primary-color);
-}
-
-.phrase_disp {
-    width: 100%;
-    max-width: 560px;
-    margin-bottom: main.$vertical-padding;
-}
-
-.err {
-    font-size: 13px;
-    color: var(--error);
-    text-align: center;
-    margin: 14px 0px !important;
-}
-
-.remember {
-    margin-top: -20px;
-    font-size: 0.75em;
-}
-
-.key_in {
-    margin: 30px auto;
-    margin-bottom: 6px;
-    width: 100%;
-    font-size: 13px;
-    background-color: main.$white;
-    border-radius: 4px;
-}
-
-.but_primary {
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-.button_container {
+    font-style: normal;
+    color: #fff;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 42px;
-}
-
-@include main.mobile_device {
-    .mnemonic_auth {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        padding: main.$container-padding-mobile;
-
-        .left,
-        .right {
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: center;
-        }
-
-        .left {
-            order: 2;
-        }
-
-        .right {
-            order: 1;
-            margin-bottom: main.$vertical-padding-mobile;
-        }
-
-        > * {
-            width: 100%;
-        }
-    }
-
-    h1 {
-        text-align: center;
-        font-size: main.$m-size-mobile;
-    }
-
-    label {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .phrase_disp {
-        width: 100%;
-        max-width: 560px;
-        margin-bottom: main.$vertical-padding-mobile;
-    }
-
-    .err {
-        font-size: 13px;
-        margin: 14px 0px !important;
-    }
-
-    .remember {
-        margin-top: -20px;
-        font-size: 0.75em;
-    }
-
-    .key_in {
-        margin: 30px auto;
-        margin-bottom: 6px;
-        width: 100%;
-        font-size: 13px;
-    }
-
-    .but_primary {
-        margin: 0px auto;
-        display: block;
-        margin-top: 20px;
-        margin-bottom: 15px;
-    }
-
-    .button_container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
 }
 </style>

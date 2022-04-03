@@ -1,53 +1,43 @@
 <template>
-    <div>
-        <div class="access_card">
-            <div class="content">
-                <h1>{{ $t('keystore.title') }}</h1>
-                <file-input class="file_in" @change="onfile"></file-input>
-                <form @submit.prevent="access">
-                    <v-text-field
-                        class="pass"
-                        :label="$t('password')"
-                        dense
-                        solo
-                        flat
-                        type="password"
-                        v-model="pass"
-                        v-if="file"
-                        hide-details
-                    ></v-text-field>
-                    <p class="err">{{ error }}</p>
-                    <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
-                    <v-btn
-                        class="ava_button button_primary"
-                        @click="access"
-                        :loading="isLoading"
-                        v-if="file"
-                        depressed
-                    >
-                        {{ $t('access.mnemonic.submit') }}
-                    </v-btn>
-                </form>
-                <div
-                    style="
-                        background: #ffffff;
-                        border: 1px solid #262626;
-                        box-sizing: border-box;
-                        border-radius: 8px;
-                        height: 48px;
-                        line-height: 48px;
-                    "
-                >
-                    <router-link
-                        style="display: inline-block; width: 100%; height: 100%; cursor: pointer"
-                        to="/access"
-                        tag="span"
-                    >
-                        {{ $t('access.cancel') }}
-                    </router-link>
-                </div>
-            </div>
-        </div>
+    <div class="max-w-md mx-auto">
+        <h1 class="font-bold text-1.75xl leading-7 text-EZC-defaultBlack">
+            {{ $t('keystore.title') }}
+        </h1>
+        <file-input class="file_in" @change="onfile"></file-input>
+        <form @submit.prevent="access">
+            <v-text-field
+                class="pass bg-white-a400"
+                :label="$t('password')"
+                dense
+                solo
+                flat
+                type="password"
+                v-model="pass"
+                v-if="file"
+                hide-details
+            ></v-text-field>
+            <p class="err">{{ error }}</p>
+            <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
+            <v-btn
+                class="ava_button button_primary h-16"
+                @click="access"
+                :loading="isLoading"
+                v-if="file"
+                depressed
+            >
+                {{ $t('access.mnemonic.submit') }}
+            </v-btn>
+        </form>
+
+        <router-link
+            class="bg-white-a500 cursor-pointer border rounded-lg h-16 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+            to="/access"
+            tag="div"
+        >
+            <span class="text-1.5xl text-EZC-defaultBlack font-bold leading-7">
+                {{ $t('access.cancel') }}
+            </span>
+        </router-link>
     </div>
 </template>
 <script lang="ts">
@@ -170,7 +160,10 @@ export default class Keystore extends Vue {
     align-items: center;
     border-radius: 6px;
 }
-
+.button_primary {
+    height: 64px !important;
+    border-radius: 8px;
+}
 .content {
     width: 340px;
     max-width: 100%;
@@ -187,7 +180,7 @@ h1 {
     color: white;
     font-size: 13px;
     border: none !important;
-    height: 48px;
+    height: 64px;
     background: #ef6825 !important;
     border-radius: 8px;
     display: flex;
@@ -218,7 +211,6 @@ a {
     h1 {
         font-size: main.$m-size-mobile;
     }
-
     .but_primary {
         width: 100%;
     }
