@@ -51,7 +51,7 @@
             <router-link
                 to="/"
                 tag="p"
-                class="leading-6 font-bold not-italic text-EZC-bgButton text-base"
+                class="leading-6 font-bold not-italic text-EZC-bgButton text-base cursor-pointer"
             >
                 {{ $t('access.cancel') }}
             </router-link>

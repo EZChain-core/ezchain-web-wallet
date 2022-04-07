@@ -13,21 +13,21 @@
                     placeholder="Hit ‘SPACE’ after every successful word entry."
                     @input="onPhraseIn"
                     translate="no"
-                    class="w-full mb-20 h-80 rounded-lg bg-EZC-bgDefault p-4"
+                    class="w-full mb-20 h-96 rounded-lg bg-EZC-bgDefault p-4"
                 ></textarea>
                 <div class="w-full">
                     <p class="err" v-if="err">{{ err }}</p>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
                         <v-btn class="button_access" @click="access" depressed :loading="isLoading">
                             <span
-                                class="text-white-a500 font-bold text-1.5xl text-center capitalize"
+                                class="text-white-a500 font-normal text-1.5xl text-center capitalize"
                             >
                                 {{ $t('access.mnemonic.submit') }}
                             </span>
                         </v-btn>
 
                         <router-link
-                            class="bg-white-a500 cursor-pointer border rounded-lg h-16 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+                            class="bg-white-a500 cursor-pointer border rounded-lg h-12 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
                             to="/access"
                             tag="div"
                         >
@@ -137,7 +137,7 @@ export default class Mnemonic extends Vue {
 .button_access {
     width: 100%;
     background-color: #ef6825 !important;
-    height: 64px !important;
+    height: 48px !important;
     font-size: 18px;
     font-weight: bold;
     font-style: normal;

@@ -19,8 +19,9 @@
             <p class="err">{{ error }}</p>
             <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
             <v-btn
-                class="ava_button button_primary h-16"
+                class="ava_button button_primary h-12 capitalize"
                 @click="access"
+                style="height: 48px !important; text-transform: capitalize"
                 :loading="isLoading"
                 v-if="file"
                 depressed
@@ -30,7 +31,7 @@
         </form>
 
         <router-link
-            class="bg-white-a500 cursor-pointer border rounded-lg h-16 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+            class="bg-white-a500 cursor-pointer border rounded-lg h-12 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
             to="/access"
             tag="div"
         >
@@ -142,7 +143,7 @@ export default class Keystore extends Vue {
 @use '../../main';
 
 .pass {
-    background-color: var(--bg) !important;
+    background-color: #f5f5f5 !important;
 }
 .ava_button {
     width: 100%;
@@ -180,8 +181,8 @@ h1 {
     color: white;
     font-size: 13px;
     border: none !important;
-    height: 64px;
-    background: #ef6825 !important;
+    height: 40px;
+    background: #6bc688 !important;
     border-radius: 8px;
     display: flex;
     align-items: center;

@@ -23,12 +23,11 @@
                     <p class="addr_text" data-cy="wallet_address">
                         {{ activeAddress }}
                     </p>
-                    <div class="buts">
-                        <button
-                            :tooltip="$t('top.hover1')"
-                            @click="viewQRModal"
-                            class="qr_but"
-                        ></button>
+                    <div class="flex items-center mt-2 buts">
+                        <button @click="viewQRModal" class="flex flex-row items-center">
+                            <img class="mr-2" src="@/assets/eyes.svg" alt="" />
+                            <span class="text-sm text-EZC-bgButton font-bold">View</span>
+                        </button>
                         <button
                             v-if="walletType === 'ledger'"
                             :tooltip="$t('create.verify')"
@@ -194,7 +193,6 @@ export default class AddressCard extends Vue {
             case 'C':
                 return this.addressEVM
         }
-        return this.address
     }
 
     get activeIdx(): number {
@@ -287,10 +285,8 @@ export default class AddressCard extends Vue {
 
     > * {
         font-size: 16px;
-        margin-left: 14px;
         position: relative;
         outline: none;
-        width: 18px;
         height: 18px;
         opacity: 0.6;
 
@@ -302,9 +298,9 @@ export default class AddressCard extends Vue {
     }
 }
 
-.qr_but {
-    background-image: url('/img/qr_icon.png');
-}
+// .qr_but {
+//     background-image: url('/img/qr_icon.png');
+// }
 .print_but {
     background-image: url('/img/faucet_icon.png');
 }
@@ -325,9 +321,9 @@ export default class AddressCard extends Vue {
 }
 
 @include main.night-mode {
-    .qr_but {
-        background-image: url('/img/qr_icon_night.svg');
-    }
+    // .qr_but {
+    //     background-image: url('/img/qr_icon_night.svg');
+    // }
     .print_but {
         background-image: url('/img/print_icon_night.svg');
     }

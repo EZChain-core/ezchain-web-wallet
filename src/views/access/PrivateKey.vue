@@ -18,13 +18,13 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
                         <v-btn class="button_access" @click="access" :loading="isLoading" depressed>
                             <span
-                                class="text-white-a500 font-bold text-1.5xl text-center capitalize"
+                                class="text-white-a500 font-normal text-1.5xl text-center capitalize"
                             >
                                 Access Wallet
                             </span>
                         </v-btn>
                         <router-link
-                            class="border border-EZC-defaultBlack rounded-lg w-full cursor-pointer h-16 flex justify-center border-solid items-center font-bold text-1.5xl leading-7"
+                            class="border border-EZC-defaultBlack rounded-lg w-full cursor-pointer h-12 flex justify-center border-solid items-center font-bold text-1.5xl leading-7"
                             to="/access"
                             tag="div"
                         >
@@ -83,7 +83,7 @@ export default class PrivateKey extends Vue {
 .button_access {
     width: 100%;
     background-color: #ef6825 !important;
-    height: 64px !important;
+    height: 48px !important;
     font-size: 18px;
     font-weight: bold;
     font-style: normal;

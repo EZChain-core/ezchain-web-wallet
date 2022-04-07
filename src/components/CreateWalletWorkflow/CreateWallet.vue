@@ -11,14 +11,14 @@
                     </h1>
 
                     <button
-                        class="h-16 rounded-lg bg-EZC-bgButton w-full text-white-a500 flex justify-center items-center font-bold"
+                        class="h-12 rounded-lg bg-EZC-bgButton w-full text-white-a500 flex justify-center items-center font-bold"
                         @click="createKey"
                     >
                         {{ $t('create.submit') }}
                     </button>
                     <router-link
                         to="/"
-                        class="h-16 rounded-lg border-solid bg-white-a500 w-full text-EZC-defaultBlack flex justify-center items-center font-bold mt-4 border border-EZC-defaultBlack"
+                        class="h-12 rounded-lg border-solid bg-white-a500 w-full text-EZC-defaultBlack flex justify-center items-center font-bold mt-4 border border-EZC-defaultBlack"
                         tag="button"
                     >
                         {{ $t('create.cancel') }}
@@ -27,7 +27,7 @@
             </div>
             <!-- PHASE 2 -->
             <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
-                <div class="mneumonic_disp_col">
+                <div class="mneumonic_disp_col xl:max-w-xl">
                     <div class="mnemonic_disp">
                         <mnemonic-display
                             :phrase="keyPhrase"
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <!-- RIGHT -->
-                <div class="phrase_disp_col mt-4">
+                <div class="phrase_disp_col xl:max-w-xl mt-4">
                     <template v-if="!isVerified">
                         <div class="flex">
                             <div class="mr-5 flex-shrink-0">
@@ -95,7 +95,7 @@
                         ></VerifyMnemonic>
                         <div class="grid grid-cols-2 gap-x-4 mt-8 lg:mt-16 mb-8">
                             <button
-                                class="mr-4 bg-EZC-bgButton rounded-lg h-16 flex justify-center w-full items-center"
+                                class="mr-4 cursor-pointer bg-EZC-bgButton rounded-lg h-12 flex justify-center w-full items-center"
                                 @click="verifyMnemonic"
                                 :disabled="!canVerify"
                             >
@@ -106,7 +106,7 @@
                             <div class="mneumonic_button_container w-full" v-if="!isVerified">
                                 <button
                                     @click="createKey"
-                                    class="bg-white-a500 rounded-lg w-full border border-EZC-defaultBlack border-solid h-16"
+                                    class="bg-white-a500 cursor-pointer rounded-lg w-full border border-EZC-defaultBlack border-solid h-12"
                                 >
                                     <span class="text-black-a500 text-1.75xl text-center">
                                         {{ $t('create.regenerate') }}
@@ -123,7 +123,7 @@
                                 <div v-else>
                                     <div class="grid grid-cols-2 gap-x-4">
                                         <button
-                                            class="bg-EZC-bgButton rounded-lg h-16 flex justify-center w-full items-center"
+                                            class="bg-EZC-bgButton rounded-lg h-12 flex justify-center w-full items-center"
                                             @click="access"
                                             :disabled="!canSubmit"
                                         >
@@ -134,7 +134,7 @@
                                         <router-link
                                             tag="button"
                                             to="/"
-                                            class="bg-white-a500 rounded-lg w-full border border-EZC-defaultBlack border-solid h-16"
+                                            class="bg-white-a500 rounded-lg w-full border border-EZC-defaultBlack border-solid h-12"
                                         >
                                             <span class="text-black-a500 text-1.75xl text-center">
                                                 Cancel
