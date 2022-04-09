@@ -23,7 +23,6 @@
                     class="ava_button button_primary h-16 w-full mt-4 mb-4"
                     @click="access"
                     :loading="isLoading"
-                    :disabled="!canSubmit"
                     depressed
                 >
                     Access Wallet
@@ -31,7 +30,9 @@
                 <small>{{ $t('keys.account_slow_warning') }}</small>
                 <br />
             </form>
-            <router-link to="/access" class="text-EZC-bgButton" tag="p">Cancel</router-link>
+            <router-link to="/access" class="text-EZC-bgButton cursor-pointer" tag="p">
+                Cancel
+            </router-link>
         </div>
     </div>
 </template>

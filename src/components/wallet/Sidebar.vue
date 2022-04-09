@@ -39,17 +39,13 @@
                     <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
                     {{ $t('wallet.sidebar.activity') }}
                 </router-link>
-                <!--                <router-link to="/wallet/keys" data-cy="wallet_manage" class="wallet_link">-->
-                <!--                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/manage_nav.png" />-->
-                <!--                    <img v-else src="@/assets/sidebar/manage_nav_night.svg" />-->
-                <!--                    {{ $t('wallet.sidebar.manage') }}-->
-                <!--                </router-link>-->
             </div>
             <div class="bottom" style="display: none">
                 <transition name="fade" mode="out-in">
                     <main-panel class="panel"></main-panel>
                 </transition>
             </div>
+            <address-card class="top_card addr_card"></address-card>
         </div>
     </div>
 </template>
@@ -57,11 +53,13 @@
 import LanguageSelect from '@/components/misc/LanguageSelect/LanguageSelect'
 import AccountMenu from '@/components/wallet/sidebar/AccountMenu'
 import MainPanel from '@/components/SidePanels/MainPanel.vue'
+import AddressCard from '@/components/wallet/TopCards/AddressCard/AddressCard.vue'
 export default {
     components: {
         AccountMenu,
         LanguageSelect,
         MainPanel,
+        AddressCard,
     },
 }
 </script>

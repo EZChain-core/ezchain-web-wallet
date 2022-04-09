@@ -85,6 +85,7 @@
                     <!-- STEP 2a - VERIFY -->
                     <div class="verify_cont" v-if="!isVerified">
                         <MnemonicCopied
+                            class="lg:mb-28 mt-10"
                             v-model="isSecured"
                             :explain="$t('create.confirm')"
                         ></MnemonicCopied>

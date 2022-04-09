@@ -1,5 +1,5 @@
 <template>
-    <div class="wallet_view" ref="wallet_view">
+    <div class="wallet_view" ref="wallet_view ">
         <UpdateKeystoreModal v-if="isManageWarning"></UpdateKeystoreModal>
         <transition name="fade" mode="out-in">
             <sidebar class="panel sidenav"></sidebar>
