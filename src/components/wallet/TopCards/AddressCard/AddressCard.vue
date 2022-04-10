@@ -12,7 +12,11 @@
             ></paper-wallet>
             <div class="flex justify-between">
                 <div class="col_qr h-24 w-24 flex-shrink-0">
-                    <canvas class="h-24 w-24" ref="qr"></canvas>
+                    <canvas
+                        class="max-w-full max-h-full"
+                        style="width: 96px !important; height: 96px !important"
+                        ref="qr"
+                    ></canvas>
                 </div>
                 <div class="bottom_rest pt-2">
                     <!-- <p class="subtitle">{{ addressLabel }}</p> -->

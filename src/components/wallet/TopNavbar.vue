@@ -1,5 +1,5 @@
 <template>
-    <div class="h-24 w-full bg-white-a500 flex justify-end py-6 px-10 shadow-md items-center">
+    <div class="h-24 w-full bg-white-a500 flex justify-end py-6 px-10 items-center">
         <network-menu class="net_menu" style="margin-right: 40px"></network-menu>
         <AccountMenu class="wallet_link"></AccountMenu>
         <router-link to="/wallet/advanced" class="ml-10">

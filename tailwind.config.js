@@ -143,7 +143,8 @@ module.exports = {
                 heightSideBar: 'calc(100vh-2rem)',
             },
             width: {
-                layout: '(100%-320px)',
+                sidebar: '304px',
+                layout: '100vh',
             },
         },
     },
