@@ -1,7 +1,7 @@
-var COLOR_SUCCESS = '#6BC688';
-var COLOR_WARNING = '#c39043';
-var COLOR_ERROR = '#E84970';
-var notif_id = 0;
+var COLOR_SUCCESS = '#6BC688'
+var COLOR_WARNING = '#c39043'
+var COLOR_ERROR = '#E84970'
+var notif_id = 0
 var notifications_module = {
     namespaced: true,
     state: {
@@ -10,21 +10,21 @@ var notifications_module = {
     mutations: {},
     actions: {
         add: function (store, data) {
-            var id = notif_id++;
+            var id = notif_id++
             // let color = data.color || NOTIF_COLOR;
-            var type = data.type || 'success';
-            var duration = data.duration || 5000;
-            var color = COLOR_SUCCESS;
+            var type = data.type || 'success'
+            var duration = data.duration || 5000
+            var color = COLOR_SUCCESS
             switch (type) {
                 case 'success':
-                    color = COLOR_SUCCESS;
-                    break;
+                    color = COLOR_SUCCESS
+                    break
                 case 'error':
-                    color = COLOR_ERROR;
-                    break;
+                    color = COLOR_ERROR
+                    break
                 case 'warning':
-                    color = COLOR_WARNING;
-                    break;
+                    color = COLOR_WARNING
+                    break
             }
             var item = {
                 id: id,
@@ -32,19 +32,19 @@ var notifications_module = {
                 message: data.message,
                 color: color,
                 duration: 5000,
-            };
+            }
             setTimeout(function () {
                 for (var i = 0; i < store.state.items.length; i++) {
-                    var item_1 = store.state.items[i];
+                    var item_1 = store.state.items[i]
                     if (item_1.id === id) {
-                        store.state.items.splice(i, 1);
+                        store.state.items.splice(i, 1)
                     }
                 }
-            }, duration);
-            store.state.items.push(item);
+            }, duration)
+            store.state.items.push(item)
         },
     },
     getters: {},
-};
-export default notifications_module;
+}
+export default notifications_module
 //# sourceMappingURL=notifications.js.map

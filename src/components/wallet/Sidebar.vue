@@ -1,51 +1,64 @@
 <template>
     <div class="wallet_sidebar">
-        <div class="stick">
-            <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
+        <div class="flex flex-col h-full px-6 pb-7">
+            <div class="max-h-24 flex justify-start items-center">
+                <img class="h-12 w-36" v-if="$root.theme === 'day'" src="@/assets/logo.svg" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
-            <div class="links">
-                <router-link to="/wallet" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por.png" />
-                    <img v-else src="@/assets/sidebar/portfolio_nav_night.png" />
-                    {{ $t('wallet.sidebar.portfolio') }}
-                </router-link>
-                <router-link to="/wallet/transfer" data-cy="wallet_transfer" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/transfer1.png" />
-                    <img v-else src="@/assets/sidebar/transfer_nav_night.svg" />
-                    {{ $t('wallet.sidebar.send') }}
-                </router-link>
-                <router-link
-                    to="/wallet/cross_chain"
-                    data-cy="wallet_export"
-                    class="wallet_export wallet_link"
-                >
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por1.png" />
-                    {{ $t('wallet.sidebar.export') }}
-                </router-link>
-                <router-link to="/wallet/earn" data-cy="wallet_earn" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/chart1.png" />
-                    <img v-else src="@/assets/sidebar/earn_nav_night.png" />
-                    {{ $t('wallet.sidebar.earn') }}
-                </router-link>
-                <router-link to="/wallet/studio" data-cy="wallet_studio" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por2.png" />
-                    <img v-else src="@/assets/sidebar/studio_nav_night.svg" />
-                    My NFT
-                </router-link>
-                <router-link to="/wallet/activity" data-cy="wallet_activity" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por4.png" />
-                    <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
-                    {{ $t('wallet.sidebar.activity') }}
-                </router-link>
+            <div class="flex flex-col justify-between h-auto mt-3">
+                <div class="links">
+                    <router-link to="/wallet" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por.png" />
+                        <img v-else src="@/assets/sidebar/portfolio_nav_night.png" />
+                        {{ $t('wallet.sidebar.portfolio') }}
+                    </router-link>
+                    <router-link
+                        to="/wallet/transfer"
+                        data-cy="wallet_transfer"
+                        class="wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/transfer1.png" />
+                        <img v-else src="@/assets/sidebar/transfer_nav_night.svg" />
+                        {{ $t('wallet.sidebar.send') }}
+                    </router-link>
+                    <router-link
+                        to="/wallet/cross_chain"
+                        data-cy="wallet_export"
+                        class="wallet_export wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por1.png" />
+                        {{ $t('wallet.sidebar.export') }}
+                    </router-link>
+                    <router-link to="/wallet/earn" data-cy="wallet_earn" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/chart1.png" />
+                        <img v-else src="@/assets/sidebar/earn_nav_night.png" />
+                        {{ $t('wallet.sidebar.earn') }}
+                    </router-link>
+                    <router-link to="/wallet/studio" data-cy="wallet_studio" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por2.png" />
+                        <img v-else src="@/assets/sidebar/studio_nav_night.svg" />
+                        My NFT
+                    </router-link>
+                    <router-link
+                        to="/wallet/activity"
+                        data-cy="wallet_activity"
+                        class="wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por4.png" />
+                        <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
+                        {{ $t('wallet.sidebar.activity') }}
+                    </router-link>
+                </div>
+                <div class="h-80">
+                    <h2 class="text-base font-bold mb-6">Derived Wallet Address</h2>
+                    <address-card></address-card>
+                </div>
+                <div class="bottom" style="display: none">
+                    <transition name="fade" mode="out-in">
+                        <main-panel class="panel"></main-panel>
+                    </transition>
+                </div>
             </div>
-            <div class="bottom" style="display: none">
-                <transition name="fade" mode="out-in">
-                    <main-panel class="panel"></main-panel>
-                </transition>
-            </div>
-            <address-card class="top_card addr_card"></address-card>
         </div>
     </div>
 </template>
@@ -100,7 +113,6 @@ export default {
             opacity: 0.6;
             color: var(--primary-color-light);
             text-decoration: none;
-            margin: 0 24px;
             font-size: 18px;
             padding: 12px 16px;
 

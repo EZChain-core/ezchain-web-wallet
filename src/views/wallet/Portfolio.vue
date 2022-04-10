@@ -1,14 +1,6 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
+        <h1 class="text-3.5xl text-EZC-defaultBlack font-bold mb-5">
             {{ $t('portfolio.assets') }}
         </h1>
         <div class="home_view">

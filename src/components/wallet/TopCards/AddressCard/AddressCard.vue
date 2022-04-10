@@ -1,7 +1,7 @@
 <template>
-    <div style="padding: 24px 24px 24px 0 !important; height: 100%">
-        <div class="addr_card">
-            <div class="bottom_tabs">
+    <div class="h-full">
+        <div class="addr_card flex flex-col w-full">
+            <div class="bottom_tabs mb-3">
                 <ChainSelect v-model="chainNow"></ChainSelect>
             </div>
             <q-r-modal ref="qr_modal" :address="activeAddress"></q-r-modal>
@@ -10,20 +10,21 @@
                 v-if="walletType === 'mnemonic'"
                 :wallet="activeWallet"
             ></paper-wallet>
-            <div class="bottom">
-                <div class="col_qr">
-                    <canvas
-                        style="width: 110px !important; height: 110px !important"
-                        ref="qr"
-                    ></canvas>
+            <div class="flex justify-between">
+                <div class="col_qr h-24 w-24 flex-shrink-0">
+                    <canvas class="h-24 w-24" ref="qr"></canvas>
                 </div>
-                <div class="bottom_rest">
-                    <p class="subtitle">{{ addressLabel }}</p>
+                <div class="bottom_rest pt-2">
+                    <!-- <p class="subtitle">{{ addressLabel }}</p> -->
+                    <p class="text-xs text-EZC-grayText">Wallet Address</p>
 
-                    <p class="addr_text" data-cy="wallet_address">
+                    <p
+                        class="text-xs font-bold text-EZC-defaultBlack break-all"
+                        data-cy="wallet_address"
+                    >
                         {{ activeAddress }}
                     </p>
-                    <div class="flex items-center mt-2 buts">
+                    <div class="grid grid-cols-2 mt-2">
                         <button @click="viewQRModal" class="flex flex-row items-center">
                             <img class="mr-2" src="@/assets/eyes.svg" alt="" />
                             <span class="text-sm text-EZC-bgButton font-bold">View</span>
@@ -42,15 +43,7 @@
                     </div>
                 </div>
             </div>
-            <p
-                style="
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 16px;
-                    line-height: 24px;
-                    color: #737373;
-                "
-            >
+            <p class="text-base text-EZC-grayText mt-4">
                 <!-- This is your X-Chain address to receive funds. -->
                 {{ addressMsg }}
             </p>
@@ -266,15 +259,6 @@ export default class AddressCard extends Vue {
 </script>
 <style scoped lang="scss">
 @use '../../../../main';
-
-.addr_card {
-    display: flex;
-    flex-direction: column;
-    padding: 16px !important;
-    background: #fafafa;
-    border-radius: 8px;
-    height: 260px;
-}
 .buts {
     width: 100%;
     display: flex;

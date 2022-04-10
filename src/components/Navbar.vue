@@ -1,8 +1,8 @@
 <template>
-    <div id="nav">
+    <div id="nav" class="shadow-lg">
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <router-link to="/" class="logo">
-            <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
+            <img v-if="$root.theme === 'day'" src="@/assets/logo.svg" />
         </router-link>
         <div class="buts_right">
             <network-menu></network-menu>

@@ -139,6 +139,12 @@ module.exports = {
                     bgCreate: '#F0F7FF',
                 },
             },
+            height: {
+                heightSideBar: 'calc(100vh-2rem)',
+            },
+            width: {
+                layout: '(100%-320px)',
+            },
         },
     },
     variants: {

@@ -1,12 +1,12 @@
 <template>
-    <div class="wallet_view" ref="wallet_view ">
+    <div class="wallet_view flex items-start h-full" ref="wallet_view">
         <UpdateKeystoreModal v-if="isManageWarning"></UpdateKeystoreModal>
         <transition name="fade" mode="out-in">
-            <sidebar class="panel sidenav"></sidebar>
+            <sidebar class="sidenav flex-shrink-0 w-80 h-full"></sidebar>
         </transition>
-        <div>
+        <div class="w-full">
             <top-nav-bar class="top_nav_bar"></top-nav-bar>
-            <div class="wallet_main">
+            <div class="bg-EZC-bgDefault px-10 py-3">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
                         <router-view
@@ -114,15 +114,6 @@ export default class Wallet extends Vue {
 
 <style lang="scss" scoped>
 @use '../main';
-
-.wallet_view {
-    padding-bottom: 0;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    height: 100%;
-    background: #f5f5f5;
-}
-
 .sidenav {
     background-color: var(--bg-wallet-light);
 }
@@ -130,12 +121,6 @@ export default class Wallet extends Vue {
 .panel {
     overflow: auto;
     height: 100%;
-}
-
-.wallet_main {
-    display: grid;
-    grid-template-rows: 550px 306px;
-    padding: 2px 40px 5px 40px;
 }
 .page_fade-enter-active,
 .page_fade-leave-active {
