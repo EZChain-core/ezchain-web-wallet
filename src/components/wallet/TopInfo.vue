@@ -1,7 +1,6 @@
 <template>
     <div class="top_cards">
         <balance-card class="top_card balance_card"></balance-card>
-        <address-card class="top_card addr_card"></address-card>
     </div>
 </template>
 <script>
@@ -17,11 +16,6 @@ export default {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
-.top_cards {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-}
 .top_card {
     flex-grow: 1;
     color: var(--primary-color);
@@ -34,12 +28,6 @@ export default {
     animation-name: fade;
     animation-duration: 0.6s;
     animation-timing-function: ease-out;
-}
-
-.balance_card {
-}
-
-.addr_card {
 }
 .card_left {
     background-color: #f4efff;

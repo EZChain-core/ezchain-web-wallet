@@ -1,6 +1,6 @@
 <template>
-    <div style="padding: 24px 24px 24px 0 !important; height: 100%">
-        <div class="addr_card">
+    <div>
+        <div>
             <div class="bottom_tabs">
                 <ChainSelect v-model="chainNow"></ChainSelect>
             </div>
@@ -10,20 +10,20 @@
                 v-if="walletType === 'mnemonic'"
                 :wallet="activeWallet"
             ></paper-wallet>
-            <div class="bottom">
-                <div class="col_qr">
-                    <canvas
-                        style="width: 110px !important; height: 110px !important"
-                        ref="qr"
-                    ></canvas>
+            <div class="flex justify-between items-start mt-4">
+                <div class="w-24 h-24 flex-shrink-0 -mt-2">
+                    <canvas class="w-full h-full" ref="qr"></canvas>
                 </div>
-                <div class="bottom_rest">
-                    <p class="subtitle">{{ addressLabel }}</p>
-
-                    <p class="addr_text" data-cy="wallet_address">
+                <div class="flex flex-col">
+                    <!-- <p class="subtitle">{{ addressLabel }}</p> -->
+                    <p class="text-xs text-EZC-grayText mb-2">Wallet Address</p>
+                    <p
+                        class="text-xs font-bold text-EZC-defaultBlack break-all"
+                        data-cy="wallet_address"
+                    >
                         {{ activeAddress }}
                     </p>
-                    <div class="flex items-center mt-2 buts">
+                    <div class="grid grid-cols-2 mt-2">
                         <button @click="viewQRModal" class="flex flex-row items-center">
                             <img class="mr-2" src="@/assets/eyes.svg" alt="" />
                             <span class="text-sm text-EZC-bgButton font-bold">View</span>
@@ -42,15 +42,7 @@
                     </div>
                 </div>
             </div>
-            <p
-                style="
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 16px;
-                    line-height: 24px;
-                    color: #737373;
-                "
-            >
+            <p class="text-base font-medium mt-8 text-EZC-grayText">
                 <!-- This is your X-Chain address to receive funds. -->
                 {{ addressMsg }}
             </p>
@@ -362,13 +354,6 @@ $qr_width: 110px;
         width: $qr_width !important;
         height: $qr_width !important;
         background-color: transparent;
-    }
-
-    .bottom_rest {
-        padding-top: 4px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
     }
 }
 

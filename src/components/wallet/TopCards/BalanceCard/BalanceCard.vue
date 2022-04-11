@@ -1,21 +1,12 @@
 <template>
     <div class="balance_card">
         <UtxosBreakdownModal ref="utxos_modal"></UtxosBreakdownModal>
-        <div class="fungible_card">
-            <div class="header">
-                <div style="display: flex; align-items: center">
-                    <h4
-                        style="
-                            font-style: normal;
-                            font-weight: bold;
-                            font-size: 16px;
-                            line-height: 24px;
-                            color: #262626;
-                            margin-right: 8px;
-                        "
-                    >
+        <div class="fungible_card w-full">
+            <div>
+                <div class="flex items-center">
+                    <span class="text-base font-bold text-EZC-defaultBlack mr-2">
                         {{ $t('top.title2') }}
-                    </h4>
+                    </span>
                     <div class="refresh">
                         <Spinner v-if="isUpdateBalance" class="spinner"></Spinner>
                         <button v-else @click="updateBalance">
@@ -23,7 +14,7 @@
                         </button>
                     </div>
                 </div>
-                <div>
+                <!-- <div>
                     <template v-if="!isBreakdown">
                         <button class="breakdown_toggle" @click="toggleBreakdown">
                             <fa icon="eye"></fa>
@@ -37,32 +28,43 @@
                         </button>
                     </template>
                     <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>
-                </div>
+                </div> -->
             </div>
             <div class="balance_row">
-                <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
+                <p
+                    class="text-2.5xl font-bold text-EZC-defaultBlack"
+                    data-cy="wallet_balance"
+                    v-if="!balanceTextRight"
+                >
                     {{ balanceTextLeft }} EZC
                 </p>
-                <p class="balance" data-cy="wallet_balance" v-else>
+                <p
+                    class="text-2.5xl font-bold text-EZC-defaultBlack"
+                    data-cy="wallet_balance"
+                    v-else
+                >
                     {{ balanceTextLeft }}
                     <span>.{{ balanceTextRight }}</span>
                     EZC
                 </p>
-                <div style="display: flex; flex-direction: row">
-                    <p class="balance_usd">
+                <div class="flex flex-row flex-nowrap">
+                    <p class="text-base font-bold text-EZC-defaultBlack mr-3">
                         <b>{{ totalBalanceUSDText }}</b>
                         USD
                     </p>
-                    <p class="balance_usd" style="background-color: transparent">
+                    <p
+                        class="bg-EZC-bgDefault rounded-xl flex justify-center text-md items-center flex-shrink-0"
+                        style="max-width: 150px"
+                    >
                         <b>1 EZC</b>
                         =
                         <b>{{ avaxPriceText }}</b>
-                        USD
+                        &nbsp; USD
                     </p>
                 </div>
             </div>
             <!--            <button class="expand_but">Show Breakdown<fa icon="list-ol"></fa></button>-->
-            <div class="alt_info">
+            <div class="grid grid-cols-1">
                 <div class="alt_non_breakdown" v-if="!isBreakdown">
                     <div>
                         <label>{{ $t('top.balance.available') }}</label>
@@ -103,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <NftCol class="nft_card"></NftCol>
+        <NftCol class="nft_card w-full"></NftCol>
     </div>
 </template>
 <script lang="ts">
@@ -355,13 +357,9 @@ export default class BalanceCard extends Vue {
     color: #171717;
 }
 .balance_card {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    column-gap: 20px;
-}
-
-.nft_card {
-    border-left: 2px solid var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .fungible_card {
     height: 100%;
@@ -385,10 +383,6 @@ export default class BalanceCard extends Vue {
         flex-grow: 1;
     }
 }
-h4 {
-    font-weight: normal;
-}
-
 .alert_cont {
     margin: 0;
 }
@@ -475,10 +469,6 @@ h4 {
 }
 
 .alt_info > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 0px;
-    margin-top: 12px;
     > div {
         position: relative;
         padding: 0 24px;
@@ -495,10 +485,6 @@ h4 {
         font-size: 13px;
         color: var(--primary-color-light);
     }
-}
-
-.nft_card {
-    padding-left: 20px;
 }
 
 .breakdown_toggle {
@@ -542,14 +528,6 @@ h4 {
 
     .nft_col {
         display: none;
-    }
-
-    .nft_card {
-        padding: 0;
-        margin-top: 15px;
-        padding-top: 15px;
-        border-top: 1px solid var(--primary-color-light);
-        border-left: none;
     }
 
     .balance {

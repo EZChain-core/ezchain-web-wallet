@@ -139,6 +139,14 @@ module.exports = {
                     bgCreate: '#F0F7FF',
                 },
             },
+            gridTemplateColumns: {
+                // Complex site-specific column configuration
+                sidebar: '304px 1fr',
+                layout: '9fr 3fr',
+            },
+            gridTemplateRows: {
+                layout: '8fr 4fr',
+            },
         },
     },
     variants: {

@@ -1,62 +1,58 @@
 <template>
-    <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
+    <div class="mt-3">
+        <h1 class="font-bold text-EZC-defaultBlack text-3.5xl mb-5">
             {{ $t('portfolio.assets') }}
         </h1>
-        <div class="home_view">
-            <div class="left_home_view no_scroll_bar">
-                <div class="header">
-                    <div>
-                        <button
-                            @click="tab = 'fungibles'"
-                            :active="tab === `fungibles`"
-                            data-cy="wallet_fungible"
-                        >
-                            {{ $t('portfolio.assets1') }}
-                        </button>
-                        <button
-                            @click="tab = 'collectibles'"
-                            :active="tab === `collectibles`"
-                            data-cy="wallet_nft"
-                        >
-                            {{ $t('portfolio.assets2') }}
-                        </button>
+        <div class="grid grid-cols-layout gap-3 max-h-screen">
+            <div class="grid grid-rows-layout gap-y-3">
+                <div class="rounded-lg shadow-md bg-white-a500 p-4 no_scroll_bar">
+                    <div class="header">
+                        <div>
+                            <button
+                                class="capitalize"
+                                @click="tab = 'fungibles'"
+                                :active="tab === `fungibles`"
+                                data-cy="wallet_fungible"
+                            >
+                                {{ $t('portfolio.assets1') }}
+                            </button>
+                            <button
+                                class="capitalize"
+                                @click="tab = 'collectibles'"
+                                :active="tab === `collectibles`"
+                                data-cy="wallet_nft"
+                            >
+                                {{ $t('portfolio.assets2') }}
+                            </button>
+                        </div>
+                        <div style="flex-grow: 1"></div>
+                        <div class="search hover_border">
+                            <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
+                            <img v-else src="@/assets/search_night.svg" />
+                            <input :placeholder="$t('portfolio.search')" v-model="search" />
+                        </div>
                     </div>
-                    <div style="flex-grow: 1"></div>
-                    <div class="search hover_border">
-                        <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
-                        <img v-else src="@/assets/search_night.svg" />
-                        <input :placeholder="$t('portfolio.search')" v-model="search" />
+                    <div class="pages">
+                        <transition-group name="fade" mode="out-in">
+                            <fungibles
+                                v-show="tab === `fungibles`"
+                                key="fungibles"
+                                :search="search"
+                            ></fungibles>
+                            <collectibles
+                                v-show="tab === `collectibles`"
+                                key="collectibles"
+                                :search="search"
+                            ></collectibles>
+                        </transition-group>
                     </div>
                 </div>
-                <div class="pages">
-                    <transition-group name="fade" mode="out-in">
-                        <fungibles
-                            v-show="tab === `fungibles`"
-                            key="fungibles"
-                            :search="search"
-                        ></fungibles>
-                        <collectibles
-                            v-show="tab === `collectibles`"
-                            key="collectibles"
-                            :search="search"
-                        ></collectibles>
-                    </transition-group>
-                </div>
+                <transition name="fade" mode="out-in">
+                    <transaction-history-panel class="panel_content"></transaction-history-panel>
+                </transition>
             </div>
-            <transition name="fade" mode="out-in">
-                <transaction-history-panel class="panel_content"></transaction-history-panel>
-            </transition>
+            <top-info class="wallet_top shadow-lg"></top-info>
         </div>
-        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script>
@@ -87,21 +83,14 @@ export default {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
-.home_view {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    grid-gap: 12px;
-    height: 506px;
-}
-.left_home_view {
-    padding: 16px;
-    background: #ffffff;
-    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
-        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
-    border-radius: 8px;
-    overflow: auto;
-}
+// .left_home_view {
+//     padding: 16px;
+//     background: #ffffff;
+//     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+//         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+//     border-radius: 8px;
+//     overflow: auto;
+// }
 .header {
     display: flex;
     align-items: center;
@@ -118,7 +107,7 @@ export default {
         font-size: 14px;
         font-weight: bold;
         margin: 0px 5px;
-        text-transform: uppercase;
+        text-transform: capitalize;
         outline: none !important;
         color: var(--primary-color-light);
 

@@ -1,51 +1,64 @@
 <template>
-    <div class="wallet_sidebar">
+    <div class="shadow-sm w-full px-6 pb-7">
         <div class="stick">
-            <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
+            <div class="max-h-24 flex items-center justify-start">
+                <img class="w-36 h-12" v-if="$root.theme === 'day'" src="@/assets/logo.svg" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
-            <div class="links">
-                <router-link to="/wallet" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por.png" />
-                    <img v-else src="@/assets/sidebar/portfolio_nav_night.png" />
-                    {{ $t('wallet.sidebar.portfolio') }}
-                </router-link>
-                <router-link to="/wallet/transfer" data-cy="wallet_transfer" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/transfer1.png" />
-                    <img v-else src="@/assets/sidebar/transfer_nav_night.svg" />
-                    {{ $t('wallet.sidebar.send') }}
-                </router-link>
-                <router-link
-                    to="/wallet/cross_chain"
-                    data-cy="wallet_export"
-                    class="wallet_export wallet_link"
-                >
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por1.png" />
-                    {{ $t('wallet.sidebar.export') }}
-                </router-link>
-                <router-link to="/wallet/earn" data-cy="wallet_earn" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/chart1.png" />
-                    <img v-else src="@/assets/sidebar/earn_nav_night.png" />
-                    {{ $t('wallet.sidebar.earn') }}
-                </router-link>
-                <router-link to="/wallet/studio" data-cy="wallet_studio" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por2.png" />
-                    <img v-else src="@/assets/sidebar/studio_nav_night.svg" />
-                    My NFT
-                </router-link>
-                <router-link to="/wallet/activity" data-cy="wallet_activity" class="wallet_link">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por4.png" />
-                    <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
-                    {{ $t('wallet.sidebar.activity') }}
-                </router-link>
-            </div>
-            <div class="bottom" style="display: none">
+            <div class="flex flex-col justify-between items-center mt-3">
+                <div class="links w-full">
+                    <router-link to="/wallet" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por.png" />
+                        <img v-else src="@/assets/sidebar/portfolio_nav_night.png" />
+                        {{ $t('wallet.sidebar.portfolio') }}
+                    </router-link>
+                    <router-link
+                        to="/wallet/transfer"
+                        data-cy="wallet_transfer"
+                        class="wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/transfer1.png" />
+                        <img v-else src="@/assets/sidebar/transfer_nav_night.svg" />
+                        {{ $t('wallet.sidebar.send') }}
+                    </router-link>
+                    <router-link
+                        to="/wallet/cross_chain"
+                        data-cy="wallet_export"
+                        class="wallet_export wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por1.png" />
+                        {{ $t('wallet.sidebar.export') }}
+                    </router-link>
+                    <router-link to="/wallet/earn" data-cy="wallet_earn" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/chart1.png" />
+                        <img v-else src="@/assets/sidebar/earn_nav_night.png" />
+                        {{ $t('wallet.sidebar.earn') }}
+                    </router-link>
+                    <router-link to="/wallet/studio" data-cy="wallet_studio" class="wallet_link">
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por2.png" />
+                        <img v-else src="@/assets/sidebar/studio_nav_night.svg" />
+                        My NFT
+                    </router-link>
+                    <router-link
+                        to="/wallet/activity"
+                        data-cy="wallet_activity"
+                        class="wallet_link"
+                    >
+                        <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por4.png" />
+                        <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
+                        {{ $t('wallet.sidebar.activity') }}
+                    </router-link>
+                </div>
+                <!-- <div class="bottom hidden">
                 <transition name="fade" mode="out-in">
                     <main-panel class="panel"></main-panel>
                 </transition>
+            </div> -->
+                <div class="max-w-full h-96">
+                    <h4 class="text-base font-bold text-black-a500 mb-6">Derived Wallet Address</h4>
+                    <address-card></address-card>
+                </div>
             </div>
-            <address-card class="top_card addr_card"></address-card>
         </div>
     </div>
 </template>
@@ -65,76 +78,58 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use "../../main";
+.stick {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.alert_icon {
+    color: #f00;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+.links {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
 
-.wallet_sidebar {
-    .stick {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-    .alert_icon {
-        color: #f00;
-        flex-grow: 1;
-        justify-content: flex-end;
+    a {
+        opacity: 0.6;
+        color: var(--primary-color-light);
+        text-decoration: none;
+        font-size: 18px;
+        padding: 12px 16px;
+
+        img {
+            opacity: 0.5;
+        }
     }
 
-    .brand {
-        height: 55px;
+    .wallet_link {
         display: flex;
-        justify-content: flex-start;
         align-items: center;
-        padding-left: 24px;
+        padding: 14px 24px;
+        white-space: nowrap;
+    }
 
+    a.router-link-exact-active {
+        opacity: 1;
+        position: static;
+        font-weight: bold;
+        height: 48px;
+        background: #f5f5f5;
+        box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+        border-radius: 8px;
+        color: #262626;
         img {
-            width: 186px;
-            object-fit: contain;
+            opacity: 1;
         }
     }
 
-    .links {
-        padding: 0 !important;
-        display: flex;
-        flex-direction: column;
-
-        a {
-            opacity: 0.6;
-            color: var(--primary-color-light);
-            text-decoration: none;
-            margin: 0 24px;
-            font-size: 18px;
-            padding: 12px 16px;
-
-            img {
-                opacity: 0.5;
-            }
-        }
-
-        .wallet_link {
-            display: flex;
-            align-items: center;
-            padding: 14px 24px;
-            white-space: nowrap;
-        }
-
-        a.router-link-exact-active {
-            opacity: 1;
-            position: static;
-            font-weight: bold;
-            height: 48px;
-            background: #f5f5f5;
-            box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
-            border-radius: 8px;
-            color: #262626;
-            img {
-                opacity: 1;
-            }
-        }
-
-        img {
-            width: 20px;
-            margin-right: 15px;
-            object-fit: contain;
-        }
+    img {
+        width: 20px;
+        margin-right: 15px;
+        object-fit: contain;
     }
 }
 .wallet_export {
