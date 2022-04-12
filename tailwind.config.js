@@ -137,14 +137,23 @@ module.exports = {
                     success: '#6FCF97',
                     bgBlackButton: '#171717',
                     bgCreate: '#F0F7FF',
+                    priceText: '#525252',
+                    textBalance: '#404040',
                 },
             },
             height: {
                 heightSideBar: 'calc(100vh-2rem)',
             },
+            minHeight: {
+                heightHomeTab: '550px',
+            },
             width: {
                 sidebar: '304px',
                 layout: '100vh',
+            },
+            gridTemplateColumns: {
+                // Complex site-specific column configuration
+                footer: 'minmax(700px, 2fr) 1fr',
             },
         },
     },

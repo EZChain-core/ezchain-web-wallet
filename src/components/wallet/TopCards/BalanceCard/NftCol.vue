@@ -1,30 +1,11 @@
 <template>
-    <div class="nft_col">
-        <h4>{{ $t('top.balance.collectibles') }}</h4>
-        <div
-            v-if="isEmpty"
-            style="
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin-top: 16px;
-            "
-        >
+    <div class="nft_col mt-9 border-t border-solid border-EZC-bgDefault pt-5 pb-20">
+        <h4 class="text-base font-bold text-EZC-textBalance">
+            {{ $t('top.balance.collectibles') }}
+        </h4>
+        <div v-if="isEmpty" class="flex flex-col justify-center items-center">
             <img v-if="isEmpty" src="@/assets/emtry_card.png" alt="" />
-            <p
-                style="
-                    margin-top: 14px;
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 16px;
-                    line-height: 24px;
-                    text-align: center;
-                    color: #737373;
-                "
-                v-if="isEmpty"
-            >
+            <p v-if="isEmpty" class="text-base text-EZC-grayText mt-3 text-center">
                 You have not collected
                 <br />
                 any non fungible tokens.
@@ -164,20 +145,13 @@ export default class NftCol extends Vue {
 <style scoped lang="scss">
 @use '../../../../main';
 
-.nft_col {
-    p {
-        font-size: 12px;
-        color: var(--primary-color-light);
-    }
-}
-
 $nft_w: 74px;
 
 .nft_list {
     margin-top: 8px;
     grid-gap: 8px;
     display: grid;
-    grid-template-columns: repeat(3, $nft_w);
+    grid-template-columns: repeat(4, $nft_w);
 }
 
 .nft_item {

@@ -1,21 +1,12 @@
 <template>
-    <div class="balance_card">
-        <UtxosBreakdownModal ref="utxos_modal"></UtxosBreakdownModal>
+    <div class="flex flex-col">
+        <!-- <UtxosBreakdownModal ref="utxos_modal"></UtxosBreakdownModal> -->
         <div class="fungible_card">
             <div class="header">
-                <div style="display: flex; align-items: center">
-                    <h4
-                        style="
-                            font-style: normal;
-                            font-weight: bold;
-                            font-size: 16px;
-                            line-height: 24px;
-                            color: #262626;
-                            margin-right: 8px;
-                        "
-                    >
+                <div class="flex items-center">
+                    <span class="text-base text-EZC-defaultBlack font-bold mr-2">
                         {{ $t('top.title2') }}
-                    </h4>
+                    </span>
                     <div class="refresh">
                         <Spinner v-if="isUpdateBalance" class="spinner"></Spinner>
                         <button v-else @click="updateBalance">
@@ -23,7 +14,7 @@
                         </button>
                     </div>
                 </div>
-                <div>
+                <!-- <div>
                     <template v-if="!isBreakdown">
                         <button class="breakdown_toggle" @click="toggleBreakdown">
                             <fa icon="eye"></fa>
@@ -37,33 +28,40 @@
                         </button>
                     </template>
                     <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>
-                </div>
+                </div> -->
             </div>
             <div class="balance_row">
-                <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
+                <p
+                    class="text-2.5xl font-bold text-EZC-defaultBlack"
+                    data-cy="wallet_balance"
+                    v-if="!balanceTextRight"
+                >
                     {{ balanceTextLeft }} EZC
                 </p>
-                <p class="balance" data-cy="wallet_balance" v-else>
+                <p
+                    class="text-2.5xl font-bold text-EZC-defaultBlack"
+                    data-cy="wallet_balance"
+                    v-else
+                >
                     {{ balanceTextLeft }}
                     <span>.{{ balanceTextRight }}</span>
                     EZC
                 </p>
-                <div style="display: flex; flex-direction: row">
-                    <p class="balance_usd">
+                <div class="flex flex-row items-center">
+                    <p class="text-base font-bold text-EZC-defaultBlack mr-4">
                         <b>{{ totalBalanceUSDText }}</b>
                         USD
                     </p>
-                    <p class="balance_usd" style="background-color: transparent">
-                        <b>1 EZC</b>
+                    <p class="rounded-3xl py-1 px-3 bg-EZC-bgDefault">
+                        <b class="text-xs text-EZC-priceText">1 EZC</b>
                         =
-                        <b>{{ avaxPriceText }}</b>
-                        USD
+                        <b class="text-xs text-EZC-priceText">{{ avaxPriceText }} USD</b>
                     </p>
                 </div>
             </div>
             <!--            <button class="expand_but">Show Breakdown<fa icon="list-ol"></fa></button>-->
-            <div class="alt_info">
-                <div class="alt_non_breakdown" v-if="!isBreakdown">
+            <div>
+                <!-- <div class="alt_non_breakdown" v-if="!isBreakdown">
                     <div>
                         <label>{{ $t('top.balance.available') }}</label>
                         <p>{{ unlockedText }} EZC</p>
@@ -76,28 +74,59 @@
                         <label>{{ $t('top.balance.stake') }}</label>
                         <p>{{ stakingText }} EZC</p>
                     </div>
-                </div>
-                <div class="alt_breakdown" v-else>
+                </div> -->
+                <div class="mt-6">
+                    <p
+                        class="text-md font-bold text-EZC-textBalance mb-3 pb-2 border-b border-solid border-EZC-bgDefault"
+                    >
+                        {{ $t('top.balance.available') }}
+                    </p>
+
                     <div>
-                        <label>{{ $t('top.balance.available') }} (X)</label>
-                        <p class="money_transaction">{{ avmUnlocked | cleanAvaxBN }} EZC</p>
-                        <label>{{ $t('top.balance.available') }} (P)</label>
-                        <p class="money_transaction">{{ platformUnlocked | cleanAvaxBN }} EZC</p>
-                        <label>{{ $t('top.balance.available') }} (C)</label>
-                        <p class="money_transaction">{{ evmUnlocked | cleanAvaxBN }} EZC</p>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">X Chain</label>
+                            <p class="money_transaction">{{ avmUnlocked | cleanAvaxBN }} EZC</p>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">P Chain</label>
+                            <p class="money_transaction">
+                                {{ platformUnlocked | cleanAvaxBN }} EZC
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">C Chain</label>
+                            <p class="money_transaction">{{ evmUnlocked | cleanAvaxBN }} EZC</p>
+                        </div>
                     </div>
+
+                    <p
+                        class="text-md font-bold text-EZC-textBalance mb-3 pb-2 border-b border-solid border-EZC-bgDefault"
+                    >
+                        {{ $t('top.balance.locked') }}
+                    </p>
+
                     <div>
-                        <label>{{ $t('top.balance.locked') }} (X)</label>
-                        <p class="money_transaction">{{ avmLocked | cleanAvaxBN }} EZC</p>
-                        <label>{{ $t('top.balance.locked') }} (P)</label>
-                        <p class="money_transaction">{{ platformLocked | cleanAvaxBN }} EZC</p>
-                        <label>{{ $t('top.balance.locked_stake') }} (P)</label>
-                        <p class="money_transaction">
-                            {{ platformLockedStakeable | cleanAvaxBN }} EZC
-                        </p>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">X Chain</label>
+                            <p class="money_transaction">{{ avmLocked | cleanAvaxBN }} EZC</p>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">P Chain</label>
+                            <p class="money_transaction">{{ platformLocked | cleanAvaxBN }} EZC</p>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs text-EZC-grayText flex-shrink-0">
+                                Stackedable P
+                            </label>
+                            <p class="money_transaction">
+                                {{ platformLockedStakeable | cleanAvaxBN }} EZC
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <label>{{ $t('top.balance.stake') }}</label>
+                    <div class="flex justify-between items-center mt-9">
+                        <label class="text-xs text-EZC-grayText flex-shrink-0">
+                            {{ $t('top.balance.stake') }}
+                        </label>
                         <p class="money_transaction">{{ stakingText }} EZC</p>
                     </div>
                 </div>
@@ -354,15 +383,6 @@ export default class BalanceCard extends Vue {
 
     color: #171717;
 }
-.balance_card {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    column-gap: 20px;
-}
-
-.nft_card {
-    border-left: 2px solid var(--bg-light);
-}
 .fungible_card {
     height: 100%;
     //display: grid !important;
@@ -495,10 +515,6 @@ h4 {
         font-size: 13px;
         color: var(--primary-color-light);
     }
-}
-
-.nft_card {
-    padding-left: 20px;
 }
 
 .breakdown_toggle {

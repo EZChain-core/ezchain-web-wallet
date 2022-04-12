@@ -1,27 +1,19 @@
 <template>
     <div class="top_cards">
         <balance-card class="top_card balance_card"></balance-card>
-        <address-card class="top_card addr_card"></address-card>
     </div>
 </template>
 <script>
 import BalanceCard from './TopCards/BalanceCard/BalanceCard'
-import AddressCard from './TopCards/AddressCard/AddressCard'
 
 export default {
     components: {
         BalanceCard,
-        AddressCard,
     },
 }
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
-.top_cards {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-}
 .top_card {
     flex-grow: 1;
     color: var(--primary-color);
@@ -36,11 +28,6 @@ export default {
     animation-timing-function: ease-out;
 }
 
-.balance_card {
-}
-
-.addr_card {
-}
 .card_left {
     background-color: #f4efff;
     flex-basis: 70px;
@@ -117,10 +104,6 @@ export default {
         grid-template-columns: none;
         grid-template-rows: min-content;
         grid-gap: 9px;
-    }
-
-    .top_card {
-        /*padding: ;*/
     }
 
     .balance_card {

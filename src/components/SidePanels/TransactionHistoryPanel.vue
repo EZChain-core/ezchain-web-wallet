@@ -2,7 +2,7 @@
     <div class="tx_history_panel">
         <div class="history_block" :disabled="!isActivityPage"></div>
         <div class="header">
-            <h2>Transactions</h2>
+            <h2 class="text-base font-bold text-EZC-defaultBlack">Transactions</h2>
             <Spinner v-if="isUpdating" class="spinner"></Spinner>
         </div>
         <div class="empty" v-if="!isExplorer">
@@ -119,11 +119,6 @@ export default class TransactionHistoryPanel extends Vue {
     align-items: center;
     border-bottom: 1px solid var(--bg-light);
     padding: 8px 16px;
-
-    h2 {
-        font-weight: normal;
-    }
-
     a {
         /*background-color: var(--primary-color);*/
         /*color: #fff !important;*/
