@@ -14,7 +14,6 @@ export async function getAvaxPriceUSD(): Promise<number> {
     if (res.data.data) return Number(res.data.data.current_price)
     return 1
 }
-
 let priceHistory: [number, number][] = []
 async function getPriceHistory() {
     let res = await coingeckoApi.get(`/coins/${COIN_ID}/market_chart`, {
