@@ -1,7 +1,7 @@
 <template>
     <div class="wallet_sidebar">
         <div class="flex flex-col h-full px-6 pb-7">
-            <div class="max-h-24 flex justify-start items-center">
+            <div class="max-h-24 flex justify-start items-center" style="height: 96px">
                 <img class="h-12 w-36" v-if="$root.theme === 'day'" src="@/assets/logo.svg" />
                 <img v-else src="@/assets/wallet_logo_dark.png" />
             </div>
@@ -49,7 +49,7 @@
                         {{ $t('wallet.sidebar.activity') }}
                     </router-link>
                 </div>
-                <div class="h-80">
+                <div class="h-80 mt-4">
                     <h2 class="text-base font-bold mb-6">Derived Wallet Address</h2>
                     <address-card></address-card>
                 </div>

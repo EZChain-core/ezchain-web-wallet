@@ -13,7 +13,7 @@
         </div>
         <div v-else class="rows">
             <p>{{ statusText }}</p>
-            <div class="nft_list">
+            <div class="nft_list grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 mt-4">
                 <div class="nft_item" v-for="(utxo, i) in nftArray" :key="utxo.getUTXOID()">
                     <NftPayloadView :payload="nftPayloads[i]" small="true"></NftPayloadView>
                 </div>
@@ -146,14 +146,6 @@ export default class NftCol extends Vue {
 @use '../../../../main';
 
 $nft_w: 74px;
-
-.nft_list {
-    margin-top: 8px;
-    grid-gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(4, $nft_w);
-}
-
 .nft_item {
     position: relative;
     height: $nft_w;

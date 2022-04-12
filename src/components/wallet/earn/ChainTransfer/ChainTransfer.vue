@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="cols">
-            <div class="form">
+        <div class="flex justify-between flex-row flex-nowrap h-full">
+            <div class="form mr-4 flex-shrink-0">
                 <ChainSwapForm
                     ref="form"
                     @change="onFormChange"
@@ -113,7 +113,7 @@
                     </v-btn>
                 </div>
             </div>
-            <div class="right_col">
+            <div class="2xl:grid-cols-2 grid-cols-1 grid gap-3 right_col">
                 <ChainCard :chain="sourceChain"></ChainCard>
                 <ChainCard :chain="targetChain" :is-source="false"></ChainCard>
                 <TxStateCard
@@ -598,25 +598,17 @@ export default class ChainTransfer extends Vue {
 .cols {
     display: grid;
     grid-template-columns: max-content 1fr;
-    column-gap: 5vw;
+    column-gap: 40px;
     background: #ffffff;
-    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
-        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 10px 16px;
     height: 100%;
 }
 
 .right_col {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 14px;
-    row-gap: 2px;
     padding-top: 14px;
     height: max-content;
-    //height: 100%;
     > div {
-        //height: max-content;
         background-color: var(--bg-light);
         border-radius: 4px;
         padding: 12px 18px;
@@ -628,7 +620,6 @@ export default class ChainTransfer extends Vue {
     max-width: 100%;
     width: 360px;
     padding-bottom: 14px;
-    //justify-self: center;
     > div {
         margin: 14px 0;
     }
@@ -644,13 +635,9 @@ export default class ChainTransfer extends Vue {
 }
 .chains {
     position: relative;
-    //text-align: center;
     display: grid;
     grid-template-rows: max-content max-content;
     row-gap: 14px;
-    //margin: 0 !important;
-    //column-gap: 4px;
-    //grid-template-columns: 1fr 1fr;
 }
 
 .chain_cont {
@@ -726,13 +713,6 @@ h2 {
         font-weight: bold;
         font-size: 12px;
     }
-
-    /*.status_icon{*/
-    /*    position: absolute;*/
-    /*    top: 8px;*/
-    /*    right: 12px;*/
-    /*}*/
-
     .loading_header {
         display: flex;
         justify-content: space-between;
@@ -779,15 +759,9 @@ h2 {
 
 @include main.medium-device {
     .cols {
-        //display: grid;
-        //grid-template-columns: 1fr 2fr;
         grid-template-columns: none;
-        //column-gap: 2vw;
     }
     .right_col {
-        //grid-template-columns: 1fr 1fr;
-        //row-gap: 14px;
-        //display: none;
         grid-column: 1;
         grid-row: 1;
     }

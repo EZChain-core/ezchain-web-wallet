@@ -4,9 +4,9 @@
         <transition name="fade" mode="out-in">
             <sidebar class="sidenav flex-shrink-0 w-sidebar h-full"></sidebar>
         </transition>
-        <div class="w-full min-h-screen bg-EZC-bgDefault">
+        <div class="w-full min-h-screen bg-EZC-bgDefault flex-shrink-1">
             <top-nav-bar class="top_nav_bar"></top-nav-bar>
-            <div class="px-10 py-3">
+            <div class="px-5 py-3">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
                         <router-view

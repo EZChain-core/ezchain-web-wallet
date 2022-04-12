@@ -152,8 +152,9 @@ module.exports = {
                 layout: '100vh',
             },
             gridTemplateColumns: {
+                layout: '304px 1fr',
                 // Complex site-specific column configuration
-                footer: 'minmax(700px, 2fr) 1fr',
+                footer: '2fr 1fr',
             },
         },
     },

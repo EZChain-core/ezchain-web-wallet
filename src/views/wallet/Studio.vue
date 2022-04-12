@@ -1,84 +1,80 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
-            My NFT
-        </h1>
-        <div class="flex_four">
-            <div class="my_nft no_scroll_bar">
-                <div class="header">
-                    <div v-if="pageNow" style="display: flex; align-items: center">
-                        <img
-                            style="width: 15px; height: 12px; cursor: pointer"
-                            @click="cancel"
-                            src="@/assets/back.png"
-                            alt=""
-                        />
-                        <h1
-                            style="
-                                font-style: normal;
-                                font-weight: bold;
-                                font-size: 16px;
-                                line-height: 24px;
-                                color: #0c1527;
-                                display: inline;
-                                margin-left: 8px;
-                            "
-                        >
-                            {{ subtitle }}
-                        </h1>
+        <h1 class="text-3.5xl font-bold mb-5 text-EZC-defaultBlack">My NFT</h1>
+        <div class="grid grid-cols-footer gap-x-3">
+            <div>
+                <div class="my_nft no_scroll_bar min-h-heightHomeTab">
+                    <div class="header">
+                        <div v-if="pageNow" style="display: flex; align-items: center">
+                            <img
+                                style="width: 15px; height: 12px; cursor: pointer"
+                                @click="cancel"
+                                src="@/assets/back.png"
+                                alt=""
+                            />
+                            <h1
+                                style="
+                                    font-style: normal;
+                                    font-weight: bold;
+                                    font-size: 16px;
+                                    line-height: 24px;
+                                    color: #0c1527;
+                                    display: inline;
+                                    margin-left: 8px;
+                                "
+                            >
+                                {{ subtitle }}
+                            </h1>
+                        </div>
                     </div>
-                </div>
-                <template v-if="!pageNow">
-                    <div class="menu">
-                        <div class="options">
-                            <div>
-                                <h4 class="title">{{ $t('studio.menu1.title') }}</h4>
-                                <p>{{ $t('studio.menu1.desc') }}</p>
-                                <v-btn
-                                    @click="goNewNftFamily"
-                                    class="button_secondary"
-                                    small
-                                    depressed
-                                >
-                                    {{ $t('studio.menu1.submit') }}
-                                </v-btn>
-                            </div>
-                            <div>
-                                <h4 class="title">{{ $t('studio.menu2.title') }}</h4>
-                                <p>{{ $t('studio.menu2.desc') }}</p>
+                    <template v-if="!pageNow">
+                        <div class="menu">
+                            <div class="options">
                                 <div>
-                                    <p v-if="!canMint" class="err">
-                                        {{ $t('studio.menu2.empty') }}
-                                    </p>
+                                    <h4 class="title">{{ $t('studio.menu1.title') }}</h4>
+                                    <p>{{ $t('studio.menu1.desc') }}</p>
                                     <v-btn
-                                        @click="goMint"
+                                        @click="goNewNftFamily"
                                         class="button_secondary"
                                         small
                                         depressed
-                                        :disabled="!canMint"
                                     >
-                                        {{ $t('studio.menu2.submit') }}
+                                        {{ $t('studio.menu1.submit') }}
                                     </v-btn>
+                                </div>
+                                <div>
+                                    <h4 class="title">{{ $t('studio.menu2.title') }}</h4>
+                                    <p>{{ $t('studio.menu2.desc') }}</p>
+                                    <div>
+                                        <p v-if="!canMint" class="err">
+                                            {{ $t('studio.menu2.empty') }}
+                                        </p>
+                                        <v-btn
+                                            @click="goMint"
+                                            class="button_secondary"
+                                            small
+                                            depressed
+                                            :disabled="!canMint"
+                                        >
+                                            {{ $t('studio.menu2.submit') }}
+                                        </v-btn>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template>
-                <Component v-else :is="pageNow" @cancel="cancel"></Component>
+                    </template>
+                    <Component v-else :is="pageNow" @cancel="cancel"></Component>
+                </div>
+                <transition name="fade" mode="out-in">
+                    <transaction-history-panel
+                        class="panel_conten mt-3"
+                    ></transaction-history-panel>
+                </transition>
             </div>
-            <transition name="fade" mode="out-in">
-                <transaction-history-panel class="panel_content"></transaction-history-panel>
-            </transition>
+            <div>
+                <top-info class="wallet_top"></top-info>
+            </div>
         </div>
-        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">

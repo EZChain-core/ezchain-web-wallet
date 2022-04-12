@@ -1,13 +1,23 @@
 <template>
     <div>
-        <h1>{{ $t('cross_chain.title') }}</h1>
-        <div class="flex_two no_scroll_bar">
-            <ChainTransfer class="top_crosschain"></ChainTransfer>
-            <transition name="fade" mode="out-in">
-                <transaction-history-panel class="panel_content"></transaction-history-panel>
-            </transition>
+        <h1 class="text-EZC-defaultBlack font-bold text-3.5xl mb-5">
+            {{ $t('cross_chain.title') }}
+        </h1>
+        <div class="grid grid-cols-footer gap-x-3">
+            <div>
+                <ChainTransfer
+                    class="top_cross_chain no_scroll_bar min-h-heightHomeTab bg-white-a500 px-4 py-6 shadow-md rounded-lg"
+                ></ChainTransfer>
+                <transition name="fade" mode="out-in">
+                    <transaction-history-panel
+                        class="panel_content mt-3"
+                    ></transaction-history-panel>
+                </transition>
+            </div>
+            <div>
+                <top-info class="wallet_top shadow-lg"></top-info>
+            </div>
         </div>
-        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -26,24 +36,6 @@ import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryP
 export default class CrossChain extends Vue {}
 </script>
 <style scoped lang="scss">
-.flex_two {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    grid-gap: 12px;
-    height: 506px;
-    overflow: overlay;
-}
-h1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 44px;
-    /* identical to box height */
-
-    /* Neutral/800 */
-
-    color: #262626;
-}
 .head {
     margin-bottom: 14px;
     //display: flex;
@@ -55,7 +47,7 @@ h1 {
         grid-template-columns: 1fr;
         height: auto;
     }
-    .top_crosschain {
+    .top_cross_chain {
         min-height: 600px;
     }
 }
