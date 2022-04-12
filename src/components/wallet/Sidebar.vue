@@ -91,19 +91,6 @@ export default {
         justify-content: flex-end;
     }
 
-    .brand {
-        height: 55px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding-left: 24px;
-
-        img {
-            width: 186px;
-            object-fit: contain;
-        }
-    }
-
     .links {
         padding: 0 !important;
         display: flex;
