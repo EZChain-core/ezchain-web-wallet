@@ -153,7 +153,6 @@ module.exports = {
             },
             gridTemplateColumns: {
                 layout: '304px 1fr',
-                // Complex site-specific column configuration
                 footer: '2fr 1fr',
             },
         },
