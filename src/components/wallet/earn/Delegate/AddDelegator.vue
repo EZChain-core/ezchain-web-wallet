@@ -262,7 +262,6 @@ import { eventBus } from '@/main'
 const MIN_MS = 60000
 const HOUR_MS = MIN_MS * 60
 const DAY_MS = HOUR_MS * 24
-
 @Component({
     components: {
         NodeCard,
