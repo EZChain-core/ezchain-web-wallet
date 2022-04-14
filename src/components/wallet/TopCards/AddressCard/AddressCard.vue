@@ -198,6 +198,7 @@ export default class AddressCard extends Vue {
             case 'C':
                 return this.addressEVM
         }
+        return this.address
     }
 
     get activeIdx(): number {

@@ -188,7 +188,7 @@
                                 >
                                     {{ $t('earn.delegate.success.title') }}
                                 </p>
-                            </div>
+                            </div>NA
                             <div class="status_icon">
                                 <Spinner v-if="!txStatus"></Spinner>
                                 <p style="color: var(--success)" v-if="txStatus === 'Committed'">
