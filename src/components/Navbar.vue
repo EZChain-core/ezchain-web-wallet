@@ -2,7 +2,7 @@
     <div id="nav">
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <router-link to="/" class="logo">
-            <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
+            <img v-if="$root.theme === 'day'" src="@/assets/Ezchain_Logo.png" />
         </router-link>
         <div class="buts_right">
             <network-menu></network-menu>
@@ -132,6 +132,7 @@ button {
             object-fit: contain;
             margin-right: 5px;
             width: 224px;
+            height: 48px;
         }
     }
 }
@@ -209,13 +210,6 @@ button {
     .logout {
         margin-top: 40px;
     }
-    //#nav {
-    //    .logo {
-    //        img {
-    //            height: 45px;
-    //        }
-    //    }
-    //}
 }
 </style>
 <style lang="scss">

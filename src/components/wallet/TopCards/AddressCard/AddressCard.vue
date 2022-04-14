@@ -1,6 +1,6 @@
 <template>
-    <div style="padding: 24px 24px 24px 0 !important; height: 100%">
-        <div class="addr_card">
+    <div>
+        <div class="addr_card xl:max-w-full max-w-mobile">
             <div class="bottom_tabs">
                 <ChainSelect v-model="chainNow"></ChainSelect>
             </div>
@@ -13,27 +13,32 @@
             <div class="bottom">
                 <div class="col_qr">
                     <canvas
-                        style="width: 110px !important; height: 110px !important"
+                        style="width: 96px !important; height: 96px !important"
                         ref="qr"
                     ></canvas>
                 </div>
                 <div class="bottom_rest">
-                    <p class="subtitle">{{ addressLabel }}</p>
+                    <!--                    <p class="subtitle">{{ addressLabel }}</p>-->
+                    <span class="text-xs text-EZC-grayText mt-3">Wallet Address</span>
 
-                    <p class="addr_text" data-cy="wallet_address">
+                    <p
+                        style="word-break: break-word"
+                        class="text-md xl:text-base text-EZC-bgBlackButton"
+                        data-cy="wallet_address"
+                    >
                         {{ activeAddress }}
                     </p>
-                    <div class="flex items-center mt-2 buts">
+                    <div class="grid grid-cols-2 gap-x-2 mt-2">
                         <button @click="viewQRModal" class="flex flex-row items-center">
                             <img class="mr-2" src="@/assets/eyes.svg" alt="" />
                             <span class="text-sm text-EZC-bgButton font-bold">View</span>
                         </button>
-                        <button
-                            v-if="walletType === 'ledger'"
-                            :tooltip="$t('create.verify')"
-                            @click="verifyLedgerAddress"
-                            class="ledger_but"
-                        ></button>
+                        <!--                        <button-->
+                        <!--                            v-if="walletType === 'ledger'"-->
+                        <!--                            :tooltip="$t('create.verify')"-->
+                        <!--                            @click="verifyLedgerAddress"-->
+                        <!--                            class="ledger_but"-->
+                        <!--                        ></button>-->
                         <CopyText
                             :tooltip="$t('top.hover3')"
                             :value="activeAddress"
@@ -270,10 +275,9 @@ export default class AddressCard extends Vue {
 .addr_card {
     display: flex;
     flex-direction: column;
-    padding: 16px !important;
     background: #fafafa;
     border-radius: 8px;
-    height: 260px;
+    height: 100%;
 }
 .buts {
     width: 100%;
@@ -297,10 +301,6 @@ export default class AddressCard extends Vue {
         }
     }
 }
-
-// .qr_but {
-//     background-image: url('/img/qr_icon.png');
-// }
 .print_but {
     background-image: url('/img/faucet_icon.png');
 }
@@ -352,7 +352,6 @@ $qr_width: 110px;
     display: grid;
     grid-template-columns: $qr_width 1fr;
     column-gap: 14px;
-    padding-right: 18px;
     margin-top: 4px;
     margin-bottom: 4px;
     padding-left: 8px;
@@ -388,7 +387,7 @@ $qr_width: 110px;
 }
 
 .addr_text {
-    font-size: 15px;
+    font-size: 12px;
     word-break: break-all;
     color: var(--primary-color);
     min-height: 55px;

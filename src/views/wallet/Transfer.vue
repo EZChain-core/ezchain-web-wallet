@@ -1,14 +1,6 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
             {{ $t('transfer.title') }}
         </h1>
         <div class="top_transfer">
@@ -562,9 +554,6 @@ $padTop: 8px;
     font-size: 12px;
     color: var(--primary-color-light);
 }
-h1 {
-    font-weight: normal;
-}
 h4 {
     display: block;
     text-align: left;
@@ -707,16 +696,6 @@ label {
     word-break: break-all;
     padding: 8px 16px;
 }
-
-//@media only screen and (max-width: 600px) {
-//    .order_form {
-//        display: block;
-//    }
-//    .asset_select button {
-//        flex-grow: 1;
-//        word-break: break-word;
-//    }
-//}
 
 @include main.medium-device {
     .new_order_Form {

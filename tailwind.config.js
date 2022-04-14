@@ -139,6 +139,16 @@ module.exports = {
                     bgCreate: '#F0F7FF',
                 },
             },
+            gridTemplateColumns: {
+                footer: '2fr 1fr',
+                layout: '1fr 348px',
+            },
+            maxHeight: {
+                heightBox: '31.625rem',
+            },
+            maxWidth: {
+                mobile: '324px',
+            },
         },
     },
     variants: {

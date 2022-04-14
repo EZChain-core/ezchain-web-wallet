@@ -12,6 +12,7 @@
                 <thead>
                     <tr class="header_tr">
                         <th>{{ $t('earn.delegate.list.id') }}</th>
+                        <th>Name</th>
                         <th style="text-align: right">
                             {{ $t('earn.delegate.list.val_stake') }}
                         </th>

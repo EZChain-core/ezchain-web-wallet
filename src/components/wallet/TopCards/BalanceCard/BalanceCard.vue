@@ -23,21 +23,21 @@
                         </button>
                     </div>
                 </div>
-                <div>
-                    <template v-if="!isBreakdown">
-                        <button class="breakdown_toggle" @click="toggleBreakdown">
-                            <fa icon="eye"></fa>
-                            {{ $t('top.balance.show') }}
-                        </button>
-                    </template>
-                    <template v-else>
-                        <button class="breakdown_toggle" @click="toggleBreakdown">
-                            <fa icon="eye-slash"></fa>
-                            {{ $t('top.balance.hide') }}
-                        </button>
-                    </template>
-                    <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>
-                </div>
+                <!--                <div>-->
+                <!--                    <template v-if="!isBreakdown">-->
+                <!--                        <button class="breakdown_toggle" @click="toggleBreakdown">-->
+                <!--                            <fa icon="eye"></fa>-->
+                <!--                            {{ $t('top.balance.show') }}-->
+                <!--                        </button>-->
+                <!--                    </template>-->
+                <!--                    <template v-else>-->
+                <!--                        <button class="breakdown_toggle" @click="toggleBreakdown">-->
+                <!--                            <fa icon="eye-slash"></fa>-->
+                <!--                            {{ $t('top.balance.hide') }}-->
+                <!--                        </button>-->
+                <!--                    </template>-->
+                <!--                    <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>-->
+                <!--                </div>-->
             </div>
             <div class="balance_row">
                 <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
@@ -346,17 +346,11 @@ export default class BalanceCard extends Vue {
     font-weight: bold;
     font-size: 14px;
     line-height: 24px;
-    /* identical to box height, or 171% */
-
-    font-feature-settings: 'tnum' on, 'lnum' on;
-
-    /* Neutral/900 */
-
     color: #171717;
 }
 .balance_card {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 2fr 1fr;
     column-gap: 20px;
 }
 
@@ -399,15 +393,11 @@ h4 {
 .balance {
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 28px;
     line-height: 44px;
     color: #262626;
-    /*font-weight: bold;*/
-    font-family: Rubik !important;
-
     span {
         font-size: 0.8em;
-        /*color: var(--primary-color-light);*/
     }
 }
 

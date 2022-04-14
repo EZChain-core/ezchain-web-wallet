@@ -7,6 +7,7 @@ import {
 import { BN } from 'ezchainjs2'
 
 export interface PlatformState {
+    nameNodeId: any | undefined
     validators: ValidatorRaw[]
     validatorsPending: ValidatorPendingRaw[]
     delegatorsPending: DelegatorPendingRaw[]
@@ -43,6 +44,7 @@ export interface ValidatorDict {
 
 export interface ValidatorListItem {
     nodeID: string
+    name: string | undefined
     validatorStake: BN
     delegatedStake: BN
     remainingStake: BN

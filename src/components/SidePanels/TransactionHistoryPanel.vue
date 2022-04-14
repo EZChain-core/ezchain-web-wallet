@@ -104,12 +104,11 @@ export default class TransactionHistoryPanel extends Vue {
     overflow: auto;
     position: relative;
     background: #ffffff;
-    /* Card Style */
-
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding-bottom: 24px;
+    max-height: 506px;
 }
 
 .header {

@@ -1,16 +1,6 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
-            Activity
-        </h1>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">Activity</h1>
         <div class="activity_page">
             <ExportCsvModal ref="csv_modal"></ExportCsvModal>
             <ExportAvaxCsvModal ref="avax_csv_modal"></ExportAvaxCsvModal>

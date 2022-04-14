@@ -1,7 +1,11 @@
 <template>
-    <div class="top_cards">
+    <div
+        class="top_cards grid grid-cols-layout gap-x-3 shadow-md px-6 py-3 bg-white-a500 rounded-lg"
+    >
         <balance-card class="top_card balance_card"></balance-card>
-        <address-card class="top_card addr_card"></address-card>
+        <div class="flex justify-center items-center pl-6">
+            <address-card class="top_card p-4 addr_card"></address-card>
+        </div>
     </div>
 </template>
 <script>
@@ -17,30 +21,6 @@ export default {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
-.top_cards {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-}
-.top_card {
-    flex-grow: 1;
-    color: var(--primary-color);
-    flex-shrink: 0;
-    //display: flex;
-    background-color: var(--bg-wallet-light);
-    padding: 12px 20px;
-    overflow: hidden;
-    border-radius: 5px;
-    animation-name: fade;
-    animation-duration: 0.6s;
-    animation-timing-function: ease-out;
-}
-
-.balance_card {
-}
-
-.addr_card {
-}
 .card_left {
     background-color: #f4efff;
     flex-basis: 70px;
@@ -131,8 +111,4 @@ export default {
         grid-column: unset;
     }
 }
-
-//@media only screen and (max-width: main.$width_m) {
-//
-//}
 </style>

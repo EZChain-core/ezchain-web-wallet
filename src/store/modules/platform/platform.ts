@@ -30,6 +30,7 @@ const platform_module: Module<PlatformState, RootState> = {
     state: {
         validators: [],
         validatorsPending: [],
+        nameNodeId: '',
         // delegators: [],
         delegatorsPending: [],
         minStake: new BN(0),
@@ -45,7 +46,6 @@ const platform_module: Module<PlatformState, RootState> = {
         async updateCurrentSupply({ state }) {
             state.currentSupply = await pChain.getCurrentSupply()
         },
-
         async updateMinStakeAmount({ state }) {
             let res = await pChain.getMinStake(true)
             state.minStake = res.minValidatorStake
@@ -99,14 +99,12 @@ const platform_module: Module<PlatformState, RootState> = {
 
             let delegatorMap: ValidatorDelegatorDict = getters.nodeDelegatorMap
             let delegatorPendingMap: ValidatorDelegatorPendingDict = getters.nodeDelegatorPendingMap
-
+            let nameValidatorArray = []
             let res: ValidatorListItem[] = []
-
-            for (var i = 0; i < validators.length; i++) {
+            for (let i = 0; i < validators.length; i++) {
                 let v = validators[i]
-
+                nameValidatorArray.push(validators[i].nodeID)
                 let nodeID = v.nodeID
-
                 let delegators: DelegatorRaw[] = delegatorMap[nodeID] || []
                 let delegatorsPending: DelegatorPendingRaw[] = delegatorPendingMap[nodeID] || []
 
@@ -137,11 +135,10 @@ const platform_module: Module<PlatformState, RootState> = {
                 let absMaxStake = ONEAVAX.mul(new BN(3000000))
                 let relativeMaxStake = validatorStake.mul(new BN(5))
                 let stakeLimit = BN.min(absMaxStake, relativeMaxStake)
-
                 let remainingStake = stakeLimit.sub(validatorStake).sub(delegatedStake)
-
                 let listItem: ValidatorListItem = {
                     nodeID: v.nodeID,
+                    name: '',
                     validatorStake: validatorStake,
                     delegatedStake: delegatedStake,
                     remainingStake: remainingStake,
@@ -153,6 +150,8 @@ const platform_module: Module<PlatformState, RootState> = {
                 }
                 res.push(listItem)
             }
+            const newStringNodeId = nameValidatorArray.toString()
+            console.log('newStringNodeId', newStringNodeId)
 
             res = res.filter((v) => {
                 // Remove if remaining space is less than minimum

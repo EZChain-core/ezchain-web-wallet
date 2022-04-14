@@ -1,8 +1,8 @@
 <template>
-    <div class="top_nav">
-        <network-menu class="net_menu" style="margin-right: 40px"></network-menu>
+    <div class="top_nav h-14 bg-white-a500 w-full flex justify-end items-center px-5 py-6">
+        <network-menu class="net_menu mr-10"></network-menu>
         <AccountMenu class="wallet_link"></AccountMenu>
-        <router-link to="/wallet/advanced" class="wallet_links">
+        <router-link to="/wallet/advanced" class="wallet_links ml-5">
             <img src="@/assets/sidebar/setting.png" />
         </router-link>
     </div>
@@ -19,16 +19,4 @@ export default {
 </script>
 <style lang="scss" scoped>
 @use '../../main';
-.top_nav {
-    height: 55px;
-    width: 100%;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 24px 40px;
-    .wallet_links {
-        margin-left: 40px;
-    }
-}
 </style>

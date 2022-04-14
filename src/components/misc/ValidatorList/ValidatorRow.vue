@@ -1,6 +1,7 @@
 <template>
     <tr class="validator_row">
         <td class="id">{{ validator.nodeID }}</td>
+        <td class="name">{{ nameNodeId }}</td>
         <td class="amount">{{ amtText }}</td>
         <td class="amount">{{ remainingAmtText }}</td>
         <td style="text-align: center">{{ numDelegators }}</td>
@@ -20,13 +21,13 @@ import { DelegatorRaw, ValidatorRaw } from '@/components/misc/ValidatorList/type
 import moment from 'moment'
 import Big from 'big.js'
 import { BN } from 'ezchainjs2'
-import { bnToBig } from '@/helpers/helper'
+import { bnToBig, getNameValidator } from '@/helpers/helper'
 import { ValidatorListItem } from '@/store/modules/platform/types'
 
 @Component
 export default class ValidatorsList extends Vue {
     @Prop() validator!: ValidatorListItem
-
+    nameNodeId: string = ''
     get remainingMs(): number {
         let end = this.validator.endTime
         let remain = end.getTime() - Date.now()
@@ -60,6 +61,7 @@ export default class ValidatorsList extends Vue {
     }
 
     get feeText() {
+        this.validatorNodeName()
         return this.validator.fee
     }
 
@@ -100,6 +102,11 @@ export default class ValidatorsList extends Vue {
     get remainingAmtText(): string {
         let big = bnToBig(this.remainingStake, 9)
         return big.toLocaleString(0)
+    }
+    async validatorNodeName() {
+        let nameData = await getNameValidator(this.validator.nodeID)
+        this.nameNodeId = nameData.data.data[0].name
+        return nameData.data.data[0].name
     }
 
     // TODO: Move this to

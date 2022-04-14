@@ -1,17 +1,9 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-0.5">
             {{ $t('portfolio.assets') }}
         </h1>
-        <div class="home_view">
+        <div class="home_view grid grid-cols-layout gap-x-3 max-h-heightBox">
             <div class="left_home_view no_scroll_bar">
                 <div class="header">
                     <div>
@@ -89,10 +81,10 @@ export default {
 @use '../../main';
 
 .home_view {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    grid-gap: 12px;
-    height: 506px;
+    // display: grid;
+    // grid-template-columns: 1fr 360px;
+    // grid-gap: 12px;
+    // height: 506px;
 }
 .left_home_view {
     padding: 16px;
@@ -101,6 +93,7 @@ export default {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     overflow: auto;
+    max-height: 506px;
 }
 .header {
     display: flex;

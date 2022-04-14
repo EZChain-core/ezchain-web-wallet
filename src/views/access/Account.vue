@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-md mx-auto">
         <div
-            class="content flex flex-col justify-center items-center shadow-lg bg-white-a400 rounded-lg p-8"
+            class="content flex flex-col justify-center items-center shadow-sm bg-white-a400 rounded-lg p-8"
         >
             <div class="flex items-center mb-4">
                 <Identicon
@@ -13,6 +13,7 @@
             <form @submit.prevent="access">
                 <input
                     class="single_line_input hover_border pass w-full"
+                    style="background_color: #f5f5f5"
                     type="password"
                     placeholder="Password"
                     v-model="password"

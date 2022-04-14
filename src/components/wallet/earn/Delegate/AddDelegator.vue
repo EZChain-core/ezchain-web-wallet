@@ -1,213 +1,228 @@
 <template>
     <div class="add_delegator">
         <NodeSelection v-if="!selected" @select="onselect" class="node_selection"></NodeSelection>
-        <div style="display: grid; grid-template-columns: 2fr 1fr; grid-gap: 20px" class="" v-else>
-            <div>
-                <transition-group name="fade" mode="out-in">
-                    <div class="ins_col" key="form" v-show="!isConfirm">
-                        <div style="margin-bottom: 16px">
-                            <h4 style="margin-bottom: 8px">
-                                {{ $t('earn.delegate.form.period.label') }}
-                            </h4>
-                            <DateForm @change_end="setEnd" :max-end-date="endMaxDate"></DateForm>
-                        </div>
-                        <div style="margin-bottom: 32px">
-                            <h4 style="margin-bottom: 8px">
-                                {{ $t('earn.delegate.form.amount.label') }}
-                            </h4>
-                            <AvaxInput
-                                v-model="stakeAmt"
-                                :max="maxAmt"
-                                class="amt_in"
-                                :balance="utxosBalanceBig"
-                                @change="changeInput"
-                            ></AvaxInput>
-                        </div>
-                        <div class="reward_in" :type="rewardDestination">
-                            <div
-                                style="
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                "
-                            >
-                                <h4>
-                                    {{ $t('earn.validate.reward.label') }}
-                                </h4>
-                                <button
-                                    v-if="this.rewardDestination === 'custom'"
-                                    @click="rewardSelect('local')"
-                                    :selected="this.rewardDestination === 'local'"
-                                >
-                                    {{ $t('earn.delegate.form.reward.chip_1') }}
-                                </button>
-                                <button
-                                    v-else
-                                    @click="rewardSelect('custom')"
-                                    :selected="this.rewardDestination === 'local'"
-                                >
-                                    {{ $t('earn.delegate.form.reward.chip_2') }}
-                                </button>
-                            </div>
-                            <QrInput
-                                style="
-                                    height: 40px;
-                                    border-radius: 8px;
-                                    background-color: #f5f5f5 !important;
-                                "
-                                v-model="rewardIn"
-                                placeholder="Reward Address"
-                                class="reward_addr_in"
-                            ></QrInput>
-                        </div>
-                    </div>
-                    <ConfirmPage
-                        v-show="isConfirm"
-                        key="confirm"
-                        :end="formEnd"
-                        :amount="formAmt"
-                        :reward-destination="rewardDestination"
-                        :reward-address="formRewardAddr"
-                        :node-i-d="formNodeID"
-                    ></ConfirmPage>
-                </transition-group>
-                <div v-if="!isSuccess" style="margin-top: 30px; width: 184px">
-                    <p class="err" style="max-width: 667px; min-width: 500px">{{ err }}</p>
-                    <v-btn
-                        v-if="!isConfirm"
-                        style="width: 184px !important; height: 40px; border-radius: 8px"
-                        @click="confirm"
-                        class="button_secondary"
-                        depressed
-                        :loading="isLoading"
-                        :disabled="!canSubmit"
-                        block
-                    >
-                        {{ $t('earn.delegate.confirm') }}
-                    </v-btn>
-                    <template v-else>
-                        <div style="display: flex; max-width: 124px; padding-bottom: 28px">
-                            <v-btn
-                                style="
-                                    width: 184px !important;
-                                    height: 40px;
-                                    border-radius: 8px;
-                                    margin-right: 12px;
-                                "
-                                @click="submit"
-                                class="button_secondary"
-                                depressed
-                                :loading="isLoading"
-                                block
-                            >
-                                {{ $t('earn.delegate.submit') }}
-                            </v-btn>
-                            <v-btn
-                                text
-                                @click="cancelConfirm"
-                                block
-                                style="
-                                    border: 1px solid #525252;
-                                    box-sizing: border-box;
-                                    border-radius: 8px;
-                                    height: 40px;
-                                    width: 102px;
-                                "
-                            >
-                                {{ $t('earn.delegate.cancel') }}
-                            </v-btn>
-                        </div>
-                    </template>
-                </div>
-                <div style="width: 184px !important; padding-left: 12px">
-                    <v-btn
-                        @click="cancel"
-                        block
-                        style="
-                            width: 184px !important;
-                            height: 40px;
-                            margin-right: 12px;
-                            background: #171717 !important;
-                            border-radius: 8px;
-                        "
-                        class="button_secondary"
-                        depressed
-                        v-if="txStatus && isSuccess"
-                    >
-                        Back to Earn
-                    </v-btn>
-                </div>
+        <div v-else>
+            <div class="flex items-center mb-5">
+                <button @click="selected = null" class="close_but button_secondary mr-5">
+                    <fa icon="sync"></fa>
+                    Change Node
+                </button>
+                <NodeCard :node="selected"></NodeCard>
             </div>
-            <div>
-                <div class="summary">
-                    <div>
-                        <label>{{ $t('earn.delegate.summary.duration') }} *</label>
-                        <p>{{ stakingDurationText }}</p>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; grid-gap: 20px">
+                <div>
+                    <transition-group name="fade" mode="out-in">
+                        <div class="ins_col" key="form" v-show="!isConfirm">
+                            <div style="margin-bottom: 16px">
+                                <h4 style="margin-bottom: 8px">
+                                    {{ $t('earn.delegate.form.period.label') }}
+                                </h4>
+                                <DateForm
+                                    @change_end="setEnd"
+                                    :max-end-date="endMaxDate"
+                                ></DateForm>
+                            </div>
+                            <div style="margin-bottom: 32px">
+                                <h4 style="margin-bottom: 8px">
+                                    {{ $t('earn.delegate.form.amount.label') }}
+                                </h4>
+                                <AvaxInput
+                                    v-model="stakeAmt"
+                                    :max="maxAmt"
+                                    class="amt_in"
+                                    :balance="utxosBalanceBig"
+                                    @change="changeInput"
+                                ></AvaxInput>
+                            </div>
+                            <div class="reward_in" :type="rewardDestination">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                    "
+                                >
+                                    <h4>
+                                        {{ $t('earn.validate.reward.label') }}
+                                    </h4>
+                                    <button
+                                        v-if="this.rewardDestination === 'custom'"
+                                        @click="rewardSelect('local')"
+                                        :selected="this.rewardDestination === 'local'"
+                                    >
+                                        {{ $t('earn.delegate.form.reward.chip_1') }}
+                                    </button>
+                                    <button
+                                        v-else
+                                        @click="rewardSelect('custom')"
+                                        :selected="this.rewardDestination === 'local'"
+                                    >
+                                        {{ $t('earn.delegate.form.reward.chip_2') }}
+                                    </button>
+                                </div>
+                                <QrInput
+                                    style="
+                                        height: 40px;
+                                        border-radius: 8px;
+                                        background-color: #f5f5f5 !important;
+                                    "
+                                    v-model="rewardIn"
+                                    placeholder="Reward Address"
+                                    class="reward_addr_in"
+                                ></QrInput>
+                            </div>
+                        </div>
+                        <ConfirmPage
+                            v-show="isConfirm"
+                            key="confirm"
+                            :end="formEnd"
+                            :amount="formAmt"
+                            :reward-destination="rewardDestination"
+                            :reward-address="formRewardAddr"
+                            :node-i-d="formNodeID"
+                        ></ConfirmPage>
+                    </transition-group>
+                    <div v-if="!isSuccess" style="margin-top: 15px; width: 184px">
+                        <p class="err" style="max-width: 667px; min-width: 500px">{{ err }}</p>
+                        <v-btn
+                            v-if="!isConfirm"
+                            style="width: 184px !important; height: 40px; border-radius: 8px"
+                            @click="confirm"
+                            class="button_secondary"
+                            depressed
+                            :loading="isLoading"
+                            :disabled="!canSubmit"
+                            block
+                        >
+                            {{ $t('earn.delegate.confirm') }}
+                        </v-btn>
+                        <template v-else>
+                            <div style="display: flex; max-width: 124px; padding-bottom: 28px">
+                                <v-btn
+                                    style="
+                                        width: 184px !important;
+                                        height: 40px;
+                                        border-radius: 8px;
+                                        margin-right: 12px;
+                                    "
+                                    @click="submit"
+                                    class="button_secondary"
+                                    depressed
+                                    :loading="isLoading"
+                                    block
+                                >
+                                    {{ $t('earn.delegate.submit') }}
+                                </v-btn>
+                                <v-btn
+                                    text
+                                    @click="cancelConfirm"
+                                    block
+                                    style="
+                                        border: 1px solid #525252;
+                                        box-sizing: border-box;
+                                        border-radius: 8px;
+                                        height: 40px;
+                                        width: 102px;
+                                    "
+                                >
+                                    {{ $t('earn.delegate.cancel') }}
+                                </v-btn>
+                            </div>
+                        </template>
                     </div>
-                    <div>
-                        <label>{{ $t('earn.delegate.summary.reward') }}</label>
-                        <p v-if="currency_type === 'EZC'">
-                            {{ rewardStake.toLocaleString(2) }} EZC
-                        </p>
-                        <p v-if="currency_type === 'USD'">
-                            ${{ estimatedRewardUSD.toLocaleString(2) }} USD
-                        </p>
-                    </div>
-                    <div>
-                        <label>{{ $t('earn.delegate.summary.fee') }}</label>
-                        <p v-if="currency_type === 'EZC'">
-                            {{ totalFeeBig.toLocaleString(2) }} EZC
-                        </p>
-                        <p v-if="currency_type === 'USD'">
-                            ${{ totalFeeUsdBig.toLocaleString(2) }} USD
-                        </p>
+                    <div style="width: 184px !important; padding-left: 12px">
+                        <v-btn
+                            @click="cancel"
+                            block
+                            style="
+                                width: 184px !important;
+                                height: 40px;
+                                margin-right: 12px;
+                                background: #171717 !important;
+                                border-radius: 8px;
+                            "
+                            class="button_secondary"
+                            depressed
+                            v-if="txStatus && isSuccess"
+                        >
+                            Back to Earn
+                        </v-btn>
                     </div>
                 </div>
-                <div v-if="isSuccess" class="success_cont" style="padding-left: 30px">
-                    <!--                    <h2>{{ $t('earn.delegate.success.title') }}</h2>-->
-                    <!--                    <p>{{ $t('earn.delegate.success.desc') }}</p>-->
-                    <!--                    <p class="tx_id">Tx ID: {{ txId }}</p>-->
-                    <div class="tx_status">
+                <div>
+                    <div class="summary">
                         <div>
-                            <label>{{ $t('earn.delegate.success.status') }}</label>
-                            <p v-if="!txStatus">Waiting..</p>
-                            <p
-                                v-else
-                                :style="`color: ${txStatus === 'Committed' ? 'green' : 'red'}`"
-                            >
-                                {{ $t('earn.delegate.success.title') }}
+                            <label>{{ $t('earn.delegate.summary.duration') }} *</label>
+                            <p>{{ stakingDurationText }}</p>
+                        </div>
+                        <div>
+                            <label>{{ $t('earn.delegate.summary.reward') }}</label>
+                            <p v-if="currency_type === 'EZC'">
+                                {{ rewardStake.toLocaleString(2) }} EZC
+                            </p>
+                            <p v-if="currency_type === 'USD'">
+                                ${{ estimatedRewardUSD.toLocaleString(2) }} USD
                             </p>
                         </div>
-                        <div class="status_icon">
-                            <Spinner v-if="!txStatus"></Spinner>
-                            <p style="color: var(--success)" v-if="txStatus === 'Committed'">
-                                <fa icon="check-circle"></fa>
+                        <div>
+                            <label>{{ $t('earn.delegate.summary.fee') }}</label>
+                            <p v-if="currency_type === 'EZC'">
+                                {{ totalFeeBig.toLocaleString(2) }} EZC
                             </p>
-                            <p style="color: var(--error)" v-if="txStatus === 'Dropped'">
-                                <fa icon="times-circle"></fa>
+                            <p v-if="currency_type === 'USD'">
+                                ${{ totalFeeUsdBig.toLocaleString(2) }} USD
                             </p>
                         </div>
                     </div>
-                    <div class="reason_cont" v-if="txReason">
-                        <label>{{ $t('earn.delegate.success.reason') }}</label>
-                        <p>{{ txReason }}</p>
+                    <div v-if="isSuccess" class="success_cont" style="padding-left: 30px">
+                        <!--                    <h2>{{ $t('earn.delegate.success.title') }}</h2>-->
+                        <!--                    <p>{{ $t('earn.delegate.success.desc') }}</p>-->
+                        <!--                    <p class="tx_id">Tx ID: {{ txId }}</p>-->
+                        <div class="tx_status">
+                            <div>
+                                <label>{{ $t('earn.delegate.success.status') }}</label>
+                                <p v-if="!txStatus">Waiting..</p>
+                                <p
+                                    v-else
+                                    :style="`color: ${txStatus === 'Committed' ? 'green' : 'red'}`"
+                                >
+                                    {{ $t('earn.delegate.success.title') }}
+                                </p>
+                            </div>
+                            <div class="status_icon">
+                                <Spinner v-if="!txStatus"></Spinner>
+                                <p style="color: var(--success)" v-if="txStatus === 'Committed'">
+                                    <fa icon="check-circle"></fa>
+                                </p>
+                                <p style="color: var(--error)" v-if="txStatus === 'Dropped'">
+                                    <fa icon="times-circle"></fa>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reason_cont" v-if="txReason">
+                            <label>{{ $t('earn.delegate.success.reason') }}</label>
+                            <p>{{ txReason }}</p>
+                        </div>
                     </div>
+                    <Expandable style="padding-left: 30px">
+                        <template v-slot:triggerOn>
+                            <p>
+                                {{ $t('earn.shared.advanced.toggle_on') }}
+                            </p>
+                        </template>
+                        <template v-slot:triggerOff>
+                            <p>
+                                {{ $t('earn.shared.advanced.toggle_off') }}
+                            </p>
+                        </template>
+                        <template v-slot:content>
+                            <UtxoSelectForm
+                                style="margin: 10px 0"
+                                v-model="formUtxos"
+                            ></UtxoSelectForm>
+                        </template>
+                    </Expandable>
                 </div>
-                <Expandable style="padding-left: 30px">
-                    <template v-slot:triggerOn>
-                        <p>
-                            {{ $t('earn.shared.advanced.toggle_on') }}
-                        </p>
-                    </template>
-                    <template v-slot:triggerOff>
-                        <p>
-                            {{ $t('earn.shared.advanced.toggle_off') }}
-                        </p>
-                    </template>
-                    <template v-slot:content>
-                        <UtxoSelectForm style="margin: 10px 0" v-model="formUtxos"></UtxoSelectForm>
-                    </template>
-                </Expandable>
             </div>
         </div>
     </div>
@@ -701,7 +716,6 @@ label {
     padding: 2px 14px;
     font-size: 13px;
     border-radius: 6px;
-    margin-bottom: 14px;
 }
 
 .node_col {

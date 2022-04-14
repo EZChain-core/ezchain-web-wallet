@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1>{{ $t('cross_chain.title') }}</h1>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
+            {{ $t('cross_chain.title') }}
+        </h1>
         <div class="flex_two no_scroll_bar">
             <ChainTransfer class="top_crosschain"></ChainTransfer>
             <transition name="fade" mode="out-in">
@@ -32,17 +34,6 @@ export default class CrossChain extends Vue {}
     grid-gap: 12px;
     height: 506px;
     overflow: overlay;
-}
-h1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 44px;
-    /* identical to box height */
-
-    /* Neutral/800 */
-
-    color: #262626;
 }
 .head {
     margin-bottom: 14px;

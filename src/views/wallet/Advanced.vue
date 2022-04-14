@@ -1,16 +1,6 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
-            Setting
-        </h1>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">Setting</h1>
         <div class="grids">
             <div style="margin: 0 auto">
                 <div>
@@ -141,10 +131,6 @@ export default class Advanced extends Vue {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
-h1 {
-    font-weight: normal;
-}
 .grids {
     display: flex;
     background: #ffffff;

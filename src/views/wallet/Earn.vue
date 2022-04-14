@@ -1,14 +1,6 @@
 <template>
     <div>
-        <h1
-            style="
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 44px;
-                color: #262626;
-            "
-        >
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
             {{ $t('earn.title') }}
         </h1>
         <div class="flex_three">

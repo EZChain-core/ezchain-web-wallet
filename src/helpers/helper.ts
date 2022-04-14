@@ -16,6 +16,7 @@ import {
 import Big from 'big.js'
 import { Buffer, BN } from 'avalanche'
 import createHash from 'create-hash'
+import axios from 'axios'
 
 const SECONDS_PER_YEAR = 31536000 //31556952
 
@@ -161,5 +162,17 @@ function getPayloadFromUTXO(utxo: UTXO): PayloadBase {
 
     return payloadbase
 }
-
-export { keyToKeypair, calculateStakingReward, bnToBig, digestMessage, getPayloadFromUTXO }
+async function getNameValidator(Node_ids: string) {
+    let dataNameNodeId = await axios.get(
+        `https://api.ezchain.com/v1/service/validators?node_ids=${Node_ids}`
+    )
+    return dataNameNodeId
+}
+export {
+    keyToKeypair,
+    calculateStakingReward,
+    bnToBig,
+    digestMessage,
+    getPayloadFromUTXO,
+    getNameValidator,
+}

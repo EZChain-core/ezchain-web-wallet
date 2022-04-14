@@ -6,7 +6,7 @@
         </transition>
         <div>
             <top-nav-bar class="top_nav_bar"></top-nav-bar>
-            <div class="wallet_main">
+            <div class="wallet_main min-h-screen bg-EZC-bgDefault pt-2 px-5 pb-2">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
                         <router-view
@@ -120,7 +120,6 @@ export default class Wallet extends Vue {
     display: grid;
     grid-template-columns: 300px 1fr;
     height: 100%;
-    background: #f5f5f5;
 }
 
 .sidenav {
@@ -133,9 +132,7 @@ export default class Wallet extends Vue {
 }
 
 .wallet_main {
-    display: grid;
-    grid-template-rows: 550px 306px;
-    padding: 2px 40px 5px 40px;
+    background-color: #f5f5f5;
 }
 .page_fade-enter-active,
 .page_fade-leave-active {

@@ -2,10 +2,15 @@
     <div class="wallet_sidebar">
         <div class="stick">
             <div class="brand">
-                <img v-if="$root.theme === 'day'" src="@/assets/logo_mainz.png" />
-                <img v-else src="@/assets/wallet_logo_dark.png" />
+                <img
+                    width="186"
+                    height="40"
+                    v-if="$root.theme === 'day'"
+                    src="@/assets/Ezchain_Logo.png"
+                />
+                <img width="186" height="40" v-else src="@/assets/wallet_logo_dark.png" />
             </div>
-            <div class="links">
+            <div class="links mt-4">
                 <router-link to="/wallet" class="wallet_link">
                     <img v-if="$root.theme === 'day'" src="@/assets/sidebar/por.png" />
                     <img v-else src="@/assets/sidebar/portfolio_nav_night.png" />
@@ -39,11 +44,6 @@
                     <img v-else src="@/assets/sidebar/activity_nav_night.svg" />
                     {{ $t('wallet.sidebar.activity') }}
                 </router-link>
-                <!--                <router-link to="/wallet/keys" data-cy="wallet_manage" class="wallet_link">-->
-                <!--                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/manage_nav.png" />-->
-                <!--                    <img v-else src="@/assets/sidebar/manage_nav_night.svg" />-->
-                <!--                    {{ $t('wallet.sidebar.manage') }}-->
-                <!--                </router-link>-->
             </div>
             <div class="bottom" style="display: none">
                 <transition name="fade" mode="out-in">
@@ -90,6 +90,7 @@ export default {
         img {
             width: 186px;
             object-fit: contain;
+            height: 40px;
         }
     }
 
