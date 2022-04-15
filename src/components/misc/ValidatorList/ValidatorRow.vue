@@ -12,7 +12,7 @@
                 v-else
                 class="w-10 h-10 rounded-full"
                 loading="eager|lazy"
-                src="@/assets/server-data-default.jpg"
+                src="@/assets/Logo_default.png"
                 alt="logo"
             />
         </td>
