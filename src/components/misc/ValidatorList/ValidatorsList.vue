@@ -11,19 +11,19 @@
             <table>
                 <thead>
                     <tr class="bg-white-a500">
+                        <th></th>
                         <th>{{ $t('earn.delegate.list.id') }}</th>
-                        <th>Name</th>
                         <th style="text-align: right">
                             {{ $t('earn.delegate.list.val_stake') }}
                         </th>
                         <th style="text-align: right">
                             {{ $t('earn.delegate.list.aval_stake') }}
-                            <Tooltip
-                                style="display: inline-block"
-                                :text="$t('earn.delegate.list.aval_stake_tip')"
-                            >
-                                <fa icon="question-circle"></fa>
-                            </Tooltip>
+                            <!--                            <Tooltip-->
+                            <!--                                style="display: inline-block"-->
+                            <!--                                :text="$t('earn.delegate.list.aval_stake_tip')"-->
+                            <!--                            >-->
+                            <!--                                <fa icon="question-circle"></fa>-->
+                            <!--                            </Tooltip>-->
                         </th>
                         <th>
                             <Tooltip text="Number of Delegators"><fa icon="users"></fa></Tooltip>
@@ -88,7 +88,10 @@ export default class ValidatorsList extends Vue {
 
         if (this.search) {
             list = list.filter((v) => {
-                return v.nodeID.includes(this.search.trim()) || v.name?.includes(this.search.trim())
+                return (
+                    v.nodeID.includes(this.search.trim()) ||
+                    v.name?.toLowerCase()?.includes(this.search.toLowerCase().trim())
+                )
             })
         }
 
@@ -146,7 +149,6 @@ th {
     background-color: white;
     border-bottom: 1px solid #f5f5f5;
 }
-
 .empty_list {
     padding: 30px;
     text-align: center;

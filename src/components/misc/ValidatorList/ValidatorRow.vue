@@ -1,7 +1,27 @@
 <template>
     <tr class="validator_row">
-        <td class="id">{{ validator.nodeID }}</td>
-        <td class="name">{{ validator.name }}</td>
+        <td class="logoUrl flex-shrink-0">
+            <img
+                v-if="validator.logoUrl"
+                class="w-10 h-10 rounded-full"
+                loading="eager|lazy"
+                :src="validator.logoUrl"
+                alt="logo"
+            />
+            <img
+                v-else
+                class="w-10 h-10 rounded-full"
+                loading="eager|lazy"
+                src="@/assets/server-data-default.jpg"
+                alt="logo"
+            />
+        </td>
+        <td class="id">
+            <span v-if="validator.name" class="font-bold text-xs text-black block">
+                {{ validator.name }}
+            </span>
+            <span style="font-size: 12px; color: #525252">{{ validator.nodeID }}</span>
+        </td>
         <td class="amount">{{ amtText }}</td>
         <td class="amount">{{ remainingAmtText }}</td>
         <td style="text-align: center">{{ numDelegators }}</td>
@@ -149,6 +169,14 @@ td {
     font-size: 12px;
     line-height: 16px;
     color: #262626;
+}
+tr {
+    border-bottom: 1px solid #f5f5f5;
+}
+.logoUrl {
+    padding: 0;
+    margin-right: 16px;
+    width: 40px;
 }
 
 @include main.medium-device {

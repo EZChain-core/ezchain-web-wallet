@@ -504,7 +504,7 @@
             "list": {
                 "prompt": "Select a node to delegate",
                 "search": "Search Node ID",
-                "id": "Node ID",
+                "id": "Name/NodeID",
                 "val_stake": "Validator Stake",
                 "aval_stake": "Available",
                 "aval_stake_tip": "How much more can be delegated to this validator.",

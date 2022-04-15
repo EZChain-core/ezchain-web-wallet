@@ -106,11 +106,13 @@ const platform_module: Module<PlatformState, RootState> = {
             let res: ValidatorListItem[] = []
             for (let i = 0; i < validators.length; i++) {
                 let nameNode = ''
+                let logo_url = ''
                 let v = validators[i]
                 let nameDataNodeValidator = state.nameNodeId
                 nameDataNodeValidator.forEach((els: any, k) => {
                     if (els.node_id === v.nodeID) {
                         nameNode = els.name
+                        logo_url = els.logo_url
                     }
                 })
                 nameValidatorArray.push(validators[i].nodeID)
@@ -143,6 +145,7 @@ const platform_module: Module<PlatformState, RootState> = {
                 let remainingStake = stakeLimit.sub(validatorStake).sub(delegatedStake)
                 let listItem: ValidatorListItem = {
                     nodeID: v.nodeID,
+                    logoUrl: logo_url,
                     name: nameNode,
                     validatorStake: validatorStake,
                     delegatedStake: delegatedStake,

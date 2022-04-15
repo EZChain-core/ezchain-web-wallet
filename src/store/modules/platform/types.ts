@@ -44,6 +44,7 @@ export interface ValidatorDict {
 
 export interface ValidatorListItem {
     nodeID: string
+    logoUrl: string | undefined
     name: string | undefined
     validatorStake: BN
     delegatedStake: BN
