@@ -45,7 +45,6 @@ const platform_module: Module<PlatformState, RootState> = {
             validators.forEach((el, k) => {
                 newArray.push(el.nodeID)
             })
-            console.log(newArray.length)
             let nodeIds = newArray.toString()
             const arrayNodeIds = await getNameValidator(nodeIds)
             state.nameNodeId = arrayNodeIds.data.data
@@ -114,8 +113,6 @@ const platform_module: Module<PlatformState, RootState> = {
                         nameNode = els.name
                     }
                 })
-                console.log(nameDataNodeValidator)
-                console.log('nhat222', nameNode)
                 nameValidatorArray.push(validators[i].nodeID)
                 let nodeID = v.nodeID
                 let delegators: DelegatorRaw[] = delegatorMap[nodeID] || []
@@ -159,7 +156,6 @@ const platform_module: Module<PlatformState, RootState> = {
                 res.push(listItem)
             }
             const newStringNodeId = nameValidatorArray.toString()
-            console.log('newStringNodeId', newStringNodeId)
 
             res = res.filter((v) => {
                 // Remove if remaining space is less than minimum

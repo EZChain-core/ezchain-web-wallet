@@ -88,7 +88,7 @@ export default class ValidatorsList extends Vue {
 
         if (this.search) {
             list = list.filter((v) => {
-                return v.nodeID.includes(this.search) || v.name?.includes(this.search)
+                return v.nodeID.includes(this.search.trim()) || v.name?.includes(this.search.trim())
             })
         }
 
