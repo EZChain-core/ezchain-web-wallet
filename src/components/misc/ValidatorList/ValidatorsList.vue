@@ -10,7 +10,7 @@
         <div class="table_cont no_scroll_bar">
             <table>
                 <thead>
-                    <tr class="header_tr">
+                    <tr class="bg-white-a500">
                         <th>{{ $t('earn.delegate.list.id') }}</th>
                         <th>Name</th>
                         <th style="text-align: right">
@@ -29,15 +29,6 @@
                             <Tooltip text="Number of Delegators"><fa icon="users"></fa></Tooltip>
                         </th>
                         <th>{{ $t('earn.delegate.list.end') }}</th>
-                        <!--                        <th>-->
-                        <!--                            {{ $t('earn.delegate.list.up') }}-->
-                        <!--                            <Tooltip-->
-                        <!--                                style="display: inline-block"-->
-                        <!--                                :text="$t('earn.delegate.list.up_tip')"-->
-                        <!--                            >-->
-                        <!--                                <fa icon="question-circle"></fa>-->
-                        <!--                            </Tooltip>-->
-                        <!--                        </th>-->
                         <th>{{ $t('earn.delegate.list.fee') }}</th>
                         <th></th>
                     </tr>
@@ -97,7 +88,7 @@ export default class ValidatorsList extends Vue {
 
         if (this.search) {
             list = list.filter((v) => {
-                return v.nodeID.includes(this.search)
+                return v.nodeID.includes(this.search) || v.name?.includes(this.search)
             })
         }
 
@@ -143,8 +134,6 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
-tr {
-}
 th {
     position: sticky;
     top: 0;
@@ -154,6 +143,7 @@ th {
     font-size: 12px;
     line-height: 16px;
     color: #a3a3a3;
+    background-color: white;
     border-bottom: 1px solid #f5f5f5;
 }
 

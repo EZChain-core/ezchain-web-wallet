@@ -1,2 +1,2 @@
-export * from './history'
+export * from './history';
 //# sourceMappingURL=index.js.map

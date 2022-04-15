@@ -33,12 +33,6 @@
                             <img class="mr-2" src="@/assets/eyes.svg" alt="" />
                             <span class="text-sm text-EZC-bgButton font-bold">View</span>
                         </button>
-                        <!--                        <button-->
-                        <!--                            v-if="walletType === 'ledger'"-->
-                        <!--                            :tooltip="$t('create.verify')"-->
-                        <!--                            @click="verifyLedgerAddress"-->
-                        <!--                            class="ledger_but"-->
-                        <!--                        ></button>-->
                         <CopyText
                             :tooltip="$t('top.hover3')"
                             :value="activeAddress"
@@ -302,12 +296,6 @@ export default class AddressCard extends Vue {
         }
     }
 }
-.print_but {
-    background-image: url('/img/faucet_icon.png');
-}
-.ledger_but {
-    background-image: url('/img/ledger_icon.png');
-}
 .copy_but {
     color: var(--primary-color);
 }
@@ -316,25 +304,6 @@ export default class AddressCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.mainnet_but {
-    background-image: url('/img/modal_icons/mainnet_addr.svg');
-}
-
-@include main.night-mode {
-    // .qr_but {
-    //     background-image: url('/img/qr_icon_night.svg');
-    // }
-    .print_but {
-        background-image: url('/img/print_icon_night.svg');
-    }
-    .ledger_but {
-        background-image: url('/img/ledger_night.svg');
-    }
-
-    .mainnet_but {
-        background-image: url('/img/modal_icons/mainnet_addr_night.svg');
-    }
 }
 
 .addr_info {

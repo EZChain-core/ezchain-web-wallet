@@ -7,7 +7,7 @@ import {
 import { BN } from 'ezchainjs2'
 
 export interface PlatformState {
-    nameNodeId: any | undefined
+    nameNodeId: []
     validators: ValidatorRaw[]
     validatorsPending: ValidatorPendingRaw[]
     delegatorsPending: DelegatorPendingRaw[]

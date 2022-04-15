@@ -9,13 +9,6 @@
                     v-model="search"
                 />
             </div>
-
-            <!--            <div class="rigt_but">-->
-            <!--                <button @click="openFilters">-->
-            <!--                    {{ $t('earn.delegate.filter.title') }}-->
-            <!--                    <fa icon="filter"></fa>-->
-            <!--                </button>-->
-            <!--            </div>-->
         </div>
         <ValidatorsList
             class="val_list"

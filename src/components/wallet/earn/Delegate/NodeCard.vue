@@ -1,9 +1,7 @@
 <template>
     <div>
         <p class="text-md text-EZC-grayText">
-            <span v-if="nameNodeId" class="font-bold text-EZC-bgBlackButton">
-                {{ nameNodeId }} -
-            </span>
+            <span v-if="node.name" class="font-bold text-EZC-bgBlackButton">{{ node.name }} -</span>
             {{ node.nodeID }}
         </p>
     </div>
@@ -50,14 +48,6 @@ export default class NodeCard extends Vue {
 
     get vscoutURL() {
         return `https://vscout.io/validator/${this.node.nodeID}`
-    }
-    async validatorNodeName() {
-        let nameData = await getNameValidator(this.node.nodeID)
-        this.nameNodeId = nameData.data.data[0].name
-        return nameData.data.data[0].name
-    }
-    mounted() {
-        this.validatorNodeName()
     }
 }
 </script>
