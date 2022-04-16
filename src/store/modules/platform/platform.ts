@@ -167,7 +167,15 @@ const platform_module: Module<PlatformState, RootState> = {
                 return true
             })
 
-            return res
+            return res.sort(function (a, b) {
+                if ((a.name as string) > (b.name as string)) {
+                    return -1
+                }
+                if ((b.name as string) > (a.name as string)) {
+                    return 1
+                }
+                return 0
+            })
         },
 
         // Maps delegators to a node id
