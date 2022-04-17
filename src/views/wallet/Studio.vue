@@ -28,7 +28,7 @@
                 </div>
                 <template v-if="!pageNow">
                     <div class="menu">
-                        <div class="options">
+                        <div class="options grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
                             <div>
                                 <h4 class="title">{{ $t('studio.menu1.title') }}</h4>
                                 <p>{{ $t('studio.menu1.desc') }}</p>
@@ -151,7 +151,7 @@ export default class Studio extends Vue {
 <style scoped lang="scss">
 .flex_four {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 348px;
     grid-gap: 12px;
     height: 506px;
 }
@@ -163,7 +163,7 @@ export default class Studio extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 16px 16px;
-    overflow: overlay;
+    overflow: scroll;
 }
 .header {
     display: flex;
@@ -202,8 +202,6 @@ export default class Studio extends Vue {
 }
 
 .options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     column-gap: 14px;
     > div {
         border: 1px solid var(--bg-light);

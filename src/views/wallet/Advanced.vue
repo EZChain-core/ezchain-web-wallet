@@ -163,10 +163,6 @@ header {
     justify-content: space-between;
 }
 
-h1 {
-    font-weight: lighter;
-}
-
 .save_account {
     color: var(--warning);
 }

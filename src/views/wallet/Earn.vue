@@ -221,7 +221,7 @@ export default class Earn extends Vue {
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 16px 16px;
-    overflow: overlay;
+    overflow: scroll;
 }
 .bottom_earn {
     display: flex;
@@ -260,7 +260,7 @@ export default class Earn extends Vue {
 }
 .flex_three {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 348px;
     grid-gap: 12px;
     height: 506px;
 }

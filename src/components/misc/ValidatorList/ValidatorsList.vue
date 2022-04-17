@@ -129,8 +129,8 @@ export default class ValidatorsList extends Vue {
 
 .table_cont {
     overflow: scroll;
-    max-height: 330px;
-    height: 330px;
+    max-height: 380px;
+    height: 380px;
 }
 
 table {

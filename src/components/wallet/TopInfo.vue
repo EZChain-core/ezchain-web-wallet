@@ -1,6 +1,6 @@
 <template>
     <div
-        class="top_cards grid grid-cols-layout gap-x-3 shadow-md px-6 py-3 bg-white-a500 rounded-lg"
+        class="top_cards grid grid-cols-layout gap-x-3 shadow-md px-4 py-3 bg-white-a500 rounded-lg"
     >
         <balance-card class="top_card balance_card"></balance-card>
         <div class="flex justify-center items-center pl-6">

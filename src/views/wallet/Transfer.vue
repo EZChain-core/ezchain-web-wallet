@@ -537,7 +537,7 @@ $padTop: 8px;
     background: #ffffff;
     border-radius: 8px;
     padding: 24px 16px;
-    overflow: overlay;
+    overflow: scroll;
 }
 .disconnected {
     padding: 30px;
@@ -546,7 +546,7 @@ $padTop: 8px;
 }
 .top_transfer {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 348px;
     grid-gap: 12px;
     height: 506px;
 }
@@ -625,17 +625,10 @@ h4 {
 }
 
 .new_order_Form > div {
-    /*padding: 10px 0;*/
     margin-bottom: 15px;
 }
 .lists {
-    /*padding-right: 45px;*/
-    border-right: 1px solid var(--bg-light);
     grid-column: 1/3;
-
-    /*> div{*/
-    /*    margin: 14px 0;*/
-    /*}*/
 }
 
 .tx_list {

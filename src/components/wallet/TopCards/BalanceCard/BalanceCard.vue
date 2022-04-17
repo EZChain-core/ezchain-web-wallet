@@ -344,7 +344,7 @@ export default class BalanceCard extends Vue {
 .money_transaction {
     font-style: normal;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
     color: #171717;
 }
@@ -359,7 +359,6 @@ export default class BalanceCard extends Vue {
 }
 .fungible_card {
     height: 100%;
-    //display: grid !important;
     grid-template-rows: max-content 1fr max-content;
     flex-direction: column;
 }
@@ -460,7 +459,7 @@ h4 {
     color: #ddd;
     width: max-content;
     max-width: 100px;
-    font-size: 14px;
+    font-size: 12px;
     padding: 4px 8px;
 }
 
@@ -471,8 +470,7 @@ h4 {
     margin-top: 12px;
     > div {
         position: relative;
-        padding: 0 24px;
-        border-right: 2px solid var(--bg-light);
+        padding: 0 5px;
         &:first-of-type {
             padding-left: 0;
         }
@@ -482,7 +480,7 @@ h4 {
     }
 
     label {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--primary-color-light);
     }
 }
@@ -505,7 +503,6 @@ h4 {
 @include main.medium-device {
     .balance_card {
         display: block;
-        //grid-template-columns: 1fr 120px;
     }
 
     .balance {
@@ -535,9 +532,8 @@ h4 {
     }
 
     .nft_card {
-        padding: 0;
+        padding: 15px 0 0 0;
         margin-top: 15px;
-        padding-top: 15px;
         border-top: 1px solid var(--primary-color-light);
         border-left: none;
     }
