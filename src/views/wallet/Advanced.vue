@@ -6,7 +6,9 @@
                 <div>
                     <div class="card_body">
                         <header>
-                            <h2>{{ $t('keys.title') }}</h2>
+                            <h2 class="font-bold text-3.5xl text-EZC-bgBlackButton">
+                                {{ $t('keys.title') }}
+                            </h2>
                             <div class="button_container" v-if="canEncryptWallet">
                                 <button
                                     v-if="!account"
@@ -39,7 +41,7 @@
                         <my-keys></my-keys>
                     </div>
                 </div>
-                <h2>Advanced</h2>
+                <h2 class="font-bold text-3.5xl text-EZC-bgBlackButton">Advanced</h2>
                 <ChainImport class="grid_box"></ChainImport>
                 <SignMessage class="grid_box"></SignMessage>
                 <VerifyMessage class="grid_box"></VerifyMessage>
