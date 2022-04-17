@@ -108,7 +108,14 @@
                         <fa icon="check-circle"></fa>
                         {{ $t('earn.transfer.success.message') }}
                     </p>
-                    <v-btn depressed class="button_secondary" small block @click="startAgain">
+                    <v-btn
+                        depressed
+                        class="button_secondary"
+                        small
+                        block
+                        @click="startAgain"
+                        style="height: 40px !important"
+                    >
                         {{ $t('earn.transfer.success.again') }}
                     </v-btn>
                 </div>
