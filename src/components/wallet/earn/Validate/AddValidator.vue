@@ -719,8 +719,8 @@ export default class AddValidator extends Vue {
 
 form {
     display: grid;
-    grid-template-columns: 1fr 340px;
-    column-gap: 90px;
+    grid-template-columns: 1fr max-content;
+    column-gap: 24px;
 }
 .ins_col {
     max-width: 490px;
