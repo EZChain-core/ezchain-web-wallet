@@ -79,7 +79,13 @@ export default {
 </script>
 <style scoped lang="scss">
 @use '../../main';
-
+.no_scroll_bar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 .home_view {
     // display: grid;
     // grid-template-columns: 1fr 360px;

@@ -113,7 +113,7 @@
                     </v-btn>
                 </div>
             </div>
-            <div class="right_col">
+            <div class="right_col grid grid-cols-1 2xl:grid-cols-2 gap-x-3 gap-y-3">
                 <ChainCard :chain="sourceChain"></ChainCard>
                 <ChainCard :chain="targetChain" :is-source="false"></ChainCard>
                 <TxStateCard
@@ -597,21 +597,16 @@ export default class ChainTransfer extends Vue {
 
 .cols {
     display: grid;
-    grid-template-columns: max-content 1fr;
-    column-gap: 5vw;
+    grid-template-columns: 1fr max-content;
     background: #ffffff;
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 10px 16px;
-    height: 100%;
+    height: auto;
 }
 
 .right_col {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 14px;
-    row-gap: 2px;
     padding-top: 14px;
     height: max-content;
     //height: 100%;

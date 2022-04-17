@@ -3,10 +3,10 @@
         <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
             {{ $t('cross_chain.title') }}
         </h1>
-        <div class="flex_two no_scroll_bar">
-            <ChainTransfer class="top_crosschain"></ChainTransfer>
+        <div class="flex_two">
+            <ChainTransfer class="top_cross_chain no_scroll_bar"></ChainTransfer>
             <transition name="fade" mode="out-in">
-                <transaction-history-panel class="panel_content"></transaction-history-panel>
+                <transaction-history-panel class="panel_content h-full"></transaction-history-panel>
             </transition>
         </div>
         <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
@@ -30,23 +30,31 @@ export default class CrossChain extends Vue {}
 <style scoped lang="scss">
 .flex_two {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 348px;
     grid-gap: 12px;
-    height: 506px;
-    overflow: overlay;
+    max-height: 506px;
+}
+.top_cross_chain {
+    max-height: 506px;
+    overflow: scroll;
 }
 .head {
     margin-bottom: 14px;
-    //display: flex;
-    //align-items: center;
-    //justify-content: space-between;
 }
+.no_scroll_bar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
 @media (max-width: 640px) {
     .flex_two {
         grid-template-columns: 1fr;
         height: auto;
     }
-    .top_crosschain {
+    .top_cross_chain {
         min-height: 600px;
     }
 }
