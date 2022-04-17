@@ -10,7 +10,7 @@
         <div class="table_cont no_scroll_bar">
             <table>
                 <thead>
-                    <tr class="bg-white-a500">
+                    <tr class="bg-white-a500 shadow-xs">
                         <th></th>
                         <th>{{ $t('earn.delegate.list.id') }}</th>
                         <th style="text-align: right">

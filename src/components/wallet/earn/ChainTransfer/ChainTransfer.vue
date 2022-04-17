@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="cols">
+        <div class="cols no_scroll_bar">
             <div class="form">
                 <ChainSwapForm
                     ref="form"
@@ -597,13 +597,15 @@ export default class ChainTransfer extends Vue {
 
 .cols {
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: 1fr 1fr;
     background: #ffffff;
     box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
         inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
     border-radius: 8px;
     padding: 10px 16px;
-    height: auto;
+    column-gap: 24px;
+    overflow: scroll;
+    height: 506px;
 }
 
 .right_col {
