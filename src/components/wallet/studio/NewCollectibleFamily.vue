@@ -43,7 +43,7 @@
                             color: #171717;
                         "
                     >
-                        {{ $t('studio.family.fee') }}: {{ txFee.toLocaleString() }} AVAX
+                        {{ $t('studio.family.fee') }}: {{ txFee.toLocaleString() }} EZC
                     </p>
                 </div>
                 <p v-if="error" class="err">{{ error }}</p>
