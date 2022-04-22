@@ -86,6 +86,7 @@
         "serve": "11.3.2",
         "sockette": "2.0.6",
         "tailwindcss-truncate-multiline": "^1.0.3",
+        "tslib": "^2.4.0",
         "uniqid": "5.2.0",
         "url-regex": "^5.0.0",
         "uuid": "3.4.0",

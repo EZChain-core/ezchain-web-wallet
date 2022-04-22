@@ -14,7 +14,7 @@
 
                     <template v-if="nftFormType === 'custom'">
                         <!--                        <label>{{ $t('studio.mint.type_col.label2') }}</label>-->
-                        <lable>Title</lable>
+                        <label>Title</label>
                         <v-chip-group mandatory v-model="nftType">
                             <v-chip value="utf8" :disabled="isSuccess">UTF-8</v-chip>
                             <v-chip value="url" :disabled="isSuccess">URL</v-chip>
@@ -97,11 +97,11 @@
                     <div>
                         <div style="border-bottom: 1px solid #f5f5f5; padding: 10px 0">
                             <p>{{ $t('studio.mint.utxo_col.label1') }}</p>
-                            <lable>{{ family.name }}</lable>
+                            <label>{{ family.name }}</label>
                         </div>
                         <div style="border-bottom: 1px solid #f5f5f5; padding: 10px 0">
                             <p>{{ $t('studio.mint.utxo_col.label2') }}</p>
-                            <lable>{{ family.symbol }}</lable>
+                            <label>{{ family.symbol }}</label>
                         </div>
                     </div>
                 </div>
@@ -417,7 +417,7 @@ export default class MintNft extends Vue {
 .mint_form {
     padding: 10px 0;
 }
-lable {
+label {
     font-style: normal;
     font-weight: bold;
     font-size: 14px;

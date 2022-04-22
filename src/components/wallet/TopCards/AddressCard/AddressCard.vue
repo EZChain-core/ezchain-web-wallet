@@ -22,7 +22,7 @@
                     <span class="text-xs text-EZC-grayText mt-3">Wallet Address</span>
 
                     <p
-                        style="word-break: break-word"
+                        style="word-break: break-all"
                         class="text-md xl:text-base text-EZC-bgBlackButton"
                         data-cy="wallet_address"
                     >
