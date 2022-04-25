@@ -448,7 +448,7 @@ export default class AddValidator extends Vue {
     get maxDelegationAmt(): BN {
         let stakeAmt = this.stakeAmt
 
-        let maxRelative = stakeAmt.mul(new BN(5))
+        let maxRelative = stakeAmt.mul(new BN(21))
 
         // absolute max stake
         let mult = new BN(10).pow(new BN(6 + 9))
