@@ -173,7 +173,7 @@ var platform_module = {
                 var validatorStake = new BN(v.stakeAmount)
                 // Calculate remaining stake
                 var absMaxStake = ONEAVAX.mul(new BN(3000000))
-                var relativeMaxStake = validatorStake.mul(new BN(5))
+                var relativeMaxStake = validatorStake.mul(new BN(21))
                 var stakeLimit = BN.min(absMaxStake, relativeMaxStake)
                 var remainingStake = stakeLimit.sub(validatorStake).sub(delegatedStake)
                 var listItem = {
@@ -231,7 +231,7 @@ var platform_module = {
             return function (validator) {
                 var stakeAmt = validator.validatorStake
                 // 5 times the validator's stake
-                var relativeMaxStake = stakeAmt.mul(new BN(5))
+                var relativeMaxStake = stakeAmt.mul(new BN(21))
                 // absolute max stake
                 var mult = new BN(10).pow(new BN(6 + 9))
                 var absMaxStake = new BN(3).mul(mult)
