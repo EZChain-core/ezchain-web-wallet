@@ -147,6 +147,7 @@ export default class BalanceCard extends Vue {
     updateBalance(): void {
         this.$store.dispatch('Assets/updateUTXOs')
         this.$store.dispatch('History/updateTransactionHistory')
+        this.$store.dispatch('updateAvaxPrice')
     }
 
     showUTXOsModal() {

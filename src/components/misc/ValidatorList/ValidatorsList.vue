@@ -113,7 +113,12 @@ export default class ValidatorsList extends Vue {
     }
 
     get validatorsFiltered(): ValidatorListItem[] {
-        return filterValidatorList(this.validators, this.filter)
+        let notNameValidator = this.validators.filter((el) => el.name === '')
+        let hasNameValidator = this.validators.filter((el) => el.name !== '')
+        notNameValidator.forEach((el) => {
+            hasNameValidator.push(el)
+        })
+        return filterValidatorList(hasNameValidator, this.filter)
     }
 
     onselect(val: ValidatorListItem) {

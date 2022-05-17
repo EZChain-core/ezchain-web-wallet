@@ -18,6 +18,7 @@
                                     {{ $t('earn.delegate.form.period.label') }}
                                 </h4>
                                 <DateForm
+                                    @change="changeInput"
                                     @change_end="setEnd"
                                     :max-end-date="endMaxDate"
                                 ></DateForm>
@@ -175,9 +176,6 @@
                         </div>
                     </div>
                     <div v-if="isSuccess" class="success_cont" style="padding-left: 30px">
-                        <!--                    <h2>{{ $t('earn.delegate.success.title') }}</h2>-->
-                        <!--                    <p>{{ $t('earn.delegate.success.desc') }}</p>-->
-                        <!--                    <p class="tx_id">Tx ID: {{ txId }}</p>-->
                         <div class="tx_status">
                             <div>
                                 <label>{{ $t('earn.delegate.success.status') }}</label>
@@ -543,7 +541,6 @@ export default class AddDelegator extends Vue {
     // Maximum end date is end of validator's staking duration
     get endMaxDate(): string | undefined {
         if (!this.selected) return undefined
-
         return this.selected.endTime.toISOString()
     }
 
@@ -551,6 +548,7 @@ export default class AddDelegator extends Vue {
         let start = new Date(this.startDate)
         let end = new Date(this.endDate)
         let dur = end.getTime() - start.getTime()
+        this.calculateEstimatedReward()
         return dur
     }
 

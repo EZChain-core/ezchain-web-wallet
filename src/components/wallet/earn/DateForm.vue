@@ -1,17 +1,8 @@
 <template>
     <div class="dates_form">
-        <!--        <div>-->
-        <!--            <label>{{ $t('earn.validate.duration.start') }}</label>-->
-        <!--            <datetime-->
-        <!--                v-model="localStart"-->
-        <!--                type="datetime"-->
-        <!--                class="date hover_border"-->
-        <!--                :min-datetime="startDateMin"-->
-        <!--                :max-datetime="startDateMax"-->
-        <!--            ></datetime>-->
-        <!--        </div>-->
         <div class="hover_border">
             <datetime
+                input-id="vueDateTime"
                 style="background-color: #f5f5f5"
                 v-model="localEnd"
                 type="datetime"
@@ -28,6 +19,7 @@
                     MAX
                 </button>
                 <div
+                    @click="showModal"
                     style="
                         background: #ffffff;
                         box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
@@ -39,7 +31,7 @@
                         align-items: center;
                     "
                 >
-                    <img src="@/assets/max.png" alt="max.png" />
+                    <img class="cursor-pointer" src="@/assets/max.png" alt="max.png" />
                 </div>
             </div>
         </div>
@@ -90,7 +82,12 @@ export default class DateForm extends Vue {
         // this.setStartDate(this.localStart)
         this.setEndDate(this.localEnd)
     }
-
+    showModal() {
+        const dateTime: HTMLElement | null = document.getElementById('vueDateTime')
+        if (dateTime) {
+            dateTime.click()
+        }
+    }
     // updateTimeNow() {
     //     this.timeNow = Date.now()
     //
