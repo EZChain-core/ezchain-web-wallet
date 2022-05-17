@@ -80,7 +80,6 @@ export default class Wallet extends Vue {
 
     mounted() {
         let view = this.$refs.wallet_view as HTMLDivElement
-        console.log('hello', this.$route.path)
         view.addEventListener('mousemove', this.resetTimer)
         view.addEventListener('mousedown', this.resetTimer)
 
@@ -160,7 +159,7 @@ export default class Wallet extends Vue {
     }
     #wallet_router {
         padding: 12px 18px;
-        overflow: overlay;
+        overflow: scroll;
     }
 }
 @media (max-width: 640px) {

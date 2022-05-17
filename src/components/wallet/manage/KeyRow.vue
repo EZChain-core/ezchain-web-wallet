@@ -81,7 +81,7 @@
                                 @click="showModal"
                                 style="margin-right: 8px"
                             >
-                                <img src="@/assets/eyes.png" alt="eyes" />
+                                <img class="mr-1" src="@/assets/eyes.png" alt="eyes" />
                                 <span>{{ $t('keys.view_key') }}</span>
                             </button>
                             <button
