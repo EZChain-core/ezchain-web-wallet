@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown hover_border" :active="isPopup">
+    <div class="dropdown hover_border bg-EZC-bgDefault h-11 rounded-lg" :active="isPopup">
         <button @click="showPopup" :disabled="disabled">
             {{ symbol }}
             <!--            <fa icon="caret-down" style="float: right"></fa>-->

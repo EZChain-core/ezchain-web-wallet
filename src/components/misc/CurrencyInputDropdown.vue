@@ -1,33 +1,51 @@
 <template>
     <div>
         <div class="curr_in_drop">
-            <div class="max_in_cont hover_border">
-                <button class="max_but" @click="maxOut" :disabled="disabled">MAX</button>
-                <div class="col_big_in">
-                    <big-num-input
-                        ref="bigIn"
-                        @change="amount_in"
-                        class="bigIn"
-                        contenteditable="bigIn"
-                        :max="max_amount"
-                        :denomination="denomination"
-                        :step="stepSize"
-                        :placeholder="placeholder"
-                        :disabled="disabled"
-                    ></big-num-input>
-                    <p class="usd_val" :active="isAvax">${{ amountUSD.toLocaleString(2) }}</p>
+            <div class="grid grid-cols-amount gap-5">
+                <div>
+                    <p class="text-md font-bold text-EZC-bgBlackButton">
+                        {{ $t('transfer.tx_list.amount') }}
+                    </p>
+                    <div>
+                        <div class="max_in_cont relative hover_border bg-EZC-bgDefault rounded-lg">
+                            <big-num-input
+                                ref="bigIn"
+                                @change="amount_in"
+                                class="bigIn w-full h-full"
+                                contenteditable="bigIn"
+                                :max="max_amount"
+                                :denomination="denomination"
+                                :step="stepSize"
+                                :placeholder="placeholder"
+                                :disabled="disabled"
+                            ></big-num-input>
+                            <button
+                                class="absolute right-0 text-base font-bold text-EZC-grayText h-full w-18"
+                                @click="maxOut"
+                                :disabled="disabled"
+                            >
+                                MAX
+                            </button>
+                        </div>
+                        <div class="col_balance flex justify-between items-center">
+                            <p :active="isAvax">${{ amountUSD.toLocaleString(2) }}</p>
+                            <p>
+                                {{ $t('misc.balance') }}:
+                                {{ maxAmountBig.toLocaleString(denomination) }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <BalanceDropdown
-                :disabled_assets="disabled_assets"
-                v-model="asset_now"
-                :disabled="disabled"
-            ></BalanceDropdown>
-            <div class="col_balance">
-                <p>
-                    {{ $t('misc.balance') }}:
-                    {{ maxAmountBig.toLocaleString(denomination) }}
-                </p>
+                <div>
+                    <p class="text-md font-bold text-EZC-bgBlackButton">
+                        {{ $t('transfer.tx_list.token') }}
+                    </p>
+                    <BalanceDropdown
+                        :disabled_assets="disabled_assets"
+                        v-model="asset_now"
+                        :disabled="disabled"
+                    ></BalanceDropdown>
+                </div>
             </div>
         </div>
     </div>
@@ -226,34 +244,31 @@ export default class CurrencyInputDropdown extends Vue {
 }
 
 .max_in_cont {
-    position: relative;
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    padding: 8px 14px;
+    height: 43px;
 }
 
 .curr_in_drop {
-    display: grid;
-    grid-template-columns: 1fr 90px;
-    background-color: transparent;
-    //font-size: 12px;
-    width: 100%;
-    outline: none;
-    text-align: right;
-    column-gap: 10px;
+    // display: grid;
+    // grid-template-columns: 1fr 90px;
+    // background-color: transparent;
+    // //font-size: 12px;
+    // width: 100%;
+    // outline: none;
+    // text-align: right;
+    // column-gap: 10px;
 
-    > * {
-        background-color: var(--bg-light);
-        border-radius: 8px;
-    }
+    // > * {
+    //     background-color: var(--bg-light);
+    //     border-radius: 8px;
+    // }
 }
 
 input {
     flex-grow: 1;
     outline: none;
-    text-align: right;
     flex-basis: 0px;
-    width: 0px;
+    text-align: left;
+    padding-left: 16px;
     color: var(--primary-color);
 }
 
@@ -299,14 +314,12 @@ input {
 }
 
 .col_big_in {
-    text-align: right;
     font-family: monospace;
     display: flex;
     flex-direction: column;
 }
 
 .col_balance {
-    padding-right: 14px;
     padding-top: 2px !important;
     font-size: 15px;
     color: var(--primary-color-light);

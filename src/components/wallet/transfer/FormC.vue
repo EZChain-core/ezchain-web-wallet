@@ -17,109 +17,109 @@
                     :gas-limit="gasLimit"
                 ></EVMInputDropdown>
             </div>
-        </div>
-        <div class="right_col">
-            <div class="to_address">
-                <h4>{{ $t('transfer.to') }}</h4>
-                <qr-input
-                    v-model="addressIn"
-                    class="qrIn"
-                    placeholder="xxx"
-                    :disabled="isConfirm"
-                ></qr-input>
-            </div>
-            <div class="gas_cont">
-                <div>
-                    <h4>
-                        {{ $t('transfer.c_chain.gasPrice') }}
-                        <br />
-                        <small>Adjusted automatically according to network load.</small>
-                    </h4>
-                    <p></p>
-                    <input
-                        type="number"
-                        v-model="gasPriceNumber"
-                        min="0"
-                        inputmode="numeric"
-                        disabled
-                    />
+            <div class="right_col">
+                <div class="to_address">
+                    <h4>{{ $t('transfer.to') }}</h4>
+                    <qr-input
+                        v-model="addressIn"
+                        class="qrIn"
+                        placeholder="xxx"
+                        :disabled="isConfirm"
+                    ></qr-input>
                 </div>
-                <div>
-                    <h4>{{ $t('transfer.c_chain.gasLimit') }}</h4>
-                    <template>
-                        <p v-if="!isConfirm" style="font-size: 13px">
-                            Gas Limit will be automatically calculated after you click Confirm.
-                        </p>
-                        <p v-else class="confirm_data">{{ gasLimit }}</p>
-                    </template>
+                <div class="gas_cont">
+                    <div>
+                        <h4>
+                            {{ $t('transfer.c_chain.gasPrice') }}
+                            <br />
+                            <small>Adjusted automatically according to network load.</small>
+                        </h4>
+                        <p></p>
+                        <input
+                            type="number"
+                            v-model="gasPriceNumber"
+                            min="0"
+                            inputmode="numeric"
+                            disabled
+                        />
+                    </div>
+                    <div>
+                        <h4>{{ $t('transfer.c_chain.gasLimit') }}</h4>
+                        <template>
+                            <p v-if="!isConfirm" style="font-size: 13px">
+                                Gas Limit will be automatically calculated after you click Confirm.
+                            </p>
+                            <p v-else class="confirm_data">{{ gasLimit }}</p>
+                        </template>
+                    </div>
                 </div>
-            </div>
 
-            <div class="fees" v-if="isConfirm">
-                <p>
-                    {{ $t('transfer.fee_tx') }}
-                    <span>{{ maxFeeText }} EZC</span>
-                </p>
-                <p>
-                    <span>${{ maxFeeUSD.toLocaleString(2) }} USD</span>
-                </p>
-            </div>
-            <template v-if="!isSuccess">
-                <p class="err">{{ err }}</p>
-                <v-btn
-                    class="button_primary checkout"
-                    depressed
-                    block
-                    @click="confirm"
-                    :disabled="!canConfirm"
-                    v-if="!isConfirm"
-                >
-                    {{ $t('transfer.c_chain.confirm') }}
-                </v-btn>
-                <template v-else>
+                <div class="fees" v-if="isConfirm">
+                    <p>
+                        {{ $t('transfer.fee_tx') }}
+                        <span>{{ maxFeeText }} EZC</span>
+                    </p>
+                    <p>
+                        <span>${{ maxFeeUSD.toLocaleString(2) }} USD</span>
+                    </p>
+                </div>
+                <template v-if="!isSuccess">
+                    <p class="err">{{ err }}</p>
                     <v-btn
                         class="button_primary checkout"
                         depressed
                         block
-                        @click="submit"
-                        :loading="isLoading"
+                        @click="confirm"
+                        :disabled="!canConfirm"
+                        v-if="!isConfirm"
                     >
-                        {{ $t('transfer.send') }}
+                        {{ $t('transfer.c_chain.confirm') }}
                     </v-btn>
+                    <template v-else>
+                        <v-btn
+                            class="button_primary checkout"
+                            depressed
+                            block
+                            @click="submit"
+                            :loading="isLoading"
+                        >
+                            {{ $t('transfer.send') }}
+                        </v-btn>
+                        <v-btn
+                            class="checkout"
+                            style="color: var(--primary-color)"
+                            text
+                            block
+                            @click="cancel"
+                            small
+                        >
+                            {{ $t('transfer.c_chain.cancel') }}
+                        </v-btn>
+                    </template>
+                </template>
+                <template v-else>
+                    <p style="color: var(--success)">
+                        <fa icon="check-circle"></fa>
+                        {{ $t('transfer.c_chain.success.desc') }}
+                    </p>
+                    <div>
+                        <label>{{ $t('transfer.c_chain.success.label1') }}</label>
+                        <p class="confirm_data" style="word-break: break-all">
+                            {{ txHash }}
+                        </p>
+                    </div>
                     <v-btn
-                        class="checkout"
-                        style="color: var(--primary-color)"
-                        text
-                        block
-                        @click="cancel"
+                        style="margin: 14px 0"
+                        :disabled="!canSendAgain"
+                        class="button_primary"
                         small
+                        block
+                        @click="startAgain"
                     >
-                        {{ $t('transfer.c_chain.cancel') }}
+                        {{ $t('transfer.c_chain.reset') }}
                     </v-btn>
                 </template>
-            </template>
-            <template v-else>
-                <p style="color: var(--success)">
-                    <fa icon="check-circle"></fa>
-                    {{ $t('transfer.c_chain.success.desc') }}
-                </p>
-                <div>
-                    <label>{{ $t('transfer.c_chain.success.label1') }}</label>
-                    <p class="confirm_data" style="word-break: break-all">
-                        {{ txHash }}
-                    </p>
-                </div>
-                <v-btn
-                    style="margin: 14px 0"
-                    :disabled="!canSendAgain"
-                    class="button_primary"
-                    small
-                    block
-                    @click="startAgain"
-                >
-                    {{ $t('transfer.c_chain.reset') }}
-                </v-btn>
-            </template>
+            </div>
         </div>
     </div>
 </template>

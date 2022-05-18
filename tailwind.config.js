@@ -142,6 +142,7 @@ module.exports = {
             gridTemplateColumns: {
                 footer: '2fr 1fr',
                 layout: '1fr 348px',
+                amount: '1fr 100px',
             },
             maxHeight: {
                 heightBox: '31.625rem',

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-0.5">
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
             {{ $t('portfolio.assets') }}
         </h1>
         <div class="home_view grid grid-cols-layout gap-x-3 max-h-heightBox">

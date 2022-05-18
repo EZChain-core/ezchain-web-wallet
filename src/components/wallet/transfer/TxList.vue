@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div class="table_title">
-            <p>{{ $t('transfer.tx_list.amount') }}</p>
-            <p>{{ $t('transfer.tx_list.token') }}</p>
-        </div>
-        <div v-for="(tx, i) in tx_list" :key="tx.uuid" class="list_item">
+        <div v-for="(tx, i) in tx_list" :key="tx.uuid" class="list_item mt-5">
             <currency-input-dropdown
                 class="list_in"
                 @change="oninputchange(i, $event)"
@@ -207,10 +203,10 @@ $right_pad: 60px;
 
 .list_item {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr $right_pad;
-    /*flex-direction: column;*/
-    margin-bottom: 14px;
+    // display: grid;
+    // grid-template-columns: 1fr $right_pad;
+    // /*flex-direction: column;*/
+    // margin-bottom: 14px;
     border-radius: 3px !important;
 
     &:last-of-type {
@@ -237,17 +233,17 @@ $right_pad: 60px;
 }
 
 .list_item button {
-    width: max-content;
-    text-align: right;
-    /*align-self: flex-end;*/
-    font-size: 12px;
-    color: var(--primary-color-light);
-    margin-top: 10px;
-    margin-bottom: 10px;
+    // width: max-content;
+    // text-align: right;
+    // /*align-self: flex-end;*/
+    // font-size: 12px;
+    // color: var(--primary-color-light);
+    // margin-top: 10px;
+    // margin-bottom: 10px;
 
-    &:hover {
-        opacity: 0.7;
-    }
+    // &:hover {
+    //     opacity: 0.7;
+    // }
 }
 
 .add_asset {

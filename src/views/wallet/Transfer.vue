@@ -22,112 +22,126 @@
                                     @change="updateTxList"
                                     :disabled="isConfirm"
                                 ></tx-list>
-                                <template v-if="hasNFT">
-                                    <NftList
-                                        @change="updateNftList"
-                                        ref="nftList"
-                                        :disabled="isConfirm"
-                                    ></NftList>
-                                </template>
+                                <div>
+                                    <div class="to_address">
+                                        <h4>{{ $t('transfer.to') }}</h4>
+                                        <qr-input
+                                            v-model="addressIn"
+                                            class="qrIn hover_border"
+                                            placeholder="xxx"
+                                            :disabled="isConfirm"
+                                        ></qr-input>
+                                    </div>
+                                    <div>
+                                        <h4 v-if="memo || !isConfirm">{{ $t('transfer.memo') }}</h4>
+                                        <textarea
+                                            class="memo"
+                                            maxlength="256"
+                                            placeholder="Memo"
+                                            v-model="memo"
+                                            v-if="memo || !isConfirm"
+                                            :disabled="isConfirm"
+                                        ></textarea>
+                                    </div>
+                                    <div class="fees">
+                                        <p>
+                                            {{ $t('transfer.fee_tx') }}
+                                            <span>{{ txFee.toLocaleString(9) }} EZC</span>
+                                        </p>
+                                        <p>
+                                            {{ $t('transfer.total_avax') }}
+                                            <span>{{ totalUSD.toLocaleString(2) }} USD</span>
+                                        </p>
+                                    </div>
+                                    <div class="checkout">
+                                        <ul class="err_list" v-if="formErrors.length > 0">
+                                            <li v-for="err in formErrors" :key="err">
+                                                {{ err }}
+                                            </li>
+                                        </ul>
+                                        <template v-if="!isConfirm">
+                                            <v-btn
+                                                depressed
+                                                class="button_primary"
+                                                :ripple="false"
+                                                @click="confirm"
+                                                :disabled="!canSend"
+                                                block
+                                            >
+                                                Confirm
+                                            </v-btn>
+                                        </template>
+                                        <template v-else-if="isConfirm && !isSuccess">
+                                            <p class="err">{{ err }}</p>
+                                            <v-btn
+                                                depressed
+                                                class="button_primary"
+                                                :loading="isAjax"
+                                                :ripple="false"
+                                                @click="submit"
+                                                :disabled="!canSend"
+                                                block
+                                            >
+                                                {{ $t('transfer.send') }}
+                                            </v-btn>
+                                            <v-btn
+                                                text
+                                                block
+                                                small
+                                                style="
+                                                    margin-top: 20px !important;
+                                                    color: var(--primary-color);
+                                                "
+                                                @click="cancelConfirm"
+                                            >
+                                                Cancel
+                                            </v-btn>
+                                        </template>
+                                        <template v-else-if="isSuccess">
+                                            <p style="color: var(--success)">
+                                                <fa icon="check-circle"></fa>
+                                                Transaction Sent
+                                            </p>
+                                            <label style="word-break: break-all">
+                                                <b>ID:</b>
+                                                {{ txId }}
+                                            </label>
+                                            <v-btn
+                                                depressed
+                                                style="margin-top: 14px"
+                                                class="button_primary"
+                                                :ripple="false"
+                                                @click="startAgain"
+                                                block
+                                                :disabled="!canSendAgain"
+                                            >
+                                                Start Again
+                                            </v-btn>
+                                        </template>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <div class="to_address">
-                                <h4>{{ $t('transfer.to') }}</h4>
-                                <qr-input
-                                    v-model="addressIn"
-                                    class="qrIn hover_border"
-                                    placeholder="xxx"
-                                    :disabled="isConfirm"
-                                ></qr-input>
-                            </div>
                             <div>
-                                <h4 v-if="memo || !isConfirm">{{ $t('transfer.memo') }}</h4>
-                                <textarea
-                                    class="memo"
-                                    maxlength="256"
-                                    placeholder="Memo"
-                                    v-model="memo"
-                                    v-if="memo || !isConfirm"
+                                <p>XChain</p>
+                                <p>Address</p>
+                            </div>
+                            <p>
+                                <span>Transaction fee</span>
+                                <span>0.01 EZC</span>
+                            </p>
+                            <p>
+                                <span>Total Amount</span>
+                                <span>0.01 EZC</span>
+                            </p>
+                            <template v-if="hasNFT">
+                                <NftList
+                                    @change="updateNftList"
+                                    ref="nftList"
                                     :disabled="isConfirm"
-                                ></textarea>
-                            </div>
-                            <div class="fees">
-                                <p>
-                                    {{ $t('transfer.fee_tx') }}
-                                    <span>{{ txFee.toLocaleString(9) }} EZC</span>
-                                </p>
-                                <p>
-                                    {{ $t('transfer.total_avax') }}
-                                    <span>{{ totalUSD.toLocaleString(2) }} USD</span>
-                                </p>
-                            </div>
-                            <div class="checkout">
-                                <ul class="err_list" v-if="formErrors.length > 0">
-                                    <li v-for="err in formErrors" :key="err">
-                                        {{ err }}
-                                    </li>
-                                </ul>
-                                <template v-if="!isConfirm">
-                                    <v-btn
-                                        depressed
-                                        class="button_primary"
-                                        :ripple="false"
-                                        @click="confirm"
-                                        :disabled="!canSend"
-                                        block
-                                    >
-                                        Confirm
-                                    </v-btn>
-                                </template>
-                                <template v-else-if="isConfirm && !isSuccess">
-                                    <p class="err">{{ err }}</p>
-                                    <v-btn
-                                        depressed
-                                        class="button_primary"
-                                        :loading="isAjax"
-                                        :ripple="false"
-                                        @click="submit"
-                                        :disabled="!canSend"
-                                        block
-                                    >
-                                        {{ $t('transfer.send') }}
-                                    </v-btn>
-                                    <v-btn
-                                        text
-                                        block
-                                        small
-                                        style="
-                                            margin-top: 20px !important;
-                                            color: var(--primary-color);
-                                        "
-                                        @click="cancelConfirm"
-                                    >
-                                        Cancel
-                                    </v-btn>
-                                </template>
-                                <template v-else-if="isSuccess">
-                                    <p style="color: var(--success)">
-                                        <fa icon="check-circle"></fa>
-                                        Transaction Sent
-                                    </p>
-                                    <label style="word-break: break-all">
-                                        <b>ID:</b>
-                                        {{ txId }}
-                                    </label>
-                                    <v-btn
-                                        depressed
-                                        style="margin-top: 14px"
-                                        class="button_primary"
-                                        :ripple="false"
-                                        @click="startAgain"
-                                        block
-                                        :disabled="!canSendAgain"
-                                    >
-                                        Start Again
-                                    </v-btn>
-                                </template>
-                            </div>
+                                ></NftList>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -627,9 +641,9 @@ h4 {
 .new_order_Form > div {
     margin-bottom: 15px;
 }
-.lists {
-    grid-column: 1/3;
-}
+// .lists {
+//     grid-column: 1/3;
+// }
 
 .tx_list {
     margin-bottom: 14px;
