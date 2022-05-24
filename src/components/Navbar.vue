@@ -2,7 +2,7 @@
     <div id="nav">
         <ConfirmLogout ref="logout"></ConfirmLogout>
         <router-link to="/" class="logo">
-            <img v-if="$root.theme === 'day'" src="@/assets/Ezchain_Logo.png" />
+            <img src="@/assets/Ezchain_Logo.png" />
         </router-link>
         <div class="buts_right">
             <network-menu></network-menu>
@@ -17,16 +17,15 @@
         <!--   MOBILE MENU     -->
         <v-navigation-drawer
             ref="drawer"
-            class="mobile_menu"
+            class="mobile_menu z-50"
             v-model="isDrawer"
             fixed
-            style="z-index: 999"
             hide-overlay
         >
             <v-list dense nav>
-                <div style="display: flex; justify-content: space-between; padding: 4px 8px">
-                    <img v-if="$root.theme === 'day'" src="@/assets/sidebar/logo_nav.png" />
-                    <img v-else src="@/assets/wallet_logo_dark.svg" />
+                <div class="flex justify-between py-1 px-2 mb-7">
+                    <img class="max-h-14" src="@/assets/sidebar/logo_nav.png" />
+                    <!-- <img v-else src="@/assets/wallet_logo_dark.svg" /> -->
                     <!--                    <DayNightToggle class="action_but"></DayNightToggle>-->
                 </div>
                 <template v-if="isAuth">
@@ -37,7 +36,7 @@
                     </router-link>
                     <router-link to="/wallet/earn">{{ $t('wallet.sidebar.earn') }}</router-link>
                     <router-link to="/wallet/activity">Activity</router-link>
-                    <router-link to="/wallet/keys">{{ $t('wallet.sidebar.manage') }}</router-link>
+                    <!-- <router-link to="/wallet/keys">{{ $t('wallet.sidebar.manage') }}</router-link> -->
                     <router-link to="/wallet/advanced" data-cy="wallet_advanced">
                         {{ $t('wallet.sidebar.advanced') }}
                     </router-link>
@@ -56,7 +55,7 @@
                 </template>
                 <div class="mobile_bottom">
                     <AccountMenu></AccountMenu>
-                    <LanguageSelect class="lang_mobile"></LanguageSelect>
+                    <!-- <LanguageSelect class="lang_mobile"></LanguageSelect> -->
                 </div>
             </v-list>
         </v-navigation-drawer>
@@ -95,10 +94,6 @@ export default class Navbar extends Vue {
 <style scoped lang="scss">
 @use '../main';
 @use "../light_theme";
-
-img {
-    max-height: 25px;
-}
 
 a {
     text-decoration: none;

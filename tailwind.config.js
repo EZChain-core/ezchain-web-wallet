@@ -13,8 +13,6 @@ module.exports = {
             ...spacing,
         },
         screens: {
-            xs: '475px',
-            // => @media (min-width: 475px) { ... }
             sm: '640px',
             // => @media (min-width: 640px) { ... }
 
@@ -143,12 +141,17 @@ module.exports = {
                 footer: '2fr 1fr',
                 layout: '1fr 348px',
                 amount: '1fr 100px',
+                a240: '1fr 260px',
             },
             maxHeight: {
                 heightBox: '31.625rem',
+                maxHeightSm: '330px',
             },
             maxWidth: {
                 mobile: '324px',
+            },
+            minWidth: {
+                a600: '600px',
             },
         },
     },

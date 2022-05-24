@@ -5,8 +5,8 @@
             <sidebar class="panel sidenav"></sidebar>
         </transition>
         <div>
-            <top-nav-bar class="top_nav_bar"></top-nav-bar>
-            <div class="wallet_main min-h-screen bg-EZC-bgDefault pt-2 px-5 pb-2">
+            <top-nav-bar class="top_nav_bar hidden lg:flex"></top-nav-bar>
+            <div class="wallet_main min-h-screen bg-EZC-bgDefault p-4">
                 <transition name="page_fade" mode="out-in">
                     <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
                         <router-view
@@ -154,20 +154,12 @@ export default class Wallet extends Vue {
 
 @include main.medium-device {
     .wallet_view {
-        grid-template-columns: 180px 1fr 240px !important;
+        grid-template-columns: 250px 1fr !important;
         column-gap: 9px;
     }
     #wallet_router {
         padding: 12px 18px;
         overflow: scroll;
-    }
-}
-@media (max-width: 640px) {
-    .top_nav_bar {
-        display: none;
-    }
-    .wallet_main {
-        padding: 0;
     }
 }
 </style>

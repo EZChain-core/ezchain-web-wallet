@@ -23,7 +23,7 @@
 
                     <p
                         style="word-break: break-all"
-                        class="text-md xl:text-base text-EZC-bgBlackButton"
+                        class="text-sm 2xl:text-base text-EZC-bgBlackButton"
                         data-cy="wallet_address"
                     >
                         {{ activeAddress }}

@@ -3,52 +3,63 @@
         <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
             {{ $t('portfolio.assets') }}
         </h1>
-        <div class="home_view grid grid-cols-layout gap-x-3 max-h-heightBox">
-            <div class="left_home_view no_scroll_bar">
-                <div class="header">
-                    <div>
-                        <button
-                            @click="tab = 'fungibles'"
-                            :active="tab === `fungibles`"
-                            data-cy="wallet_fungible"
-                        >
-                            {{ $t('portfolio.assets1') }}
-                        </button>
-                        <button
-                            @click="tab = 'collectibles'"
-                            :active="tab === `collectibles`"
-                            data-cy="wallet_nft"
-                        >
-                            {{ $t('portfolio.assets2') }}
-                        </button>
+        <div class="grid grid-cols-1">
+            <div
+                class="grid grid-cols-1 gap-3 2xl:grid-cols-layout xl:grid-cols-a240 max-h-heightBox overflow-hidden"
+            >
+                <div class="p-4 bg-white-a500 shadow-lg rounded-lg max-h-heightBox">
+                    <div class="header mb-3">
+                        <div>
+                            <button
+                                @click="tab = 'fungibles'"
+                                :active="tab === `fungibles`"
+                                data-cy="wallet_fungible"
+                            >
+                                {{ $t('portfolio.assets1') }}
+                            </button>
+                            <button
+                                @click="tab = 'collectibles'"
+                                :active="tab === `collectibles`"
+                                data-cy="wallet_nft"
+                            >
+                                {{ $t('portfolio.assets2') }}
+                            </button>
+                        </div>
+                        <div class="search hover_border w-full">
+                            <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
+                            <img v-else src="@/assets/search_night.svg" />
+                            <input
+                                class="w-full"
+                                :placeholder="$t('portfolio.search')"
+                                v-model="search"
+                            />
+                        </div>
                     </div>
-                    <div style="flex-grow: 1"></div>
-                    <div class="search hover_border">
-                        <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
-                        <img v-else src="@/assets/search_night.svg" />
-                        <input :placeholder="$t('portfolio.search')" v-model="search" />
+                    <div class="no_scroll_bar overflow-y-auto max-h-heightBox">
+                        <transition-group name="fade" mode="out-in">
+                            <fungibles
+                                v-show="tab === `fungibles`"
+                                key="fungibles"
+                                :search="search"
+                            ></fungibles>
+                            <collectibles
+                                v-show="tab === `collectibles`"
+                                key="collectibles"
+                                :search="search"
+                            ></collectibles>
+                        </transition-group>
                     </div>
                 </div>
-                <div class="pages">
-                    <transition-group name="fade" mode="out-in">
-                        <fungibles
-                            v-show="tab === `fungibles`"
-                            key="fungibles"
-                            :search="search"
-                        ></fungibles>
-                        <collectibles
-                            v-show="tab === `collectibles`"
-                            key="collectibles"
-                            :search="search"
-                        ></collectibles>
-                    </transition-group>
+                <div class="hidden xl:block">
+                    <transition name="fade" mode="out-in">
+                        <transaction-history-panel
+                            class="panel_content"
+                        ></transaction-history-panel>
+                    </transition>
                 </div>
             </div>
-            <transition name="fade" mode="out-in">
-                <transaction-history-panel class="panel_content"></transaction-history-panel>
-            </transition>
+            <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
         </div>
-        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script>
@@ -85,12 +96,6 @@ export default {
     }
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-}
-.home_view {
-    // display: grid;
-    // grid-template-columns: 1fr 360px;
-    // grid-gap: 12px;
-    // height: 506px;
 }
 .left_home_view {
     padding: 16px;
@@ -140,7 +145,6 @@ export default {
     flex-shrink: 1;
     border: 1px solid transparent;
     flex-direction: row-reverse;
-    width: 268px;
     background: #f5f5f5;
     border-radius: 8px;
     $icon_w: 36px;
@@ -168,10 +172,6 @@ export default {
     }
 }
 
-.pages {
-    /*margin-top: 30px;*/
-}
-
 @include main.mobile-device {
     .header {
         display: block;
@@ -190,11 +190,6 @@ export default {
 
     .search {
         margin: 15px 0px;
-    }
-
-    .pages {
-        /*min-height: 100vh;*/
-        /*padding-bottom: 30px;*/
     }
 }
 
@@ -223,13 +218,13 @@ export default {
         }
     }
 }
-@media (max-width: 640px) {
-    .home_view {
-        grid-template-columns: 1fr;
-        height: auto;
-    }
-    .left_home_view {
-        min-height: 600px;
-    }
-}
+// @media (max-width: 640px) {
+//     .home_view {
+//         grid-template-columns: 1fr;
+//         height: auto;
+//     }
+//     .left_home_view {
+//         min-height: 600px;
+//     }
+// }
 </style>
