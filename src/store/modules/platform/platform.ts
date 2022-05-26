@@ -20,6 +20,7 @@ import {
     ValidatorRaw,
 } from '@/components/misc/ValidatorList/types'
 import { ONEAVAX } from 'ezchainjs2/dist/utils'
+import { getNameValidator } from '@/helpers/helper'
 
 const MINUTE_MS = 60000
 const HOUR_MS = MINUTE_MS * 60
@@ -30,6 +31,7 @@ const platform_module: Module<PlatformState, RootState> = {
     state: {
         validators: [],
         validatorsPending: [],
+        nameNodeId: [],
         // delegators: [],
         delegatorsPending: [],
         minStake: new BN(0),
@@ -37,15 +39,21 @@ const platform_module: Module<PlatformState, RootState> = {
         currentSupply: new BN(1),
     },
     mutations: {
-        setValidators(state, validators: ValidatorRaw[]) {
+        async setValidators(state, validators: ValidatorRaw[]) {
             state.validators = validators
+            const newArray: any = []
+            validators.forEach((el, k) => {
+                newArray.push(el.nodeID)
+            })
+            let nodeIds = newArray.toString()
+            const arrayNodeIds = await getNameValidator(nodeIds)
+            state.nameNodeId = arrayNodeIds.data.data
         },
     },
     actions: {
         async updateCurrentSupply({ state }) {
             state.currentSupply = await pChain.getCurrentSupply()
         },
-
         async updateMinStakeAmount({ state }) {
             let res = await pChain.getMinStake(true)
             state.minStake = res.minValidatorStake
@@ -64,7 +72,6 @@ const platform_module: Module<PlatformState, RootState> = {
         async updateValidators({ state, commit }) {
             let res = (await pChain.getCurrentValidators()) as GetValidatorsResponse
             let validators = res.validators
-
             commit('setValidators', validators)
         },
 
@@ -82,43 +89,43 @@ const platform_module: Module<PlatformState, RootState> = {
         validatorListEarn(state, getters): ValidatorListItem[] {
             // Filter validators we do not need
             let now = Date.now()
-
             let validators = state.validators
             validators = validators.filter((v) => {
                 let endTime = parseInt(v.endTime) * 1000
                 let dif = endTime - now
-
                 // If End time is less than 2 weeks + 1 hour, remove from list they are no use
                 let threshold = DAY_MS * 14 + 10 * MINUTE_MS
                 if (dif <= threshold) {
                     return false
                 }
-
                 return true
             })
-
             let delegatorMap: ValidatorDelegatorDict = getters.nodeDelegatorMap
             let delegatorPendingMap: ValidatorDelegatorPendingDict = getters.nodeDelegatorPendingMap
-
+            let nameValidatorArray = []
             let res: ValidatorListItem[] = []
-
-            for (var i = 0; i < validators.length; i++) {
+            for (let i = 0; i < validators.length; i++) {
+                let nameNode = ''
+                let logo_url = ''
                 let v = validators[i]
-
+                let nameDataNodeValidator = state.nameNodeId
+                nameDataNodeValidator.forEach((els: any, k) => {
+                    if (els.node_id === v.nodeID) {
+                        nameNode = els.name
+                        logo_url = els.logo_url
+                    }
+                })
+                nameValidatorArray.push(validators[i].nodeID)
                 let nodeID = v.nodeID
-
                 let delegators: DelegatorRaw[] = delegatorMap[nodeID] || []
                 let delegatorsPending: DelegatorPendingRaw[] = delegatorPendingMap[nodeID] || []
-
                 let delegatedAmt = new BN(0)
                 let delegatedPendingAmt = new BN(0)
-
                 if (delegators) {
                     delegatedAmt = delegators.reduce((acc: BN, val: DelegatorRaw) => {
                         return acc.add(new BN(val.stakeAmount))
                     }, new BN(0))
                 }
-
                 if (delegatorsPending) {
                     delegatedPendingAmt = delegatorsPending.reduce(
                         (acc: BN, val: DelegatorPendingRaw) => {
@@ -127,21 +134,19 @@ const platform_module: Module<PlatformState, RootState> = {
                         new BN(0)
                     )
                 }
-
                 let startTime = new Date(parseInt(v.startTime) * 1000)
                 let endTime = new Date(parseInt(v.endTime) * 1000)
-
                 let delegatedStake = delegatedAmt.add(delegatedPendingAmt)
                 let validatorStake = new BN(v.stakeAmount)
                 // Calculate remaining stake
                 let absMaxStake = ONEAVAX.mul(new BN(3000000))
                 let relativeMaxStake = validatorStake.mul(new BN(5))
                 let stakeLimit = BN.min(absMaxStake, relativeMaxStake)
-
                 let remainingStake = stakeLimit.sub(validatorStake).sub(delegatedStake)
-
                 let listItem: ValidatorListItem = {
                     nodeID: v.nodeID,
+                    logoUrl: logo_url,
+                    name: nameNode,
                     validatorStake: validatorStake,
                     delegatedStake: delegatedStake,
                     remainingStake: remainingStake,
@@ -153,6 +158,7 @@ const platform_module: Module<PlatformState, RootState> = {
                 }
                 res.push(listItem)
             }
+            const newStringNodeId = nameValidatorArray.toString()
 
             res = res.filter((v) => {
                 // Remove if remaining space is less than minimum

@@ -137,9 +137,10 @@ export default class TxRow extends Vue {
     display: grid;
     grid-template-columns: max-content 2fr 1fr;
     column-gap: 14px;
-    background-color: var(--bg-light);
+    /*background-color: var(--bg-light);*/
     padding: 8px 14px;
     border-radius: 4px;
+    border-bottom: 1px solid #f5f5f5;
 }
 
 .date {

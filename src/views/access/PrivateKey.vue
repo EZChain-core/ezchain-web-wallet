@@ -1,42 +1,49 @@
 <template>
-    <div class="access_card">
-        <div class="content">
-            <h1>Private Key</h1>
-            <form @submit.prevent="access">
-                <v-text-field
-                    class="pass"
-                    label="Private Key"
-                    dense
-                    solo
-                    flat
-                    type="password"
-                    v-model="privatekey"
-                    hide-details
-                ></v-text-field>
-                <p class="err">{{ error }}</p>
-                <v-btn
-                    class="ava_button button_primary"
-                    @click="access"
-                    :loading="isLoading"
-                    :disabled="!canSubmit"
-                    depressed
-                >
-                    Access Wallet
-                </v-btn>
-            </form>
-            <router-link to="/access" class="link">Cancel</router-link>
+    <div>
+        <div class="max-w-md mx-auto">
+            <div>
+                <h1 class="font-bold text-1.75xl leading-7 text-EZC-defaultBlack">Private Key</h1>
+                <form @submit.prevent="access">
+                    <v-text-field
+                        class="pass bg-EZC-bgDefault block my-4 rounded-lg"
+                        label="Private Key"
+                        dense
+                        solo
+                        flat
+                        type="password"
+                        v-model="privatekey"
+                        hide-details
+                    ></v-text-field>
+                    <p class="err">{{ error }}</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+                        <v-btn class="button_access" @click="access" :loading="isLoading" depressed>
+                            <span
+                                class="text-white-a500 font-normal text-1.5xl text-center capitalize"
+                            >
+                                Access Wallet
+                            </span>
+                        </v-btn>
+                        <router-link
+                            class="border border-EZC-defaultBlack rounded-lg w-full cursor-pointer h-12 flex justify-center border-solid items-center font-bold text-1.5xl leading-7"
+                            to="/access"
+                            tag="div"
+                        >
+                            Cancel
+                        </router-link>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { ImportKeyfileInput } from '@/store/types'
-import { SingletonWallet } from '@/js/wallets/SingletonWallet'
-import { privateToAddress } from 'ethereumjs-util'
-import { bintools } from '@/AVA'
-import { Buffer } from 'ezchainjs2'
-
-@Component
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
+@Component({
+    components: {
+        LogoCenter,
+    },
+})
 export default class PrivateKey extends Vue {
     privatekey: string = ''
     isLoading: boolean = false
@@ -73,66 +80,17 @@ export default class PrivateKey extends Vue {
 }
 </script>
 <style scoped lang="scss">
-@use '../../main';
-.pass {
-    background-color: var(--bg) !important;
-}
-.ava_button {
+.button_access {
     width: 100%;
-    margin-bottom: 22px;
-}
-.access_card {
-    /*max-width: 80vw;*/
-    background-color: var(--bg-light);
-    padding: main.$container-padding;
-    width: 100%;
-    /*max-width: 240px;*/
-    /*max-width: 1000px;*/
+    background-color: #ef6825 !important;
+    height: 48px !important;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    color: #fff;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
-}
-.content {
-    width: 340px;
-    max-width: 100%;
-    margin: 0px auto;
-}
-h1 {
-    font-size: main.$m-size;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-.file_in {
-    margin: 30px auto 10px;
-    font-size: 13px;
-    border: none !important;
-    background-color: var(--bg) !important;
-    /*min-width: 200px*/
-}
-a {
-    color: main.$primary-color-light !important;
-    text-decoration: underline !important;
-    margin: 10px 0 20px;
-}
-.link {
-    color: var(--secondary-color);
-}
-.remember {
-    margin: 12px 0;
-}
-.err {
-    font-size: 13px;
-    color: var(--error);
-    margin: 14px 0px !important;
-}
-@media only screen and (max-width: main.$mobile_width) {
-    h1 {
-        font-size: main.$m-size-mobile;
-    }
-    .but_primary {
-        width: 100%;
-    }
+    margin-bottom: 16px;
 }
 </style>

@@ -1,38 +1,48 @@
 <template>
-    <div class="access_card">
-        <div class="content">
-            <h1>{{ $t('keystore.title') }}</h1>
-            <file-input class="file_in" @change="onfile"></file-input>
-            <form @submit.prevent="access">
-                <v-text-field
-                    class="pass"
-                    :label="$t('password')"
-                    dense
-                    solo
-                    flat
-                    type="password"
-                    v-model="pass"
-                    v-if="file"
-                    hide-details
-                ></v-text-field>
-                <p class="err">{{ error }}</p>
-                <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
-                <v-btn
-                    class="ava_button button_primary"
-                    @click="access"
-                    :loading="isLoading"
-                    v-if="file"
-                    :disabled="!canSubmit"
-                    depressed
-                >
-                    {{ $t('access.mnemonic.submit') }}
-                </v-btn>
-            </form>
-            <router-link to="/access" class="link">{{ $t('access.cancel') }}</router-link>
-        </div>
+    <div class="max-w-md mx-auto">
+        <h1 class="font-bold text-1.75xl leading-7 text-EZC-defaultBlack">
+            {{ $t('keystore.title') }}
+        </h1>
+        <file-input class="file_in" @change="onfile"></file-input>
+        <form @submit.prevent="access">
+            <v-text-field
+                class="pass bg-white-a400"
+                :label="$t('password')"
+                dense
+                solo
+                flat
+                type="password"
+                v-model="pass"
+                v-if="file"
+                hide-details
+            ></v-text-field>
+            <p class="err">{{ error }}</p>
+            <!--                <remember-key class="remember" v-model="rememberPass" v-if="file" @is-valid="isRememberValid"></remember-key>-->
+            <v-btn
+                class="ava_button button_primary h-12 capitalize"
+                @click="access"
+                style="height: 48px !important; text-transform: capitalize"
+                :loading="isLoading"
+                v-if="file"
+                depressed
+            >
+                {{ $t('access.mnemonic.submit') }}
+            </v-btn>
+        </form>
+
+        <router-link
+            class="bg-white-a500 cursor-pointer border rounded-lg h-12 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+            to="/access"
+            tag="div"
+        >
+            <span class="text-1.5xl text-EZC-defaultBlack font-bold leading-7">
+                {{ $t('access.cancel') }}
+            </span>
+        </router-link>
     </div>
 </template>
 <script lang="ts">
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 import { Vue, Component } from 'vue-property-decorator'
 
 import FileInput from '../../components/misc/FileInput.vue'
@@ -44,6 +54,7 @@ import { AllKeyFileTypes } from '@/js/IKeystore'
     components: {
         // RememberKey,
         FileInput,
+        LogoCenter,
     },
 })
 export default class Keystore extends Vue {
@@ -132,7 +143,7 @@ export default class Keystore extends Vue {
 @use '../../main';
 
 .pass {
-    background-color: var(--bg) !important;
+    background-color: #f5f5f5 !important;
 }
 .ava_button {
     width: 100%;
@@ -140,7 +151,6 @@ export default class Keystore extends Vue {
 }
 .access_card {
     /*max-width: 80vw;*/
-    background-color: var(--bg-light);
     padding: main.$container-padding;
     width: 100%;
     /*max-width: 240px;*/
@@ -151,7 +161,10 @@ export default class Keystore extends Vue {
     align-items: center;
     border-radius: 6px;
 }
-
+.button_primary {
+    height: 64px !important;
+    border-radius: 8px;
+}
 .content {
     width: 340px;
     max-width: 100%;
@@ -160,15 +173,20 @@ export default class Keystore extends Vue {
 
 h1 {
     font-size: main.$m-size;
-    font-weight: 400;
+    font-weight: bold;
 }
 
 .file_in {
     margin: 30px auto 10px;
+    color: white;
     font-size: 13px;
     border: none !important;
-    background-color: var(--bg) !important;
-    /*min-width: 200px*/
+    height: 40px;
+    background: #6bc688 !important;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a {
@@ -194,9 +212,11 @@ a {
     h1 {
         font-size: main.$m-size-mobile;
     }
-
     .but_primary {
         width: 100%;
+    }
+    .access_card {
+        padding: 0;
     }
 }
 </style>

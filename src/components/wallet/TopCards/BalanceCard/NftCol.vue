@@ -1,17 +1,47 @@
 <template>
     <div class="nft_col">
         <h4>{{ $t('top.balance.collectibles') }}</h4>
-        <p v-if="isEmpty">{{ $t('top.nftempty') }}</p>
+        <div
+            v-if="isEmpty"
+            style="
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 16px;
+            "
+        >
+            <img v-if="isEmpty" src="@/assets/emtry_card.png" alt="" />
+            <p
+                style="
+                    margin-top: 14px;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                    text-align: center;
+                    color: #737373;
+                "
+                v-if="isEmpty"
+            >
+                You have not collected
+                <br />
+                any non fungible tokens.
+            </p>
+        </div>
         <div v-else class="rows">
             <p>{{ statusText }}</p>
-            <div class="nft_list">
+            <div class="nft_list grid grid-cols-3 2xl:grid-cols-4 gap-3">
                 <div class="nft_item" v-for="(utxo, i) in nftArray" :key="utxo.getUTXOID()">
                     <NftPayloadView :payload="nftPayloads[i]" small="true"></NftPayloadView>
                 </div>
                 <div class="nft_item" v-for="item in erc721BalanceArray" :key="item.id">
                     <ERC721View :token="item.token" :index="item.id"></ERC721View>
                 </div>
-                <div v-for="i in dummyAmt" class="nft_item dummy_item" :key="i"></div>
+                <div style="display: none">
+                    <div v-for="i in dummyAmt" class="nft_item dummy_item" :key="i"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -141,13 +171,10 @@ export default class NftCol extends Vue {
     }
 }
 
-$nft_w: 35px;
+$nft_w: 60px;
 
 .nft_list {
     margin-top: 8px;
-    grid-gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(5, $nft_w);
 }
 
 .nft_item {
@@ -160,6 +187,7 @@ $nft_w: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 100%;
 }
 
 .dummy_item {

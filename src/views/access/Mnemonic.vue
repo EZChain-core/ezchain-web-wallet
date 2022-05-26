@@ -1,30 +1,55 @@
 <template>
-    <div class="mnemonic_auth">
-        <div class="left">
-            <header>
-                <h1>{{ $t('access.mnemonic.title') }}</h1>
-            </header>
-            <label>{{ $t('access.mnemonic.subtitle') }}</label>
-            <textarea @input="onPhraseIn" translate="no"></textarea>
-            <div class="button_container">
-                <p class="err" v-if="err">{{ err }}</p>
-                <v-btn
-                    class="ava_button but_primary button_primary access"
-                    @click="access"
-                    depressed
-                    :loading="isLoading"
-                    :disabled="!canSubmit"
-                >
-                    {{ $t('access.mnemonic.submit') }}
-                </v-btn>
-                <router-link to="/access" class="link">
-                    {{ $t('access.mnemonic.cancel') }}
-                </router-link>
+    <div>
+        <div class="flex flex-col-reverse lg:flex-row pb-14">
+            <div class="mr-4 mt-4 mb-4 lg:mb-0 w-full lg:w-1/2">
+                <header>
+                    <h1
+                        class="text-left mb-4 font-bold text-1.75xl leading-7 text-EZC-defaultBlack"
+                    >
+                        {{ $t('access.mnemonic.title') }}
+                    </h1>
+                </header>
+                <textarea
+                    placeholder="Hit ‘SPACE’ after every successful word entry."
+                    @input="onPhraseIn"
+                    translate="no"
+                    class="w-full mb-20 h-96 rounded-lg bg-EZC-bgDefault p-4"
+                ></textarea>
+                <div class="w-full">
+                    <p class="err" v-if="err">{{ err }}</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+                        <v-btn class="button_access" @click="access" depressed :loading="isLoading">
+                            <span
+                                class="text-white-a500 font-normal text-1.5xl text-center capitalize"
+                            >
+                                {{ $t('access.mnemonic.submit') }}
+                            </span>
+                        </v-btn>
+
+                        <router-link
+                            class="bg-white-a500 cursor-pointer border rounded-lg h-12 border-solid border-EZC-defaultBlack flex justify-center items-center w-full"
+                            to="/access"
+                            tag="div"
+                        >
+                            <span class="text-1.5xl text-EZC-defaultBlack font-bold leading-7">
+                                {{ $t('access.mnemonic.cancel') }}
+                            </span>
+                        </router-link>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="right">
-            <label>Preview</label>
-            <mnemonic-display :phrase="phrase" class="phrase_disp" :rowSize="3"></mnemonic-display>
+            <div class="w-full mt-4 lg:w-1/2">
+                <header>
+                    <h1 class="mb-4 font-bold text-1.75xl leading-7 text-EZC-defaultBlack">
+                        Preview
+                    </h1>
+                </header>
+                <mnemonic-display
+                    :phrase="phrase"
+                    class="phrase_disp"
+                    :rowSize="3"
+                ></mnemonic-display>
+            </div>
         </div>
     </div>
 </template>
@@ -34,10 +59,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 import MnemonicDisplay from '@/components/misc/MnemonicDisplay.vue'
 import * as bip39 from 'bip39'
-
+import LogoCenter from '@/components/LogoEzChain/Logo.vue'
 @Component({
     components: {
         MnemonicDisplay,
+        LogoCenter,
     },
 })
 export default class Mnemonic extends Vue {
@@ -108,170 +134,17 @@ export default class Mnemonic extends Vue {
 }
 </script>
 <style scoped lang="scss">
-@use '../../main';
-
-.mnemonic_auth {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 60px;
-    background-color: var(--bg-light);
-    padding: main.$container-padding;
+.button_access {
     width: 100%;
-    max-width: 1200px;
-
-    .left,
-    .right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-    > * {
-        width: 100%;
-    }
-}
-
-h1 {
-    text-align: left;
-    font-size: main.$m-size;
-}
-
-textarea {
-}
-
-label {
-    text-align: left;
-    color: main.$primary-color-light;
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-
-textarea {
-    margin: 20px 0;
-    margin-bottom: main.$vertical-padding;
-    width: 100%;
-    background-color: var(--bg) !important;
-    resize: none;
-    min-height: 120px;
-    padding: 8px 16px;
-    font-size: 14px;
-    color: var(--primary-color);
-}
-
-.phrase_disp {
-    width: 100%;
-    max-width: 560px;
-    margin-bottom: main.$vertical-padding;
-}
-
-.err {
-    font-size: 13px;
-    color: var(--error);
-    text-align: center;
-    margin: 14px 0px !important;
-}
-
-.remember {
-    margin-top: -20px;
-    font-size: 0.75em;
-}
-
-.key_in {
-    margin: 30px auto;
-    margin-bottom: 6px;
-    width: 100%;
-    font-size: 13px;
-    background-color: main.$white;
-    border-radius: 4px;
-}
-
-.but_primary {
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-.button_container {
+    background-color: #ef6825 !important;
+    height: 48px !important;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    color: #fff;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-@include main.mobile_device {
-    .mnemonic_auth {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        padding: main.$container-padding-mobile;
-
-        .left,
-        .right {
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: center;
-        }
-
-        .left {
-            order: 2;
-        }
-
-        .right {
-            order: 1;
-            margin-bottom: main.$vertical-padding-mobile;
-        }
-
-        > * {
-            width: 100%;
-        }
-    }
-
-    h1 {
-        text-align: center;
-        font-size: main.$m-size-mobile;
-    }
-
-    label {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .phrase_disp {
-        width: 100%;
-        max-width: 560px;
-        margin-bottom: main.$vertical-padding-mobile;
-    }
-
-    .err {
-        font-size: 13px;
-        margin: 14px 0px !important;
-    }
-
-    .remember {
-        margin-top: -20px;
-        font-size: 0.75em;
-    }
-
-    .key_in {
-        margin: 30px auto;
-        margin-bottom: 6px;
-        width: 100%;
-        font-size: 13px;
-    }
-
-    .but_primary {
-        margin: 0px auto;
-        display: block;
-        margin-top: 20px;
-        margin-bottom: 15px;
-    }
-
-    .button_container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
 }
 </style>

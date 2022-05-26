@@ -1,144 +1,152 @@
 <template>
-    <div class="transfer_card">
-        <!--        <h1>{{ $t('transfer.title') }}</h1>-->
-        <div v-if="networkStatus !== 'connected'" class="disconnected">
-            <p>{{ $t('transfer.disconnected') }}</p>
-        </div>
-        <div class="card_body" v-else>
-            <FormC v-show="formType === 'C'">
-                <ChainInput v-model="formType" :disabled="isConfirm"></ChainInput>
-            </FormC>
-            <div class="new_order_Form" v-show="formType === 'X'">
-                <div class="lists">
-                    <ChainInput v-model="formType" :disabled="isConfirm"></ChainInput>
-                    <div>
-                        <tx-list
-                            class="tx_list"
-                            ref="txList"
-                            @change="updateTxList"
-                            :disabled="isConfirm"
-                        ></tx-list>
-                        <template v-if="hasNFT">
-                            <NftList
-                                @change="updateNftList"
-                                ref="nftList"
-                                :disabled="isConfirm"
-                            ></NftList>
-                        </template>
-                    </div>
+    <div>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">
+            {{ $t('transfer.title') }}
+        </h1>
+        <div class="top_transfer">
+            <div class="transfer_card no_scroll_bar">
+                <div v-if="networkStatus !== 'connected'" class="disconnected">
+                    <p>{{ $t('transfer.disconnected') }}</p>
                 </div>
-                <div>
-                    <div class="to_address">
-                        <h4>{{ $t('transfer.to') }}</h4>
-                        <qr-input
-                            v-model="addressIn"
-                            class="qrIn hover_border"
-                            placeholder="xxx"
-                            :disabled="isConfirm"
-                        ></qr-input>
-                    </div>
-                    <div>
-                        <!--                        <template v-if="isConfirm && formMemo.length > 0">-->
-                        <!--                            <h4>Memo (Optional)</h4>-->
-                        <!--                            <p class="confirm_val">{{ formMemo }}</p>-->
-                        <!--                        </template>-->
-                        <h4 v-if="memo || !isConfirm">{{ $t('transfer.memo') }}</h4>
-                        <textarea
-                            class="memo"
-                            maxlength="256"
-                            placeholder="Memo"
-                            v-model="memo"
-                            v-if="memo || !isConfirm"
-                            :disabled="isConfirm"
-                        ></textarea>
-                    </div>
-                    <div class="fees">
-                        <p>
-                            {{ $t('transfer.fee_tx') }}
-                            <span>{{ txFee.toLocaleString(9) }} EZC</span>
-                        </p>
-                        <p>
-                            {{ $t('transfer.total_avax') }}
-                            <span>{{ totalUSD.toLocaleString(2) }} USD</span>
-                        </p>
-                    </div>
-                    <div class="checkout">
-                        <ul class="err_list" v-if="formErrors.length > 0">
-                            <li v-for="err in formErrors" :key="err">
-                                {{ err }}
-                            </li>
-                        </ul>
-                        <template v-if="!isConfirm">
-                            <v-btn
-                                depressed
-                                class="button_primary"
-                                :ripple="false"
-                                @click="confirm"
-                                :disabled="!canSend"
-                                block
-                            >
-                                Confirm
-                            </v-btn>
-                        </template>
-                        <template v-else-if="isConfirm && !isSuccess">
-                            <p class="err">{{ err }}</p>
-                            <v-btn
-                                depressed
-                                class="button_primary"
-                                :loading="isAjax"
-                                :ripple="false"
-                                @click="submit"
-                                :disabled="!canSend"
-                                block
-                            >
-                                {{ $t('transfer.send') }}
-                            </v-btn>
-                            <v-btn
-                                text
-                                block
-                                small
-                                style="margin-top: 20px !important; color: var(--primary-color)"
-                                @click="cancelConfirm"
-                            >
-                                Cancel
-                            </v-btn>
-                        </template>
-                        <template v-else-if="isSuccess">
-                            <p style="color: var(--success)">
-                                <fa icon="check-circle"></fa>
-                                Transaction Sent
-                            </p>
-                            <label style="word-break: break-all">
-                                <b>ID:</b>
-                                {{ txId }}
-                            </label>
-                            <v-btn
-                                depressed
-                                style="margin-top: 14px"
-                                class="button_primary"
-                                :ripple="false"
-                                @click="startAgain"
-                                block
-                                :disabled="!canSendAgain"
-                            >
-                                Start Again
-                            </v-btn>
-                        </template>
+                <div class="card_body" v-else>
+                    <FormC v-show="formType === 'C'">
+                        <ChainInput v-model="formType" :disabled="isConfirm"></ChainInput>
+                    </FormC>
+                    <div class="new_order_Form" v-show="formType === 'X'">
+                        <div class="lists">
+                            <ChainInput v-model="formType" :disabled="isConfirm"></ChainInput>
+                            <div>
+                                <tx-list
+                                    class="tx_list"
+                                    ref="txList"
+                                    @change="updateTxList"
+                                    :disabled="isConfirm"
+                                ></tx-list>
+                                <template v-if="hasNFT">
+                                    <NftList
+                                        @change="updateNftList"
+                                        ref="nftList"
+                                        :disabled="isConfirm"
+                                    ></NftList>
+                                </template>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="to_address">
+                                <h4>{{ $t('transfer.to') }}</h4>
+                                <qr-input
+                                    v-model="addressIn"
+                                    class="qrIn hover_border"
+                                    placeholder="xxx"
+                                    :disabled="isConfirm"
+                                ></qr-input>
+                            </div>
+                            <div>
+                                <h4 v-if="memo || !isConfirm">{{ $t('transfer.memo') }}</h4>
+                                <textarea
+                                    class="memo"
+                                    maxlength="256"
+                                    placeholder="Memo"
+                                    v-model="memo"
+                                    v-if="memo || !isConfirm"
+                                    :disabled="isConfirm"
+                                ></textarea>
+                            </div>
+                            <div class="fees">
+                                <p>
+                                    {{ $t('transfer.fee_tx') }}
+                                    <span>{{ txFee.toLocaleString(9) }} EZC</span>
+                                </p>
+                                <p>
+                                    {{ $t('transfer.total_avax') }}
+                                    <span>{{ totalUSD.toLocaleString(2) }} USD</span>
+                                </p>
+                            </div>
+                            <div class="checkout">
+                                <ul class="err_list" v-if="formErrors.length > 0">
+                                    <li v-for="err in formErrors" :key="err">
+                                        {{ err }}
+                                    </li>
+                                </ul>
+                                <template v-if="!isConfirm">
+                                    <v-btn
+                                        depressed
+                                        class="button_primary"
+                                        :ripple="false"
+                                        @click="confirm"
+                                        :disabled="!canSend"
+                                        block
+                                    >
+                                        Confirm
+                                    </v-btn>
+                                </template>
+                                <template v-else-if="isConfirm && !isSuccess">
+                                    <p class="err">{{ err }}</p>
+                                    <v-btn
+                                        depressed
+                                        class="button_primary"
+                                        :loading="isAjax"
+                                        :ripple="false"
+                                        @click="submit"
+                                        :disabled="!canSend"
+                                        block
+                                    >
+                                        {{ $t('transfer.send') }}
+                                    </v-btn>
+                                    <v-btn
+                                        text
+                                        block
+                                        small
+                                        style="
+                                            margin-top: 20px !important;
+                                            color: var(--primary-color);
+                                        "
+                                        @click="cancelConfirm"
+                                    >
+                                        Cancel
+                                    </v-btn>
+                                </template>
+                                <template v-else-if="isSuccess">
+                                    <p style="color: var(--success)">
+                                        <fa icon="check-circle"></fa>
+                                        Transaction Sent
+                                    </p>
+                                    <label style="word-break: break-all">
+                                        <b>ID:</b>
+                                        {{ txId }}
+                                    </label>
+                                    <v-btn
+                                        depressed
+                                        style="margin-top: 14px"
+                                        class="button_primary"
+                                        :ripple="false"
+                                        @click="startAgain"
+                                        block
+                                        :disabled="!canSendAgain"
+                                    >
+                                        Start Again
+                                    </v-btn>
+                                </template>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <transition name="fade" mode="out-in">
+                <transaction-history-panel class="panel_content"></transaction-history-panel>
+            </transition>
         </div>
+        <top-info class="wallet_top shadow-lg" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
 import 'reflect-metadata'
 import { Vue, Component, Ref } from 'vue-property-decorator'
-
 import TxList from '@/components/wallet/transfer/TxList.vue'
 import Big from 'big.js'
 
 import NftList from '@/components/wallet/transfer/NftList.vue'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 //@ts-ignore
 import { QrInput } from 'ezchain-vue_components'
 import { ava, avm, isValidAddress } from '../../AVA'
@@ -157,6 +165,8 @@ import { ChainIdType } from '@/constants'
 import ChainInput from '@/components/wallet/transfer/ChainInput.vue'
 import AvaAsset from '../../js/AvaAsset'
 import { TxState } from '@/components/wallet/earn/ChainTransfer/types'
+import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
+import { eventBus } from '@/main'
 @Component({
     components: {
         FaucetLink,
@@ -166,6 +176,8 @@ import { TxState } from '@/components/wallet/earn/ChainTransfer/types'
         TxSummary,
         FormC,
         ChainInput,
+        TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class Transfer extends Vue {
@@ -199,13 +211,12 @@ export default class Transfer extends Vue {
     confirm() {
         let isValid = this.formCheck()
         if (!isValid) return
-
         this.formOrders = [...this.orders]
         this.formNftOrders = [...this.nftOrders]
         this.formAddress = this.addressIn
         this.formMemo = this.memo
-
         this.isConfirm = true
+        this.updateBalance()
     }
 
     cancelConfirm() {
@@ -215,6 +226,7 @@ export default class Transfer extends Vue {
         this.formNftOrders = []
         this.formAddress = ''
         this.isConfirm = false
+        this.updateBalance()
     }
 
     updateTxList(data: ITransaction[]) {
@@ -228,7 +240,6 @@ export default class Transfer extends Vue {
     formCheck() {
         this.formErrors = []
         let err = []
-
         let addr = this.addressIn
 
         let chain = addr.split('-')
@@ -277,17 +288,16 @@ export default class Transfer extends Vue {
         this.txId = ''
         this.isSuccess = false
         this.cancelConfirm()
-
         this.orders = []
         this.nftOrders = []
         this.formOrders = []
         this.formNftOrders = []
+        this.updateBalance()
     }
 
     clearForm() {
         this.addressIn = ''
         this.memo = ''
-
         // Clear transactions list
         this.$refs.txList.reset()
 
@@ -300,13 +310,12 @@ export default class Transfer extends Vue {
     async onsuccess(txId: string) {
         this.isAjax = false
         this.isSuccess = true
-
+        this.updateBalance()
         this.$store.dispatch('Notifications/add', {
             title: this.$t('transfer.success_title'),
             message: this.$t('transfer.success_msg'),
             type: 'success',
         })
-
         // Update the user's balance
         this.$store.dispatch('Assets/updateUTXOs').then(() => {
             this.updateSendAgainLock()
@@ -317,7 +326,9 @@ export default class Transfer extends Vue {
     updateSendAgainLock() {
         if (!this.wallet.isFetchUtxos) {
             this.canSendAgain = true
+            this.updateBalance()
         } else {
+            this.updateBalance()
             setTimeout(() => {
                 this.updateSendAgainLock()
             }, 1000)
@@ -345,15 +356,17 @@ export default class Transfer extends Vue {
             memo: Buffer.from(this.formMemo),
             orders: sumArray,
         }
-
         this.$store
             .dispatch('issueBatchTx', txList)
             .then((res) => {
+                this.updateBalance()
                 this.canSendAgain = false
                 this.waitTxConfirm(res)
                 this.txId = res
+                eventBus.$emit('eventTransactions')
             })
             .catch((err) => {
+                this.updateBalance()
                 this.onerror(err)
             })
     }
@@ -466,7 +479,10 @@ export default class Transfer extends Vue {
     deactivated() {
         this.startAgain()
     }
-
+    updateBalance(): void {
+        this.$store.dispatch('Assets/updateUTXOs')
+        this.$store.dispatch('History/updateTransactionHistory')
+    }
     activated() {
         this.clearForm()
 
@@ -517,19 +533,26 @@ export default class Transfer extends Vue {
 
 $padLeft: 24px;
 $padTop: 8px;
-
+.transfer_card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 24px 16px;
+    overflow: scroll;
+}
 .disconnected {
     padding: 30px;
     text-align: center;
     background-color: var(--bg-light);
 }
-
+.top_transfer {
+    display: grid;
+    grid-template-columns: 1fr 348px;
+    grid-gap: 12px;
+    height: 506px;
+}
 .explain {
     font-size: 12px;
     color: var(--primary-color-light);
-}
-h1 {
-    font-weight: normal;
 }
 h4 {
     display: block;
@@ -582,7 +605,7 @@ h4 {
     resize: none;
     width: 100%;
     height: 80px;
-    border-radius: 2px;
+    border-radius: 8px;
     padding: 4px 12px;
 }
 
@@ -602,17 +625,10 @@ h4 {
 }
 
 .new_order_Form > div {
-    /*padding: 10px 0;*/
     margin-bottom: 15px;
 }
 .lists {
-    /*padding-right: 45px;*/
-    border-right: 1px solid var(--bg-light);
     grid-column: 1/3;
-
-    /*> div{*/
-    /*    margin: 14px 0;*/
-    /*}*/
 }
 
 .tx_list {
@@ -674,16 +690,6 @@ label {
     padding: 8px 16px;
 }
 
-//@media only screen and (max-width: 600px) {
-//    .order_form {
-//        display: block;
-//    }
-//    .asset_select button {
-//        flex-grow: 1;
-//        word-break: break-word;
-//    }
-//}
-
 @include main.medium-device {
     .new_order_Form {
         grid-template-columns: 1fr 1fr 220px;
@@ -713,6 +719,15 @@ label {
 
     .lists {
         border: none;
+    }
+    @media (max-width: 640px) {
+        .top_transfer {
+            grid-template-columns: 1fr;
+            height: auto;
+        }
+        .transfer_card {
+            min-height: 600px;
+        }
     }
 }
 </style>

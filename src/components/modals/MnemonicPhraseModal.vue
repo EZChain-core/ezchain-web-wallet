@@ -56,7 +56,7 @@ export default class MnemonicPhraseModal extends Vue {
 .phrase_raw {
     background-color: var(--bg);
     margin: 15px 0px !important;
-    border-radius: 2px;
+    border-radius: 8px;
     padding: 6px 12px;
 }
 

@@ -7,10 +7,8 @@ import VueI18n from 'vue-i18n'
 //@ts-ignore
 import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
-
-import { BootstrapVue } from 'bootstrap-vue'
-// Install BootstrapVue
-Vue.use(BootstrapVue)
+//tailwind css
+import '../public/assets/tailwind.css'
 
 Vue.use(VueMeta)
 
@@ -22,10 +20,10 @@ import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n.js'
 
 Vue.config.productionTip = false
-
+export const eventBus = new Vue()
 const app = new Vue({
-    router,
     store,
+    router,
     vuetify,
     i18n,
     render: (h) => h(App),

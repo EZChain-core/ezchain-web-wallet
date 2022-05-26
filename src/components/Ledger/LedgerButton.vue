@@ -1,9 +1,12 @@
 <template>
-    <button class="button_primary" @click="submit">
+    <button
+        class="bg-white-a500 rounded-lg shadow-lg flex justify-between items-center w-full text-1.5xl text-black-a400 p-5"
+        @click="submit"
+    >
         <template v-if="!isLoading">
             Ledger
             <ImageDayNight
-                day="/img/access_icons/day/ledger.svg"
+                day="/img/access_icons/day/external-drive.svg"
                 night="/img/access_icons/night/ledger.svg"
                 class="ledger_img"
             ></ImageDayNight>
@@ -139,7 +142,7 @@ export default class LedgerButton extends Vue {
 
     async loadWallet(wallet: LedgerWallet) {
         this.showWalletLoading()
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             setTimeout(() => {
                 this.$store
                     .dispatch('accessWalletLedger', wallet)

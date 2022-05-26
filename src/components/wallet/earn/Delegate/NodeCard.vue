@@ -1,62 +1,21 @@
 <template>
-    <div class="node_card">
-        <p class="node_id">{{ node.nodeID }}</p>
-        <!--        <div class="meta_row"></div>-->
-        <div>
-            <label>Fee</label>
-            <p>{{ node.fee.toFixed(2) }}%</p>
-        </div>
-        <div>
-            <label>Uptime</label>
-            <!--            <p>{{ uptimeText }}</p>-->
-            <p style="font-size: 0.8rem">
-                Please refer to
-                <a :href="vscoutURL" target="_blank">VScout</a>
-                or
-                <a :href="avascanURL" target="_blank">Avascan</a>
-                to get more information about a node's uptime.
-            </p>
-        </div>
-        <div>
-            <label>Delegators</label>
-            <p>{{ node.numDelegators }}</p>
-        </div>
-        <!--        <div class="stake_row">-->
-        <!--            -->
-        <!--        </div>-->
-        <div>
-            <label>Active Stake</label>
-            <p>{{ totalStakeBig.toLocaleString(0) }} EZC</p>
-        </div>
-        <div>
-            <label>Available Stake</label>
-            <p>{{ remainingStakeBig.toLocaleString(0) }} EZC</p>
-        </div>
-        <!--        <div class="dates"></div>-->
-        <div class="date_row">
-            <label>Stake Start Date</label>
-            <p>{{ node.startTime.toLocaleDateString() }}</p>
-            <p>{{ node.startTime.toLocaleTimeString() }}</p>
-        </div>
-        <div class="date_row">
-            <label>Stake End Date</label>
-            <p>
-                {{ node.endTime.toLocaleDateString() }}
-            </p>
-            <p>{{ node.endTime.toLocaleTimeString() }}</p>
-        </div>
+    <div>
+        <p class="text-md text-EZC-grayText">
+            <span v-if="node.name" class="font-bold text-EZC-bgBlackButton">{{ node.name }} -</span>
+            {{ node.nodeID }}
+        </p>
     </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ValidatorListItem } from '@/store/modules/platform/types'
-import { bnToBig } from '@/helpers/helper'
+import { bnToBig, getNameValidator } from '@/helpers/helper'
 import { AvaNetwork } from '@/js/AvaNetwork'
 
 @Component
 export default class NodeCard extends Vue {
     @Prop() node!: ValidatorListItem
-
+    nameNodeId: string = ''
     get uptimeText(): string {
         return (this.node.uptime * 100).toFixed(2) + '%'
     }

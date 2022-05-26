@@ -4,19 +4,20 @@
         <transition name="fade" mode="out-in">
             <sidebar class="panel sidenav"></sidebar>
         </transition>
-        <div class="wallet_main">
-            <top-info class="wallet_top"></top-info>
-            <transition name="page_fade" mode="out-in">
-                <keep-alive
-                    :exclude="['cross_chain', 'activity', 'advanced', 'earn', 'manage', 'studio']"
-                >
-                    <router-view id="wallet_router" :key="$route.path"></router-view>
-                </keep-alive>
-            </transition>
+        <div>
+            <top-nav-bar class="top_nav_bar"></top-nav-bar>
+            <div class="wallet_main min-h-screen bg-EZC-bgDefault pt-2 px-5 pb-2">
+                <transition name="page_fade" mode="out-in">
+                    <keep-alive :exclude="['cross_chain', 'activity', 'earn', 'manage', 'studio']">
+                        <router-view
+                            class="no_scroll_bar"
+                            id="wallet_router"
+                            :key="$route.path"
+                        ></router-view>
+                    </keep-alive>
+                </transition>
+            </div>
         </div>
-        <transition name="fade" mode="out-in">
-            <main-panel class="panel"></main-panel>
-        </transition>
     </div>
 </template>
 
@@ -24,6 +25,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import TopInfo from '@/components/wallet/TopInfo.vue'
 import Sidebar from '@/components/wallet/Sidebar.vue'
+import TopNavBar from '@/components/wallet/TopNavbar.vue'
 import MainPanel from '@/components/SidePanels/MainPanel.vue'
 import UpdateKeystoreModal from '@/components/modals/UpdateKeystore/UpdateKeystoreModal.vue'
 
@@ -35,6 +37,7 @@ const TIMEOUT_DUR_MS = TIMEOUT_DURATION * 1000
         Sidebar,
         MainPanel,
         TopInfo,
+        TopNavBar,
         UpdateKeystoreModal,
     },
 })
@@ -42,7 +45,6 @@ export default class Wallet extends Vue {
     intervalId: NodeJS.Timeout | null = null
     logoutTimestamp = Date.now() + TIMEOUT_DUR_MS
     isLogOut = false
-
     // Set the logout timestamp to now + TIMEOUT_DUR_MS
     resetTimer() {
         this.logoutTimestamp = Date.now() + TIMEOUT_DUR_MS
@@ -78,7 +80,6 @@ export default class Wallet extends Vue {
 
     mounted() {
         let view = this.$refs.wallet_view as HTMLDivElement
-
         view.addEventListener('mousemove', this.resetTimer)
         view.addEventListener('mousedown', this.resetTimer)
 
@@ -116,10 +117,8 @@ export default class Wallet extends Vue {
 .wallet_view {
     padding-bottom: 0;
     display: grid;
-    grid-template-columns: 200px 1fr 300px;
-    column-gap: 15px;
+    grid-template-columns: 300px 1fr;
     height: 100%;
-    background-color: var(--bg-wallet);
 }
 
 .sidenav {
@@ -132,19 +131,8 @@ export default class Wallet extends Vue {
 }
 
 .wallet_main {
-    height: 100%;
-    display: grid;
-    grid-template-rows: max-content 1fr;
-    grid-gap: 15px;
-    padding-top: 8px;
+    background-color: #f5f5f5;
 }
-
-#wallet_router {
-    padding: 22px 20px;
-    background-color: var(--bg-wallet-light);
-    border-radius: 4px;
-}
-
 .page_fade-enter-active,
 .page_fade-leave-active {
     transition: all 0.2s;
@@ -159,11 +147,6 @@ export default class Wallet extends Vue {
         display: block;
         column-gap: 9px;
     }
-    .wallet_main {
-        grid-gap: 9px;
-        padding-top: 0;
-    }
-
     .wallet_sidebar {
         display: none;
     }
@@ -174,13 +157,17 @@ export default class Wallet extends Vue {
         grid-template-columns: 180px 1fr 240px !important;
         column-gap: 9px;
     }
-
-    .wallet_main {
-        grid-gap: 9px;
-    }
-
     #wallet_router {
         padding: 12px 18px;
+        overflow: scroll;
+    }
+}
+@media (max-width: 640px) {
+    .top_nav_bar {
+        display: none;
+    }
+    .wallet_main {
+        padding: 0;
     }
 }
 </style>

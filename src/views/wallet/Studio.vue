@@ -1,46 +1,74 @@
 <template>
     <div>
-        <div class="header">
-            <h1>{{ $t('studio.title') }}</h1>
-            <h1 class="subtitle" v-if="pageNow">
-                / {{ subtitle }}
-                <span @click="cancel"><fa icon="times"></fa></span>
-            </h1>
-        </div>
-        <template v-if="!pageNow">
-            <p>{{ $t('studio.desc') }}</p>
-            <div class="menu">
-                <h2>{{ $t('studio.collectibles') }}</h2>
-                <div class="options">
-                    <div>
-                        <h4 class="title">{{ $t('studio.menu1.title') }}</h4>
-                        <p>{{ $t('studio.menu1.desc') }}</p>
-                        <v-btn @click="goNewNftFamily" class="button_secondary" small depressed>
-                            {{ $t('studio.menu1.submit') }}
-                        </v-btn>
-                    </div>
-                    <div>
-                        <h4 class="title">{{ $t('studio.menu2.title') }}</h4>
-                        <p>{{ $t('studio.menu2.desc') }}</p>
-                        <div>
-                            <p v-if="!canMint" class="err">
-                                {{ $t('studio.menu2.empty') }}
-                            </p>
-                            <v-btn
-                                @click="goMint"
-                                class="button_secondary"
-                                small
-                                depressed
-                                :disabled="!canMint"
-                            >
-                                {{ $t('studio.menu2.submit') }}
-                            </v-btn>
-                        </div>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">My NFT</h1>
+        <div class="flex_four">
+            <div class="my_nft no_scroll_bar">
+                <div class="header">
+                    <div v-if="pageNow" style="display: flex; align-items: center">
+                        <img
+                            style="width: 15px; height: 12px; cursor: pointer"
+                            @click="cancel"
+                            src="@/assets/back.png"
+                            alt=""
+                        />
+                        <h1
+                            style="
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 16px;
+                                line-height: 24px;
+                                color: #0c1527;
+                                display: inline;
+                                margin-left: 8px;
+                            "
+                        >
+                            {{ subtitle }}
+                        </h1>
                     </div>
                 </div>
+                <template v-if="!pageNow">
+                    <div class="menu">
+                        <div class="options grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
+                            <div>
+                                <h4 class="title">{{ $t('studio.menu1.title') }}</h4>
+                                <p>{{ $t('studio.menu1.desc') }}</p>
+                                <v-btn
+                                    @click="goNewNftFamily"
+                                    class="button_secondary"
+                                    small
+                                    depressed
+                                >
+                                    {{ $t('studio.menu1.submit') }}
+                                </v-btn>
+                            </div>
+                            <div>
+                                <h4 class="title">{{ $t('studio.menu2.title') }}</h4>
+                                <p>{{ $t('studio.menu2.desc') }}</p>
+                                <div>
+                                    <p v-if="!canMint" class="err">
+                                        {{ $t('studio.menu2.empty') }}
+                                    </p>
+                                    <v-btn
+                                        @click="goMint"
+                                        class="button_secondary"
+                                        small
+                                        depressed
+                                        :disabled="!canMint"
+                                    >
+                                        {{ $t('studio.menu2.submit') }}
+                                    </v-btn>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <Component v-else :is="pageNow" @cancel="cancel"></Component>
             </div>
-        </template>
-        <Component v-else :is="pageNow" @cancel="cancel"></Component>
+            <transition name="fade" mode="out-in">
+                <transaction-history-panel class="panel_content"></transaction-history-panel>
+            </transition>
+        </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -52,10 +80,14 @@ import Big from 'big.js'
 import { bnToBig } from '@/helpers/helper'
 import { avm } from '@/AVA'
 import { BN } from 'ezchainjs2'
+import TransactionHistoryPanel from '@/components/SidePanels/TransactionHistoryPanel.vue'
+import TopInfo from '@/components/wallet/TopInfo.vue'
 @Component({
     name: 'studio',
     components: {
         NewCollectibleFamily,
+        TransactionHistoryPanel,
+        TopInfo,
     },
 })
 export default class Studio extends Vue {
@@ -64,7 +96,7 @@ export default class Studio extends Vue {
 
     goNewNftFamily() {
         this.pageNow = NewCollectibleFamily
-        this.subtitle = 'New Collectible Family'
+        this.subtitle = 'New Family'
     }
 
     goMint() {
@@ -117,6 +149,22 @@ export default class Studio extends Vue {
 }
 </script>
 <style scoped lang="scss">
+.flex_four {
+    display: grid;
+    grid-template-columns: 1fr 348px;
+    grid-gap: 12px;
+    height: 506px;
+}
+.my_nft {
+    background: #ffffff;
+    /* Card Style */
+
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding: 16px 16px;
+    overflow: scroll;
+}
 .header {
     display: flex;
     /*justify-content: space-between;*/
@@ -154,35 +202,50 @@ export default class Studio extends Vue {
 }
 
 .options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     column-gap: 14px;
     > div {
-        border-radius: 4px;
         border: 1px solid var(--bg-light);
-        background-color: var(--bg-light);
-        padding: 30px;
+        padding: 16px;
         display: flex;
         flex-direction: column;
-
-        &:hover {
-            background-color: var(--bg-light);
-        }
+        background: #fafafa;
+        border-radius: 8px;
     }
 
     p {
         flex-grow: 1;
-        margin: 12px 0 !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        /* or 150% */
+
+        letter-spacing: 0.1px;
+
+        /* Neutral/500 */
+
+        color: #737373;
     }
 
     h4 {
-        font-size: 32px !important;
-        font-weight: lighter;
-        color: var(--primary-color-light);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #0c1527;
+        margin-bottom: 9px;
     }
 
     .v-btn {
         width: max-content;
+        height: 40px;
+        margin-top: 24px;
+        background: #ffffff;
+        /* Card Style */
+
+        box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+            inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+        border-radius: 8px;
     }
 }
 </style>

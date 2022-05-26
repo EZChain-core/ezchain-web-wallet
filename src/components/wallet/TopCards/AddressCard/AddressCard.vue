@@ -1,50 +1,58 @@
 <template>
-    <div class="addr_card">
-        <q-r-modal ref="qr_modal" :address="activeAddress"></q-r-modal>
-        <paper-wallet
-            ref="print_modal"
-            v-if="walletType === 'mnemonic'"
-            :wallet="activeWallet"
-        ></paper-wallet>
-        <p class="addr_info">{{ addressMsg }}</p>
-        <div class="bottom">
-            <div class="col_qr">
-                <canvas ref="qr"></canvas>
+    <div>
+        <div class="addr_card xl:max-w-full max-w-mobile">
+            <div class="bottom_tabs">
+                <ChainSelect v-model="chainNow"></ChainSelect>
             </div>
-            <div class="bottom_rest">
-                <p class="subtitle">{{ addressLabel }}</p>
+            <q-r-modal ref="qr_modal" :address="activeAddress"></q-r-modal>
+            <paper-wallet
+                ref="print_modal"
+                v-if="walletType === 'mnemonic'"
+                :wallet="activeWallet"
+            ></paper-wallet>
+            <div class="bottom">
+                <div class="col_qr">
+                    <canvas
+                        style="width: 96px !important; height: 96px !important"
+                        ref="qr"
+                    ></canvas>
+                </div>
+                <div class="bottom_rest">
+                    <!--                    <p class="subtitle">{{ addressLabel }}</p>-->
+                    <span class="text-xs text-EZC-grayText mt-3">Wallet Address</span>
 
-                <p class="addr_text" data-cy="wallet_address">
-                    {{ activeAddress }}
-                </p>
-                <div class="buts">
-                    <button
-                        :tooltip="$t('top.hover1')"
-                        @click="viewQRModal"
-                        class="qr_but"
-                    ></button>
-                    <button
-                        v-if="walletType === 'mnemonic'"
-                        :tooltip="$t('top.hover2')"
-                        @click="viewPrintModal"
-                        class="print_but"
-                    ></button>
-                    <button
-                        v-if="walletType === 'ledger'"
-                        :tooltip="$t('create.verify')"
-                        @click="verifyLedgerAddress"
-                        class="ledger_but"
-                    ></button>
-                    <CopyText
-                        :tooltip="$t('top.hover3')"
-                        :value="activeAddress"
-                        class="copy_but"
-                    ></CopyText>
+                    <p
+                        style="word-break: break-all"
+                        class="text-md xl:text-base text-EZC-bgBlackButton"
+                        data-cy="wallet_address"
+                    >
+                        {{ activeAddress }}
+                    </p>
+                    <div class="grid grid-cols-2 gap-x-2 mt-2">
+                        <button @click="viewQRModal" class="flex flex-row items-center">
+                            <img class="mr-2" src="@/assets/eyes.svg" alt="" />
+                            <span class="text-sm text-EZC-bgButton font-bold">View</span>
+                        </button>
+                        <CopyText
+                            :tooltip="$t('top.hover3')"
+                            :value="activeAddress"
+                            class="copy_but"
+                        ></CopyText>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bottom_tabs">
-            <ChainSelect v-model="chainNow"></ChainSelect>
+            <p
+                style="
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #737373;
+                "
+            >
+                <!-- This is your X-Chain address to receive funds. -->
+                {{ addressMsg }}
+            </p>
         </div>
     </div>
 </template>
@@ -262,21 +270,22 @@ export default class AddressCard extends Vue {
 .addr_card {
     display: flex;
     flex-direction: column;
-    padding: 0 !important;
+    background: #fafafa;
+    border-radius: 8px;
+    height: 100%;
 }
 .buts {
     width: 100%;
     display: flex;
     align-items: center;
     color: var(--primary-color-light);
-    justify-content: flex-end;
+    justify-content: flex-start;
+    margin-top: 15px;
 
     > * {
         font-size: 16px;
-        margin-left: 14px;
         position: relative;
         outline: none;
-        width: 18px;
         height: 18px;
         opacity: 0.6;
 
@@ -287,16 +296,6 @@ export default class AddressCard extends Vue {
         }
     }
 }
-
-.qr_but {
-    background-image: url('/img/qr_icon.png');
-}
-.print_but {
-    background-image: url('/img/faucet_icon.png');
-}
-.ledger_but {
-    background-image: url('/img/ledger_icon.png');
-}
 .copy_but {
     color: var(--primary-color);
 }
@@ -305,25 +304,6 @@ export default class AddressCard extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.mainnet_but {
-    background-image: url('/img/modal_icons/mainnet_addr.svg');
-}
-
-@include main.night-mode {
-    .qr_but {
-        background-image: url('/img/qr_icon_night.svg');
-    }
-    .print_but {
-        background-image: url('/img/print_icon_night.svg');
-    }
-    .ledger_but {
-        background-image: url('/img/ledger_night.svg');
-    }
-
-    .mainnet_but {
-        background-image: url('/img/modal_icons/mainnet_addr_night.svg');
-    }
 }
 
 .addr_info {
@@ -342,15 +322,14 @@ $qr_width: 110px;
     display: grid;
     grid-template-columns: $qr_width 1fr;
     column-gap: 14px;
-    padding-right: 18px;
     margin-top: 4px;
     margin-bottom: 4px;
     padding-left: 8px;
     flex-grow: 1;
 
     canvas {
-        width: $qr_width;
-        height: $qr_width;
+        width: $qr_width !important;
+        height: $qr_width !important;
         background-color: transparent;
     }
 
@@ -378,7 +357,7 @@ $qr_width: 110px;
 }
 
 .addr_text {
-    font-size: 15px;
+    font-size: 12px;
     word-break: break-all;
     color: var(--primary-color);
     min-height: 55px;

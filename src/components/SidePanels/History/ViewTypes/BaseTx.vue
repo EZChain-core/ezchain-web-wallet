@@ -4,10 +4,10 @@
             <div v-if="hasSent">
                 <label>Sent</label>
                 <BaseTxOutput
+                    :summary="asset"
                     v-for="(asset, assetId) in tokensSent"
                     :key="assetId"
                     :asset-i-d="assetId"
-                    :summary="asset"
                 ></BaseTxOutput>
                 <div class="nft_cols">
                     <div class="nft_addr">
@@ -51,28 +51,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--            <tx-history-value-->
-            <!--                v-for="(amount, assetId) in valList"-->
-            <!--                :key="assetId"-->
-            <!--                :amount="amount"-->
-            <!--                :type="type"-->
-            <!--                :asset-id="assetId"-->
-            <!--                :is-income="false"-->
-            <!--                :operation-color="operationColor"-->
-            <!--                :operation-direction="operationDirection"-->
-            <!--            ></tx-history-value>-->
-            <!--            <div class="nfts">-->
-            <!--                <div v-for="(groupIDs, assetID) in nftGroups" :key="assetID">-->
-            <!--                    <tx-history-nft-family-group-->
-            <!--                        v-for="(payloads, id) in groupIDs"-->
-            <!--                        :key="id"-->
-            <!--                        :payloads="payloads"-->
-            <!--                        :assetID="assetID"-->
-            <!--                        class="group"-->
-            <!--                    ></tx-history-nft-family-group>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </div>
 </template>
@@ -92,6 +70,7 @@ import TxHistoryNftFamilyGroup from '@/components/SidePanels/TxHistoryNftFamilyG
 import { getTransactionSummary } from '@/helpers/history_helper'
 import BaseTxOutput from '@/components/SidePanels/History/ViewTypes/BaseTxOutput.vue'
 import BaseTxNFTOutput from '@/components/SidePanels/History/ViewTypes/BaseTxNFTOutput.vue'
+import { eventBus } from '@/main'
 
 let payloadtypes = PayloadTypes.getInstance()
 

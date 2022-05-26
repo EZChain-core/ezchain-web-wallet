@@ -1,27 +1,27 @@
 <template>
     <div class="avax_input">
         <div class="col1 hover_border">
-            <button class="max_but" @click="maxOut" v-if="max">MAX</button>
             <BigNumInput
+                style="text-align: left !important"
                 ref="amt_in"
                 class="amt_in"
                 contenteditable="amt_in"
                 :denomination="9"
                 :max="max"
-                placeholder="0.00"
+                placeholder="0 EZC"
                 @change="amount_in"
             ></BigNumInput>
+            <button class="max_but" @click="maxOut" v-if="max">MAX</button>
         </div>
-        <p class="ticker">EZC</p>
         <div v-if="balance" class="balance">
             <div>
                 <p>
-                    <b>{{ $t('misc.balance') }}:</b>
-                    {{ balance.toLocaleString() }}
-                </p>
-                <p>
                     <b>$</b>
                     {{ amountUSD.toLocaleString(2) }}
+                </p>
+                <p>
+                    <b>{{ $t('misc.balance') }}:</b>
+                    {{ balance.toLocaleString() }}
                 </p>
             </div>
             <div></div>
@@ -80,15 +80,19 @@ export default class AvaxInput extends Vue {
 
 .avax_input {
     display: grid;
-    grid-template-columns: 1fr max-content;
-    grid-gap: 0px 10px;
+    grid-template-rows: 1fr max-content;
     color: var(--primary-color);
     width: 100%;
     height: 40px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
 
     .amt_in {
-        color: var(--primary-color);
-        font-size: 15px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #262626;
         font-family: monospace;
         flex-grow: 1;
         flex-shrink: 1;
@@ -98,12 +102,20 @@ export default class AvaxInput extends Vue {
         border: none !important;
         //padding: 0 12px !important;
     }
-
-    .ticker,
-    .amt_in,
+    .amt_in::placeholder {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #262626;
+    }
     .max_but {
         background-color: var(--bg-light);
-        //border-radius: 3px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #737373;
     }
 }
 
@@ -135,12 +147,12 @@ export default class AvaxInput extends Vue {
 }
 
 .col1 {
-    border-radius: 3px;
-    background-color: var(--bg-light);
+    background-color: #f5f5f5;
     border: 1px solid transparent;
+    border-radius: 8px;
     //display: flex;
     display: grid;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: 1fr max-content;
     width: 100%;
     box-sizing: border-box;
     //overflow: auto;
@@ -165,10 +177,7 @@ p {
 }
 .max_but {
     font-size: 13px;
-    opacity: 0.4;
-    &:hover {
-        opacity: 1;
-    }
+    color: #737373;
 }
 
 @include main.mobile-device {

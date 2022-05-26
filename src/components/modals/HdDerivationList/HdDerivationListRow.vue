@@ -17,6 +17,15 @@
                 </p>
             </template>
         </div>
+        <a
+            style="color: white"
+            class="rounded-lg h-8 text-center p-2 bg-EZC-bgButton text-xs mr-4"
+            title="Show PrivateKey of this address"
+            @click="showPrivateKeyModals()"
+        >
+            Show
+        </a>
+        <PrivateKey :privateKey="privateKey" ref="modal_priv_keys"></PrivateKey>
     </div>
 </template>
 <script lang="ts">
@@ -29,9 +38,14 @@ import { WalletType } from '@/js/wallets/types'
 
 import { ava } from '@/AVA'
 import { getPreferredHRP } from 'ezchainjs2/dist/utils'
-import { AVA_ACCOUNT_PATH } from '../../../js/wallets/MnemonicWallet'
+import MnemonicWallet, { AVA_ACCOUNT_PATH } from '../../../js/wallets/MnemonicWallet'
+import PrivateKey from '@/components/modals/PrivateKey.vue'
 
-@Component
+@Component({
+    components: {
+        PrivateKey,
+    },
+})
 export default class HdDerivationListRow extends Vue {
     @Prop() index!: number
     @Prop() path!: number
@@ -48,11 +62,17 @@ export default class HdDerivationListRow extends Vue {
         }
         return res
     }
-
+    $refs!: {
+        modal_priv_keys: PrivateKey
+    }
     get noBalance(): boolean {
         return Object.keys(this.cleanBalance).length === 0
     }
-
+    get privateKey(): string | null {
+        if (this.walletType !== 'mnemonic') return null
+        let wallet = this.wallet as MnemonicWallet
+        return wallet.ethKeyBech
+    }
     get assetsDict() {
         return this.$store.state.Assets.assetsDict
     }
@@ -64,10 +84,11 @@ export default class HdDerivationListRow extends Vue {
     get walletType() {
         return this.wallet.type
     }
-
+    showPrivateKeyModals() {
+        this.$refs.modal_priv_keys.open()
+    }
     async verifyLedgerAddress() {
         const wallet = this.wallet as LedgerWallet
-
         let networkId = ava.getNetworkID()
         let hrp = getPreferredHRP(networkId)
 
@@ -118,7 +139,7 @@ export default class HdDerivationListRow extends Vue {
 span {
     /*background-color: #ddd;*/
     /*padding: 2px 6px;*/
-    border-radius: 2px;
+    border-radius: 8px;
     font-weight: bold;
 }
 </style>

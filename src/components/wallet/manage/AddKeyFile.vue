@@ -138,7 +138,7 @@ export default class AddKeyFile extends Vue {
 
 .addKeyBut {
     text-transform: none;
-    border-radius: 2px;
+    border-radius: 8px;
     margin-top: 14px;
 }
 
@@ -157,7 +157,7 @@ label {
     height: 40px;
     font-size: 12px;
     background-color: var(--bg-light) !important;
-    border-radius: 2px;
+    border-radius: 8px;
 }
 </style>
 <style lang="scss">

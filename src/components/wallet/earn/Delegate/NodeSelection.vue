@@ -1,21 +1,13 @@
 <template>
     <div class="node_selection">
         <div style="display: flex; align-items: center; justify-content: space-between">
-            <div style="display: flex; align-items: center">
-                <p>{{ $t('earn.delegate.list.prompt') }}:</p>
+            <div class="search hover_border">
+                <img v-if="$root.theme === 'day'" src="@/assets/search.png" />
                 <input
-                    class="search"
                     type="text"
                     :placeholder="$t('earn.delegate.list.search')"
                     v-model="search"
                 />
-            </div>
-
-            <div class="rigt_but">
-                <button @click="openFilters">
-                    {{ $t('earn.delegate.filter.title') }}
-                    <fa icon="filter"></fa>
-                </button>
             </div>
         </div>
         <ValidatorsList
@@ -66,11 +58,42 @@ export default class NodeSelection extends Vue {
 }
 
 .search {
-    padding: 3px 12px;
-    border-radius: 12px;
-    background-color: var(--bg-light);
-    margin-left: 30px;
-    color: var(--primary-color);
+    /*flex-grow: 1;*/
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    flex-basis: 420px;
+    flex-shrink: 1;
+    border: 1px solid transparent;
+    flex-direction: row-reverse;
+    width: 268px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    $icon_w: 36px;
+
+    img {
+        border-radius: 4px;
+        padding: 10px 0px;
+        background-color: var(--bg-wallet-light);
+        /*height: 100%;*/
+        height: $icon_w;
+        width: $icon_w;
+        object-fit: contain;
+    }
+
+    input {
+        padding: 0px 16px;
+        outline: none;
+        border: none !important;
+        flex-grow: 1;
+        color: var(--primary-color);
+
+        &::placeholder {
+            color: #b3b7d3;
+        }
+    }
 }
 
 .rigt_but {

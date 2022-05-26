@@ -31,21 +31,26 @@ export default class ChainSelect extends Vue {
     grid-template-columns: 1fr 1fr 1fr;
     font-size: 13px;
     color: var(--primary-color-light);
-    background-color: var(--bg-wallet);
+    height: 40px;
+    background: #e5e5e5;
+    border-radius: 20px;
+    padding: 4px;
 }
 button {
     padding: 8px 5px;
     opacity: 0.8;
+    height: 32px;
     outline: none !important;
     font-weight: bold;
-    background-color: rgba(var(--bg-1), 0.5);
     &:hover {
         opacity: 1;
         color: var(--secondary-color);
     }
     &[active] {
         opacity: 1;
-        background-color: var(--bg);
+        background: #ffffff;
+        box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+        border-radius: 16px;
         color: var(--primary-color);
     }
 }

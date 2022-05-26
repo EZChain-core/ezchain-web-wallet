@@ -316,8 +316,8 @@
         "import_mnemonic_duplicate_err": "This mnemonic has already been added to this wallet.",
         "import_mnemonic_err": "Invalid key phrase.",
         "tooltip": "This key will be forgotten when you refresh the browser.",
-        "view_priv_key": "View Private Key",
-        "view_priv_key_c": "View C Chain Private Key",
+        "view_priv_key": "Private Key",
+        "view_priv_key_c": "C Chain Private Key",
         "view_key": "View Key Phrase",
         "export_key": "Export Key",
         "hd_addresses": "HD Addresses",
@@ -439,7 +439,7 @@
                 "end": "End Date & Time"
             },
             "amount": {
-                "label": "Stake Amount",
+                "label": "Staking Amount",
                 "desc": "The amount of EZC to lock for staking."
             },
             "fee": {
@@ -504,7 +504,7 @@
             "list": {
                 "prompt": "Select a node to delegate",
                 "search": "Search Node ID",
-                "id": "Node ID",
+                "id": "Name/NodeID",
                 "val_stake": "Validator Stake",
                 "aval_stake": "Available",
                 "aval_stake_tip": "How much more can be delegated to this validator.",
@@ -532,7 +532,7 @@
                     "end": "End Date & Time"
                 },
                 "amount": {
-                    "label": "Stake Amount",
+                    "label": "Staking Amount",
                     "desc": "The amount of EZC to lock for staking.",
                     "desc2": "The available delegation amount for this node is {0} EZC"
                 },
@@ -565,7 +565,7 @@
             "summary": {
                 "duration": "Staking Duration",
                 "reward": "Estimated Reward",
-                "fee": "Fee",
+                "fee": "Fee (for Validator)",
                 "warn": "If it is your first time staking, start small. Staked tokens are locked until the end of the staking period."
             },
             "confirm": "Confirm",

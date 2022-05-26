@@ -1,6 +1,6 @@
 <template>
     <modal ref="modal" :title="$t('modal.qr.title')">
-        <div class="qr_body">
+        <div class="qr_body flex flex-col justify-center items-center">
             <canvas ref="qr"></canvas>
             <p>{{ address }}</p>
             <CopyText :value="address" class="copyBut">{{ $t('modal.qr.copy') }}</CopyText>

@@ -12,9 +12,6 @@
         <div class="empty" v-else-if="isEmpty && !isUpdating">
             <p>{{ $t('transactions.notx') }}</p>
         </div>
-        <!--        <div v-else-if="isUpdating">-->
-        <!--            <p class="empty">{{ $t('transactions.loading') }}</p>-->
-        <!--        </div>-->
         <div class="list no_scroll_bar" v-else>
             <tx-history-row
                 v-for="tx in transactions"
@@ -35,6 +32,7 @@ import TxHistoryRow from '@/components/SidePanels/TxHistoryRow.vue'
 import { ITransactionData } from '@/store/modules/history/types'
 import { AvaNetwork } from '@/js/AvaNetwork'
 import { ITransaction } from '@/components/wallet/transfer/types'
+import { eventBus } from '@/main'
 
 @Component({
     components: {
@@ -89,6 +87,12 @@ export default class TransactionHistoryPanel extends Vue {
         let addr = this.$store.state.address.split('-')[1]
         return `https://explorer.avax.network/address/${addr}`
     }
+    mounted() {
+        eventBus.$on('eventTransactions', () => {
+            this.$store.dispatch('Assets/updateUTXOs')
+            this.$store.dispatch('History/updateTransactionHistory')
+        })
+    }
 }
 </script>
 <style scoped lang="scss">
@@ -99,6 +103,12 @@ export default class TransactionHistoryPanel extends Vue {
     grid-template-rows: max-content 1fr;
     overflow: auto;
     position: relative;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding-bottom: 24px;
+    max-height: 506px;
 }
 
 .header {

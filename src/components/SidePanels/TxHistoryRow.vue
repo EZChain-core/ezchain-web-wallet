@@ -10,7 +10,7 @@
                     tooltip="View in Explorer"
                     class="explorer_link"
                 >
-                    <fa icon="search"></fa>
+                    <img src="@/assets/show.png" alt="show" />
                 </a>
             </p>
             <div v-if="memo" class="memo">
@@ -35,6 +35,7 @@ import ImportExport from '@/components/SidePanels/History/ViewTypes/ImportExport
 import BaseTx from '@/components/SidePanels/History/ViewTypes/BaseTx.vue'
 import StakingTx from '@/components/SidePanels/History/ViewTypes/StakingTx.vue'
 import getMemoFromByteString from '@/services/history/utils'
+import { eventBus } from '@/main'
 
 @Component({
     components: {
@@ -49,8 +50,10 @@ export default class TxHistoryRow extends Vue {
     get explorerUrl(): string | null {
         let network: AvaNetwork = this.$store.state.Network.selectedNetwork
         if (network.explorerSiteUrl) {
+            eventBus.$emit('explorerUrl', `${network.explorerSiteUrl}/tx/${this.transaction.id}`)
             return `${network.explorerSiteUrl}/tx/${this.transaction.id}`
         }
+        eventBus.$emit('explorerUrl', null)
         return null
     }
 
@@ -70,8 +73,10 @@ export default class TxHistoryRow extends Vue {
         let dayMs = 1000 * 60 * 60 * 24
 
         if (diff > dayMs) {
+            eventBus.$emit('timeText', this.time.format('MMM DD, YYYY'))
             return this.time.format('MMM DD, YYYY')
         }
+        eventBus.$emit('timeText', this.time.fromNow())
         return this.time.fromNow()
     }
 

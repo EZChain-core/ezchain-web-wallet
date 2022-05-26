@@ -2,7 +2,7 @@
     <v-app>
         <v-main>
             <template>
-                <UrlBanner></UrlBanner>
+                <!--                <UrlBanner></UrlBanner>-->
                 <navbar v-show="isNavbar"></navbar>
                 <div class="main_cols" :wallet_view="!isNavbar">
                     <UpgradeToAccountModal></UpgradeToAccountModal>
@@ -76,13 +76,13 @@ export default {
                 vmid: 'description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing EZC.',
             },
             {
                 vmid: 'og:description',
                 name: 'description',
                 content:
-                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing AVAX.',
+                    'EZChain wallet is a simple, highly secure, non-custodial crypto wallet for storing EZC.',
             },
             {
                 vmid: 'og:title',
@@ -104,7 +104,6 @@ export default {
         height: 100vh;
 
         #router_view {
-            overflow: auto;
             padding: 0;
             padding-bottom: 0px;
         }
@@ -121,7 +120,6 @@ export default {
     min-height: calc(100vh - 80px);
     position: relative;
     padding: main.$container_padding_m;
-    overflow: auto;
 }
 
 /*.panel {*/
@@ -158,14 +156,15 @@ p {
 }
 
 #nav {
-    height: 80px;
+    height: 96px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
     background-color: transparent;
-    padding: main.$container_padding_m;
+    padding: 24px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 @include main.mobile-device {

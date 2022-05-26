@@ -3,26 +3,41 @@
         <UtxosBreakdownModal ref="utxos_modal"></UtxosBreakdownModal>
         <div class="fungible_card">
             <div class="header">
-                <div class="refresh">
-                    <Spinner v-if="isUpdateBalance" class="spinner"></Spinner>
-                    <button v-else @click="updateBalance">
-                        <fa icon="sync"></fa>
-                    </button>
+                <div style="display: flex; align-items: center">
+                    <h4
+                        style="
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 16px;
+                            line-height: 24px;
+                            color: #262626;
+                            margin-right: 8px;
+                        "
+                    >
+                        {{ $t('top.title2') }}
+                    </h4>
+                    <div class="refresh">
+                        <Spinner v-if="isUpdateBalance" class="spinner"></Spinner>
+                        <button v-else @click="updateBalance">
+                            <img src="@/assets/repeat.png" alt="" />
+                        </button>
+                    </div>
                 </div>
-                <h4>{{ $t('top.title2') }}</h4>
-                <template v-if="!isBreakdown">
-                    <button class="breakdown_toggle" @click="toggleBreakdown">
-                        <fa icon="eye"></fa>
-                        {{ $t('top.balance.show') }}
-                    </button>
-                </template>
-                <template v-else>
-                    <button class="breakdown_toggle" @click="toggleBreakdown">
-                        <fa icon="eye-slash"></fa>
-                        {{ $t('top.balance.hide') }}
-                    </button>
-                </template>
-                <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>
+                <!--                <div>-->
+                <!--                    <template v-if="!isBreakdown">-->
+                <!--                        <button class="breakdown_toggle" @click="toggleBreakdown">-->
+                <!--                            <fa icon="eye"></fa>-->
+                <!--                            {{ $t('top.balance.show') }}-->
+                <!--                        </button>-->
+                <!--                    </template>-->
+                <!--                    <template v-else>-->
+                <!--                        <button class="breakdown_toggle" @click="toggleBreakdown">-->
+                <!--                            <fa icon="eye-slash"></fa>-->
+                <!--                            {{ $t('top.balance.hide') }}-->
+                <!--                        </button>-->
+                <!--                    </template>-->
+                <!--                    <button @click="showUTXOsModal" class="breakdown_toggle">Show UTXOs</button>-->
+                <!--                </div>-->
             </div>
             <div class="balance_row">
                 <p class="balance" data-cy="wallet_balance" v-if="!balanceTextRight">
@@ -35,13 +50,13 @@
                 </p>
                 <div style="display: flex; flex-direction: row">
                     <p class="balance_usd">
-                        <b>$ {{ totalBalanceUSDText }}</b>
+                        <b>{{ totalBalanceUSDText }}</b>
                         USD
                     </p>
                     <p class="balance_usd" style="background-color: transparent">
                         <b>1 EZC</b>
                         =
-                        <b>${{ avaxPriceText }}</b>
+                        <b>{{ avaxPriceText }}</b>
                         USD
                     </p>
                 </div>
@@ -65,23 +80,25 @@
                 <div class="alt_breakdown" v-else>
                     <div>
                         <label>{{ $t('top.balance.available') }} (X)</label>
-                        <p>{{ avmUnlocked | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">{{ avmUnlocked | cleanAvaxBN }} EZC</p>
                         <label>{{ $t('top.balance.available') }} (P)</label>
-                        <p>{{ platformUnlocked | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">{{ platformUnlocked | cleanAvaxBN }} EZC</p>
                         <label>{{ $t('top.balance.available') }} (C)</label>
-                        <p>{{ evmUnlocked | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">{{ evmUnlocked | cleanAvaxBN }} EZC</p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.locked') }} (X)</label>
-                        <p>{{ avmLocked | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">{{ avmLocked | cleanAvaxBN }} EZC</p>
                         <label>{{ $t('top.balance.locked') }} (P)</label>
-                        <p>{{ platformLocked | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">{{ platformLocked | cleanAvaxBN }} EZC</p>
                         <label>{{ $t('top.balance.locked_stake') }} (P)</label>
-                        <p>{{ platformLockedStakeable | cleanAvaxBN }} EZC</p>
+                        <p class="money_transaction">
+                            {{ platformLockedStakeable | cleanAvaxBN }} EZC
+                        </p>
                     </div>
                     <div>
                         <label>{{ $t('top.balance.stake') }}</label>
-                        <p>{{ stakingText }} EZC</p>
+                        <p class="money_transaction">{{ stakingText }} EZC</p>
                     </div>
                 </div>
             </div>
@@ -130,6 +147,7 @@ export default class BalanceCard extends Vue {
     updateBalance(): void {
         this.$store.dispatch('Assets/updateUTXOs')
         this.$store.dispatch('History/updateTransactionHistory')
+        this.$store.dispatch('updateAvaxPrice')
     }
 
     showUTXOsModal() {
@@ -324,9 +342,16 @@ export default class BalanceCard extends Vue {
 </script>
 <style scoped lang="scss">
 @use '../../../../main';
+.money_transaction {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+    color: #171717;
+}
 .balance_card {
     display: grid;
-    grid-template-columns: 1fr 230px;
+    grid-template-columns: 2fr 1fr;
     column-gap: 20px;
 }
 
@@ -335,7 +360,6 @@ export default class BalanceCard extends Vue {
 }
 .fungible_card {
     height: 100%;
-    display: grid !important;
     grid-template-rows: max-content 1fr max-content;
     flex-direction: column;
 }
@@ -348,9 +372,10 @@ export default class BalanceCard extends Vue {
 }
 .header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     h4 {
-        margin-left: 12px;
         flex-grow: 1;
     }
 }
@@ -366,22 +391,23 @@ h4 {
     align-self: center;
 }
 .balance {
-    font-size: 2.4em;
-    white-space: normal;
-    /*font-weight: bold;*/
-    font-family: Rubik !important;
-
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 44px;
+    color: #262626;
     span {
         font-size: 0.8em;
-        /*color: var(--primary-color-light);*/
     }
 }
 
 .balance_usd {
     width: max-content;
-    background: var(--bg-light);
-    color: var(--primary-color-light);
-    font-size: 13px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    color: #262626;
     padding: 1px 6px;
     border-radius: 3px;
     margin-right: 6px !important;
@@ -434,19 +460,18 @@ h4 {
     color: #ddd;
     width: max-content;
     max-width: 100px;
-    font-size: 14px;
+    font-size: 12px;
     padding: 4px 8px;
 }
 
 .alt_info > div {
     display: grid;
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
     margin-top: 12px;
     > div {
         position: relative;
-        padding: 0 24px;
-        border-right: 2px solid var(--bg-light);
+        padding: 0 5px;
         &:first-of-type {
             padding-left: 0;
         }
@@ -456,7 +481,7 @@ h4 {
     }
 
     label {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--primary-color-light);
     }
 }
@@ -479,7 +504,6 @@ h4 {
 @include main.medium-device {
     .balance_card {
         display: block;
-        //grid-template-columns: 1fr 120px;
     }
 
     .balance {
@@ -509,9 +533,8 @@ h4 {
     }
 
     .nft_card {
-        padding: 0;
+        padding: 15px 0 0 0;
         margin-top: 15px;
-        padding-top: 15px;
         border-top: 1px solid var(--primary-color-light);
         border-left: none;
     }

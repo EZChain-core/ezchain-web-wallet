@@ -48,7 +48,7 @@ export default class PrivateKey extends Vue {
     word-break: break-all;
     background-color: var(--bg);
     margin: 15px 0px !important;
-    border-radius: 2px;
+    border-radius: 8px;
     padding: 6px 12px;
 }
 

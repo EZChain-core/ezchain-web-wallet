@@ -1,6 +1,6 @@
 <template>
-    <div class="access_view">
-        <create-wallet></create-wallet>
+    <div class="flex justify-center items-start">
+        <create-wallet class="lg:mt-30"></create-wallet>
     </div>
 </template>
 <script lang="ts">
@@ -41,16 +41,6 @@ import CreateWallet from '@/components/CreateWalletWorkflow/CreateWallet.vue'
 export default class Create extends Vue {}
 </script>
 <style scoped lang="scss">
-@use '../main';
-
-.access_view {
-    /*display: grid;*/
-    /*grid-template-columns: 1fr 1fr;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .card {
     text-align: center;
 }

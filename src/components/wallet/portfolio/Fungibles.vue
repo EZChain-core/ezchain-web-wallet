@@ -197,7 +197,7 @@ export default class Fungibles extends Vue {
 }
 
 .scrollabe_cont {
-    height: 50px;
+    height: auto;
 }
 .asset {
     border-bottom: 1px solid var(--bg-light);

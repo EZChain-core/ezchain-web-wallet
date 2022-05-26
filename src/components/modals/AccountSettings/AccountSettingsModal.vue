@@ -26,6 +26,9 @@
                 </button>
                 <button @click="changePassword" class="ava_button">Change Password</button>
                 <button @click="deleteAccount" class="ava_button">Delete Account</button>
+                <button class="logout" @click="logout">
+                    {{ $t('logout.button') }}
+                </button>
             </div>
             <template v-else>
                 <component v-if="subComponent" :is="subComponent"></component>
@@ -36,7 +39,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-
+import ConfirmLogout from '@/components/modals/ConfirmLogout.vue'
 import Modal from '@/components/modals/Modal.vue'
 import Identicon from '@/components/misc/Identicon.vue'
 import { iUserAccountEncrypted } from '@/store/types'
@@ -47,6 +50,7 @@ import SaveKeys from '@/components/modals/AccountSettings/SaveKeys.vue'
     components: {
         ChangePassword,
         Identicon,
+        ConfirmLogout,
         Modal,
     },
 })
@@ -59,6 +63,19 @@ export default class AccountSettingsModal extends Vue {
 
     get account(): iUserAccountEncrypted {
         return this.$store.getters['Accounts/account']
+    }
+    get isAuth(): boolean {
+        return this.$store.state.isAuth
+    }
+
+    async logout() {
+        // @ts-ignore
+        this.isLoading = true
+        await this.$store.dispatch('logout')
+        await this.$store.dispatch('Notifications/add', {
+            title: 'Logout',
+            message: 'You have successfully logged out of your wallet.',
+        })
     }
     open() {
         this.$refs.modal.open()

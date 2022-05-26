@@ -1,24 +1,39 @@
 <template>
     <div class="dates_form">
-        <!--        <div>-->
-        <!--            <label>{{ $t('earn.validate.duration.start') }}</label>-->
-        <!--            <datetime-->
-        <!--                v-model="localStart"-->
-        <!--                type="datetime"-->
-        <!--                class="date hover_border"-->
-        <!--                :min-datetime="startDateMin"-->
-        <!--                :max-datetime="startDateMax"-->
-        <!--            ></datetime>-->
-        <!--        </div>-->
         <div class="hover_border">
-            <button class="max_but" @click="maxoutEndDate">Max</button>
             <datetime
+                input-id="vueDateTime"
+                style="background-color: #f5f5f5"
                 v-model="localEnd"
                 type="datetime"
                 class="date"
                 :min-datetime="endDateMin"
                 :max-datetime="endDateMax"
             ></datetime>
+            <div style="display: flex; align-items: center">
+                <button
+                    class="max_but"
+                    style="background-color: #f5f5f5; margin-right: 20px"
+                    @click="maxoutEndDate"
+                >
+                    MAX
+                </button>
+                <div
+                    @click="showModal"
+                    style="
+                        background: #ffffff;
+                        box-shadow: inset 0px -1px 2px rgba(23, 23, 23, 0.06);
+                        border-radius: 4px;
+                        width: 32px;
+                        height: 32px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    "
+                >
+                    <img class="cursor-pointer" src="@/assets/max.png" alt="max.png" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -67,7 +82,12 @@ export default class DateForm extends Vue {
         // this.setStartDate(this.localStart)
         this.setEndDate(this.localEnd)
     }
-
+    showModal() {
+        const dateTime: HTMLElement | null = document.getElementById('vueDateTime')
+        if (dateTime) {
+            dateTime.click()
+        }
+    }
     // updateTimeNow() {
     //     this.timeNow = Date.now()
     //
@@ -154,7 +174,7 @@ export default class DateForm extends Vue {
 .dates_form {
     .date input {
         border: none !important;
-        text-align: right;
+        text-align: left;
         width: 100%;
     }
 }
@@ -165,12 +185,16 @@ export default class DateForm extends Vue {
     grid-template-columns: 1fr;
     grid-gap: 15px;
     width: 100%;
-
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+    padding: 0 4px;
+    height: 40px;
     > div {
         width: 100%;
         display: grid;
-        grid-template-columns: max-content 1fr;
-        background-color: var(--bg-light);
+        grid-template-columns: 1fr max-content;
+        background-color: #f5f5f5;
     }
 
     label > span {
@@ -185,9 +209,10 @@ export default class DateForm extends Vue {
 
 .max_but {
     padding-left: 12px;
-    color: var(--primary-color-light);
-    &:hover {
-        color: var(--primary-color);
-    }
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #737373;
 }
 </style>

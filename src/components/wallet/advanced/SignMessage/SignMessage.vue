@@ -92,6 +92,8 @@ select {
     color: var(--primary-color);
     cursor: pointer;
     font-size: 13px;
+    background: #ffffff;
+    border-radius: 8px;
 
     &:hover {
         color: var(--primary-color);
@@ -117,6 +119,8 @@ textarea {
     font-size: 13px;
     padding: 6px 12px;
     height: 80px;
+    background: #ffffff;
+    border-radius: 8px;
 }
 
 .signed {

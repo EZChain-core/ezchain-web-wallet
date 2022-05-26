@@ -4,6 +4,7 @@
             <p style="text-align: center">#</p>
             <p>{{ $t('portfolio.address') }}</p>
             <p class="col_bal">{{ $t('portfolio.balance') }}</p>
+            <p>Private Key</p>
         </div>
         <div>
             <HdDerivationListRow
@@ -103,7 +104,7 @@ export default class HdChainTable extends Vue {
 .headers,
 .list_row {
     display: grid;
-    grid-template-columns: 35px 2fr 1fr;
+    grid-template-columns: 35px 2fr 1fr 100px;
     padding: 5px 0px;
     column-gap: 10px;
 }

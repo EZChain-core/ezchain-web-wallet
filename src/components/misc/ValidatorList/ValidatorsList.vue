@@ -7,36 +7,28 @@
             @change="applyFilter"
             :validators="validators"
         ></FilterSettings>
-        <div class="table_cont">
+        <div class="table_cont no_scroll_bar">
             <table>
                 <thead>
-                    <tr class="header_tr">
+                    <tr class="bg-white-a500 shadow-xs">
+                        <th></th>
                         <th>{{ $t('earn.delegate.list.id') }}</th>
                         <th style="text-align: right">
                             {{ $t('earn.delegate.list.val_stake') }}
                         </th>
                         <th style="text-align: right">
                             {{ $t('earn.delegate.list.aval_stake') }}
-                            <Tooltip
-                                style="display: inline-block"
-                                :text="$t('earn.delegate.list.aval_stake_tip')"
-                            >
-                                <fa icon="question-circle"></fa>
-                            </Tooltip>
+                            <!--                            <Tooltip-->
+                            <!--                                style="display: inline-block"-->
+                            <!--                                :text="$t('earn.delegate.list.aval_stake_tip')"-->
+                            <!--                            >-->
+                            <!--                                <fa icon="question-circle"></fa>-->
+                            <!--                            </Tooltip>-->
                         </th>
                         <th>
                             <Tooltip text="Number of Delegators"><fa icon="users"></fa></Tooltip>
                         </th>
                         <th>{{ $t('earn.delegate.list.end') }}</th>
-                        <!--                        <th>-->
-                        <!--                            {{ $t('earn.delegate.list.up') }}-->
-                        <!--                            <Tooltip-->
-                        <!--                                style="display: inline-block"-->
-                        <!--                                :text="$t('earn.delegate.list.up_tip')"-->
-                        <!--                            >-->
-                        <!--                                <fa icon="question-circle"></fa>-->
-                        <!--                            </Tooltip>-->
-                        <!--                        </th>-->
                         <th>{{ $t('earn.delegate.list.fee') }}</th>
                         <th></th>
                     </tr>
@@ -96,7 +88,10 @@ export default class ValidatorsList extends Vue {
 
         if (this.search) {
             list = list.filter((v) => {
-                return v.nodeID.includes(this.search)
+                return (
+                    v.nodeID.includes(this.search.trim()) ||
+                    v.name?.toLowerCase()?.includes(this.search.toLowerCase().trim())
+                )
             })
         }
 
@@ -118,7 +113,12 @@ export default class ValidatorsList extends Vue {
     }
 
     get validatorsFiltered(): ValidatorListItem[] {
-        return filterValidatorList(this.validators, this.filter)
+        let notNameValidator = this.validators.filter((el) => el.name === '')
+        let hasNameValidator = this.validators.filter((el) => el.name !== '')
+        notNameValidator.forEach((el) => {
+            hasNameValidator.push(el)
+        })
+        return filterValidatorList(hasNameValidator, this.filter)
     }
 
     onselect(val: ValidatorListItem) {
@@ -134,23 +134,26 @@ export default class ValidatorsList extends Vue {
 
 .table_cont {
     overflow: scroll;
-    max-height: 450px;
+    max-height: 380px;
+    height: 380px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
-tr {
-}
 th {
     position: sticky;
     top: 0;
-    padding: 2px 14px;
-    font-size: 14px;
-    background-color: var(--bg-wallet-light);
+    padding: 8px 14px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    color: #a3a3a3;
+    background-color: white;
+    border-bottom: 1px solid #f5f5f5;
 }
-
 .empty_list {
     padding: 30px;
     text-align: center;

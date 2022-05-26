@@ -1,7 +1,7 @@
 <template>
-    <modal ref="modal" title="Export AVAX Transfers" class="modal_main">
+    <modal ref="modal" title="Export EZC Transfers" class="modal_main">
         <div class="csv_modal_body">
-            <p>Only X chain AVAX transactions will be exported.</p>
+            <p>Only X chain EZC transactions will be exported.</p>
             <v-btn
                 class="button_secondary"
                 small
@@ -137,7 +137,7 @@ export default class ExportAvaxCsvModal extends Vue {
         }
 
         let csvRows = rows.map((row) => avaxTransferDataToCsvRow(row))
-        let headers = ['Tx ID', 'Date', 'Memo', 'From', 'To', 'Sent/Received', 'Amount (AVAX)']
+        let headers = ['Tx ID', 'Date', 'Memo', 'From', 'To', 'Sent/Received', 'Amount (EZC)']
         let allRows = [headers, ...csvRows]
 
         let csvContent = createCSVContent(allRows)

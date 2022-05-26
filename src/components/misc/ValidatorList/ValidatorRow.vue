@@ -1,6 +1,27 @@
 <template>
     <tr class="validator_row">
-        <td class="id">{{ validator.nodeID }}</td>
+        <td class="logoUrl flex-shrink-0">
+            <img
+                v-if="validator.logoUrl"
+                class="w-10 h-10 rounded-full"
+                loading="eager|lazy"
+                :src="validator.logoUrl"
+                alt="logo"
+            />
+            <img
+                v-else
+                class="w-10 h-10 rounded-full"
+                loading="eager|lazy"
+                src="@/assets/Logo_default.png"
+                alt="logo"
+            />
+        </td>
+        <td class="id">
+            <span v-if="validator.name" class="font-bold text-xs text-black block">
+                {{ validator.name }}
+            </span>
+            <span style="font-size: 12px; color: #525252">{{ validator.nodeID }}</span>
+        </td>
         <td class="amount">{{ amtText }}</td>
         <td class="amount">{{ remainingAmtText }}</td>
         <td style="text-align: center">{{ numDelegators }}</td>
@@ -8,7 +29,7 @@
         <!--        <td>{{ uptimeText }}</td>-->
         <td>{{ feeText }}%</td>
         <td>
-            <button class="button_secondary" @click="select">Select</button>
+            <button @click="select">Select</button>
         </td>
     </tr>
 </template>
@@ -20,13 +41,12 @@ import { DelegatorRaw, ValidatorRaw } from '@/components/misc/ValidatorList/type
 import moment from 'moment'
 import Big from 'big.js'
 import { BN } from 'ezchainjs2'
-import { bnToBig } from '@/helpers/helper'
+import { bnToBig, getNameValidator } from '@/helpers/helper'
 import { ValidatorListItem } from '@/store/modules/platform/types'
 
 @Component
 export default class ValidatorsList extends Vue {
     @Prop() validator!: ValidatorListItem
-
     get remainingMs(): number {
         let end = this.validator.endTime
         let remain = end.getTime() - Date.now()
@@ -125,19 +145,38 @@ export default class ValidatorsList extends Vue {
 }
 
 button {
-    padding: 3px 12px;
+    padding: 8px 16px;
     font-size: 13px;
-    border-radius: 3px;
+    border: 1px solid #525252;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #ffffff !important;
+}
+button:hover,
+button:active {
+    background-color: var(--secondary-color) !important;
+    color: #fff !important;
+    text-decoration: none;
 }
 
 .id {
     word-break: break-all;
 }
 td {
-    padding: 4px 14px;
-    background-color: var(--bg-light);
-    border: 1px solid var(--bg);
-    font-size: 13px;
+    padding: 14px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #262626;
+}
+tr {
+    border-bottom: 1px solid #f5f5f5;
+}
+.logoUrl {
+    padding: 0;
+    margin-right: 16px;
+    width: 40px;
 }
 
 @include main.medium-device {

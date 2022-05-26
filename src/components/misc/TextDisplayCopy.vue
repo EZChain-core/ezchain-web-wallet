@@ -33,7 +33,7 @@ export default {
 .display_copy {
     display: flex;
     background-color: #e2e2e2;
-    border-radius: 2px;
+    border-radius: 8px;
     overflow: hidden;
     border: 1px solid #d2d2d2;
 }

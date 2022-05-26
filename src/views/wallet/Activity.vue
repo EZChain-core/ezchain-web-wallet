@@ -1,84 +1,140 @@
 <template>
-    <div class="activity_page">
-        <ExportCsvModal ref="csv_modal"></ExportCsvModal>
-        <ExportAvaxCsvModal ref="avax_csv_modal"></ExportAvaxCsvModal>
-        <div class="explorer_warning" v-if="!hasExplorer">
-            <div class="warning_body">
-                <h1>{{ $t('activity.no_explorer.title') }}</h1>
-                <p>{{ $t('activity.no_explorer.desc') }}</p>
+    <div>
+        <h1 class="text-3.5xl font-bold text-EZC-defaultBlack mb-3">Activity</h1>
+        <div class="activity_page">
+            <ExportCsvModal ref="csv_modal"></ExportCsvModal>
+            <ExportAvaxCsvModal ref="avax_csv_modal"></ExportAvaxCsvModal>
+            <div class="explorer_warning" v-if="!hasExplorer">
+                <div class="warning_body">
+                    <h1>{{ $t('activity.no_explorer.title') }}</h1>
+                    <p>{{ $t('activity.no_explorer.desc') }}</p>
+                </div>
             </div>
-        </div>
-        <div class="settings">
-            <div class="filter_col">
-                <div class="filter_cont">
-                    <label>Export CSV File (BETA)</label>
-                    <div class="csv_buttons">
-                        <v-btn
-                            x-small
-                            @click="openCsvModal"
-                            class="button_secondary"
-                            depressed
-                            :disabled="!showList"
+            <div class="settings">
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                    "
+                >
+                    <div class="pagination">
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 250px;
+                            "
                         >
-                            Export Rewards
-                        </v-btn>
-                        <v-btn
-                            x-small
-                            @click="openAvaxCsvModal"
-                            class="button_secondary"
-                            depressed
-                            :disabled="!showList"
+                            <button @click="prevPage" :disabled="!isPrevPage">
+                                <fa icon="angle-left"></fa>
+                            </button>
+                            <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
+                            <button @click="nextPage" :disabled="!isNextPage">
+                                <fa icon="angle-right"></fa>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="filter_cont" style="display: flex; align-items: center">
+                        <label
+                            style="
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 16px;
+                                line-height: 24px;
+                                color: #000000;
+                                margin-right: 24px;
+                            "
                         >
-                            Export EZC Transfers
-                        </v-btn>
+                            Export CSV File:
+                        </label>
+                        <div class="csv_buttons">
+                            <v-btn
+                                style="
+                                    background-color: white !important;
+                                    color: #2f80ed !important;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                "
+                                x-small
+                                @click="openCsvModal"
+                                class="button_secondary"
+                                depressed
+                                :disabled="!showList"
+                            >
+                                Export Rewards
+                            </v-btn>
+                            <v-btn
+                                x-small
+                                style="
+                                    background-color: white !important;
+                                    color: #2f80ed !important;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                "
+                                @click="openAvaxCsvModal"
+                                class="button_secondary"
+                                depressed
+                                :disabled="!showList"
+                            >
+                                Export EZC Transfers
+                            </v-btn>
+                        </div>
                     </div>
                 </div>
-                <div class="filter_cont">
-                    <label>{{ $t('activity.label1') }}</label>
-                    <RadioButtons :labels="modes" :keys="modeKey" v-model="mode"></RadioButtons>
-                </div>
-            </div>
-            <div>
-                <div class="pagination">
-                    <p class="date_display">{{ monthNowName }} {{ yearNow }}</p>
+                <div
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                        margin-top: 16px;
+                    "
+                >
+                    <div class="filter_col">
+                        <div class="filter_cont">
+                            <RadioButtons
+                                :labels="modes"
+                                :keys="modeKey"
+                                v-model="mode"
+                            ></RadioButtons>
+                        </div>
+                    </div>
                     <div>
-                        <button @click="prevPage" :disabled="!isPrevPage">
-                            <fa icon="angle-left"></fa>
-                        </button>
-                        <button @click="nextPage" :disabled="!isNextPage">
-                            <fa icon="angle-right"></fa>
-                        </button>
+                        <div class="pagination_info">
+                            <p>{{ $t('activity.found', [txs.length]) }}</p>
+                            <button @click="updateHistory">
+                                <fa icon="sync"></fa>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="pagination_info">
-                    <p>{{ $t('activity.found', [txs.length]) }}</p>
-                    <button @click="updateHistory">
-                        <fa icon="sync"></fa>
-                    </button>
+            </div>
+            <div class="tx_table no_scroll_bar" ref="list">
+                <div class="tx_list" v-show="showList">
+                    <virtual-list
+                        v-show="txs.length > 0"
+                        :style="{ height: `${listH}px`, overflowY: 'auto' }"
+                        :data-key="'id'"
+                        :data-sources="txsProcessed"
+                        :data-component="RowComponent"
+                        :keeps="20"
+                        ref="vlist"
+                        :estimate-size="txsProcessed.length"
+                    ></virtual-list>
+                    <div v-if="txs.length === 0" class="empty">
+                        <p>{{ $t('activity.empty') }}</p>
+                    </div>
+                </div>
+                <div v-if="!showList" class="loading">
+                    <Spinner class="spinner"></Spinner>
+                    <p>{{ $t('activity.loading') }}</p>
                 </div>
             </div>
         </div>
-        <div class="tx_table" ref="list">
-            <div class="tx_list" v-show="showList">
-                <virtual-list
-                    v-show="txs.length > 0"
-                    :style="{ height: `${listH}px`, overflowY: 'auto' }"
-                    :data-key="'id'"
-                    :data-sources="txsProcessed"
-                    :data-component="RowComponent"
-                    :keeps="20"
-                    ref="vlist"
-                    :estimate-size="txsProcessed.length"
-                ></virtual-list>
-                <div v-if="txs.length === 0" class="empty">
-                    <p>{{ $t('activity.empty') }}</p>
-                </div>
-            </div>
-            <div v-if="!showList" class="loading">
-                <Spinner class="spinner"></Spinner>
-                <p>{{ $t('activity.loading') }}</p>
-            </div>
-        </div>
+        <top-info class="wallet_top" style="margin-top: 12px"></top-info>
     </div>
 </template>
 <script lang="ts">
@@ -93,7 +149,7 @@ import moment from 'moment'
 import TxRow from '@/components/wallet/activity/TxRow.vue'
 import RadioButtons from '@/components/misc/RadioButtons.vue'
 import Spinner from '@/components/misc/Spinner.vue'
-
+import TopInfo from '@/components/wallet/TopInfo.vue'
 type FilterModeType = 'all' | 'transfer' | 'export_import' | 'stake'
 type ModeKeyType = 'all' | 'transfer' | 'swap' | 'stake'
 
@@ -115,6 +171,7 @@ const MONTH_MIN = 8
         ExportCsvModal,
         Spinner,
         TxRow,
+        TopInfo,
         RadioButtons,
         VirtualList,
     },
@@ -363,7 +420,12 @@ export default class Activity extends Vue {
     position: relative;
     display: grid;
     grid-template-rows: max-content 1fr;
-    padding-bottom: 14px;
+    background: #ffffff;
+    box-shadow: 0px 8px 40px -24px rgba(24, 38, 46, 0.3),
+        inset 0px -1px 3px -2px rgba(24, 38, 46, 0.5);
+    border-radius: 8px;
+    padding: 24px 16px;
+    height: 506px;
 }
 
 .explorer_warning {
@@ -409,9 +471,8 @@ export default class Activity extends Vue {
 
 .settings {
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 12px;
 }
 
@@ -419,15 +480,9 @@ export default class Activity extends Vue {
     height: 100%;
     overflow: auto;
     border-top: 2px solid var(--bg-wallet);
-    //overflow: scroll;
-    //padding-right: 20px;
-    //margin-right: 20px;
-    //border-right: 1px solid var(--bg-light);
 }
 
 .tx_list {
-    //max-height: 480px;
-    //overflow: scroll;
     height: 100%;
     position: relative;
 }
@@ -435,8 +490,6 @@ export default class Activity extends Vue {
 .table_headers {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    //border-bottom: 1px solid var(--bg-light);
-    //background-color: var(--bg-light);
 }
 
 .month_group {
@@ -455,9 +508,6 @@ export default class Activity extends Vue {
 
 .cols {
     height: 100%;
-    //overflow: auto;
-    //display: grid;
-    //grid-template-columns: 1fr 240px;
 }
 
 .empty,
@@ -486,7 +536,11 @@ export default class Activity extends Vue {
     flex-direction: row;
     align-items: center;
     p {
-        margin-right: 12px !important;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
     }
     button {
         width: 24px;

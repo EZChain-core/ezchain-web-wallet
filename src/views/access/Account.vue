@@ -1,18 +1,27 @@
 <template>
-    <div class="access_card">
-        <div class="content">
-            <Identicon :value="account.baseAddresses.join('')"></Identicon>
-            <h1>{{ account.name }}</h1>
+    <div class="max-w-md mx-auto">
+        <div
+            class="content flex flex-col justify-center items-center shadow-sm bg-white-a400 rounded-lg p-8"
+        >
+            <div class="flex items-center mb-4">
+                <Identicon
+                    class="flex-shrink-0 mr-4"
+                    :value="account.baseAddresses.join('')"
+                ></Identicon>
+                <h1 class="text-center font-bold text-base">{{ account.name }}</h1>
+            </div>
             <form @submit.prevent="access">
                 <input
-                    class="single_line_input hover_border pass"
+                    class="single_line_input hover_border pass w-full"
+                    style="background_color: #f5f5f5"
                     type="password"
                     placeholder="Password"
                     v-model="password"
                 />
-                <p class="err">{{ error }}</p>
+                <p class="err block">{{ error }}</p>
                 <v-btn
-                    class="ava_button button_primary"
+                    style="height: 40px"
+                    class="ava_button button_primary h-16 w-full mt-4 mb-4"
                     @click="access"
                     :loading="isLoading"
                     :disabled="!canSubmit"
@@ -22,9 +31,8 @@
                 </v-btn>
                 <small>{{ $t('keys.account_slow_warning') }}</small>
                 <br />
-                <br />
             </form>
-            <router-link to="/access" class="link">Cancel</router-link>
+            <router-link to="/access" class="text-EZC-bgButton" tag="p">Cancel</router-link>
         </div>
     </div>
 </template>
@@ -109,71 +117,4 @@ export default class Account extends Vue {
     }
 }
 </script>
-<style scoped lang="scss">
-@use '../../main';
-.pass {
-    text-align: center;
-    background-color: var(--bg-light) !important;
-}
-.ava_button {
-    width: 100%;
-    margin-bottom: 22px;
-}
-.access_card {
-    /*max-width: 80vw;*/
-    //background-color: var(--bg-light);
-    //padding: main.$container-padding;
-    width: 100%;
-    /*max-width: 240px;*/
-    /*max-width: 1000px;*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-}
-.content {
-    width: 340px;
-    max-width: 100%;
-    margin: 0px auto;
-}
-h1 {
-    font-size: main.$m-size;
-    font-weight: 400;
-}
-
-form {
-    margin: 14px 0;
-}
-.file_in {
-    margin: 30px auto 10px;
-    font-size: 13px;
-    border: none !important;
-    background-color: var(--bg-light) !important;
-    /*min-width: 200px*/
-}
-a {
-    color: main.$primary-color-light !important;
-    text-decoration: underline !important;
-    margin: 10px 0 20px;
-}
-.link {
-    color: var(--secondary-color);
-}
-.remember {
-    margin: 12px 0;
-}
-.err {
-    font-size: 13px;
-    color: var(--error);
-    margin: 14px 0px !important;
-}
-@media only screen and (max-width: main.$mobile_width) {
-    h1 {
-        font-size: main.$m-size-mobile;
-    }
-    .but_primary {
-        width: 100%;
-    }
-}
-</style>
+<style scoped lang="scss"></style>

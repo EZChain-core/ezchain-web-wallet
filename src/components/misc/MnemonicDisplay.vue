@@ -1,8 +1,10 @@
 <template>
     <div class="mnemonic_display" :style="{ gridTemplateColumns: `repeat(${rowSize}, 1fr)` }">
         <div v-for="i in wordNum" :key="i" class="word">
-            <p class="index">{{ i }}.</p>
-            <p class="phrase_word">{{ phraseArray[i - 1] }}</p>
+            <p class="index text-base text-EZC-defaultBlack font-bold">{{ i }}.</p>
+            <p class="phrase_word text-base text-EZC-defaultBlack font-bold">
+                {{ phraseArray[i - 1] }}
+            </p>
         </div>
     </div>
 </template>
@@ -10,11 +12,10 @@
 import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import MnemonicPhrase from '@/js/wallets/MnemonicPhrase'
-
 @Component
 export default class MnemonicDisplay extends Vue {
     @Prop({ default: '#FFFFFF' }) bgColor?: string
-    @Prop({ default: 4 }) rowSize!: number
+    @Prop({ default: 3 }) rowSize!: number
     @Prop() phrase!: string | MnemonicPhrase
 
     wordNum: number = 24
@@ -30,20 +31,21 @@ export default class MnemonicDisplay extends Vue {
 </script>
 <style scoped lang="scss">
 @use "../../main";
-
 .mnemonic_display {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 6px;
     row-gap: 6px;
     font-size: 12px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 16px;
 }
-
 .word {
     display: flex;
     overflow: hidden;
     font-weight: 700;
-
+    border-radius: 8px;
     background-color: var(--bg);
 
     > * {

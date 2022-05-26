@@ -100,8 +100,9 @@ input,
 .address {
     padding: 6px 12px;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
     font-size: 13px;
+    background: #ffffff;
+    border-radius: 8px;
 }
 
 label {
@@ -118,6 +119,8 @@ textarea {
     resize: none;
     padding: 6px 12px;
     height: 80px;
+    background: #ffffff;
+    border-radius: 8px;
 }
 
 .result {

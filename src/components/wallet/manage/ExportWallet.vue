@@ -138,7 +138,7 @@ label {
 .formIn {
     background-color: var(--bg-light);
     font-size: 12px;
-    border-radius: 2px;
+    border-radius: 8px;
 }
 
 .button_primary {
